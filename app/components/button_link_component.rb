@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ButtonLinkComponent < ViewComponent::Base
-  def initialize(label:, url:, style: :primary, method: :get)
+  def initialize(label:, url:, style: :primary, method: :get, turbo: true)
     @label = label
     @url = url
     @button_style =
@@ -16,5 +16,6 @@ class ButtonLinkComponent < ViewComponent::Base
         raise ArgumentError("Invalid button style")
       end
     @method = method
+    @turbo = turbo
   end
 end

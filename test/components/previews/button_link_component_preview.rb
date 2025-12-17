@@ -1,6 +1,6 @@
 class ButtonLinkComponentPreview < ViewComponent::Preview
   def primary
-    render(ButtonLinkComponent.new(label: I18n.t("continue"), url: "https://www.google.com"))
+    render(ButtonLinkComponent.new(label: I18n.t("continue"), url: "https://www.google.com", turbo: false))
   end
 
   def secondary
