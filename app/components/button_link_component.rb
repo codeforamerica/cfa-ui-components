@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
 class ButtonLinkComponent < ViewComponent::Base
-  def initialize(label:, url:, style: :primary)
+  def initialize(label:, url:, style: :primary, method: :get)
     @label = label
     @url = url
     @button_style = case style
-    when :primary
+                    when :primary
                       "btn--primary"
-    when :secondary
+                    when :secondary
                       "btn--secondary"
-    else
+                    when :destructive
+                      "btn--destructive"
+                    else
                       raise ArgumentError("Invalid button style")
-    end
+                    end
+    @method = method
   end
 end

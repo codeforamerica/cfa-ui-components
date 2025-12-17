@@ -97,6 +97,10 @@ a:visited {
     @apply bg-white border-2 text-black;
 }
 
+.btn--destructive {
+    @apply bg-white border-2 border-red-700 text-red-700;
+}
+
 .btn--small {
     @apply px-3 py-2;
 }
