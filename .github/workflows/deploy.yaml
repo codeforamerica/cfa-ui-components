@@ -65,7 +65,7 @@ jobs:
             --value "$IMAGE_TAG" \
             --overwrite
       - name: Trigger deployment from shared services
-        uses: codex-/return-dispatch@v2
+        uses: codex-/return-dispatch@v3
         id: dispatch
         with:
           token: ${{ secrets.DEPLOYMENT_PAT }}
