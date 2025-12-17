@@ -1,0 +1,11 @@
+<%= select_date(
+  selected_value,
+  {
+    prefix: prefix_name,
+    start_year: @start_year,
+    end_year: @end_year,
+    include_blank: @include_blank,
+    order: @order
+  }.merge(@date_options),
+  @html_options
+) %>
