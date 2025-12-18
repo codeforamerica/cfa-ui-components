@@ -8,7 +8,7 @@ class DatePickerComponent < ViewComponent::Base
     selected: nil,
     start_year: Date.current.year - 100,
     end_year: Date.current.year,
-    include_blank: true,
+    include_blank: false,
     order: %i[month day year],
     html_options: {},
     date_options: {}
