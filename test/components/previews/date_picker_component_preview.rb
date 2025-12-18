@@ -5,6 +5,12 @@ class DatePickerComponentPreview < FormComponentPreview
                              method: :my_date
                           )
   end
+  def blank
+    render DatePickerComponent.new(form: form,
+                             method: :my_date,
+                             include_blank: true
+                          )
+  end
   def with_labels
     render DatePickerComponent.new(form: form,
                              method: :my_date,
