@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+ruby_version = File.read(File.join(File.dirname(__FILE__), ".ruby-version")).strip
+ruby ruby_version
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2", ">= 8.0.2.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
