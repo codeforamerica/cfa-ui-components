@@ -5,7 +5,7 @@
     end_year: @end_year,
     include_blank: @include_blank,
     order: @order,
-    prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }
+    prompt: @prompt
   }.merge(@date_options),
   @html_options,
 ) %>
