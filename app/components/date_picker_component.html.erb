@@ -9,3 +9,4 @@
   }.merge(@date_options),
   @html_options,
 ) %>
+<%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
