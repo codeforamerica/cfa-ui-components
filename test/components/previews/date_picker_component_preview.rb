@@ -38,7 +38,7 @@ class DatePickerComponentPreview < FormComponentPreview
   def custom_year_range
     render DatePickerComponent.new(form: form,
                              method: :my_date,
-                             start_year: Date.current.year - 20,
+                             start_year: Date.current.year - 30,
                              end_year: Date.current.year + 50
                           )
   end
