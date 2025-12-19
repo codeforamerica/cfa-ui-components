@@ -20,11 +20,12 @@ class FormComponentPreview < ViewComponent::Preview
     attribute :last_name
     attribute :pineapple_pizza_preference
     attribute :favorite_fruits
-
+    attribute :my_date
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :pineapple_pizza_preference, presence: true
     validates :favorite_fruits, presence: true
+    validates :my_date, presence: true
   end
 
   def self.yes_no_options
