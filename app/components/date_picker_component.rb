@@ -9,6 +9,7 @@ class DatePickerComponent < ViewComponent::Base
     include_blank: false,
     order: %i[month day year],
     prompt: false,
+
     html_options: {},
     date_options: {}
   )
