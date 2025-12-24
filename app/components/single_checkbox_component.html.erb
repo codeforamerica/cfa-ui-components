@@ -1,0 +1,24 @@
+<div class="space-y-1">
+  <div class="flex items-start gap-3 <%= "opacity-50" if @disabled %>">
+    <%= @form.hidden_field(@method, value: "") %>
+
+    <%= @form.check_box(
+          @method,
+          {
+            class: "h-5 w-5 rounded border #{ @form.object&.errors&.include?(@method) ? "border-red-600" : "border-slate-400" }",
+            disabled: @disabled,
+            checked: @checked
+          },
+          "1",
+          ""
+        ) %>
+
+    <%= @form.label(
+          @method,
+          @label,
+          class: (@disabled ? "text-slate-400" : "text-slate-900")
+        ) %>
+  </div>
+
+  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+</div>
