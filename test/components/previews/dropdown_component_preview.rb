@@ -7,6 +7,10 @@ class DropdownComponentPreview < FormComponentPreview
     custom_model = TestModel.new(favorite_fruits: [ "apple" ])
     render(DropdownComponent.new(form: form(model: custom_model), method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label))
   end
+  def custom_label
+    custom_model = TestModel.new(favorite_fruits: [ "apple" ])
+    render(DropdownComponent.new(form: form(model: custom_model), method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, label: "My Custom Fruit Label"))
+  end
 
   def with_errors
     custom_model = TestModel.new
