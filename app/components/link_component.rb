@@ -6,5 +6,4 @@ class LinkComponent < BaseComponent
     @url = url
     @icon = icon
   end
-
 end

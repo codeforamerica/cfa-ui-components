@@ -5,5 +5,4 @@ class ExpandableSectionComponent < BaseComponent
     @summary_text = summary_text
     @icon = icon
   end
-
 end

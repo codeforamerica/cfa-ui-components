@@ -18,6 +18,4 @@ class BaseComponent < ViewComponent::Base
     base = ICONS.dig(icon, :alt)
     base ? "#{base} icon" : ""
   end
-
-
 end
