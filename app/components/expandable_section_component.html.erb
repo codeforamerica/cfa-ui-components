@@ -1,7 +1,7 @@
 <%= render CardComponent.new do %>
   <details class="group">
-    <summary class="flex justify-between justify-between after:ml-10px after:content-[url('/icons/arrow_closed.svg')] after:transform-[0.2s] group-open:after:content-[url('/icons/arrow_open.svg')] list-none cursor-pointer">
-      <p class='flex font-bold'> 
+    <summary class="flex justify-between items-center after:ml-10px after:content-[url('/icons/arrow_closed.svg')] after:transform-[0.2s] group-open:after:content-[url('/icons/arrow_open.svg')] list-none cursor-pointer">
+      <p class='flex font-bold items-center'> 
          <% if @icon.present? %> 
          <%= image_tag icon_image_path(@icon), alt: icon_alt_text(@icon), class: "size-[20px] mr-2" %> 
          <% end %> 
