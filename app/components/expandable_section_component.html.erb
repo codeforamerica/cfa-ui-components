@@ -1,0 +1,6 @@
+<%= render CardComponent.new do %>
+  <details>
+    <summary> <p class='flex font-bold'>  <% if @icon.present? %> <%= image_tag icon_image_path, alt: icon_alt_text, class: "size-[20px] mr-2" %> <% end %> <%= @summary_text %> </p></summary>
+    <p class="mt-8"><%= @detail_text %> </p>
+  </details>
+<% end %>
