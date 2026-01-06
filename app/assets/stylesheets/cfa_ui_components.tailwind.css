@@ -121,30 +121,3 @@ a:visited {
     display: inline;
 }
 
-details summary {
-  display: flex; /* Use flexbox for alignment */
-  justify-content: space-between; /* Pushes content to edges, moving the arrow container to the right */
-  align-items: center; /* Vertically centers content and arrow */
-}
-
-/* Add your custom arrow using ::after pseudo-element */
-details summary::after {
-  content: url('/icons/arrow_closed.svg');
-  margin-left: 10px; /* Add some space between text and arrow */
-  transition: transform 0.2s; /* Smooth animation for rotation */
-}
-
-/* Rotate the arrow when the details element is open */
-details[open] summary::after {
-  content: url('/icons/arrow_open.svg');
-}
-
-summary {
-  list-style: none; /* For Firefox and other modern browsers */
-  cursor: pointer; /* Provides a better user experience, showing it's interactive */
-}
-
-/* For Chromium-based browsers (Chrome, Edge, etc.) and Safari */
-summary::-webkit-details-marker {
-  display: none;
-}
