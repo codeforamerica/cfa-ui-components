@@ -64,11 +64,19 @@ jobs:
             --name  /$APPLICATION/$ENVIRONMENT/web/version \
             --value "$IMAGE_TAG" \
             --overwrite
+      - name: Get a deployment token
+        uses: actions/create-github-app-token@v2
+        id: token
+        with:
+          app-id: ${{ secrets.DEPLOYMENT_APP_ID }}
+          private-key: ${{ secrets.DEPLOYMENT_APP_KEY }}
+          owner: codeforamerica
+          repositories: shared-services-infra
       - name: Trigger deployment from shared services
         uses: codex-/return-dispatch@v3
         id: dispatch
         with:
-          token: ${{ secrets.DEPLOYMENT_PAT }}
+          token: ${{ steps.token.outputs.token }}
           ref: ${{ inputs.shared_services_ref || 'main' }}
           repo: shared-services-infra
           owner: codeforamerica
