@@ -1,6 +1,6 @@
 <span class='flex'>
 <% if @icon.present? %>
-    <%= image_tag icon_image_path, alt: icon_alt_text, class: "size-[20px]" %> 
+    <%= image_tag icon_image_path(@icon), alt: icon_alt_text(@icon), class: "size-[20px]" %> 
 <% end %>
 <%= link_to @label, @url, target: "_blank", rel: "noopener noreferrer" %>
 </span>
