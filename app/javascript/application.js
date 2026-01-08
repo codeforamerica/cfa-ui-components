@@ -1,2 +1,2 @@
 import "@hotwired/turbo-rails"
-import "./controllers"
+import "./cfa_ui_components"
