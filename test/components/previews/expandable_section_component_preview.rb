@@ -7,7 +7,7 @@ class ExpandableSectionComponentPreview < ViewComponent::Preview
 
   def with_icon
     render(ExpandableSectionComponent.new(summary_text: "I am summary", icon: "question")) do
-      content_tag(:p, content_tag(:strong, "Sample form card"))
+      content_tag(:p, "Sample form card")
     end
   end
 end
