@@ -1,13 +1,13 @@
 class ExpandableSectionComponentPreview < ViewComponent::Preview
   def default
     render(ExpandableSectionComponent.new(summary_text: "I am summary")) do
-      content_tag(:p,  "Sample Details")
+      content_tag(:p,  "Sample Details", style: "margin-top: 8px;")
     end
   end
 
   def with_icon
     render(ExpandableSectionComponent.new(summary_text: "I am summary", icon: "question")) do
-      content_tag(:p, "Sample form card")
+      content_tag(:p, "Sample form card", style: "margin-top: 8px;")
     end
   end
 end
