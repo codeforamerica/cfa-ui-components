@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@alpinejs/mask@^3.15.3":
+  version "3.15.3"
+  resolved "https://registry.yarnpkg.com/@alpinejs/mask/-/mask-3.15.3.tgz#e038819131aaf7ea00e1a8ffa11514eb9b9521ff"
+  integrity sha512-1hpI+KwKwV16RQhDQYCp6k78cEoTXrT9o6FmQk9IM7XkFWkDJu1CRRuaACLn2jkORO2jK2s+H0SHmmwhepEi7w==
+
 "@emnapi/core@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@emnapi/core/-/core-1.5.0.tgz#85cd84537ec989cebb2343606a1ee663ce4edaf0"
@@ -436,6 +441,25 @@
   integrity sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==
   dependencies:
     tslib "^2.4.0"
+
+"@vue/reactivity@~3.1.1":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.1.5.tgz#dbec4d9557f7c8f25c2635db1e23a78a729eb991"
+  integrity sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==
+  dependencies:
+    "@vue/shared" "3.1.5"
+
+"@vue/shared@3.1.5":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.5.tgz#74ee3aad995d0a3996a6bb9533d4d280514ede03"
+  integrity sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==
+
+alpinejs@^3.15.3:
+  version "3.15.3"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.15.3.tgz#667bce66914f8a11a786bffba9081c25ee3692d8"
+  integrity sha512-fSI6F5213FdpMC4IWaup92KhuH3jBX0VVqajRJ6cOTCy1cL6888KyXdGO+seAAkn+g6fnrxBqQEx6gRpQ5EZoQ==
+  dependencies:
+    "@vue/reactivity" "~3.1.1"
 
 braces@^3.0.3:
   version "3.0.3"
