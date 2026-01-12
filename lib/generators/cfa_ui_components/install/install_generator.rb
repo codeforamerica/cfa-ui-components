@@ -1,6 +1,5 @@
 module CfaUiComponents
   class InstallGenerator < Rails::Generators::Base
-
     # Heavily inspired by https://github.com/getrailsui/railsui/blob/main/lib/generators/railsui/install/install_generator.rb
     def check_dependencies
       unless using_tool?(:yarn) && using_esbuild_and_tailwind?
