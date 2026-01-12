@@ -1,0 +1,6 @@
+# Adding CfA UI Components to a Rails app
+1. Ensure that your app uses a node-based (i.e. `package.json` exists) asset pipeline with Tailwind and esbuild. _(TODO: Check whether other JS bundlers work)_ 
+   1. You can create a new app that's set up correctly by passing `-j esbuild -c tailwind` to `rails new`
+   2. Or, you can use `cssbundling-rails` and `jsbundling-rails` to install `tailwind` and `esbuild` respectively.  
+2. Add the CfA UI Components gem by adding `gem "cfa_ui_components", github: "codeforamerica/cfa-ui-components"` to your `Gemfile`, and run `bundle install`
+3. Run `bin/rails g cfa_ui_components:install`
