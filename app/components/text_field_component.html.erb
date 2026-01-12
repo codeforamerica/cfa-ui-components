@@ -8,6 +8,3 @@
   <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900"%>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
-<div x-data>
-  <input x-mask="99/99/9999" placeholder="MM/DD/YYYY">
-</div>
