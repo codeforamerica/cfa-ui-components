@@ -1,3 +1,5 @@
+require "rails/generators"
+
 module CfaUiComponents
   class InstallGenerator < Rails::Generators::Base
     # Heavily inspired by https://github.com/getrailsui/railsui/blob/main/lib/generators/railsui/install/install_generator.rb
