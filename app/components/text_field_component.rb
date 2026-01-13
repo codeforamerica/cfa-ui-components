@@ -17,6 +17,7 @@ class TextFieldComponent < ViewComponent::Base
   def text_field_kwargs
     kwargs = {}
     if @value_type == TIN
+      kwargs["x-data"] = "{}"
       kwargs["x-mask"] = "999-99-9999"
       kwargs["placeholder"] = "___-__-____"
     end
