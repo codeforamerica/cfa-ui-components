@@ -12,8 +12,6 @@
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
 
-<div x-data x-text="$store.<%= @method %>"></div>
-
 <script>
   document.addEventListener('alpine:init', () => {
     Alpine.store("<%= @method %>", "");
