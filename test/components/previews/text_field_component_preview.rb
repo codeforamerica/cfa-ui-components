@@ -21,4 +21,8 @@ class TextFieldComponentPreview < FormComponentPreview
     custom_model.valid?
     render(TextFieldComponent.new(form: form(model: custom_model), method: :first_name, label: I18n.t(:first_name)))
   end
+
+  def tin
+    render(TextFieldComponent.new(form: form, method: :ssn, label: I18n.t(:ssn), help_text: I18n.t(:ssn_help), value_type: TextFieldComponent::TIN))
+  end
 end

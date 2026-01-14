@@ -18,8 +18,10 @@ Gem::Specification.new do |spec|
     "lib/cfa_ui_components/**/*",
     "app/components/**/*",
     "app/assets/stylesheets/cfa_ui_components.tailwind.css",
-    "lib/tasks/cfa_ui_components.rake",
-    "app/assets/images/icons/*"
+    "app/javascript/cfa_ui_components.js",
+    "app/assets/images/icons/*",
+    "lib/generators/**/*",
+    "lib/tasks/cfa_ui_components.rake"
   ]
   spec.require_paths = [ "lib" ]
 

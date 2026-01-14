@@ -5,6 +5,6 @@
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900"%>
+  <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900", **text_field_kwargs %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
