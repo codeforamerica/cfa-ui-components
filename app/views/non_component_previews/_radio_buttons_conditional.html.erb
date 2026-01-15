@@ -1,6 +1,6 @@
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
   <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
-  <%= render FollowupComponent.new(method: :pineapple_pizza_preference, value: "yes") do %>
+  <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes") do %>
     But why!?
   <% end %>
 <% end %>

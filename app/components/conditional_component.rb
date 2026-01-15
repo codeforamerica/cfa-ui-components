@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FollowupComponent < ViewComponent::Base
+class ConditionalComponent < ViewComponent::Base
   def initialize(method:, value:)
     @method = method
     @value = value
