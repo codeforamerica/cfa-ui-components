@@ -6,6 +6,6 @@
 
 <script>
   document.addEventListener('alpine:init', () => {
-    Alpine.store("<%= @method %>", "");
+    Alpine.store("<%= @method %>", "<%= current_value %>");
   })
 </script>

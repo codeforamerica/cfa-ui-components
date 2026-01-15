@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DatePickerComponent < ViewComponent::Base
+class DatePickerComponent < AttributeBoundFormElementComponent
   def initialize(
     form:,
     method:,
@@ -12,8 +12,7 @@ class DatePickerComponent < ViewComponent::Base
     html_options: {},
     date_options: {}
   )
-    @form          = form
-    @method        = method
+    super(form: form, method: method)
     @start_year    = start_year
     @end_year      = end_year
     @include_blank = include_blank

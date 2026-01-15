@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-class FormErrorsComponent < ViewComponent::Base
+class FormErrorsComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:)
-    @form = form
-    @method = method
+    super(form: form, method: method)
   end
 end

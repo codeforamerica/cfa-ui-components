@@ -120,3 +120,7 @@ a:visited {
 .field_with_errors {
     display: inline;
 }
+
+[x-cloak] {
+    display: none !important;
+}
