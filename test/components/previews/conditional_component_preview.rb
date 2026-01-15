@@ -17,7 +17,7 @@ class ConditionalComponentPreview < FormComponentPreview
   end
 
   def prefilled_checkboxes
-    custom_model = TestModel.new(favorite_fruits: ["banana"])
+    custom_model = TestModel.new(favorite_fruits: [ "banana" ])
     render("non_component_previews/prefilled_checkboxes_conditional", model: custom_model)
   end
 
