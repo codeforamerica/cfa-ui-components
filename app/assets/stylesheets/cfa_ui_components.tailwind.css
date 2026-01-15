@@ -122,5 +122,5 @@ a:visited {
 }
 
 [x-cloak] {
-    display: none !important;
+    @apply hidden!;
 }
