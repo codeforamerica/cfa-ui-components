@@ -1,6 +1,6 @@
 <%= form_with url: "/", method: :post, model: model do |f| %>
   <%= render CheckboxesComponent.new(form: f, method: :favorite_fruits, collection: FormComponentPreview.fruit_options, item_value_method: :value, item_label_method: :label) %>
-  <%= render ConditionalComponent.new(method: :favorite_fruits, value: "banana") do %>
+  <%= render ConditionalComponent.new(method: :favorite_fruits, value: "banana", content_description: "Followup banana question") do %>
     But why!?
   <% end %>
 <% end %>
