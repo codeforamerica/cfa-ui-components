@@ -4,7 +4,7 @@ class DropdownComponentPreview < FormComponentPreview
   end
 
   def prefilled
-    custom_model = TestModel.new(favorite_fruits: [ "apple" ])
+    custom_model = TestModel.new(favorite_fruits: "apple")
     render(DropdownComponent.new(form: form(model: custom_model), method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label))
   end
 

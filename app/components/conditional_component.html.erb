@@ -1,0 +1,10 @@
+<div x-data="{condition: false}"
+     x-effect="condition = $store.<%= @method %> === '<%= @value %>' ||
+                           (Array.isArray($store.<%= @method %>) && $store.<%= @method %>.includes('<%= @value %>'))">
+  <p class="sr-only" aria-live="polite" role="status"
+     x-text="'<%= content_description %> is now ' + (condition ? 'visible' : 'hidden')">
+  </p>
+  <div x-cloak x-show="condition">
+    <%= content %>
+  </div>
+</div>
