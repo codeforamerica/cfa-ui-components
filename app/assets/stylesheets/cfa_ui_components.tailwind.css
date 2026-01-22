@@ -103,6 +103,8 @@ a:visited {
 
 .btn--small {
     @apply px-3 py-2;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .btn--large {
