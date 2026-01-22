@@ -21,14 +21,14 @@ permissions:
 
 env:
   APPLICATION: cfa-ui-components
-  ENVIRONMENT: ${{ inputs.environment }}
+  ENVIRONMENT: ${{ inputs.environment || 'development' }}
   REMOTE_WORKFLOW: deploy-app.yaml
 
 jobs:
   deploy:
-    name: Deploy to ${{ inputs.environment }}
+    name: Deploy to ${{ inputs.environment || 'development' }}
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.environment || 'development' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
