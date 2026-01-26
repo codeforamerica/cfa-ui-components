@@ -5,6 +5,7 @@ class ConditionalComponent < ViewComponent::Base
     @method = method
     @value = value
     @content_description = content_description
+    puts "method #{method} value #{value}"
   end
 
   private

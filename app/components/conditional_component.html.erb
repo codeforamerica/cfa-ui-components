@@ -1,3 +1,5 @@
+<div><%= @value %><div>
+<div><%= @method %><div>
 <div x-data="{condition: false}"
      x-effect="condition = $store.<%= @method %> === '<%= @value %>' ||
                            (Array.isArray($store.<%= @method %>) && $store.<%= @method %>.includes('<%= @value %>'))">
