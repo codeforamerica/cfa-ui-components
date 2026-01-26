@@ -2,11 +2,11 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@alpinejs/mask": "^3.15.3",
+    "@alpinejs/mask": "^3.15.4",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.16",
     "@tailwindcss/cli": "^4.1.14",
-    "alpinejs": "^3.15.3",
+    "alpinejs": "^3.15.4",
     "node": "^20.19.5",
     "tailwindcss": "^4.1.14"
   },
@@ -15,8 +15,8 @@
     "yarn": "1.x"
   },
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+    "build:css": "bundle exec rake cfa_ui_components:copy_gem_styles && npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "build": "bundle exec rake cfa_ui_components:copy_gem_javascript && esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
   },
   "devDependencies": {
     "esbuild": "^0.27.0"

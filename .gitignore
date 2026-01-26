@@ -39,4 +39,5 @@
 
 /node_modules
 
-*.gem
+*.gemcfa_ui_components.tailwind.css
+cfa_ui_components.js

@@ -1,2 +1,3 @@
+@import "./vendor/cfa_ui_components.tailwind.css";
 @import "tailwindcss";
 @import "./cfa_ui_components.tailwind.css";
