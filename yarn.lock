@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@alpinejs/mask@^3.15.3":
-  version "3.15.3"
-  resolved "https://registry.yarnpkg.com/@alpinejs/mask/-/mask-3.15.3.tgz#e038819131aaf7ea00e1a8ffa11514eb9b9521ff"
-  integrity sha512-1hpI+KwKwV16RQhDQYCp6k78cEoTXrT9o6FmQk9IM7XkFWkDJu1CRRuaACLn2jkORO2jK2s+H0SHmmwhepEi7w==
+"@alpinejs/mask@^3.15.4":
+  version "3.15.4"
+  resolved "https://registry.yarnpkg.com/@alpinejs/mask/-/mask-3.15.4.tgz#e42c7eb427413f2c2d156555c0e34ad82622f31f"
+  integrity sha512-mRqlcCcHXG1Al/y0z4CKxQoKYNHowBizxvSs72Qb5H0yzLWp6GIgUKzTzUXoDBoKvvGAq4vj/coeFq2VhVIhFQ==
 
 "@emnapi/core@^1.5.0":
   version "1.5.0"
@@ -454,10 +454,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.5.tgz#74ee3aad995d0a3996a6bb9533d4d280514ede03"
   integrity sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==
 
-alpinejs@^3.15.3:
-  version "3.15.3"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.15.3.tgz#667bce66914f8a11a786bffba9081c25ee3692d8"
-  integrity sha512-fSI6F5213FdpMC4IWaup92KhuH3jBX0VVqajRJ6cOTCy1cL6888KyXdGO+seAAkn+g6fnrxBqQEx6gRpQ5EZoQ==
+alpinejs@^3.15.4:
+  version "3.15.4"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.15.4.tgz#c66fd08a0b1aab51f0758e21bce5d442652013dc"
+  integrity sha512-lDpOdoVo0bhFjgl310k1qw3kbpUYwM/v0WByvAchsO93bl3o1rrgr0P/ssx3CimwEtNfXbmwKbtHbqTRCTTH9g==
   dependencies:
     "@vue/reactivity" "~3.1.1"
 
