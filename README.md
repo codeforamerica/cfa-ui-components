@@ -7,9 +7,12 @@
 
 # How to test changes to CfA UI Components locally
 1. Make local changes
-2. Run `gem build cfa_ui_components.gemspec && gem install cfa_ui_components` to build the components
-3. Modify the Gemfile for the Rails app to use the local cfa-ui-components repo.
-- `gem "cfa_ui_components", path: "../cfa-ui-components"` # this should be the local path to the cfa-ui-components repo
+2. Run `gem build cfa_ui_components.gemspec && gem install cfa_ui_components` to build the gem & install it locally
+3. In your Rails app,
+   1. Modify the Gemfile to use the locally-installed cfa_ui_components gem.
+      - `gem "cfa_ui_components"`
+   2. Run `bundle update cfa_ui_components`
+   3. Ensure that you switch the Gemfile back to github & update again before merging your PR.
 
 ## Running the Lookbook locally
 Run `bin/dev` and navigate to localhost:3000
