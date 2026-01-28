@@ -7,6 +7,14 @@ class BaseComponent < ViewComponent::Base
     "info" => {
       path: "icons/information.svg",
       alt:  "info"
+    },
+    "check_mark" => {
+      path: "icons/check_mark.svg",
+      alt:  "check mark"
+    },
+    "x_mark" => {
+      path: "icons/x_mark.svg",
+      alt:  "x mark"
     }
   }.freeze
 

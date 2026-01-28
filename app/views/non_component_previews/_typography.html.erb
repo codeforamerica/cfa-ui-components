@@ -37,3 +37,16 @@
 <p>
   <a href="https://www.google.com">Visited hyperlinked text</a> (open in new tab if it's not already purple)
 </p>
+
+
+<h1>
+  <%= render TextComponent.new(text: "I am a Heading level one", icon: "info")  %>
+</h1>
+
+
+<p>
+  <%= render TextComponent.new(text: "I am a paragraph", icon: "check_mark")  %>
+</p>
+<p>
+  <%= render TextComponent.new(text: "I am a paragraph")  %>
+</p>
