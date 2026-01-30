@@ -1,0 +1,17 @@
+<button x-data @click="$dispatch('modal')">Open Modal</button>
+
+<%= render(ModalComponent.new(name: 'modal')) do |c| %>
+  <% c.with_header do %>Snack copy would go here framed as a question?<% end %>
+
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </p>
+
+  <ul>
+    <li>Ut enim ad minim veniam, quis nostrud</li>
+    <li>exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+    <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+  </ul>
+  <%= render(ButtonLinkComponent.new(label: "Button", url: "http://google.com", style: :secondary)) %>
+  <%= render(ButtonLinkComponent.new(label: "Button", url: "http://google.com")) %>
+<% end %>
