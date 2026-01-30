@@ -39,14 +39,26 @@
 </p>
 
 
-<h1>
-  <%= render TextComponent.new(text: "I am a Heading level one", icon: "info")  %>
+<h1 class="flex">
+  <%= render IconComponent.new(icon: "info")  %> I am a H1 with flex and icon on the left
 </h1>
 
+<h1 class="flex">
+  I am a H1 with flex and icon on the right <%= render IconComponent.new(icon: "info")  %> 
+</h1>
+
+<h1>
+  <%= render IconComponent.new(icon: "check_mark")  %> I am a H1 with no formatting
+</h1>
+
+<p class="flex">
+  <%= render IconComponent.new(icon: "info")  %> I am a paragraph with flex and icon on the left
+</p>
+
+<p class="flex">
+  I am a paragraph with flex and icon on the right <%= render IconComponent.new(icon: "info")  %> 
+</p>
 
 <p>
-  <%= render TextComponent.new(text: "I am a paragraph", icon: "check_mark")  %>
-</p>
-<p>
-  <%= render TextComponent.new(text: "I am a paragraph")  %>
+  <%= render IconComponent.new(icon: "check_mark")  %> I am a paragraph with no formatting
 </p>
