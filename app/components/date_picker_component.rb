@@ -13,30 +13,27 @@ class DatePickerComponent < AttributeBoundFormElementComponent
 
   private
 
-  attr_reader :form, :method, :label
 
   def date
-    form.object.public_send(method)
+    @form.object.public_send(@method)
   end
 
   def object_name
-    form.object_name
+    @form.object_name
   end
 
   # Rails multiparam pieces: (1i)=year, (2i)=month, (3i)=day
   def param_name(part)
-    "#{object_name}[#{method}(#{part}i)]"
+    "#{object_name}[#{@method}(#{part}i)]"
   end
 
   def input_id(part)
-    "#{object_name}_#{method}_#{part}i"
+    "#{object_name}_#{@method}_#{part}i"
   end
 
   def month_options
     Date::MONTHNAMES.compact.each_with_index.map { |m, i| [ m, i + 1 ] }
   end
-
-  def match_day_pattern = "^(0?[1-9]|[12][0-9]|3[01])$"
 
   def month_value = date&.month
   def day_value   = date&.day

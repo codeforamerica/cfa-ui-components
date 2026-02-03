@@ -1,9 +1,6 @@
-
-
-<div class="">
-  <!-- “group” label (optional) -->
+<div>
   <p class="text-[16px] mb-[8px]">
-   <strong> <%= label %> </strong>
+   <strong> <%= @label %> </strong>
   </p>
   <% if @helper_text %>
     <p class="help_text mb-[8px]">
@@ -11,8 +8,7 @@
     </p>
   <% end %>
   <div class="flex">
-    <!-- Month -->
-    <div class="">
+    <div>
       <%= @form.label input_id(2), @label_month, class: "label" %><br>
       <%= select_tag param_name(2),
         options_for_select(month_options, month_value),
@@ -20,32 +16,25 @@
         id: input_id(2),
         class: "mr-[8px] outline  mt-[8px] h-[40px]" %>
     </div>
-
-    <!-- Day -->
-    <div class="">
+    <div>
       <%= @form.label input_id(3), @label_day, class: "label" %><br>
       <%= @form.text_field "#{@method}(3i)",
         value: day_value,
         id: input_id(3),
         type: "text",
         inputmode: "numeric",
-        # pattern: "^(0?[1-9]|[12][0-9]|3[01])$",
-        # title: "Must be under 31 days",
         minlength: 1,
         maxlength: 2,
         placeholder: "DD",
         class: "w-[48px] outline mr-[8px]  mt-[8px] h-[40px]" %>
     </div>
-
-    <!-- Year -->
-    <div class="">
+    <div>
       <%= @form.label input_id(1), @label_year, class: "label" %><br>
       <%= @form.text_field "#{@method}(1i)",
         value: year_value,
         id: input_id(1),
         type: "text",
         inputmode: "numeric",
-        # pattern: "^[12][0-9]{3}$",
         minlength: 4,
         maxlength: 4,
         placeholder: "YYYY",
@@ -53,6 +42,5 @@
     </div>
   </div>
 </div>
-
 
 <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
