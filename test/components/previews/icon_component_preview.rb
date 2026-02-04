@@ -1,5 +1,5 @@
 class IconComponentPreview < ViewComponent::Preview
-  def default
+  def with_info
     render(IconComponent.new(icon: "info"))
   end
 
