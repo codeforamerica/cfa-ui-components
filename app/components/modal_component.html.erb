@@ -1,13 +1,14 @@
-<div x-id="['<%= @name %>']" x-transition.opacity class="absolute top-0 left-0 z-index-1000" x-show="open" x-cloak x-data="{open: false, toggle() { this.open = !this.open }}" @<%= @name %>.window="toggle()">
+<div x-id="['<%= @name %>-title', '<%= @name %>-description']" x-transition.opacity class="absolute top-0 left-0 z-index-1000" x-show="open" x-cloak x-data="{open: false, toggle() { this.open = !this.open }}" @<%= @name %>.window="toggle()">
   <div @keyup.esc.window="open && toggle()" class="h-screen w-screen relative flex flex-row justify-center items-center bg-stone-400/50 overflow-y-hidden" x-trap.inert.noscroll="open">
-    <dialog :aria-labelledby="$id('<%= @name %>')" x-transition x-show="open" @click.away="toggle()" class="relative flex flex-col min-h-50 max-h-[100vh] md:max-h-[80vh] overflow-auto bg-white rounded-sm border-zinc-400 border-2">
+    <dialog role="dialog" aria-modal="true" :aria-labelledby="$id('<%= @name %>')" :aria-describedby="$id('<%= @name %>-description')" x-transition x-show="open" @click.away="toggle()" class="relative flex flex-col min-h-50 max-h-[100vh] md:max-h-[80vh] overflow-auto bg-white rounded-sm border-zinc-400 border-2" :open="open">
       <div class="p-[32px] space-y-4 max-w-[360px]">
         <div class="space-x-7 flex flex-row">
-          <h2 tabindex="0" :id="$id('<%= @name %>')"><%= header %></h2>
+          <h2 :id="$id('<%= @name %>')-title"><%= header %></h2>
           <div class="w-[25px] shrink-0">
-            <a href="#" @click="toggle()" class="flex flex-col items-start cursor-pointer"><%= image_tag icon_image_path('xmark'), width: "25px", alt: icon_alt_text('xmark') %></a>
+            <a href="#" @click="toggle()" aria-label="Close modal" class="flex flex-col items-start cursor-pointer"><%= image_tag icon_image_path('xmark'), width: "25px", alt: icon_alt_text('xmark') %></a>
           </div>
         </div>
+        <div :id="$id('<%= @name %>-description')">
         <%= content %>
       </div>
     </dialog>
