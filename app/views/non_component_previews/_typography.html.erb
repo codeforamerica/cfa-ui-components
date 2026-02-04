@@ -37,3 +37,15 @@
 <p>
   <a href="https://www.google.com">Visited hyperlinked text</a> (open in new tab if it's not already purple)
 </p>
+
+<p class="flex">
+  <%= render IconComponent.new(icon: "info")  %><span class="ml-[8px]"> I am a paragraph with flex and icon on the left </span>
+</p>
+
+<p class="flex">
+  I am a paragraph with flex and icon on the right <%= render IconComponent.new(icon: "info")  %> 
+</p>
+
+<p>
+  <%= render IconComponent.new(icon: "circle_check")  %> I am a paragraph with no formatting
+</p>
