@@ -3,11 +3,11 @@ class IconComponentPreview < ViewComponent::Preview
     render(IconComponent.new(icon: "info"))
   end
 
-  def with_x_mark
-    render(IconComponent.new(icon: "x_mark"))
+  def with_circle_xmark
+    render(IconComponent.new(icon: "circle_xmark"))
   end
 
-  def with_check_mark
-    render(IconComponent.new(icon: "check_mark"))
+  def with_circle_check
+    render(IconComponent.new(icon: "circle_check"))
   end
 end

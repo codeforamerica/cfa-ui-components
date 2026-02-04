@@ -1,19 +1,19 @@
 class BaseComponent < ViewComponent::Base
   ICONS = {
     "question" => {
-      path: "icons/question_mark_circle.svg",
+      path: "icons/circle_question.svg",
       alt:  "question"
     },
     "info" => {
-      path: "icons/information.svg",
+      path: "icons/circle_info.svg",
       alt:  "info"
     },
-    "check_mark" => {
-      path: "icons/check_mark.svg",
+    "circle_check" => {
+      path: "icons/circle_check.svg",
       alt:  "check mark"
     },
-    "x_mark" => {
-      path: "icons/x_mark.svg",
+    "circle_xmark" => {
+      path: "icons/circle_xmark.svg",
       alt:  "x mark"
     }
   }.freeze
