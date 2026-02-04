@@ -69,9 +69,6 @@ ol {
     list-style-type: decimal;
     list-style-position: inside;
 }
-li {
-     
-}
 
 a {
     &:not(.btn) {
