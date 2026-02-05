@@ -37,6 +37,7 @@ module CfaUiComponents
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.view_component.previews.paths = [ "#{Rails.root}/test/components/previews" ]
 
     config.view_component.previews.default_layout = "component_preview"
     config.lookbook.preview_controller = "PreviewController"
