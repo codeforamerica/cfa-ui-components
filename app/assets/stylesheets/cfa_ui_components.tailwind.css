@@ -60,11 +60,13 @@ h2 {
 }
 
 ul {
+    @apply space-y-6;
     list-style-type: disc;
     list-style-position: inside;
 }
 
 ol {
+    @apply space-y-6;
     list-style-type: decimal;
     list-style-position: inside;
 }
