@@ -1,5 +1,10 @@
 <div class="space-y-4">
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
+  <% if @help_text %>
+    <p class="help_text">
+      <%= @help_text %>
+    </p>
+  <% end %>
   <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-data" => "{}", "x-model" => "$store.#{@method}"} %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

@@ -17,4 +17,8 @@ class DropdownComponentPreview < FormComponentPreview
   def required
     render(DropdownComponent.new(form: form, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, required: true))
   end
+
+  def with_help_text
+    render(DropdownComponent.new(form: form, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, help_text: I18n.t(:dropdown_help_text)))
+  end
 end
