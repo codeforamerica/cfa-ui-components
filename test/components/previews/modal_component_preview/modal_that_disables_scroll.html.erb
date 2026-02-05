@@ -1,4 +1,4 @@
-<button x-data @click="$dispatch('modal')">Open Modal</button>
+<button x-data @click="$dispatch('first-modal')">Open Modal</button>
 
 <p>
   You will rejoice to hear that no disaster has accompanied the commencement of
@@ -112,7 +112,7 @@
   and kindness.
 </p>
 
-<%= render(ModalComponent.new(name: 'modal')) do |c| %>
+<%= render(ModalComponent.new(name: 'first')) do |c| %>
   <% c.with_header do %>Snack copy would go here framed as a question?<% end %>
 
   <p>
