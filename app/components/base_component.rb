@@ -11,6 +11,7 @@ class BaseComponent < ViewComponent::Base
     "xmark" => {
       path: "icons/xmark.svg",
       alt: "close"
+    },
     "circle_check" => {
       path: "icons/circle_check.svg",
       alt:  "check mark"
