@@ -1,12 +1,46 @@
-<%= @form.date_select(
-  @method,
-  {
-    start_year: @start_year,
-    end_year: @end_year,
-    include_blank: @include_blank,
-    order: @order,
-    prompt: @prompt
-  }.merge(@date_options),
-  @html_options,
-) %>
+<div>
+  <p class="text-[16px] mb-[8px]">
+   <strong> <%= @label %> </strong>
+  </p>
+  <% if @helper_text %>
+    <p class="help_text mb-[8px]">
+      <%= @helper_text %>
+    </p>
+  <% end %>
+  <div class="flex">
+    <div>
+      <%= @form.label input_id(2), @label_month, class: "label" %><br>
+      <%= select_tag param_name(2),
+        options_for_select(month_options, month_value),
+        include_blank: @label_month_select,
+        id: input_id(2),
+        class: "mr-[8px] outline  mt-[8px] h-[40px]" %>
+    </div>
+    <div>
+      <%= @form.label input_id(3), @label_day, class: "label" %><br>
+      <%= @form.text_field "#{@method}(3i)",
+        value: day_value,
+        id: input_id(3),
+        type: "text",
+        inputmode: "numeric",
+        minlength: 1,
+        maxlength: 2,
+        placeholder: "DD",
+        class: "w-[48px] outline mr-[8px]  mt-[8px] h-[40px] px-[8px]" %>
+    </div>
+    <div>
+      <%= @form.label input_id(1), @label_year, class: "label" %><br>
+      <%= @form.text_field "#{@method}(1i)",
+        value: year_value,
+        id: input_id(1),
+        type: "text",
+        inputmode: "numeric",
+        minlength: 4,
+        maxlength: 4,
+        placeholder: "YYYY",
+        class: "w-[72px] outline mr-[8px] mt-[8px] h-[40px] px-[8px]" %>
+    </div>
+  </div>
+</div>
+
 <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>

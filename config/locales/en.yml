@@ -1,6 +1,9 @@
 en:
   back: Go back
   continue: Continue
+  cfaui:
+    modal:
+      close_aria: Close modal
   decline: Decline
   remove: Remove
   favorite_fruits: Favorite fruits

@@ -46,7 +46,7 @@ module CfaUiComponents
     end
 
     def add_js_dependencies
-      run "yarn add alpinejs @alpinejs/mask"
+      run "yarn add alpinejs @alpinejs/mask @alpinejs/focus"
     end
 
     def add_components_to_gitignore

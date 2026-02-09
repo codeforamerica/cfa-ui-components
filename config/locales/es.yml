@@ -1,6 +1,9 @@
 es:
   back: Regresa
   continue: Continuar
+  cfaui:
+    modal:
+      close_aria: Cerrar modal 
   decline: Rechazar
   remove: Eliminar
   favorite_fruits: Frutas favoritas
