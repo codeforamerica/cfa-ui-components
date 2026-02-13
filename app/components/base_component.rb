@@ -19,6 +19,10 @@ class BaseComponent < ViewComponent::Base
     "circle_xmark" => {
       path: "icons/circle_xmark.svg",
       alt:  "x mark"
+    },
+    "chevron_down" => {
+      path: "icons/chevron_down.svg",
+      alt: "chevron down"
     }
   }.freeze
 

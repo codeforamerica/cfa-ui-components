@@ -10,7 +10,6 @@ export default function (Alpine: Alpine) {
         else if (directive.value === 'list') comboboxList(el, Alpine)
         else if (directive.value === 'item') comboboxListItem(el, Alpine)
         else if (directive.value === 'values') comboboxValues(el, Alpine)
-        else if (directive.value === 'clear') comboboxClearButton(el, Alpine)
         else if (directive.value === 'toggle') comboboxToggleButton(el, Alpine)
         else comboboxRoot(el, Alpine)
     })
@@ -248,28 +247,6 @@ const comboboxList = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
         },
     })
 }
-
-const comboboxClearButton = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
-    Alpine.bind(el, {
-        ':type'() {
-            return 'button'
-        },
-        ':aria-label'() {
-            return 'clear input'
-        },
-        ':tabindex'() {
-            return '-1'
-        },
-        'x-show'() {
-            return !!this.selectedValue
-        },
-        '@mouseup.prevent'() {
-            this.reset();
-            this.$focus.focus(this.inputEl);
-        }
-    })
-}
-
 const comboboxToggleButton = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
     Alpine.bind(el, {
         ':type'() {
