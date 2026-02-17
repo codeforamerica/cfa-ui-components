@@ -63,7 +63,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     return this.selectedEl ? this.selectedEl.textContent : ''
                 },
                 get noResults() {
-                    return this.isDirty && !this.allOptions.some(o => o.label.toLowerCase().startsWith(this.inputValue.toLowerCase()))
+                    return this.isDirty && !this.allOptions.some(o => o.label.toLowerCase().includes(this.inputValue.toLowerCase()))
                 },
                 select(el: HTMLElement) {
                     this.selectedEl = el
@@ -293,7 +293,7 @@ const comboboxListItem = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
             }
         },
         'x-show'() {
-            return this.isDirty ? this.$data.label.toLowerCase().startsWith(this.inputValue.toLowerCase()) : true
+            return this.isDirty ? this.$data.label.toLowerCase().includes(this.inputValue.toLowerCase()) : true
         },
         '@mousedown.prevent'() {
             return true
