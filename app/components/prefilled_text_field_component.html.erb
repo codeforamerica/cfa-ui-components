@@ -1,4 +1,4 @@
 <div class="space-y-2">
-  <%= label_tag nil, @label, class: "label block" %>
-  <%= text_field_tag nil, @text, class: "w-full max-w-sm " + @style %>
+    <%= content_tag(:span, @label, class: "label block", aria: {labelledby: "content"})%>
+    <%= content_tag(:span, @text, class: "w-full max-w-sm " + @style, id: "content")%>
 </div>
