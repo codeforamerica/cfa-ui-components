@@ -1,4 +1,6 @@
 class BaseComponent < ViewComponent::Base
+  attr_accessor :html_attrs
+
   ICONS = {
     "question" => {
       path: "icons/circle_question.svg",
@@ -21,6 +23,10 @@ class BaseComponent < ViewComponent::Base
       alt:  "x mark"
     }
   }.freeze
+
+  def initialize(html_attrs:)
+    @html_attrs = html_attrs
+  end
 
   def icon_image_path(icon)
     ICONS.dig(icon, :path) || ""
