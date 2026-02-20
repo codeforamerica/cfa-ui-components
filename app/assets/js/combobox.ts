@@ -3,6 +3,9 @@
 // @ts-nocheck
 import type { Alpine, ElementWithXAttributes } from "alpinejs";
 
+function stringContainsSubstring(label: string, substring: string): boolean {
+    return label.toLowerCase().includes(substring.toLowerCase());
+}
 export default function (Alpine: Alpine) {
     Alpine.directive('combobox', (el, directive) => {
         if (directive.value === 'input') comboboxInput(el, Alpine)
@@ -63,7 +66,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     return this.selectedEl ? this.selectedEl.textContent : ''
                 },
                 get noResults() {
-                    return this.isDirty && !this.allOptions.some(o => o.label.toLowerCase().includes(this.inputValue.toLowerCase()))
+                    return this.isDirty && !this.allOptions.some(o => stringContainsSubstring(o.label, this.inputValue))
                 },
                 select(el: HTMLElement) {
                     this.selectedEl = el
@@ -139,11 +142,14 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
 
 const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
     Alpine.bind(el, {
+        ':type'() {
+            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value })).filter((o) => stringContainsSubstring(o.label, this.inputValue));
+        },
         'x-init'() {
             el.id = '';
             el.hidden = true;
-            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value }))
-        }
+            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value }));
+        },
     })
 }
 
@@ -293,7 +299,7 @@ const comboboxListItem = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
             }
         },
         'x-show'() {
-            return this.isDirty ? this.$data.label.toLowerCase().includes(this.inputValue.toLowerCase()) : true
+            return this.isDirty ? stringContainsSubstring(this.$data.label, this.inputValue) : true
         },
         '@mousedown.prevent'() {
             return true
