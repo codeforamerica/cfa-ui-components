@@ -29,6 +29,9 @@ export default function (Alpine: Alpine) {
             },
             get noResults() {
                 return $data.noResults
+            },
+            get isOpen() {
+                return $data.isOpen
             }
         }
     })
