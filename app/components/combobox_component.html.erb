@@ -28,7 +28,7 @@
       </div>
       <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-gray-60 bg-white max-h-52 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
-          <li x-combobox:item class="p-2 !m-0 cursor-pointer aria-selected:bg-blue-60v aria-selected:text-white data-active:outline data-active:outline-4 data-active:!outline-blue-800 data-active:-outline-offset-4" x-text="option.label"></li>
+          <li x-combobox:item class="p-2 !m-0 cursor-pointer aria-selected:bg-blue-60v data-active:outline data-active:outline-4 data-active:!outline-blue-800 data-active:-outline-offset-4" x-text="option.label"></li>
         </template>
         <template x-if="$combobox.noResults">
           <li class="p-2 cursor-not-allowed">
