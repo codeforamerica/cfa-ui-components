@@ -38,7 +38,7 @@ class FormComponentPreview < ViewComponent::Preview
      OpenStruct.new(value: "banana", label: "Banana"),
      OpenStruct.new(value: "apple", label: "Apple") ]
   end
-  
+
   def self.combobox_fruit_options
     [ OpenStruct.new(value: "apple", label: "Apple"),
     OpenStruct.new(value: "apricot", label: "Apricot"),

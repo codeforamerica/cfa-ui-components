@@ -10,7 +10,7 @@ class ComboboxComponentPreview < FormComponentPreview
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
-    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits,label: I18n.t(:favorite_fruits), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
+    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
   def prefilled
