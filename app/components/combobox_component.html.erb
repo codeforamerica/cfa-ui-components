@@ -8,6 +8,7 @@
 
   <select id="combobox" x-combobox:values>
     <% options = @collection.map {|o| [o.send(@item_label_method), o.send(@item_value_method)]} %>
+    <% options.insert(0, "- Select or Type -") %>
     <%= options_for_select(options, current_value) %>
   </select>
 

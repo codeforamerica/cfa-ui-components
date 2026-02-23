@@ -200,6 +200,7 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
         },
         'x-init'() {
             this.inputEl = el;
+            // placeholderText has index of 0
             if(this.comboboxValues.selectedIndex != 0) {
                 this.setInitialValue(this.comboboxValues);
             }
