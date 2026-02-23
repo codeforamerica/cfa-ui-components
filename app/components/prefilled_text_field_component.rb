@@ -2,7 +2,17 @@
 
 class PrefilledTextFieldComponent < ViewComponent::Base
   def initialize(text:,  label:,  style: :primary)
-    @text = text
+    @text =
+     case style
+     when :primary
+          text
+     when :numeric
+          "$" +  number_with_delimiter(text.to_i)
+     else
+          raise ArgumentError("Invalid style")
+     end
+
+
     @label = label
     @style =
       case style
