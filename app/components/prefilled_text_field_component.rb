@@ -6,7 +6,7 @@ class PrefilledTextFieldComponent < ViewComponent::Base
      case style
      when :primary
       text
-     when :numeric
+     when :currency
       "$" +  number_with_delimiter(text)
      else
       raise ArgumentError("Invalid style")
@@ -18,7 +18,7 @@ class PrefilledTextFieldComponent < ViewComponent::Base
       case style
       when :primary
         ""
-      when :numeric
+      when :currency
         "text-[22px] text-[#008817] font-bold"
       else
         raise ArgumentError("Invalid style")

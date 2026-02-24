@@ -3,7 +3,7 @@ class PrefilledTextFieldComponentPreview < ViewComponent::Preview
     render(PrefilledTextFieldComponent.new(label: "Your text", text: "Primary text"))
   end
 
-  def numeric
-    render(PrefilledTextFieldComponent.new(label: "Your refund", text: "1000", style: :numeric))
+  def currency
+    render(PrefilledTextFieldComponent.new(label: "Your refund", text: "1000", style: :currency))
   end
 end
