@@ -7,8 +7,6 @@ class PrefilledTextFieldComponent < ViewComponent::Base
      when :primary
       text
      when :numeric
-      # check whether its a valid integer
-      Integer(text)
       "$" +  number_with_delimiter(text)
      else
       raise ArgumentError("Invalid style")
