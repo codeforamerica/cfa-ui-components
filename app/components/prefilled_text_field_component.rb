@@ -5,11 +5,13 @@ class PrefilledTextFieldComponent < ViewComponent::Base
     @text =
      case style
      when :primary
-          text
+      text
      when :numeric
-          "$" +  number_with_delimiter(text.to_i)
+      # check whether its a valid integer
+      Integer(text)
+      "$" +  number_with_delimiter(text)
      else
-          raise ArgumentError("Invalid style")
+      raise ArgumentError("Invalid style")
      end
 
 
