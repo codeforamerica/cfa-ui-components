@@ -3,7 +3,7 @@ class RadioButtonsComponentPreview < FormComponentPreview
     render(RadioButtonsComponent.new(form: form, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label))
   end
 
-  def vertical
+  def horizontal
     render(RadioButtonsComponent.new(form: form, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, layout: :horizontal))
   end
 
