@@ -6,11 +6,8 @@
     </p>
   <% end %>
 
-  <select id="combobox" x-combobox:values>
-    <% options = @collection.map {|o| [o.send(@item_label_method), o.send(@item_value_method)]} %>
-    <% options.insert(0, "- Select or Type -") %>
-    <%= options_for_select(options, current_value) %>
-  </select>
+  <% @collection.insert(0, OpenStruct.new(value: "- Select or Type -", label: "- Select or Type -")) %>
+  <%= @form.select(@method, @collection.map{ |o| [o.send(@item_label_method), o.send(@item_value_method)]}, {prompt: "- Select or Type -"}, html_options={"x-combobox:values": ""}) %>
 
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-2">

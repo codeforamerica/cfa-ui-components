@@ -11,6 +11,10 @@ function filterResults(allOptions, filterString: string): Array<{ label: string,
     return [...allOptions].map((o) => ({ label: o.textContent, value: o.value })).filter((o) => stringContainsSubstring(o.label, filterString));
 }
 
+function getCorrespondingOption(allOptions, liElement: HTMLElement): HTMLElement {
+    return [...allOptions].filter((o) => o.label === liElement.textContent).pop()
+}
+
 export default function (Alpine: Alpine) {
     Alpine.directive('combobox', (el, directive) => {
         if (directive.value === 'input') comboboxInput(el, Alpine)
@@ -65,7 +69,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                 labelEl: undefined as HTMLElement | undefined,
                 selectedEl: undefined as HTMLElement | undefined,
                 activeEl: undefined as HTMLElement | undefined,
-                comboboxValues: undefined as HTMLElement | undefined,
+                selectEl: undefined as HTMLElement | undefined,
                 inputValue: '',
                 isLoaded: false,
                 isOpen: false,
@@ -78,20 +82,21 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     return this.isDirty && !this.allOptions.some(o => stringContainsSubstring(o.label, this.inputValue))
                 },
                 setInitialValue() {
-                    this.value = this.comboboxValues.value;
-                    this.inputValue = this.comboboxValues.value;
-                    this.select(this.comboboxValues.options[this.comboboxValues.selectedIndex], false);
+                    this.value = this.selectEl.value;
+                    this.inputValue = this.selectEl.value;
+                    this.select(this.selectEl.options[this.selectEl.selectedIndex], false);
                 },
                 select(el: HTMLElement, setFocus=true) {
                     this.selectedEl = el
                     this.inputEl.value = el.textContent;
                     this.inputValue = el.textContent;
+                    this.selectEl.value = getCorrespondingOption(this.selectEl.children, el).value;
                     this.isOpen = false;
                     this.isDirty = false;
                     if(setFocus) {
                         this.$focus.focus(this.inputEl);
                     }
-                    this.allOptions = filterResults(this.comboboxValues.children, this.inputValue)
+                    this.allOptions = filterResults(this.selectEl.children, this.inputValue)
                 },
                 reset() {
                     this.inputEl.value = '';
@@ -164,7 +169,7 @@ const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)
             el.id = '';
             el.hidden = true;
             this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value }));
-            this.comboboxValues = el;
+            this.selectEl = el;
         },
     })
 }
@@ -201,8 +206,8 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
         'x-init'() {
             this.inputEl = el;
             // placeholderText has index of 0
-            if(this.comboboxValues.selectedIndex != 0) {
-                this.setInitialValue(this.comboboxValues);
+            if(this.selectEl.selectedIndex != 0) {
+                this.setInitialValue(this.selectEl);
             }
         },
         '@mousedown'() {
