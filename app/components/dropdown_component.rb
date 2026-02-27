@@ -10,10 +10,4 @@ class DropdownComponent < AttributeBoundFormElementComponent
     @item_label_method = item_label_method
     @required = required
   end
-
-  private
-
-  def required_class
-    @required ? "required" : ""
-  end
 end

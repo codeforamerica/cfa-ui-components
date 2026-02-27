@@ -13,3 +13,6 @@ en:
   ssn: Social Security Number or ITIN
   ssn_help: For example, 123-45-6789
   fruit_help_text: Please choose your favorite fruit
+  combobox:
+    placeholder_label: "- Select or Type -"
+    no_results: No results found
