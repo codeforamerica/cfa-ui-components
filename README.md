@@ -5,6 +5,10 @@
 2. Add the CfA UI Components gem by adding `gem "cfa_ui_components", github: "codeforamerica/cfa-ui-components"` to your `Gemfile`, and run `bundle install`
 3. Run `bin/rails g cfa_ui_components:install`
 
+# Adding a new component to CFA UI Components
+1. Run `bin/rails g view_component:component <COMPONENT_NAME>` to create all the relevant files.
+2. Make local changes
+
 # How to test changes to CfA UI Components locally
 1. Make local changes
 2. Run `gem build cfa_ui_components.gemspec && gem install cfa_ui_components` to build the gem & install it locally
