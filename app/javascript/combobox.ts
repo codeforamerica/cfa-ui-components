@@ -231,7 +231,7 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
         '@keydown.prevent.down'() {
             this.isOpen = true;
             this.$nextTick(() => {
-                this.selectedEl ? this.focusSelected() : this.focusFirst()
+                this.focusFirst()
             })
         },
     })
