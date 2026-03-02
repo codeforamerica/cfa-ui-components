@@ -21,6 +21,14 @@ class BaseComponent < ViewComponent::Base
     "circle_xmark" => {
       path: "icons/circle_xmark.svg",
       alt:  "x mark"
+    },
+    "chevron_down" => {
+      path: "icons/arrow_closed.svg",
+      alt: "chevron down"
+    },
+    "chevron_up" => {
+      path: "icons/arrow_open.svg",
+      alt: "chevron up"
     }
   }.freeze
 
@@ -35,5 +43,9 @@ class BaseComponent < ViewComponent::Base
   def icon_alt_text(icon)
     base = ICONS.dig(icon, :alt)
     base ? "#{base} icon" : ""
+  end
+
+  def required_class
+    @required ? "required" : ""
   end
 end

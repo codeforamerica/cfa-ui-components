@@ -22,8 +22,4 @@ class TextFieldComponent < AttributeBoundFormElementComponent
     end
     kwargs
   end
-
-  def required_class
-    @required ? "required" : ""
-  end
 end
