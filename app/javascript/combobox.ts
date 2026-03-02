@@ -131,7 +131,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                         this.activeEl = el;
                         this.$focus.focus(el)
                     } else {
-                        this.isOpen = false;
+                        this.activeEl = this.inputEl;
                         this.$focus.focus(this.inputEl)
                     }
                 },
@@ -162,14 +162,14 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
 
 const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
     Alpine.bind(el, {
-        ':type'() {
-            this.allOptions = filterResults(el.children, this.inputValue)
-        },
         'x-init'() {
             el.id = '';
             el.hidden = true;
             this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value }));
             this.selectEl = el;
+        },
+        ':foo'() {
+            this.allOptions = filterResults(el.children, this.inputValue)
         },
     })
 }
