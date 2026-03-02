@@ -18,6 +18,7 @@ function getCorrespondingOption(allOptions, liElement: HTMLElement): HTMLElement
 export default function (Alpine: Alpine) {
     Alpine.directive('combobox', (el, directive) => {
         if (directive.value === 'input') comboboxInput(el, Alpine)
+        else if (directive.value === 'desc') comboboxDesc(el, Alpine)
         else if (directive.value === 'label') comboboxLabel(el, Alpine)
         else if (directive.value === 'list') comboboxList(el, Alpine)
         else if (directive.value === 'item') comboboxListItem(el, Alpine)
@@ -49,7 +50,7 @@ export default function (Alpine: Alpine) {
 const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
     Alpine.bind(el, {
         'x-id'() {
-            return ['combobox-label', 'combobox-list', 'combobox-input']
+            return ['combobox-label', 'combobox-list', 'combobox-input', 'combobox-desc']
         },
         'x-init'() {
             this.isLoaded = true;
@@ -70,6 +71,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                 selectedEl: undefined as HTMLElement | undefined,
                 activeEl: undefined as HTMLElement | undefined,
                 selectEl: undefined as HTMLElement | undefined,
+                comboboxDesc: undefined,
                 inputValue: '',
                 isLoaded: false,
                 isOpen: false,
@@ -202,6 +204,14 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
         },
         ':aria-owns'() {
             return this.$id('combobox-list')
+        },
+        ':aria-labelledby'() {
+            return this.$id('combobox-label')
+        },
+        ':aria-describedby'() {
+            if(this.comboboxDesc) {
+                return this.$id('combobox-desc')
+            }
         },
         'x-init'() {
             this.inputEl = el;
@@ -364,5 +374,19 @@ const comboboxLabel = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
         '@click'() {
             this.isOpen = true
         }
+    })
+}
+
+const comboboxDesc = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)=> {
+    Alpine.bind(el, {
+        ':id'() {
+            return this.$id('combobox-desc')
+        },
+        ':for'() {
+            return this.$id('combobox-input')
+        },
+        'x-init'() {
+            this.comboboxDesc = el
+        },
     })
 }
