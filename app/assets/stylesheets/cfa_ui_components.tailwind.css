@@ -21,7 +21,7 @@ main {
 }
 
 form {
-    @apply space-y-8;
+    @apply flex flex-col gap-y-8;
 }
 
 .radio_button_item {
