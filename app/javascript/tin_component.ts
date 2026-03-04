@@ -50,15 +50,14 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
                     }
                 },
                 formatMask(str: string, inputType: string){
-                    //can we use alpine mask here? there's a bug if we backspace to a hyphen breakpoint and then type again.
                     if (inputType == "insertText") {
-                        if(str.length == 3) {
-                            str = str.slice(0, 3) + "-"
+                        if(str.length >= 3 && str[3] != "-") {
+                            str = str.slice(0, 3) + "-" + str.slice(3)
                         }
-                        else if(str.length == 6) {
-                            str = str.slice(0, 6) + "-"
+                        if(str.length >= 6 && str[6] != "-") {
+                            str = str.slice(0, 6) + "-" + str.slice(6)
                         }
-                        else if(str.length > 11) {
+                        if(str.length > 11) {
                             str = str.slice(0, 11)
                         }
                     }
