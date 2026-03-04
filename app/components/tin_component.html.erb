@@ -1,12 +1,14 @@
-<div class="space-y-2">
-  <%= @form.label @method, @label, class: "label block" %>
-  <% if @help_text %>
-    <p class="help_text">
-      <%= @help_text %>
-    </p>
-  <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900", "x-data": "", "x-mask": "999-99-9999", "placeholder": "___-__-____" %>
-  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+<div x-data x-tin>
+  <div class="space-y-2">
+    <%= @form.label @method, @label, class: "label block", "x-tin:label": "" %>
+    <% if @help_text %>
+      <p x-tin:desc class="help_text">
+        <%= @help_text %>
+      </p>
+    <% end %>
+    <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900", "x-tin:input": "", "x-mask": "999-99-9999", "placeholder": "___-__-____" %>
+    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+  </div>
+  <input x-tin:show-checkbox type="checkbox" id="show" value="Show" >
+  <label x-tin:show-label for="show">Show</label>
 </div>
-<input type="checkbox" id="show" value="Show">
-<label for="show">Show</label>

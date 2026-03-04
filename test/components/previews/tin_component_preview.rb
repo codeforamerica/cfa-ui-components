@@ -1,5 +1,5 @@
 class TinComponentPreview < FormComponentPreview
   def default
-    render(TinComponent.new(form: form, method: :first_name, label: I18n.t(:first_name)))
+    render(TinComponent.new(form: form, method: :ssn, label: I18n.t(:ssn)))
   end
 end
