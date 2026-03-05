@@ -12,6 +12,10 @@
     <li>exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
     <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
   </ul>
-  <%= render(ButtonLinkComponent.new(label: "Button", url: "http://google.com", style: :secondary)) %>
-  <%= render(ButtonLinkComponent.new(label: "Button", url: "http://google.com")) %>
+  <% c.with_button do %>
+    <%= render(ButtonLinkComponent.new(label: "Button", url: "http://google.com", style: :secondary)) %>
+  <% end %>
+  <% c.with_button do %>
+    <%= render(ButtonLinkComponent.new(label: "Button", url: "http://google.com")) %>
+  <% end %>
 <% end %>

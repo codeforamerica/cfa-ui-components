@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-class ButtonLinkComponent < ViewComponent::Base
-  def initialize(label:, url:, style: :primary, method: :get, size: :large, turbo: true)
+class ButtonLinkComponent < BaseComponent
+  def initialize(label:, url:, style: :primary, method: :get, size: :large, turbo: true, html_attrs: nil)
+    super(html_attrs:)
     @turbo = turbo
     @label = label
     @url = url

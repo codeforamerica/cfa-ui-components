@@ -1,1 +1,7 @@
-<%= button_to @label, @url, class: "btn #{@button_style} #{@button_size}", method: @method, form: (@turbo ? {} : { data: { turbo: false} }) %>
+<%= button_to @label,
+              @url,
+              class: "btn #{@button_style} #{@button_size}",
+              method: @method,
+              form: (@turbo ? {} : { data: { turbo: false} }),
+              **html_attrs
+%>
