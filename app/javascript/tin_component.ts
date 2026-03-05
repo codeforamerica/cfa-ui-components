@@ -7,6 +7,7 @@ export default function (Alpine: Alpine) {
         else if (directive.value === 'desc') tinDesc(el, Alpine)
         else if (directive.value === 'label') tinLabel(el, Alpine)
         else if (directive.value === 'show-checkbox') tinCheckbox(el, Alpine)
+        else if (directive.value === 'alert') tinAlert(el, Alpine)
         else if (directive.value === 'show-label') tinCheckboxLabel(el, Alpine)
         else tinRoot(el, Alpine)
     })
@@ -24,6 +25,7 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
         'x-data'() {
             return {
                 inputEl: undefined as HTMLElement,
+                alertEl: undefined as HTMLElement,
                 inputValue: "",
                 showTin: false,
                 hideValue() {
@@ -37,6 +39,15 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
                         this.showValue()
                     } else {
                         this.hideValue();
+                    }
+                },
+                setAlertText() {
+                    if(this.showTin) {
+                        this.alertEl.innerHTML = "TIN visible"
+                        console.log("TIN visible");
+                    } else {
+                        this.alertEl.innerHTML = "TIN hidden"
+                        console.log("TIN hidden");
                     }
                 },
                 formatMask(str: string, inputType: string){
@@ -117,6 +128,7 @@ const tinCheckbox = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =>
         '@click'() {
             this.showTin = !this.showTin
             this.showHideHandler();
+            this.setAlertText();
         },
     })
 }
@@ -140,5 +152,18 @@ const tinCheckboxLabel = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
         ':for'() {
             return this.$id('tin-show-checkbox')
         },
+    })
+}
+
+
+const tinAlert = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)=> {
+    Alpine.bind(el, {
+        ':id'() {
+            return this.$id('tin-alert')
+        },
+        'x-init'() {
+            this.alertEl = el;
+        },
+
     })
 }

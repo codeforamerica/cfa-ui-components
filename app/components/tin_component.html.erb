@@ -6,6 +6,7 @@
         <%= @help_text %>
       </p>
     <% end %>
+    <div x-tin:alert role="alert" class="sr-only"></div>
     <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900 mb-2", "x-tin:input": "", "placeholder": "___-__-____" %>
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
