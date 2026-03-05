@@ -13,12 +13,6 @@ export default function (Alpine: Alpine) {
 
     Alpine.magic('tin', el => {
         const $data = Alpine.$data(el)
-
-        return {
-            get isLoaded() {
-                return $data.isLoaded
-            }
-        }
     })
 }
 
@@ -27,14 +21,10 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
         'x-id'() {
             return ['tin-label', 'tin-input', 'tin-desc', 'tin-show-checkbox', 'tin-show-checkbox-label']
         },
-        'x-init'() {
-            this.isLoaded = true;
-        },
         'x-data'() {
             return {
                 inputEl: undefined as HTMLElement,
                 inputValue: "",
-                isLoaded: false,
                 showTin: false,
                 hideValue() {
                     this.inputEl.value = this.inputValue.replaceAll(/\d/g, "*");
@@ -42,7 +32,7 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
                 showValue() {
                     this.inputEl.value = this.inputValue;
                 },
-                hideHandler() {
+                showHideHandler() {
                     if(this.showTin) {
                         this.showValue()
                     } else {
@@ -106,8 +96,7 @@ const tinInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
 
             }
             this.inputValue = this.formatMask(this.inputValue, event.inputType);
-            console.log(this.inputValue);
-            this.hideHandler()
+            this.showHideHandler()
         }
      })
 }
@@ -117,8 +106,6 @@ const tinDesc = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
         ':id'() {
             return this.$id('tin-desc')
         },
-        'x-init'() {
-        },
     })
 }
 
@@ -127,11 +114,9 @@ const tinCheckbox = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =>
         ':id'() {
             return this.$id('tin-show-checkbox')
         },
-        'x-init'() {
-        },
         '@click'() {
             this.showTin = !this.showTin
-            this.hideHandler();
+            this.showHideHandler();
         },
     })
 }
@@ -144,8 +129,6 @@ const tinLabel = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
         ':for'() {
             return this.$id('tin-input')
         },
-        'x-init'() {
-        },
     })
 }
 
@@ -156,8 +139,6 @@ const tinCheckboxLabel = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
         },
         ':for'() {
             return this.$id('tin-show-checkbox')
-        },
-        'x-init'() {
         },
     })
 }

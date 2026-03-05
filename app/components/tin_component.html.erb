@@ -6,9 +6,9 @@
         <%= @help_text %>
       </p>
     <% end %>
-    <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900", "x-tin:input": "", "placeholder": "___-__-____" %>
+    <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900 mb-2", "x-tin:input": "", "placeholder": "___-__-____" %>
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
-  <input x-tin:show-checkbox type="checkbox" id="show" value="Show" >
-  <label x-tin:show-label for="show">Show</label>
+    <input x-tin:show-checkbox class="accent-zinc-900" type="checkbox" id="show" value="Show" >
+    <label x-tin:show-label for="show">Show</label>
 </div>
