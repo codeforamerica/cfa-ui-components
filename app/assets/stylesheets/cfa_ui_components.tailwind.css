@@ -21,7 +21,7 @@ main {
 }
 
 form {
-    @apply space-y-8;
+    @apply flex flex-col gap-y-8;
 }
 
 .radio_button_item {
@@ -104,7 +104,7 @@ a:visited {
 }
 
 .btn--small {
-    @apply px-3 py-2;
+    @apply px-3 py-2 w-fit;
     font-size: 16px;
     font-weight: 700;
 }
