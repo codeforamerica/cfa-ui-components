@@ -1,13 +1,15 @@
 <div class="space-y-4" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
   <%= @form.hidden_field @method, value: "" %>
-  <% content = capture {
-    @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
-      content_tag :div, class: "radio_button_item" do
-        concat radio_button_item.radio_button("x-model" => "$store.#{@method}")
-        concat radio_button_item.label
+  <% content = content_tag(:div, class: @layout) do
+    capture do
+      @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
+        content_tag :div, class: "radio_button_item" do
+          concat radio_button_item.radio_button("x-model" => "$store.#{@method}")
+          concat radio_button_item.label
+        end
       end
     end
-  } %>
+  end %>
   <% concat content %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
