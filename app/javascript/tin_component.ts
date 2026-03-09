@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { Alpine, ElementWithXAttributes } from "alpinejs";
 
 export default function (Alpine: Alpine) {
@@ -10,10 +9,6 @@ export default function (Alpine: Alpine) {
         else if (directive.value === 'alert') tinAlert(el, Alpine)
         else if (directive.value === 'show-label') tinCheckboxLabel(el, Alpine)
         else tinRoot(el, Alpine)
-    })
-
-    Alpine.magic('tin', el => {
-        const $data = Alpine.$data(el)
     })
 }
 
@@ -44,10 +39,8 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
                 setAlertText() {
                     if(this.showTin) {
                         this.alertEl.innerHTML = "TIN visible"
-                        console.log("TIN visible");
                     } else {
                         this.alertEl.innerHTML = "TIN hidden"
-                        console.log("TIN hidden");
                     }
                 },
                 formatMask(str: string, inputType: string){
@@ -96,15 +89,13 @@ const tinInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
             this.inputEl = el;
         },
         '@input'(event) {
-            if(event.inputType == "insertText") {
+            if (event.inputType == "insertText") {
                 if (event.data.match(/\d/)) {
                     this.inputValue = this.inputValue + event.data
                 }
             }
             else if (event.inputType == "deleteContentBackward") {
                 this.inputValue = this.inputValue.slice(0, -1);
-            } else {
-
             }
             this.inputValue = this.formatMask(this.inputValue, event.inputType);
             this.showHideHandler()
