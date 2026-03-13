@@ -11,7 +11,7 @@ class SubmitButtonComponent < ViewComponent::Base
       when :secondary
         "btn--secondary"
       else
-        raise ArgumentError("Invalid button style")
+        raise ArgumentError.new("Invalid button style")
       end
   end
 end

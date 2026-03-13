@@ -13,7 +13,7 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
       when :vertical
         "space-y-4"
       else
-        raise ArgumentError("Invalid layout")
+        raise ArgumentError.new("Invalid layout")
       end
   end
 end
