@@ -15,7 +15,7 @@ class ButtonLinkComponent < BaseComponent
       when :destructive
         "btn--destructive"
       else
-        raise ArgumentError("Invalid button style")
+        raise ArgumentError.new("Invalid button style")
       end
     @method = method
     @button_size =
@@ -25,7 +25,7 @@ class ButtonLinkComponent < BaseComponent
       when :small
         "btn--small"
       else
-        raise ArgumentError("Invalid button size")
+        raise ArgumentError.new("Invalid button size")
       end
   end
 end
