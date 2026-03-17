@@ -7,8 +7,8 @@ class RevealComponent < BaseComponent
     @style =
       case style
       when :primary
-        :grey
-      when :white
+        :secondary
+      when :secondary
         :primary
       else
         raise ArgumentError.new("Invalid style")

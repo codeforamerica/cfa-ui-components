@@ -17,8 +17,8 @@ class RevealComponentPreview < ViewComponent::Preview
     end
   end
 
-  def white_variant
-    render(RevealComponent.new(summary_text: "I am summary", icon: "question", style: :white)) do
+  def secondary
+    render(RevealComponent.new(summary_text: "I am summary", icon: "question", style: :secondary)) do
       content_tag(:p,  "Sample Details", style: "margin-top: 8px;")
     end
   end
