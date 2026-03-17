@@ -16,4 +16,10 @@ class RevealComponentPreview < ViewComponent::Preview
       content_tag(:p, "Sample form card", style: "padding-top: 20px;")
     end
   end
+
+  def grey
+    render(RevealComponent.new(summary_text: "I am summary", icon: "question", style: :grey)) do
+      content_tag(:p,  "Sample Details", style: "margin-top: 8px;")
+    end
+  end
 end
