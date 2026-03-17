@@ -6,7 +6,6 @@ class CardComponentPreview < ViewComponent::Preview
     end
   end
 
-
   def grey
     render(CardComponent.new(style: :grey)) do
       content_tag(:p, content_tag(:strong, "Sample form card")) +
