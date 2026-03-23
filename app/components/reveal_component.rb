@@ -4,7 +4,7 @@ class RevealComponent < BaseComponent
   def initialize(summary_text:, icon: nil, style: :primary)
     @summary_text = summary_text
     @icon = icon
-    @style =
+    @card_style =
       case style
       when :primary
         :secondary
