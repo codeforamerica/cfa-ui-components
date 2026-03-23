@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
     "app/assets/stylesheets/cfa_ui_components.tailwind.css",
     "app/javascript/cfa_ui_components.js",
     "app/javascript/combobox.ts",
+    "app/javascript/tin_component.ts",
     "app/assets/images/icons/*",
     "lib/generators/**/*",
     "lib/tasks/cfa_ui_components.rake"
