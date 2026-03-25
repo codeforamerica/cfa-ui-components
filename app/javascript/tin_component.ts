@@ -43,17 +43,15 @@ const tinRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
                         this.alertEl.innerHTML = "TIN hidden"
                     }
                 },
-                formatMask(str: string, inputType: string){
-                    if (inputType == "insertText") {
-                        if(str.length >= 3 && str[3] != "-") {
-                            str = str.slice(0, 3) + "-" + str.slice(3)
-                        }
-                        if(str.length >= 6 && str[6] != "-") {
-                            str = str.slice(0, 6) + "-" + str.slice(6)
-                        }
-                        if(str.length > 11) {
-                            str = str.slice(0, 11)
-                        }
+                formatMask(str: string){
+                    if(str.length >= 3 && str[3] != "-") {
+                        str = str.slice(0, 3) + "-" + str.slice(3)
+                    }
+                    if(str.length >= 6 && str[6] != "-") {
+                        str = str.slice(0, 6) + "-" + str.slice(6)
+                    }
+                    if(str.length > 11) {
+                        str = str.slice(0, 11)
                     }
                     return str
                 }
@@ -87,6 +85,7 @@ const tinInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
         },
         'x-init'() {
             this.inputEl = el;
+            this.inputValue = this.formatMask(this.inputEl.value);
         },
         '@input'(event) {
             if (event.inputType == "insertText") {
@@ -97,8 +96,14 @@ const tinInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) => {
             else if (event.inputType == "deleteContentBackward") {
                 this.inputValue = this.inputValue.slice(0, -1);
             }
-            this.inputValue = this.formatMask(this.inputValue, event.inputType);
+            this.inputValue = this.formatMask(this.inputValue);
             this.showHideHandler()
+        },
+        '@select'(event) {
+            event.target.selectionStart = event.target.selectionEnd // disables ctrl-a
+        },
+        '@submit'() {
+            this.inputEl.value = this.inputValue.replaceAll(/-/g, "");
         }
      })
 }
