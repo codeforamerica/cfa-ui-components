@@ -1,15 +1,12 @@
-<div x-data x-tin>
-  <div class="space-y-2">
-    <%= @form.label @method, @label, class: "label block", "x-tin:label": "" %>
-    <% if @help_text %>
-      <p x-tin:desc class="help_text">
-        <%= @help_text %>
-      </p>
-    <% end %>
-    <div x-tin:alert role="alert" class="sr-only"></div>
-    <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900 mb-2", "x-tin:input": "", "placeholder": "___-__-____" %>
-    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
-  </div>
-    <input x-tin:show-checkbox class="accent-zinc-900" type="checkbox" id="show" value="Show" >
-    <label x-tin:show-label for="show">Show</label>
+<div x-data="{ hide: true }">
+  <input
+    x-mask="999-99-9999"
+    placeholder="000-00-0000"
+    :type="hide ? 'password' : 'text'"
+    />
+
+  <label>
+    <input type="checkbox" @click="hide = !hide" />
+    Show
+  </label>
 </div>
