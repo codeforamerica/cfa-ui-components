@@ -2,11 +2,11 @@
 
 require "test_helper"
 
-class NumberFieldComponentTest < ViewComponent::TestCase
+class InputCurrencyComponentTest < ViewComponent::TestCase
   def test_component_renders_something_useful
     # assert_equal(
     #   %(<span>Hello, components!</span>),
-    #   render_inline(NumberFieldComponent.new(message: "Hello, components!")).css("span").to_html
+    #   render_inline(InputCurrencyComponent.new(message: "Hello, components!")).css("span").to_html
     # )
   end
 end
