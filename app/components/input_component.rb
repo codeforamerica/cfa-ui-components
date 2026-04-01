@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TextFieldComponent < AttributeBoundFormElementComponent
+class InputComponent < AttributeBoundFormElementComponent
   TIN = :tin
 
   def initialize(form:, method:, label:, help_text: nil, value_type: nil, required: false)
