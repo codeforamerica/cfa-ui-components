@@ -1,4 +1,29 @@
-<div x-data="{ hide: true }">
+<div
+  x-data="{
+    show: false,
+    selectionStart: null,
+    selectionEnd: null,
+    announcement: '',
+    preserveCursor() {
+      this.selectionStart = this.$refs.input.selectionStart
+      this.selectionEnd = this.$refs.input.selectionEnd
+    },
+    restoreCursor() {
+      setTimeout(() => {
+        this.$refs.input.focus()
+        if (this.selectionStart !== null && this.selectionEnd !== null) {
+          this.$refs.input.setSelectionRange(this.selectionStart, this.selectionEnd)
+        }
+      }, 50)
+    },
+    toggleShow() {
+      this.preserveCursor()
+      this.show = !this.show
+      this.announcement = this.show ? '<%= j t(".visible") %>' : '<%= j t(".hidden") %>'
+      this.restoreCursor()
+    }
+  }"
+>
   <div class="space-y-2">
     <%= @form.label @method, @label, class: "label block", for: @form.field_id(@method) %>
 
@@ -10,10 +35,12 @@
 
     <%= @form.text_field @method,
                          id: @form.field_id(@method),
+                         type: "text",
                          class: "w-full max-w-sm border border-zinc-900 mb-2",
                          placeholder: "000-00-0000",
+                         "x-ref": "input",
                          "x-mask": "999-99-9999",
-                         "x-bind:type": "hide ? 'password' : 'text'" %>
+                         "x-bind:style": "show ? '' : '-webkit-text-security: disc;'" %>
 
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
@@ -23,7 +50,15 @@
                     false,
                     id: @form.field_id(@method, :show),
                     class: "accent-zinc-900",
-                    "x-on:click": "hide = !hide" %>
+                    "x-bind:checked": "show",
+                    "x-on:change": "toggleShow()" %>
 
-  <%= label_tag @form.field_id(@method, :show), "Show" %>
+  <%= label_tag @form.field_id(@method, :show), t(".show") %>
+
+  <div
+    class="sr-only"
+    role="alert"
+    aria-atomic="true"
+    x-text="announcement"
+  ></div>
 </div>

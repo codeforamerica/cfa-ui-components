@@ -1,4 +1,7 @@
 en:
+  show: "Show"
+  visible: "TIN visible"
+  hidden: "TIN hidden"
   back: Go back
   continue: Continue
   cfaui:
