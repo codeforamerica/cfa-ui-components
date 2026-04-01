@@ -20,7 +20,7 @@ namespace :cfa_ui_components do
   desc "Copy CfA UI Components javascript to application. Ensure that copied files are included in .gitignore."
   task copy_gem_javascript: :environment do
     gem_spec = Gem.loaded_specs["cfa_ui_components"]
-    files_to_copy = [ "cfa_ui_components.js", "combobox.ts", "tin_component.ts" ]
+    files_to_copy = [ "cfa_ui_components.js", "combobox.ts"]
     files_to_copy.each do |file|
       if gem_spec
         js_source = File.join(gem_spec.full_gem_path, "app/javascript/#{file}")
