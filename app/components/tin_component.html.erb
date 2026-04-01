@@ -1,4 +1,29 @@
-<div x-data="{hide: true}">
-  <input x-mask="999-99-9999" placeholder="000-00-0000" :type="hide ? 'password' : 'text'" />
-  <input type="checkbox" @click="hide = !hide" /> <label>Show</label>
+<div x-data="{ hide: true }">
+  <div class="space-y-2">
+    <%= @form.label @method, @label, class: "label block", for: @form.field_id(@method) %>
+
+    <% if @help_text %>
+      <p class="help_text">
+        <%= @help_text %>
+      </p>
+    <% end %>
+
+    <%= @form.text_field @method,
+                         id: @form.field_id(@method),
+                         class: "w-full max-w-sm border border-zinc-900 mb-2",
+                         placeholder: "000-00-0000",
+                         "x-mask": "999-99-9999",
+                         "x-bind:type": "hide ? 'password' : 'text'" %>
+
+    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+  </div>
+
+  <%= check_box_tag "#{@form.field_id(@method)}_show",
+                    "1",
+                    false,
+                    id: @form.field_id(@method, :show),
+                    class: "accent-zinc-900",
+                    "x-on:click": "hide = !hide" %>
+
+  <%= label_tag @form.field_id(@method, :show), "Show" %>
 </div>
