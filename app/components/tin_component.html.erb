@@ -1,12 +1,4 @@
-<div x-data="{ hide: true }">
-  <input
-    x-mask="999-99-9999"
-    placeholder="000-00-0000"
-    :type="hide ? 'password' : 'text'"
-    />
-
-  <label>
-    <input type="checkbox" @click="hide = !hide" />
-    Show
-  </label>
+<div x-data="{hide: true}">
+  <input x-mask="999-99-9999" placeholder="000-00-0000" :type="hide ? 'password' : 'text'" />
+  <input type="checkbox" @click="hide = !hide" /> <label>Show</label>
 </div>
