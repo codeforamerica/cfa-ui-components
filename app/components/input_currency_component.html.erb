@@ -1,4 +1,4 @@
-<div class="space-y-2">
+<div class="currency-field space-y-2">
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
     <p class="help_text">
@@ -15,7 +15,7 @@
       step: @step_num,
       required: @required,
       inputmode: "decimal",
-      class: "no-spinner w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2" %>
+      class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2" %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
