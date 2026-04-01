@@ -1,9 +1,9 @@
-class PrefilledInputComponentPreview < ViewComponent::Preview
+class PrefilledTextFieldComponentPreview < ViewComponent::Preview
   def text
-    render(PrefilledInputComponent.new(label: "Your text", text: "Primary text"))
+    render(PrefilledTextFieldComponent.new(label: "Your text", text: "Primary text"))
   end
 
   def currency
-    render(PrefilledInputComponent.new(label: "Your refund", text: "1000", style: :currency))
+    render(PrefilledTextFieldComponent.new(label: "Your refund", text: "1000", style: :currency))
   end
 end

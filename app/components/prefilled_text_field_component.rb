@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PrefilledInputComponent < ViewComponent::Base
+class PrefilledTextFieldComponent < ViewComponent::Base
   def initialize(text:,  label:,  style: :primary)
     @text =
      case style
