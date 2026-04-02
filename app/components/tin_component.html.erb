@@ -1,29 +1,40 @@
-<div
-  x-data="{
-    show: false,
-    selectionStart: null,
-    selectionEnd: null,
-    announcement: '',
-    preserveCursor() {
-      this.selectionStart = this.$refs.input.selectionStart
-      this.selectionEnd = this.$refs.input.selectionEnd
-    },
-    restoreCursor() {
-    this.$nextTick(() => {
-      this.$refs.input.focus()
-      if (this.selectionStart !== null && this.selectionEnd !== null) {
-        this.$refs.input.setSelectionRange(this.selectionStart, this.selectionEnd)
+<script>
+  function tinToggle() {
+    return {
+      show: false,
+      selectionStart: null,
+      selectionEnd: null,
+      announcement: '',
+
+      visibleText: <%= raw t("visible").to_json %>,
+      hiddenText: <%= raw t("hidden").to_json %>,
+
+      init() {
+        this.$watch('show', (value) => {
+          this.preserveCursor()
+          this.announcement = value ? this.visibleText : this.hiddenText
+          this.restoreCursor()
+        })
+      },
+
+      preserveCursor() {
+        this.selectionStart = this.$refs.input.selectionStart
+        this.selectionEnd = this.$refs.input.selectionEnd
+      },
+
+      restoreCursor() {
+        this.$nextTick(() => {
+          this.$refs.input.focus()
+          if (this.selectionStart !== null && this.selectionEnd !== null) {
+            this.$refs.input.setSelectionRange(this.selectionStart, this.selectionEnd)
+          }
+        })
       }
-    })
-    },
-    toggleShow() {
-      this.preserveCursor()
-      this.show = !this.show
-      this.announcement = this.show ? 'TIN visible' : 'TIN hidden'
-      this.restoreCursor()
     }
-  }"
->
+  }
+</script>
+
+<div x-data="tinToggle()">
   <div class="space-y-2">
     <%= @form.label @method, @label, class: "label block", for: @form.field_id(@method) %>
 
@@ -34,9 +45,8 @@
     <% end %>
 
     <%= @form.text_field @method,
-                         id: @form.field_id(@method),
                          type: "text",
-                         class: "w-full max-w-sm border border-zinc-900 mb-2",
+                         class: "w-full max-w-sm border border-zinc-900",
                          placeholder: "000-00-0000",
                          "x-ref": "input",
                          "x-mask": "999-99-9999",
@@ -50,10 +60,9 @@
                     false,
                     id: @form.field_id(@method, :show),
                     class: "accent-zinc-900",
-                    "x-bind:checked": "show",
-                    "x-on:change": "toggleShow()" %>
+                    "x-model": "show" %>
 
-  <%= label_tag @form.field_id(@method, :show), "Show" %>
+  <label><%= t("show") %></label>
 
   <div
     class="sr-only"
