@@ -9,17 +9,17 @@
       this.selectionEnd = this.$refs.input.selectionEnd
     },
     restoreCursor() {
-      setTimeout(() => {
-        this.$refs.input.focus()
-        if (this.selectionStart !== null && this.selectionEnd !== null) {
-          this.$refs.input.setSelectionRange(this.selectionStart, this.selectionEnd)
-        }
-      }, 50)
+    this.$nextTick(() => {
+      this.$refs.input.focus()
+      if (this.selectionStart !== null && this.selectionEnd !== null) {
+        this.$refs.input.setSelectionRange(this.selectionStart, this.selectionEnd)
+      }
+    })
     },
     toggleShow() {
       this.preserveCursor()
       this.show = !this.show
-      this.announcement = this.show ? '<%= j t(".visible") %>' : '<%= j t(".hidden") %>'
+      this.announcement = this.show ? 'TIN visible' : 'TIN hidden'
       this.restoreCursor()
     }
   }"
@@ -53,7 +53,7 @@
                     "x-bind:checked": "show",
                     "x-on:change": "toggleShow()" %>
 
-  <%= label_tag @form.field_id(@method, :show), t(".show") %>
+  <%= label_tag @form.field_id(@method, :show), "Show" %>
 
   <div
     class="sr-only"
