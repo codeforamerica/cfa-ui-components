@@ -10,12 +10,11 @@
       $
     </span>
     <%= @form.number_field @method,
-      min: @min_num,
-      max: @max_num,
-      step: @step_num,
-      required: @required,
-      inputmode: "decimal",
-      class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2" %>
+      {
+        inputmode: "decimal",
+        class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2"
+      }.merge(@number_field_kwargs)
+     %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
