@@ -4,7 +4,7 @@
     --color-link-unvisited: #0358A2;
     --color-link-visited: #4C2C92;
 }
-/* the three css rules below are to remove the spin button from the input currency component */
+/* the css rules below are to remove the spin button from the input currency component */
 .currency-field input[type="number"]::-webkit-outer-spin-button,
 .currency-field input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
