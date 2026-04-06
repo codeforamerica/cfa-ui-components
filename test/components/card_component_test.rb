@@ -3,10 +3,13 @@
 require "test_helper"
 
 class CardComponentTest < ViewComponent::TestCase
-  def test_component_renders_something_useful
-    # assert_equal(
-    #   %(<span>Hello, components!</span>),
-    #   render_inline(CardComponent.new(message: "Hello, components!")).css("span").to_html
-    # )
+  def test_renders_content
+    render_inline(CardComponent.new) { "Card body" }
+    assert_text "Card body"
+  end
+
+  def test_has_border_class
+    render_inline(CardComponent.new) { "Card body" }
+    assert_selector "div.border"
   end
 end
