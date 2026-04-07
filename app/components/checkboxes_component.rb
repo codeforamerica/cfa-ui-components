@@ -5,7 +5,7 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
 
   # scope namespaces both the Alpine store key and the input id/label-for,
   # so multiple instances of this component can coexist on a single page.
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, small: false, warning_message: nil, item_states: {}, scope: nil, legend: nil)
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, legend:, small: false, warning_message: nil, item_states: {}, scope: nil)
     super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
