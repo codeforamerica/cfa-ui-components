@@ -1,7 +1,5 @@
 <fieldset class="border-none p-0 m-0 min-w-0" x-data x-init="Alpine.store('<%= @method.to_s + @unique_alpine_store_key.to_s %>', '<%= current_value %>');">
-  <% if @legend %>
-    <legend class="label block w-full"><%= @legend %></legend>
-  <% end %>
+  <legend class="sr-only"><%= @legend %></legend>
   <%= @form.hidden_field @method, value: "" %>
   <% content = content_tag(:div, class: "#{@layout} space-y-cfa-med") do
        capture do

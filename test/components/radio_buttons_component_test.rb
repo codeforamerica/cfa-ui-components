@@ -72,13 +72,14 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Do you like pineapple on pizza?"
     ))
 
     assert_selector "fieldset"
   end
 
-  def test_renders_legend_when_provided
+  def test_renders_legend
     render_inline(RadioButtonsComponent.new(
       form: build_form,
       method: :radio_field,
@@ -89,17 +90,5 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     ))
 
     assert_selector "fieldset > legend", text: "Do you like pineapple on pizza?"
-  end
-
-  def test_renders_no_legend_when_omitted
-    render_inline(RadioButtonsComponent.new(
-      form: build_form,
-      method: :radio_field,
-      collection: simple_collection,
-      item_value_method: :value,
-      item_label_method: :label
-    ))
-
-    assert_no_selector "legend"
   end
 end

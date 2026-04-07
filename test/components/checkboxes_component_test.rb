@@ -33,13 +33,14 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "What are your favorite fruits?"
     ))
 
     assert_selector "fieldset"
   end
 
-  def test_renders_legend_when_provided
+  def test_renders_legend
     render_inline(CheckboxesComponent.new(
       form: build_form,
       method: :checkboxes_field,
@@ -50,17 +51,5 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     ))
 
     assert_selector "fieldset > legend", text: "What are your favorite fruits?"
-  end
-
-  def test_renders_no_legend_when_omitted
-    render_inline(CheckboxesComponent.new(
-      form: build_form,
-      method: :checkboxes_field,
-      collection: simple_collection,
-      item_value_method: :value,
-      item_label_method: :label
-    ))
-
-    assert_no_selector "legend"
   end
 end
