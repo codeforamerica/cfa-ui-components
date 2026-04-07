@@ -26,4 +26,41 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     ))
     assert_selector "input[type='hidden'][value='']", visible: :all
   end
+
+  def test_renders_fieldset
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+
+    assert_selector "fieldset"
+  end
+
+  def test_renders_legend_when_provided
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "What are your favorite fruits?"
+    ))
+
+    assert_selector "fieldset > legend", text: "What are your favorite fruits?"
+  end
+
+  def test_renders_no_legend_when_omitted
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+
+    assert_no_selector "legend"
+  end
 end
