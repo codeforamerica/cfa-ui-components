@@ -1,7 +1,7 @@
 class RadioButtonsComponentPreview < FormComponentPreview
   # @!group Default
   def default
-    render(RadioButtonsComponent.new(form: form(scope: :radio_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "default"))
+    render(RadioButtonsComponent.new(form: form(scope: :radio_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "default", legend: "Do you like pineapple on pizza?"))
   end
 
   def horizontal
@@ -18,13 +18,13 @@ class RadioButtonsComponentPreview < FormComponentPreview
 
   def prefilled
     custom_model = TestModel.new(pineapple_pizza_preference: "yes")
-    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_prefilled), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "prefilled"))
+    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_prefilled), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "prefilled", legend: "Do you like pineapple on pizza?"))
   end
 
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
-    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_with_error), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "with_error"))
+    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_with_error), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "with_error", legend: "Do you like pineapple on pizza?"))
   end
 
   def with_warning

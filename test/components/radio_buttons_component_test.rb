@@ -28,29 +28,6 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     assert_selector "div.flex.items-center.gap-cfa-lg"
   end
 
-  def test_legend_renders_above_radios
-    render_inline(RadioButtonsComponent.new(
-      form: build_form,
-      method: :radio_field,
-      collection: simple_collection,
-      item_value_method: :value,
-      item_label_method: :label,
-      legend: "Pick one"
-    ))
-    assert_selector "p", text: "Pick one"
-  end
-
-  def test_no_legend_when_omitted
-    render_inline(RadioButtonsComponent.new(
-      form: build_form,
-      method: :radio_field,
-      collection: simple_collection,
-      item_value_method: :value,
-      item_label_method: :label
-    ))
-    assert_no_selector "p", text: "Pick one"
-  end
-
   def test_invalid_layout_raises
     assert_raises(ArgumentError) do
       RadioButtonsComponent.new(
@@ -111,6 +88,43 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       small: true
     ))
     assert_selector "input[type='radio'].cfa-radio.cfa-radio--small", count: 2
+  end
+
+  def test_renders_fieldset
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+
+    assert_selector "fieldset"
+  end
+
+  def test_renders_legend_when_provided
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "Do you like pineapple on pizza?"
+    ))
+
+    assert_selector "fieldset > legend", text: "Do you like pineapple on pizza?"
+  end
+
+  def test_renders_no_legend_when_omitted
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+
+    assert_no_selector "legend"
   end
 
   def test_error_state_applies_error_modifier

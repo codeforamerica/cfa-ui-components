@@ -1,4 +1,7 @@
-<div x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+<fieldset class="border-none p-0 m-0 min-w-0" x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+  <% if @legend %>
+    <legend class="label block w-full"><%= @legend %></legend>
+  <% end %>
   <%= @form.hidden_field @method, value: "" %>
   <div class="space-y-cfa-med <%= "has-error" if has_error? %>">
     <% content = capture {
@@ -34,4 +37,4 @@
       <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
     <% end %>
   </div>
-</div>
+</fieldset>
