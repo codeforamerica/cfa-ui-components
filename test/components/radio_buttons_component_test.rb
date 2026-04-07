@@ -3,10 +3,41 @@
 require "test_helper"
 
 class RadioButtonsComponentTest < ViewComponent::TestCase
-  def test_component_renders_something_useful
-    # assert_equal(
-    #   %(<span>Hello, components!</span>),
-    #   render_inline(RadioButtonsComponent.new(message: "Hello, components!")).css("span").to_html
-    # )
+  def test_renders_radio_buttons_from_collection
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    assert_selector "input[type='radio']", count: 2
+    assert_selector "label", text: "Yes"
+    assert_selector "label", text: "No"
+  end
+
+  def test_horizontal_layout_applies_flex_class
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      layout: :horizontal
+    ))
+    assert_selector "div.flex"
+  end
+
+  def test_invalid_layout_raises
+    assert_raises(ArgumentError) do
+      RadioButtonsComponent.new(
+        form: build_form,
+        method: :radio_field,
+        collection: simple_collection,
+        item_value_method: :value,
+        item_label_method: :label,
+        layout: :diagonal
+      )
+    end
   end
 end
