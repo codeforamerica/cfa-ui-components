@@ -55,6 +55,7 @@
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
 
+  <div class="mt-2">
   <%= check_box_tag "#{@form.field_id(@method)}_show",
                     "1",
                     false,
@@ -63,6 +64,7 @@
                     "x-model": "show" %>
 
   <label><%= t("show") %></label>
+  </div>
 
   <div
     class="sr-only"

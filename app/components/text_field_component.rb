@@ -10,16 +10,4 @@ class TextFieldComponent < AttributeBoundFormElementComponent
     @value_type = value_type
     @required = required
   end
-
-  private
-
-  def text_field_kwargs
-    kwargs = {}
-    if @value_type == TIN
-      kwargs["x-data"] = "{}"
-      kwargs["x-mask"] = "999-99-9999"
-      kwargs["placeholder"] = "___-__-____"
-    end
-    kwargs
-  end
 end
