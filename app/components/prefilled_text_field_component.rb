@@ -9,7 +9,7 @@ class PrefilledTextFieldComponent < ViewComponent::Base
      when :currency
       "$" +  number_with_delimiter(text)
      else
-      raise ArgumentError("Invalid style")
+      raise ArgumentError.new("Invalid style")
      end
 
 
@@ -21,7 +21,7 @@ class PrefilledTextFieldComponent < ViewComponent::Base
       when :currency
         "text-[22px] text-[#008817] font-bold"
       else
-        raise ArgumentError("Invalid style")
+        raise ArgumentError.new("Invalid style")
       end
   end
 end

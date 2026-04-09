@@ -3,10 +3,44 @@
 require "test_helper"
 
 class ComboboxComponentTest < ViewComponent::TestCase
-  def test_component_renders_something_useful
-    # assert_equal(
-    #   %(<span>Hello, components!</span>),
-    #   render_inline(CheckboxesComponent.new(message: "Hello, components!")).css("span").to_html
-    # )
+  def test_renders_label_and_select
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    assert_selector "label", text: "Choose fruit"
+    assert_selector "select"
+    assert_selector "option", text: "Yes"
+    assert_selector "option", text: "No"
+  end
+
+  def test_renders_help_text
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      help_text: "Pick one"
+    ))
+    assert_selector ".help_text", text: "Pick one"
+  end
+
+  def test_required_adds_class_to_label
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      required: true
+    ))
+    assert_selector "label.required"
   end
 end

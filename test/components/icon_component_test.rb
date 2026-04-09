@@ -3,10 +3,13 @@
 require "test_helper"
 
 class IconComponentTest < ViewComponent::TestCase
-  def test_component_renders_something_useful
-    # assert_equal(
-    #   %(<span>Hello, components!</span>),
-    #   render_inline(IconComponent.new(message: "Hello, components!")).css("span").to_html
-    # )
+  def test_renders_image_for_known_icon
+    render_inline(IconComponent.new(icon: "info"))
+    assert_selector "img[alt='info icon']"
+  end
+
+  def test_renders_empty_alt_for_unknown_icon
+    render_inline(IconComponent.new(icon: "unknown"))
+    assert_selector "img[alt='']"
   end
 end
