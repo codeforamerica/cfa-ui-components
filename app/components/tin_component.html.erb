@@ -36,7 +36,7 @@
 
 <div x-data="tinToggle()">
   <div class="space-y-2">
-    <%= @form.label @method, @label, class: "label block", for: @form.field_id(@method) %>
+    <%= @form.label @method, @label, class: "label block #{required_class}", for: @form.field_id(@method) %>
 
     <% if @help_text %>
       <p class="help_text">
