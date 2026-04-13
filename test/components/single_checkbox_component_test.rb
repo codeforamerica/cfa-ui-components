@@ -15,6 +15,11 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     assert_selector "input[disabled]"
   end
 
+  def test_no_duplicate_hidden_field
+    render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree"))
+    assert_selector "input[type='hidden'][name='component_test_model[checkbox_field]']", visible: :all, count: 1
+  end
+
   def test_error_state_applies_red_border
     model = ComponentTestModel.new
     model.errors.add(:checkbox_field, "must be accepted")
