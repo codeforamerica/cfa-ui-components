@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ConditionalWithDropdownTest < ApplicationSystemTestCase
+class ConditionalWithDropdownTest < JavaScriptSystemTestCase
   test "selecting the matching dropdown value reveals the conditional section" do
     visit "/rails/view_components/conditional_component/dropdown"
 
