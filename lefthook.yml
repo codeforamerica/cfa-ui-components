@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    rubocop:
+      glob: "*.rb"
+      run: bin/rubocop --autocorrect {staged_files}
+      stage_fixed: true
