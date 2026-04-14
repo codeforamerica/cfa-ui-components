@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ModalAriaTest < ApplicationSystemTestCase
+class ModalAriaTest < JavaScriptSystemTestCase
   test "open dialog aria-labelledby references the header h2 id" do
     visit "/rails/view_components/modal_component/default"
 

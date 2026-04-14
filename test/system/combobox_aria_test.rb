@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ComboboxAriaTest < ApplicationSystemTestCase
+class ComboboxAriaTest < JavaScriptSystemTestCase
   test "search input aria-labelledby references the visible label" do
     visit "/rails/view_components/combobox_component/default"
 
