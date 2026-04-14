@@ -1,4 +1,27 @@
-<div class="currency-field space-y-2">
+<script>
+  function currencyInput() {
+    return {
+      value: '',
+
+      init() {
+        this.value = this.$refs.input.value
+      },
+
+      formatCurrency(rawValue) {
+        if (!rawValue) return ""
+
+        let digits = rawValue.replace(/\D/g, "")
+        let number = parseInt(digits, 10)
+
+        if (isNaN(number)) return ""
+
+        this.value = (number / 100).toFixed(2)
+      }
+    }
+  }
+</script>
+
+<div class="currency-field space-y-2" x-data="currencyInput()">
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
     <p class="help_text">

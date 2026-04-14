@@ -13,10 +13,9 @@ class InputCurrencyComponent < AttributeBoundFormElementComponent
     {
       inputmode: "decimal",
       class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2",
-      "x-data": "{ value: '' }",
+      "x-ref": "input",
       "x-model": "value",
-      "x-on:input": "value = formatCurrency($event.target.value)",
-      "x-init": "value = $el.value"
+      "x-on:input": "formatCurrency($event.target.value)"
     }.merge(@number_field_kwargs)
   end
 end
