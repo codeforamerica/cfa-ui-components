@@ -3,10 +3,18 @@
 require "test_helper"
 
 class LinkComponentTest < ViewComponent::TestCase
-  def test_component_renders_something_useful
-    # assert_equal(
-    #   %(<span>Hello, components!</span>),
-    #   render_inline(LinkComponent.new(message: "Hello, components!")).css("span").to_html
-    # )
+  def test_renders_link_with_label_and_url
+    render_inline(LinkComponent.new(label: "Visit us", url: "https://example.com"))
+    assert_selector "a[href='https://example.com']", text: "Visit us"
+  end
+
+  def test_opens_in_new_tab
+    render_inline(LinkComponent.new(label: "Visit us", url: "https://example.com"))
+    assert_selector "a[target='_blank'][rel='noopener noreferrer']"
+  end
+
+  def test_renders_icon_when_provided
+    render_inline(LinkComponent.new(label: "Visit us", url: "https://example.com", icon: "info"))
+    assert_selector "img[alt='info icon']"
   end
 end

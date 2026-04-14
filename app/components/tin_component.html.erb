@@ -1,0 +1,75 @@
+<script>
+  function tinToggle() {
+    return {
+      show: false,
+      selectionStart: null,
+      selectionEnd: null,
+      announcement: '',
+
+      visibleText: <%= raw t("visible").to_json %>,
+      hiddenText: <%= raw t("hidden").to_json %>,
+
+      init() {
+        this.$watch('show', (value) => {
+          this.preserveCursor()
+          this.announcement = value ? this.visibleText : this.hiddenText
+          this.restoreCursor()
+        })
+      },
+
+      preserveCursor() {
+        this.selectionStart = this.$refs.input.selectionStart
+        this.selectionEnd = this.$refs.input.selectionEnd
+      },
+
+      restoreCursor() {
+        this.$nextTick(() => {
+          this.$refs.input.focus()
+          if (this.selectionStart !== null && this.selectionEnd !== null) {
+            this.$refs.input.setSelectionRange(this.selectionStart, this.selectionEnd)
+          }
+        })
+      }
+    }
+  }
+</script>
+
+<div x-data="tinToggle()">
+  <div class="space-y-2">
+    <%= @form.label @method, @label, class: "label block #{required_class}", for: @form.field_id(@method) %>
+
+    <% if @help_text %>
+      <p class="help_text">
+        <%= @help_text %>
+      </p>
+    <% end %>
+
+    <%= @form.text_field @method,
+                         type: "text",
+                         class: "w-full max-w-sm border border-zinc-900",
+                         placeholder: "000-00-0000",
+                         "x-ref": "input",
+                         "x-mask": "999-99-9999",
+                         "x-bind:style": "show ? '' : '-webkit-text-security: disc;'" %>
+
+    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+  </div>
+
+  <div class="mt-2">
+  <%= check_box_tag "#{@form.field_id(@method)}_show",
+                    "1",
+                    false,
+                    id: @form.field_id(@method, :show),
+                    class: "accent-zinc-900",
+                    "x-model": "show" %>
+
+  <label><%= t("show") %></label>
+  </div>
+
+  <div
+    class="sr-only"
+    role="alert"
+    aria-atomic="true"
+    x-text="announcement"
+  ></div>
+</div>
