@@ -6,10 +6,11 @@ module CfaUiComponents
   class Engine < ::Rails::Engine
     isolate_namespace CfaUiComponents
 
-    initializer "disable .field_with_errors" do |app|
-      puts "disabling .field_with_errors wrapper (in engine)" unless Rails.env.test?
-      ActionView::Base.field_error_proc = proc do |html_tag, instance|
-        html_tag.html_safe
+    # Use a span instead of Rails' default div to avoid breaking inline layouts
+    initializer "field_with_errors span wrapper" do |app|
+      puts "using span for .field_with_errors wrapper (in engine)" unless Rails.env.test?
+      ActionView::Base.field_error_proc = proc do |html_tag, _instance|
+        %(<span class="field_with_errors">#{html_tag}</span>).html_safe
       end
     end
 
