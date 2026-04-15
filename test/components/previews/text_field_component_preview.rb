@@ -21,4 +21,11 @@ class TextFieldComponentPreview < FormComponentPreview
     custom_model.valid?
     render(TextFieldComponent.new(form: form(model: custom_model), method: :first_name, label: I18n.t(:first_name)))
   end
+
+  # @label Error with link
+  def with_error_link
+    custom_model = TestModel.new
+    custom_model.errors.add(:first_name, "is not in our system. <a href=\"/\">Click here</a> to get started.".html_safe)
+    render(TextFieldComponent.new(form: form(model: custom_model), method: :first_name, label: I18n.t(:first_name)))
+  end
 end
