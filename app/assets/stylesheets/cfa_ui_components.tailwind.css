@@ -3,6 +3,10 @@
 @theme {
     --color-link-unvisited: #0358A2;
     --color-link-visited: #4C2C92;
+    --color-text-body-secondary: #1A353E;
+    --color-background-navigation: #011E29;
+    --color-icon-primary: #FFF;
+    --color-text-button-link: #007C7C;
 }
 
 body {
