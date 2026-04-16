@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ConditionalWithCheckboxesTest < ApplicationSystemTestCase
+class ConditionalWithCheckboxesTest < JavaScriptSystemTestCase
   test "checking the matching checkbox reveals the conditional section" do
     visit "/rails/view_components/conditional_component/checkboxes"
 
