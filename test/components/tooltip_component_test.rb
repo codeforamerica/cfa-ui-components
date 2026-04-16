@@ -33,13 +33,6 @@ class TooltipComponentTest < ViewComponent::TestCase
     assert_no_selector "dialog"
   end
 
-  def test_renders_modal_with_body_param
-    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", body: "Some details here."))
-    assert_selector "dialog"
-    assert_text "Some details here."
-    assert_text "Learn more"
-  end
-
   def test_renders_modal_with_block
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do |c|
       c.with_modal_content { "<ul><li>Item</li></ul>".html_safe }
@@ -49,7 +42,9 @@ class TooltipComponentTest < ViewComponent::TestCase
   end
 
   def test_modal_header_defaults_to_label
-    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", body: "Details."))
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do |c|
+      c.with_modal_content { "Details." }
+    end
     assert_selector "h2", text: "Learn more"
   end
 end

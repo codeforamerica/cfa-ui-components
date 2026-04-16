@@ -1,1 +1,5 @@
-<%= render(TooltipComponent.new(label: "Tooltip copy goes here", modal_name: "tooltip", body: "Tooltip snack content goes here.")) %>
+<%= render(TooltipComponent.new(label: "Tooltip copy goes here", modal_name: "tooltip")) do |c| %>
+  <% c.with_modal_content do %>
+    <p>Tooltip snack content goes here.</p>
+  <% end %>
+<% end %>
