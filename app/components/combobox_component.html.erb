@@ -1,4 +1,4 @@
-<div x-data x-combobox class="max-w-lg space-y-4">
+<div x-data x-combobox class="max-w-lg space-y-cfa-med">
   <%= @form.label @method, @label, class: "label block #{required_class}", "x-combobox:label": "" %>
   <% if @help_text %>
     <p x-combobox:desc class="help_text" >
@@ -8,7 +8,7 @@
   <%= @form.select(@method, @collection.map{ |o| [o.send(@item_label_method), o.send(@item_value_method)]}, {prompt: "#{I18n.t('combobox.placeholder_label')}"}, html_options={"x-combobox:values": ""}) %>
 
   <template x-if="$combobox.isLoaded">
-    <div class="relative mt-2">
+    <div class="relative mt-cfa-sm">
       <div class="flex w-full">
         <input x-combobox:input class="pr-10 p-2 bg-white w-full h-10 rounded-sm border focus:outline focus:outline-offset-4 focus:outline-4 focus:!outline-blue-800 selection:!rounded-t-sm data-[invalid]:ring-4 data-[invalid]:ring-red-60v data-[invalid]:border-transparent data-[invalid]:outline-offset-4" placeholder="<%= I18n.t('combobox.placeholder_label') %>">
         <div class="absolute z-10 inset-y-0 right-0 flex">

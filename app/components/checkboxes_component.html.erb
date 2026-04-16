@@ -1,4 +1,4 @@
-<div class="space-y-4" x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
+<div class="space-y-cfa-med" x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
   <%= @form.hidden_field @method, value: "" %>
   <% content = capture {
     @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|

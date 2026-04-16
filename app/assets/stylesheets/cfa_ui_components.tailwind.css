@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @theme {
+    --spacing-cfa-xsm: 4px;
+    --spacing-cfa-sm: 8px;
+    --spacing-cfa-med: 16px;
+    --spacing-cfa-lg: 24px;
+    --spacing-cfa-xl: 32px;
+
     --color-link-unvisited: #0358A2;
     --color-link-visited: #4C2C92;
 }
@@ -17,19 +23,19 @@ body {
 }
 
 main {
-    @apply bg-white mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-4 py-8 space-y-8;
+    @apply bg-white mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med py-cfa-xl space-y-cfa-xl;
 }
 
 form {
-    @apply flex flex-col gap-y-8;
+    @apply flex flex-col gap-y-cfa-xl;
 }
 
 .radio_button_item {
-    @apply space-x-2;
+    @apply space-x-cfa-sm;
 }
 
 .checkbox_item {
-    @apply space-x-2;
+    @apply space-x-cfa-sm;
 }
 
 h1 {
@@ -60,13 +66,13 @@ h2 {
 }
 
 ul {
-    @apply space-y-6;
+    @apply space-y-cfa-med;
     list-style-type: disc;
     list-style-position: inside;
 }
 
 ol {
-    @apply space-y-6;
+    @apply space-y-cfa-med;
     list-style-type: decimal;
     list-style-position: inside;
 }
@@ -110,7 +116,7 @@ a:visited {
 }
 
 .btn--large {
-    @apply px-6 py-4 w-fit place-self-center;
+    @apply px-cfa-lg py-cfa-med w-fit place-self-center;
     font-size: 22px;
     font-weight: 700;
 }

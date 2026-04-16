@@ -35,7 +35,7 @@
 </script>
 
 <div x-data="tinToggle()">
-  <div class="space-y-2">
+  <div class="space-y-cfa-med">
     <%= @form.label @method, @label, class: "label block #{required_class}", for: @form.field_id(@method) %>
 
     <% if @help_text %>
@@ -55,7 +55,7 @@
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
 
-  <div class="mt-2">
+  <div class="mt-cfa-sm">
   <%= check_box_tag "#{@form.field_id(@method)}_show",
                     "1",
                     false,
