@@ -131,8 +131,8 @@ a:visited {
 }
 
 .form_errors {
-    color: var(--color-text-body-secondary) !important;
-    /* font-size: 13px !important; */
+    @apply text-red-500;
+    font-size: 16px;
     font-weight: 700;
     line-height: normal;
     a {
