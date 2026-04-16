@@ -54,7 +54,7 @@ h1 {
 
 h2 {
     font-size: 22px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .label {
@@ -156,14 +156,4 @@ footer {
     a:visited:not(.btn) {
         color: white;
     }
-}
-
-h1 {
-    font-weight: 700;
-    font-size: 48px;
-}
-
-h2 {
-    font-weight: 500;
-    font-size: 22px;
 }
