@@ -9,6 +9,16 @@
     --color-text-button-link: #007C7C;
     --color-border-error: #B50909;
 }
+/* the css rules below are to remove the spin button from the input currency component */
+.currency-field input[type="number"]::-webkit-outer-spin-button,
+.currency-field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.currency-field input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 body {
     font-family: "Public Sans", sans-serif;
