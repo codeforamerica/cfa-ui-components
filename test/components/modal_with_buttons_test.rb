@@ -20,10 +20,10 @@ class ModalWithButtonsTest < ViewComponent::TestCase
     assert_selector "dialog"
     assert_selector "h2", text: "Are you sure?"
     assert_text "This action cannot be undone."
-    assert_button "Confirm"
-    assert_button "Cancel"
-    assert_selector "button.btn--primary"
-    assert_selector "button.btn--secondary"
+    assert_link "Confirm"
+    assert_link "Cancel"
+    assert_selector "a.btn--primary"
+    assert_selector "a.btn--secondary"
   end
 
   def test_modal_renders_submit_button_in_slot
