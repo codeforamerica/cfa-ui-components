@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @theme {
-    --color-link-unvisited: #0358A2;
+    --color-link-unvisited: #007C7C;
     --color-link-visited: #4C2C92;
     --color-text-body-secondary: #1A353E;
     --color-background-navigation: #011E29;
@@ -122,11 +122,10 @@ a:visited {
 
 .form_errors {
     color: var(--color-text-body-secondary) !important;
-    font-size: 13px !important;
+    /* font-size: 13px !important; */
     font-weight: 700;
     line-height: normal;
     a {
-        color: var(--color-text-button-link) !important;
         text-decoration: underline;
     }
 }
@@ -140,4 +139,21 @@ a:visited {
 
 [x-cloak] {
     @apply hidden!;
+}
+
+footer {
+    a:not(.btn),
+    a:visited:not(.btn) {
+        color: white;
+    }
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 48px;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 22px;
 }
