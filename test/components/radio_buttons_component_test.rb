@@ -40,4 +40,29 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       )
     end
   end
+
+  def test_alpine_store_key_defaults_to_method_name
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    assert_selector "[x-init*=\"Alpine.store('radio_field'\"]"
+    assert_selector "input[x-model=\"\$store.radio_field\"]"
+  end
+
+  def test_unique_alpine_store_key_appended_to_method_name
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      unique_alpine_store_key: "_unique_key"
+    ))
+    assert_selector "[x-init*=\"Alpine.store('radio_field_unique_key'\"]"
+    assert_selector "input[x-model=\"\$store.radio_field_unique_key\"]"
+  end
 end
