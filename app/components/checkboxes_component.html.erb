@@ -1,13 +1,17 @@
-<div class="space-y-cfa-med" x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
+<div x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
   <%= @form.hidden_field @method, value: "" %>
-  <% content = capture {
-    @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
-      content_tag :div, class: "checkbox_item" do
-        concat checkbox_item.checkbox("x-model" => "$store.#{@method}")
-        concat checkbox_item.label
+  <div class="space-y-cfa-med">
+    <% content = capture {
+      @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
+        content_tag :div, class: "checkbox_item" do
+          concat checkbox_item.checkbox("x-model" => "$store.#{@method}")
+          concat checkbox_item.label
+        end
       end
-    end
-  } %>
-  <% concat content %>
-  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+    } %>
+    <% concat content %>
+  </div>
+  <div class="mt-cfa-sm">
+    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+  </div>
 </div>
