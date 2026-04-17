@@ -1,12 +1,10 @@
-<%= render(TooltipComponent.new(label: "What relationships qualify?", modal_name: "relationships")) do |c| %>
-  <% c.with_modal_content do %>
-    <p>The following relationships qualify:</p>
-    <ul class="list-disc pl-5 space-y-2">
-      <li>Biological child</li>
-      <li>Adopted child</li>
-      <li>Stepchild</li>
-      <li>Foster child</li>
-    </ul>
-    <p>If none of your dependents meet one of the relationships listed, this service isn't the best option for you.</p>
-  <% end %>
+<%= render(TooltipComponent.new(label: "What relationships qualify?", modal_name: "relationships")) do %>
+  <p>The following relationships qualify:</p>
+  <ul>
+    <li>Biological child</li>
+    <li>Adopted child</li>
+    <li>Stepchild</li>
+    <li>Foster child</li>
+  </ul>
+  <p>If none of your dependents meet one of the relationships listed, this service isn't the best option for you.</p>
 <% end %>
