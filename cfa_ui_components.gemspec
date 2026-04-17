@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
     "lib/cfa_ui_components.rb",
     "lib/cfa_ui_components/**/*",
     "app/components/**/*",
-    "app/assets/stylesheets/cfa_ui_components.tailwind.css",
+    "app/assets/stylesheets/**/*.css",
     "app/javascript/cfa_ui_components.js",
     "app/javascript/combobox.ts",
     "app/assets/images/icons/*",
