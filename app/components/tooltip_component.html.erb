@@ -1,4 +1,4 @@
-<button x-data @click="$dispatch('<%= @modal_name %>-modal')" type="button" class="group flex items-center gap-2 text-link-unvisited cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+<button x-data @click="$dispatch('<%= @modal_name %>-modal')" type="button" class="group flex items-center gap-2 text-link-unvisited cursor-pointer text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
   <%= render IconComponent.new(icon: 'info') %>
   <span class="underline group-hover:no-underline"><%= @label %></span>
 </button>
