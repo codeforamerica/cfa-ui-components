@@ -34,17 +34,25 @@ class TooltipComponentTest < ViewComponent::TestCase
   end
 
   def test_renders_modal_with_block
-    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do |c|
-      c.with_modal_content { "<ul><li>Item</li></ul>".html_safe }
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do
+      "<ul><li>Item</li></ul>".html_safe
     end
     assert_selector "dialog"
     assert_selector "ul li", text: "Item"
   end
 
   def test_modal_header_defaults_to_label
-    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do |c|
-      c.with_modal_content { "Details." }
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do
+      "Details."
     end
     assert_selector "h2", text: "Learn more"
+  end
+
+  def test_modal_header_can_be_overridden
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", header: "Custom header")) do
+      "Body."
+    end
+    assert_selector "h2", text: "Custom header"
+    assert_no_selector "h2", text: "Learn more"
   end
 end

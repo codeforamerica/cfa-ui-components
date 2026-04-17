@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class TooltipComponent < BaseComponent
-  renders_one :modal_content
-
-  def initialize(label:, modal_name:)
+  def initialize(label:, modal_name:, header: nil)
     @label = label
     @modal_name = modal_name
+    @header = header || label
   end
 end
