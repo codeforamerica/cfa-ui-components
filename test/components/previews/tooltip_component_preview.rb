@@ -6,4 +6,7 @@ class TooltipComponentPreview < ViewComponent::Preview
 
   def with_rich_content
   end
+
+  def with_modal_button
+  end
 end

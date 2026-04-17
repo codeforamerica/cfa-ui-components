@@ -1,0 +1,17 @@
+<%= render(TooltipComponent.new(label: "What relationships qualify?", modal_name: "relationships_with_button")) do |modal| %>
+  <p>The following relationships qualify:</p>
+  <ul class="list-disc pl-5 space-y-2">
+    <li>Biological child</li>
+    <li>Adopted child</li>
+    <li>Stepchild</li>
+    <li>Foster child</li>
+  </ul>
+  <% modal.with_button do %>
+    <%= render(ButtonLinkComponent.new(
+      label: "Got it",
+      url: "#",
+      html_attrs: {
+        "@click.prevent": "toggle()"
+      })) %>
+  <% end %>
+<% end %>
