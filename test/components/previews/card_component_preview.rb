@@ -16,12 +16,12 @@ class CardComponentPreview < ViewComponent::Preview
 
   def with_interspersed_headings
     render(CardComponent.new) do
-      content_tag(:h2, "Name") +
+      content_tag(:h3, "Name") +
         content_tag(:p, "Text field 1", class: "m-0") +
         content_tag(:p, "Text field 2", class: "m-0") +
-        content_tag(:h2, "Date of birth") +
+        content_tag(:h3, "Date of birth") +
         content_tag(:p, "Date picker", class: "m-0") +
-        content_tag(:h2, "Social security") +
+        content_tag(:h3, "Social security") +
         content_tag(:p, "TIN field", class: "m-0")
     end
   end
