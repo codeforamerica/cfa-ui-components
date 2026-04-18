@@ -3,11 +3,19 @@ namespace :cfa_ui_components do
   task copy_gem_styles: :environment do
     gem_spec = Gem.loaded_specs["cfa_ui_components"]
     if gem_spec
-      css_source = File.join(gem_spec.full_gem_path, "app/assets/stylesheets/cfa_ui_components.tailwind.css")
-      css_dest = Rails.root.join("app/assets/stylesheets/vendor/cfa_ui_components.tailwind.css")
-      FileUtils.mkdir_p(File.dirname(css_dest))
+      stylesheets_source_dir = File.join(gem_spec.full_gem_path, "app/assets/stylesheets")
+      stylesheets_dest_dir = Rails.root.join("app/assets/stylesheets/vendor")
+      FileUtils.mkdir_p(stylesheets_dest_dir)
+
+      # Copy partial subdirectories (base/, components/, utilities/) that
+      # the entry CSS @imports. Without these, Tailwind can't resolve them.
+      Dir.glob(File.join(stylesheets_source_dir, "*")).each do |entry|
+        FileUtils.cp_r(entry, stylesheets_dest_dir) if File.directory?(entry)
+      end
 
       # Prepend a @source directive that instructs Tailwind to scan the gem source while deciding which utility classes not to purge.
+      css_source = File.join(stylesheets_source_dir, "cfa_ui_components.tailwind.css")
+      css_dest = stylesheets_dest_dir.join("cfa_ui_components.tailwind.css")
       Tempfile.open do |temp_file|
         source_line = "@source \"#{gem_spec.full_gem_path}\";\n\n"
         temp_file.write(source_line)
