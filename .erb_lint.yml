@@ -1,0 +1,9 @@
+---
+EnableDefaultLinters: false
+linters:
+  TrailingWhitespace:
+    enabled: true
+  FinalNewline:
+    enabled: true
+  SpaceAroundErbTag:
+    enabled: true

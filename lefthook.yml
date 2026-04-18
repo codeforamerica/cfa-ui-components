@@ -4,3 +4,7 @@ pre-commit:
       glob: "*.rb"
       run: bin/rubocop --autocorrect {staged_files}
       stage_fixed: true
+    erb_lint:
+      glob: "app/**/*.erb"
+      run: bundle exec erb_lint --autocorrect {staged_files}
+      stage_fixed: true
