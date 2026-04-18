@@ -20,3 +20,21 @@
 
 ## Running the Lookbook locally
 Run `bin/dev` and navigate to localhost:3000
+
+# Contributing
+
+## Setup
+Install [lefthook](https://github.com/evilmartians/lefthook) and enable the git hooks:
+
+```sh
+brew install lefthook
+lefthook install
+```
+
+Lefthook runs `rubocop` and `erb_lint` on pre-commit. To run manually:
+
+```sh
+bin/rubocop --autocorrect
+bundle exec erb_lint --autocorrect 'app/**/*.erb'
+```
+
