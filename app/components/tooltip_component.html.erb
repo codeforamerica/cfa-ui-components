@@ -2,9 +2,9 @@
   <%= render IconComponent.new(icon: 'info') %>
   <span class="underline group-hover:no-underline"><%= @label %></span>
 </button>
-<% if modal_content? %>
+<% if content? %>
   <%= render ModalComponent.new(name: @modal_name) do |c| %>
-    <% c.with_header { @label } %>
-    <%= modal_content %>
+    <% c.with_header { @header } %>
+    <%= content %>
   <% end %>
 <% end %>
