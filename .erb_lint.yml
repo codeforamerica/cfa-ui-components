@@ -7,3 +7,13 @@ linters:
     enabled: true
   SpaceAroundErbTag:
     enabled: true
+  ExtraNewline:
+    enabled: true
+  SpaceIndentation:
+    enabled: true
+  RightTrim:
+    enabled: true
+  ClosingErbTagIndent:
+    enabled: true
+  CommentSyntax:
+    enabled: true
