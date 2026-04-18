@@ -10,6 +10,11 @@
 
     --color-link-unvisited: #0358A2;
     --color-link-visited: #4C2C92;
+    --color-text-body-secondary: #1A353E;
+    --color-background-navigation: #011E29;
+    --color-icon-primary: #FFF;
+    --color-text-button-link: #007C7C;
+    --color-border-error: #B50909;
 }
 
 body {
@@ -33,6 +38,14 @@ form {
 
 .radio_button_item {
     @apply space-x-cfa-sm;
+}
+
+.cfa-card > * + * {
+    margin-top: var(--spacing-cfa-med);
+}
+
+.cfa-card > :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-top: var(--spacing-cfa-sm);
 }
 
 .checkbox_item {
@@ -67,15 +80,19 @@ h2 {
 }
 
 ul {
-    @apply space-y-cfa-med;
+    @apply space-y-cfa-med pl-6;
     list-style-type: disc;
-    list-style-position: inside;
+    list-style-position: outside;
 }
 
 ol {
-    @apply space-y-cfa-med;
+    @apply space-y-cfa-med pl-6;
     list-style-type: decimal;
-    list-style-position: inside;
+    list-style-position: outside;
+}
+
+ul ul, ul ol, ol ul, ol ol {
+    @apply space-y-cfa-sm mt-cfa-sm;
 }
 
 a {
