@@ -9,7 +9,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick one"
     ))
     assert_selector "input[type='radio']", count: 2
     assert_selector "label", text: "Yes"
@@ -23,7 +24,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      layout: :horizontal
+      layout: :horizontal,
+      legend: "Pick one"
     ))
     assert_selector "div.flex"
   end
@@ -36,7 +38,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
         collection: simple_collection,
         item_value_method: :value,
         item_label_method: :label,
-        layout: :diagonal
+        layout: :diagonal,
+        legend: "Pick one"
       )
     end
   end
