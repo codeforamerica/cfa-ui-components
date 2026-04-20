@@ -1,13 +1,13 @@
 form {
-    @apply flex flex-col gap-y-8;
+    @apply flex flex-col gap-y-cfa-xl;
 }
 
 .radio_button_item {
-    @apply space-x-2;
+    @apply space-x-cfa-sm;
 }
 
 .checkbox_item {
-    @apply space-x-2;
+    @apply space-x-cfa-sm;
 }
 
 /* the css rules below are to remove the spin button from the input currency component */
@@ -22,7 +22,7 @@ form {
 }
 
 .form_errors {
-    @apply text-red-500;
+    @apply text-red-500 mt-cfa-sm;
     font-size: 16px;
     font-weight: 700;
     line-height: normal;

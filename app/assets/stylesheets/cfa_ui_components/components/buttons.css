@@ -25,7 +25,7 @@
 }
 
 .btn--large {
-    @apply px-6 py-4 w-fit place-self-center;
+    @apply px-cfa-lg py-cfa-med w-fit place-self-center;
     font-size: 22px;
     font-weight: 700;
 }

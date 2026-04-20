@@ -1,4 +1,11 @@
 @theme {
+    --spacing-cfa-xsm: 4px;
+    --spacing-cfa-sm: 8px;
+    --spacing-cfa-med: 16px;
+    --spacing-cfa-lg: 24px;
+    --spacing-cfa-xl: 32px;
+    --spacing-cfa-2xl: 40px;
+
     --color-link-unvisited: #007C7C;
     --color-link-visited: #4C2C92;
     --color-text-body-secondary: #1A353E;

@@ -1,5 +1,13 @@
 main {
-    @apply bg-white mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-4 py-8 space-y-8;
+    @apply bg-white mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med py-cfa-xl space-y-cfa-xl;
+}
+
+.cfa-card > * + * {
+    margin-top: var(--spacing-cfa-med);
+}
+
+.cfa-card > :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-top: var(--spacing-cfa-sm);
 }
 
 footer {
