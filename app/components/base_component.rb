@@ -29,6 +29,10 @@ class BaseComponent < ViewComponent::Base
     "chevron_up" => {
       path: "icons/arrow_open.svg",
       alt: "chevron up"
+    },
+    "alert" => {
+      path: "icons/alert.svg",
+      alt: "alert"
     }
   }.freeze
 
