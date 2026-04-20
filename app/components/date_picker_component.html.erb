@@ -41,6 +41,5 @@
         class: "w-[72px] outline mr-cfa-sm mt-cfa-sm h-[40px] px-cfa-sm" %>
     </div>
   </div>
+  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
-
-<%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
