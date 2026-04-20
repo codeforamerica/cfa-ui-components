@@ -65,7 +65,7 @@ jobs:
           filters: |
             packaging:
               - 'cfa_ui_components.gemspec'
-              - 'app/**'
+              - 'app/assets/**'
               - 'lib/**'
               - 'package.json'
               - 'script/smoke_test_gem_install.sh'
