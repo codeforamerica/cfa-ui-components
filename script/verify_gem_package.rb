@@ -19,10 +19,9 @@ EXPECTED_GLOBS = [
   "lib/generators/**/*",
   "lib/tasks/cfa_ui_components.rake",
   "app/components/**/*",
-  "app/assets/stylesheets/**/*.css",
-  "app/assets/images/icons/*",
-  "app/javascript/cfa_ui_components.js",
-  "app/javascript/combobox.ts"
+  "app/assets/stylesheets/cfa_ui_components/**/*",
+  "app/javascript/cfa_ui_components/**/*",
+  "app/assets/images/icons/*"
 ].freeze
 
 def sh!(cmd, chdir: REPO_ROOT)

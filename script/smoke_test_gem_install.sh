@@ -63,9 +63,9 @@ yarn build
 yarn build:css
 
 echo "==> Verifying copied files landed in expected locations"
-test -f app/assets/stylesheets/vendor/cfa_ui_components.tailwind.css
-test -f app/javascript/vendor/cfa_ui_components.js
-test -f app/javascript/vendor/combobox.ts
+test -f app/assets/stylesheets/vendor/cfa_ui_components/cfa_ui_components.tailwind.css
+test -f app/javascript/vendor/cfa_ui_components/cfa_ui_components.js
+test -f app/javascript/vendor/cfa_ui_components/combobox.ts
 
 echo "==> Rendering a component via rails runner"
 bin/rails runner '
