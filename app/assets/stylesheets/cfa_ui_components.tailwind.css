@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @theme {
+    --spacing-cfa-xsm: 4px;
+    --spacing-cfa-sm: 8px;
+    --spacing-cfa-med: 16px;
+    --spacing-cfa-lg: 24px;
+    --spacing-cfa-xl: 32px;
+    --spacing-cfa-2xl: 40px;
+
     --color-link-unvisited: #007C7C;
     --color-link-visited: #4C2C92;
     --color-text-body-secondary: #1A353E;
@@ -32,19 +39,27 @@ body {
 }
 
 main {
-    @apply bg-white mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-4 py-8 space-y-8;
+    @apply bg-white mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med py-cfa-xl space-y-cfa-xl;
 }
 
 form {
-    @apply flex flex-col gap-y-8;
+    @apply flex flex-col gap-y-cfa-xl;
 }
 
 .radio_button_item {
-    @apply space-x-2;
+    @apply space-x-cfa-sm;
+}
+
+.cfa-card > * + * {
+    margin-top: var(--spacing-cfa-med);
+}
+
+.cfa-card > :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-top: var(--spacing-cfa-sm);
 }
 
 .checkbox_item {
-    @apply space-x-2;
+    @apply space-x-cfa-sm;
 }
 
 h1 {
@@ -75,15 +90,19 @@ h2 {
 }
 
 ul {
-    @apply space-y-6;
+    @apply space-y-cfa-med pl-6;
     list-style-type: disc;
-    list-style-position: inside;
+    list-style-position: outside;
 }
 
 ol {
-    @apply space-y-6;
+    @apply space-y-cfa-med pl-6;
     list-style-type: decimal;
-    list-style-position: inside;
+    list-style-position: outside;
+}
+
+ul ul, ul ol, ol ul, ol ol {
+    @apply space-y-cfa-sm mt-cfa-sm;
 }
 
 a {
@@ -125,13 +144,13 @@ a:visited {
 }
 
 .btn--large {
-    @apply px-6 py-4 w-fit place-self-center;
+    @apply px-cfa-lg py-cfa-med w-fit place-self-center;
     font-size: 22px;
     font-weight: 700;
 }
 
 .form_errors {
-    @apply text-red-500;
+    @apply text-red-500 mt-cfa-sm;
     font-size: 16px;
     font-weight: 700;
     line-height: normal;
