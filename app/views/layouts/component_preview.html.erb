@@ -223,7 +223,6 @@
             const children = Array.from(el.children);
             for (let i = 1; i < children.length; i++) {
               const prev = children[i - 1].getBoundingClientRect();
-              const curr = children[i].getBoundingClientRect();
               if (isRow) {
                 addGapBar(
                   'horizontal',
@@ -369,12 +368,14 @@
         enableDebug();
       }
 
+      // Badges are positioned in document coords and scroll with the page,
+      // so no scroll listener is needed. Resize can change geometry; coalesce
+      // redraws through rAF to avoid piling up work during window drags.
       window.addEventListener('resize', () => {
-        if (document.body.dataset.debug) drawBadges();
+        if (!document.body.dataset.debug) return;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(drawBadges);
       });
-      window.addEventListener('scroll', () => {
-        if (document.body.dataset.debug) drawBadges();
-      }, { passive: true });
     })();
   </script>
 </body>
