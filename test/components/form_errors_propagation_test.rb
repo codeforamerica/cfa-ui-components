@@ -25,7 +25,8 @@ class FormErrorsPropagationTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick one"
     ))
 
     assert_selector ".form_errors", text: "must be selected"
@@ -40,7 +41,8 @@ class FormErrorsPropagationTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
 
     assert_selector ".form_errors", text: "must select at least one"

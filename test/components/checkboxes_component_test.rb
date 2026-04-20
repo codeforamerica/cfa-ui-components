@@ -9,7 +9,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox']", count: 2
     assert_selector "label", text: "Yes"
@@ -22,7 +23,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='hidden'][value='']", visible: :all
   end
