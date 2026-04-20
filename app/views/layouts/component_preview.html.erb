@@ -114,15 +114,25 @@
       let observer = null;
       let rafId = null;
 
-      // px → design token name (for cfa-ui-components spacing tokens)
-      const TOKEN_BY_PX = {
-        4: 'cfa-xsm',
-        8: 'cfa-sm',
-        16: 'cfa-med',
-        24: 'cfa-lg',
-        32: 'cfa-xl',
-        40: 'cfa-2xl',
-      };
+      // px → design token name, built from --spacing-* custom properties on :root
+      // (Tailwind v4 @theme exposes spacing tokens as --spacing-<name>.)
+      let TOKEN_BY_PX = {};
+      function buildTokenMap() {
+        const map = {};
+        const rootStyle = getComputedStyle(document.documentElement);
+        for (let i = 0; i < rootStyle.length; i++) {
+          const prop = rootStyle[i];
+          if (!prop.startsWith('--spacing-')) continue;
+          const value = rootStyle.getPropertyValue(prop).trim();
+          const match = value.match(/^(-?\d*\.?\d+)px$/);
+          if (!match) continue;
+          const px = Math.round(parseFloat(match[1]));
+          const name = prop.slice('--spacing-'.length);
+          // First definition wins — avoids an alias overwriting the canonical name
+          if (!(px in map)) map[px] = name;
+        }
+        TOKEN_BY_PX = map;
+      }
 
       function tokenSuffix(px) {
         const rounded = Math.round(px);
@@ -169,6 +179,7 @@
       function drawBadges() {
         clearBadges();
         if (!document.body.dataset.debug) return;
+        buildTokenMap();
 
         const els = document.querySelectorAll('main *');
         els.forEach(el => {
