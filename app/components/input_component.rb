@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TextFieldComponent < AttributeBoundFormElementComponent
+class InputComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, label:, help_text: nil, required: false)
     super(form:, method:)
     @label = label
