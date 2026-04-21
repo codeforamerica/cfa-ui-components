@@ -7,7 +7,7 @@ require "test_helper"
 # Catches the class of bug fixed in 3e88f561.
 class LabelInputAssociationTest < ViewComponent::TestCase
   def test_text_field_label_for_matches_input_id
-    render_inline(TextFieldComponent.new(
+    render_inline(InputComponent.new(
       form: build_form, method: :text_field, label: "Full name"
     ))
 

@@ -9,7 +9,7 @@ class FormErrorsPropagationTest < ViewComponent::TestCase
     model = ComponentTestModel.new
     model.errors.add(:text_field, "can't be blank")
 
-    render_inline(TextFieldComponent.new(
+    render_inline(InputComponent.new(
       form: build_form(model), method: :text_field, label: "Name"
     ))
 
