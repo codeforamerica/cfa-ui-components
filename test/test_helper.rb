@@ -19,7 +19,7 @@ end
 module FormBuildable
   def build_form(model = ComponentTestModel.new)
     f = nil
-    vc_test_controller.view_context.form_with(url: "/", model: model) { |fb| f = fb }
+    vc_test_controller.view_context.form_with(url: "/", model:) { |fb| f = fb }
     f
   end
 

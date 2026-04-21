@@ -2,7 +2,7 @@
 
 class InputCurrencyComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, label:, help_text: nil, required: false, **number_field_kwargs)
-    super(form: form, method: method)
+    super(form:, method:)
     @label = label
     @help_text = help_text
     @required = required

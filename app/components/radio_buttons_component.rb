@@ -2,7 +2,7 @@
 
 class RadioButtonsComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, collection:, item_value_method:, item_label_method:, unique_alpine_store_key: "", layout: :vertical)
-    super(form: form, method: method)
+    super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
     @item_label_method = item_label_method

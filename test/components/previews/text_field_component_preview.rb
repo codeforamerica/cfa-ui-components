@@ -1,14 +1,14 @@
 class TextFieldComponentPreview < FormComponentPreview
   def default
-    render(TextFieldComponent.new(form: form, method: :first_name, label: I18n.t(:first_name)))
+    render(TextFieldComponent.new(form:, method: :first_name, label: I18n.t(:first_name)))
   end
 
   def with_help_text
-    render(TextFieldComponent.new(form: form, method: :first_name, label: I18n.t(:first_name), help_text: "Or preferred name"))
+    render(TextFieldComponent.new(form:, method: :first_name, label: I18n.t(:first_name), help_text: "Or preferred name"))
   end
 
   def required
-    render(TextFieldComponent.new(form: form, method: :first_name, label: I18n.t(:first_name), required: true))
+    render(TextFieldComponent.new(form:, method: :first_name, label: I18n.t(:first_name), required: true))
   end
 
   def prefilled
