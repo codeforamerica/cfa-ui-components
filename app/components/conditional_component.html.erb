@@ -1,6 +1,6 @@
 <div x-data="{condition: false}"
-     x-effect="condition = $store.<%= @method %> === '<%= @value %>' ||
-                           (Array.isArray($store.<%= @method %>) && $store.<%= @method %>.includes('<%= @value %>'))">
+     x-effect="condition = $store.<%= @method.to_s + @unique_alpine_store_key.to_s %> === '<%= @value %>' ||
+                           (Array.isArray($store.<%= @method.to_s + @unique_alpine_store_key.to_s %>) && $store.<%= @method.to_s + @unique_alpine_store_key.to_s %>.includes('<%= @value %>'))">
   <p class="sr-only" aria-live="polite" role="status"
      x-text="'<%= content_description %> is now ' + (condition ? 'visible' : 'hidden')">
   </p>
