@@ -1,5 +1,5 @@
 <% if @form.object.errors[@method].any? %>
   <p class="form_errors">
-    ⚠️ <%= @form.object.errors.full_messages_for(@method).join(", ") %>
+    <%= image_tag(icon_image_path("alert"), alt: icon_alt_text("alert"), class: "inline align-text-bottom") %> <%= safe_join(@form.object.errors.where(@method).map { |e| e.message.html_safe? ? e.full_message.html_safe : e.full_message }, ", ") %>
   </p>
 <% end %>

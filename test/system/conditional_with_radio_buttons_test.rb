@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ConditionalWithRadioButtonsTest < ApplicationSystemTestCase
+class ConditionalWithRadioButtonsTest < JavaScriptSystemTestCase
   test "selecting the matching radio value reveals the conditional section" do
     visit "/rails/view_components/conditional_component/radio_buttons"
 

@@ -1,0 +1,37 @@
+body {
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    @apply antialiased leading-none;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.label {
+    @apply text-zinc-900;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.label.required::after {
+    @apply text-red-700;
+    content: " *";
+}
+
+.help_text {
+    @apply block text-zinc-500;
+    font-size: 13px;
+    font-weight: 400;
+}
