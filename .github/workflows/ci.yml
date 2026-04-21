@@ -95,7 +95,7 @@ jobs:
           cache: yarn
 
       - name: Cache Rails gem for dummy app
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.smoke-test-gems
           key: smoke-test-gems-${{ runner.os }}-ruby-${{ hashFiles('.ruby-version') }}-rails8
