@@ -1,5 +1,5 @@
 <% label_id = "#{@label.parameterize}-#{object_id}" %>
 <div class="space-y-cfa-sm">
     <%= content_tag(:span, @label, class: "label block", id: label_id) %>
-    <%= content_tag(:span, @text, class: "w-full max-w-sm #{@style}",  aria: { labelledby: label_id }) %>
+    <%= content_tag(:span, @text, class: "w-full max-w-sm #{@style}", aria: {labelledby: label_id}) %>
 </div>

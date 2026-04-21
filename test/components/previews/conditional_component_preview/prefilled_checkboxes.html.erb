@@ -1,4 +1,4 @@
-<% model = FormComponentPreview::TestModel.new(favorite_fruits: [ "banana" ]) %>
+<% model = FormComponentPreview::TestModel.new(favorite_fruits: ["banana"]) %>
 
 <%= form_with url: "/", method: :post, model: model do |f| %>
   <%= render CheckboxesComponent.new(form: f, method: :favorite_fruits, collection: FormComponentPreview.fruit_options, item_value_method: :value, item_label_method: :label) %>
