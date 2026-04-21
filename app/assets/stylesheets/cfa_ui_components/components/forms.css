@@ -1,0 +1,39 @@
+form {
+    @apply flex flex-col gap-y-cfa-xl;
+}
+
+.radio_button_item {
+    @apply space-x-cfa-sm;
+}
+
+.checkbox_item {
+    @apply space-x-cfa-sm;
+}
+
+/* the css rules below are to remove the spin button from the input currency component */
+.currency-field input[type="number"]::-webkit-outer-spin-button,
+.currency-field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.currency-field input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form_errors {
+    @apply text-red-500 mt-cfa-sm;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    a {
+        text-decoration: underline;
+    }
+}
+
+.field_with_errors {
+    display: inline;
+    input {
+        border-color: var(--color-border-error) !important;
+    }
+}
