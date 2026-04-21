@@ -1,0 +1,15 @@
+ul {
+    @apply space-y-cfa-med pl-6;
+    list-style-type: disc;
+    list-style-position: outside;
+}
+
+ol {
+    @apply space-y-cfa-med pl-6;
+    list-style-type: decimal;
+    list-style-position: outside;
+}
+
+ul ul, ul ol, ol ul, ol ol {
+    @apply space-y-cfa-sm mt-cfa-sm;
+}

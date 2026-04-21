@@ -22,14 +22,14 @@ module CfaUiComponents
 
     def add_css_import
       application_css_path = "app/assets/stylesheets/application.tailwind.css"
-      import_components_line = "@import \"./vendor/cfa_ui_components.tailwind.css\";\n"
+      import_components_line = "@import \"./vendor/cfa_ui_components/cfa_ui_components.tailwind.css\";\n"
       import_tailwind_line = "@import \"tailwindcss\";"
       insert_into_file application_css_path, import_components_line, before: import_tailwind_line
     end
 
     def add_js_import
       application_js_path = "app/javascript/application.js"
-      import_components_line = "import \"./vendor/cfa_ui_components\"\n"
+      import_components_line = "import \"./vendor/cfa_ui_components/cfa_ui_components\"\n"
       append_to_file application_js_path, import_components_line
     end
 
@@ -51,7 +51,7 @@ module CfaUiComponents
 
     def add_components_to_gitignore
       gitignore_path = ".gitignore"
-      component_filename_lines = "cfa_ui_components.tailwind.css\ncfa_ui_components.js\n"
+      component_filename_lines = "/app/assets/stylesheets/vendor/cfa_ui_components/\n/app/javascript/vendor/cfa_ui_components/\n"
       append_to_file gitignore_path, component_filename_lines
     end
 
