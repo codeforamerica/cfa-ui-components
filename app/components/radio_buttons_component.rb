@@ -9,9 +9,9 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
     @layout =
       case layout
       when :horizontal
-        "flex items-start gap-4"
+        "flex items-start gap-cfa-med"
       when :vertical
-        "space-y-4"
+        "space-y-cfa-med"
       else
         raise ArgumentError.new("Invalid layout")
       end

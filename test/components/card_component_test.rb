@@ -12,4 +12,9 @@ class CardComponentTest < ViewComponent::TestCase
     render_inline(CardComponent.new) { "Card body" }
     assert_selector "div.border"
   end
+
+  def test_has_cfa_card_class
+    render_inline(CardComponent.new) { "Card body" }
+    assert_selector "div.cfa-card"
+  end
 end

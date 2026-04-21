@@ -1,6 +1,3 @@
-<%= render(TooltipComponent.new(label: "Tooltip copy goes here", modal_name: "tooltip")) %>
-
-<%= render(ModalComponent.new(name: "tooltip")) do |c| %>
-  <% c.with_header do %>Tooltip header<% end %>
+<%= render(TooltipComponent.new(label: "Tooltip copy goes here and this string is very very very very very very very very very very very very very very very very very long to show how the text aligns left.", modal_name: "tooltip", header: "Tooltip header")) do %>
   <p>Tooltip snack content goes here.</p>
 <% end %>

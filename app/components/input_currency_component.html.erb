@@ -1,0 +1,21 @@
+<div class="currency-field space-y-2">
+  <%= @form.label @method, @label, class: "label block #{required_class}" %>
+  <% if @help_text %>
+    <p class="help_text">
+      <%= @help_text %>
+    </p>
+  <% end %>
+  <div class="relative max-w-sm">
+    <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-bold text-zinc-700">
+      $
+    </span>
+    <%= @form.text_field @method,
+                         class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2",
+                         inputmode: "decimal",
+                         placeholder: "0.00",
+                         "x-data": "",
+                         "x-mask:dynamic": "$money",
+                         **@number_field_kwargs %>
+  </div>
+  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+</div>

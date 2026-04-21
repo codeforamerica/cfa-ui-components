@@ -9,11 +9,362 @@
   <%# :app includes all stylesheet files in app/assets/stylesheets %>
   <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+
+  <style>
+    .debug-toggle {
+      position: fixed;
+      top: 8px;
+      right: 8px;
+      z-index: 9999;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 4px 8px;
+      font: 12px system-ui;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Debug overlay styles — only active when body has data-debug="true" */
+    body[data-debug="true"] main * {
+      outline: 1px dashed rgba(59, 130, 246, 0.4);
+      outline-offset: -1px;
+    }
+
+    /* Gap bar: sized to the actual spacing value so the bar itself is a ruler */
+    .debug-gap-bar {
+      position: absolute;
+      background: rgba(239, 68, 68, 0.35);
+      pointer-events: none;
+      z-index: 9998;
+      border-radius: 1px;
+    }
+
+    .debug-gap-bar > span {
+      position: absolute;
+      background: #ef4444;
+      color: white;
+      font: bold 10px system-ui;
+      padding: 1px 5px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .debug-gap-bar.vertical > span {
+      left: 100%;
+      top: 50%;
+      transform: translate(4px, -50%);
+    }
+
+    .debug-gap-bar.horizontal > span {
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 4px);
+    }
+
+    .debug-pad-badge {
+      position: absolute;
+      background: #10b981;
+      color: white;
+      font: bold 10px system-ui;
+      padding: 1px 5px;
+      border-radius: 3px;
+      pointer-events: none;
+      z-index: 9998;
+      white-space: nowrap;
+    }
+
+    .debug-metatip {
+      position: fixed;
+      background: #1f2937;
+      color: white;
+      font: 11px/1.4 ui-monospace, monospace;
+      padding: 6px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 10000;
+      max-width: 320px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    body[data-debug="true"] main *:hover {
+      outline: 2px solid #f59e0b !important;
+      outline-offset: -2px;
+    }
+  </style>
 </head>
 
 <body class="bg-slate-50">
+  <label class="debug-toggle">
+    <input type="checkbox" id="debug-toggle-input"> Debug spacing
+  </label>
   <main>
     <%= yield %>
   </main>
+
+  <script>
+    (function() {
+      const toggle = document.getElementById('debug-toggle-input');
+      const main = document.querySelector('main');
+      const STORAGE_KEY = 'cfa-debug-spacing';
+      const badges = [];
+      let metatip = null;
+      let observer = null;
+      let rafId = null;
+
+      // px → design token name (for cfa-ui-components spacing tokens)
+      const TOKEN_BY_PX = {
+        4: 'cfa-xsm',
+        8: 'cfa-sm',
+        16: 'cfa-med',
+        24: 'cfa-lg',
+        32: 'cfa-xl',
+        40: 'cfa-2xl',
+      };
+
+      function tokenSuffix(px) {
+        const rounded = Math.round(px);
+        return TOKEN_BY_PX[rounded] ? ' (' + TOKEN_BY_PX[rounded] + ')' : '';
+      }
+
+      function clearBadges() {
+        badges.forEach(b => b.remove());
+        badges.length = 0;
+      }
+
+      function addBadge(cls, text, top, left) {
+        const b = document.createElement('div');
+        b.className = cls;
+        b.textContent = text;
+        b.style.top = top + 'px';
+        b.style.left = left + 'px';
+        document.body.appendChild(b);
+        badges.push(b);
+      }
+
+      // Gap bar: sized to the actual spacing value
+      function addGapBar(orientation, sizePx, top, left, label) {
+        const bar = document.createElement('div');
+        bar.className = 'debug-gap-bar ' + orientation;
+        bar.style.top = top + 'px';
+        bar.style.left = left + 'px';
+        if (orientation === 'vertical') {
+          bar.style.height = sizePx + 'px';
+          bar.style.width = '12px';
+        } else {
+          bar.style.width = sizePx + 'px';
+          bar.style.height = '12px';
+        }
+        const span = document.createElement('span');
+        span.textContent = label;
+        bar.appendChild(span);
+        document.body.appendChild(bar);
+        badges.push(bar);
+      }
+
+      function round(n) { return Math.round(n * 10) / 10; }
+
+      function drawBadges() {
+        clearBadges();
+        if (!document.body.dataset.debug) return;
+
+        const els = document.querySelectorAll('main *');
+        els.forEach(el => {
+          const cs = getComputedStyle(el);
+          const rect = el.getBoundingClientRect();
+          const scrollY = window.scrollY;
+          const scrollX = window.scrollX;
+
+          // Margin-top (gap from previous sibling above) — bar spans the full gap
+          const mt = parseFloat(cs.marginTop);
+          if (mt > 0 && el.previousElementSibling) {
+            addGapBar(
+              'vertical',
+              mt,
+              rect.top + scrollY - mt,
+              rect.left + scrollX + 4,
+              round(mt) + 'px ↕' + tokenSuffix(mt)
+            );
+          }
+
+          // Margin-left (gap from previous sibling to the left) — bar spans the full gap
+          const ml = parseFloat(cs.marginLeft);
+          if (ml > 0 && el.previousElementSibling) {
+            const prev = el.previousElementSibling.getBoundingClientRect();
+            if (prev.right <= rect.left + 1 && Math.abs(prev.top - rect.top) < rect.height) {
+              addGapBar(
+                'horizontal',
+                ml,
+                rect.top + scrollY + rect.height / 2 - 6,
+                rect.left + scrollX - ml,
+                round(ml) + 'px ↔' + tokenSuffix(ml)
+              );
+            }
+          }
+
+          // Flex/grid gap — draw bars between consecutive children
+          const gap = parseFloat(cs.gap);
+          const display = cs.display;
+          if (gap > 0 && (display === 'flex' || display === 'inline-flex' || display === 'grid' || display === 'inline-grid') && el.children.length > 1) {
+            const isRow = display.includes('flex') && (cs.flexDirection === 'row' || cs.flexDirection === 'row-reverse');
+            const children = Array.from(el.children);
+            for (let i = 1; i < children.length; i++) {
+              const prev = children[i - 1].getBoundingClientRect();
+              const curr = children[i].getBoundingClientRect();
+              if (isRow) {
+                addGapBar(
+                  'horizontal',
+                  gap,
+                  prev.top + scrollY + prev.height / 2 - 6,
+                  prev.right + scrollX,
+                  round(gap) + 'px gap' + tokenSuffix(gap)
+                );
+              } else {
+                addGapBar(
+                  'vertical',
+                  gap,
+                  prev.bottom + scrollY,
+                  prev.left + scrollX + 4,
+                  round(gap) + 'px gap' + tokenSuffix(gap)
+                );
+              }
+            }
+          }
+
+          // Padding
+          const pt = parseFloat(cs.paddingTop);
+          const pr = parseFloat(cs.paddingRight);
+          const pb = parseFloat(cs.paddingBottom);
+          const pl = parseFloat(cs.paddingLeft);
+          if (pt > 0 || pr > 0 || pb > 0 || pl > 0) {
+            const allSame = pt === pr && pr === pb && pb === pl;
+            const label = allSame
+              ? round(pt) + 'px pad' + tokenSuffix(pt)
+              : round(pt) + '/' + round(pr) + '/' + round(pb) + '/' + round(pl) + ' pad';
+            addBadge(
+              'debug-pad-badge',
+              label,
+              rect.top + scrollY + 2,
+              rect.right + scrollX - 90
+            );
+          }
+        });
+      }
+
+      // Mutation observer: redraw badges when DOM changes
+      function startObserving() {
+        if (observer) return;
+        observer = new MutationObserver(() => {
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(drawBadges);
+        });
+        observer.observe(main, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['class', 'style', 'hidden'],
+        });
+      }
+
+      function stopObserving() {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+      }
+
+      // Metatip: hover tooltip with tag, classes, dimensions
+      function showMetatip(el) {
+        if (!metatip) {
+          metatip = document.createElement('div');
+          metatip.className = 'debug-metatip';
+          document.body.appendChild(metatip);
+        }
+        const rect = el.getBoundingClientRect();
+        const tag = el.tagName.toLowerCase();
+        const cls = el.className && typeof el.className === 'string'
+          ? '.' + el.className.trim().split(/\s+/).join('.')
+          : '';
+        const dims = Math.round(rect.width) + ' × ' + Math.round(rect.height);
+        metatip.textContent = tag + cls + '  ·  ' + dims;
+
+        // Position above the element, or below if there's no room
+        const tipHeight = 28;
+        let top = rect.top - tipHeight - 4;
+        if (top < 4) top = rect.bottom + 4;
+        let left = rect.left;
+        // Keep within viewport
+        const maxLeft = window.innerWidth - 330;
+        if (left > maxLeft) left = maxLeft;
+        if (left < 4) left = 4;
+        metatip.style.top = top + 'px';
+        metatip.style.left = left + 'px';
+        metatip.style.display = 'block';
+      }
+
+      function hideMetatip() {
+        if (metatip) metatip.style.display = 'none';
+      }
+
+      function onMouseOver(e) {
+        if (!document.body.dataset.debug) return;
+        if (!main.contains(e.target)) return;
+        showMetatip(e.target);
+      }
+
+      function onMouseOut(e) {
+        if (!main.contains(e.target)) return;
+        hideMetatip();
+      }
+
+      function enableDebug() {
+        document.body.dataset.debug = 'true';
+        drawBadges();
+        startObserving();
+        main.addEventListener('mouseover', onMouseOver);
+        main.addEventListener('mouseout', onMouseOut);
+      }
+
+      function disableDebug() {
+        delete document.body.dataset.debug;
+        clearBadges();
+        stopObserving();
+        hideMetatip();
+        main.removeEventListener('mouseover', onMouseOver);
+        main.removeEventListener('mouseout', onMouseOut);
+      }
+
+      toggle.addEventListener('change', (e) => {
+        const on = e.target.checked;
+        try { localStorage.setItem(STORAGE_KEY, on ? '1' : '0'); } catch (_) {}
+        if (on) enableDebug(); else disableDebug();
+      });
+
+      // Restore from URL param (takes precedence) or localStorage
+      let saved = '0';
+      try { saved = localStorage.getItem(STORAGE_KEY) || '0'; } catch (_) {}
+      const urlParam = new URLSearchParams(window.location.search).get('debug');
+      if (urlParam === '1') {
+        saved = '1';
+        try { localStorage.setItem(STORAGE_KEY, '1'); } catch (_) {}
+      } else if (urlParam === '0') {
+        saved = '0';
+        try { localStorage.setItem(STORAGE_KEY, '0'); } catch (_) {}
+      }
+      if (saved === '1') {
+        toggle.checked = true;
+        enableDebug();
+      }
+
+      window.addEventListener('resize', () => {
+        if (document.body.dataset.debug) drawBadges();
+      });
+      window.addEventListener('scroll', () => {
+        if (document.body.dataset.debug) drawBadges();
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>

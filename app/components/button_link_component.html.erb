@@ -1,7 +1,16 @@
-<%= button_to @label,
+<% if @method == :get %>
+  <%= link_to @label,
               @url,
               class: "btn #{@button_style} #{@button_size}",
-              method: @method,
-              form: (@turbo ? {} : { data: { turbo: false} }),
+              data: (@turbo ? {} : { turbo: false }),
               **html_attrs
-%>
+  %>
+<% else %>
+  <%= button_to @label,
+                @url,
+                class: "btn #{@button_style} #{@button_size}",
+                method: @method,
+                form: (@turbo ? {} : { data: { turbo: false } }),
+                **html_attrs
+  %>
+<% end %>

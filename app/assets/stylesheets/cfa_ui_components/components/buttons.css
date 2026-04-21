@@ -1,0 +1,31 @@
+.btn {
+    @apply block text-center rounded border cursor-pointer;
+
+    a {
+        @apply text-inherit no-underline;
+    }
+}
+
+.btn--primary {
+    @apply bg-black border-none text-gray-50;
+}
+
+.btn--secondary {
+    @apply bg-white border-2 text-black;
+}
+
+.btn--destructive {
+    @apply bg-white border-2 border-red-700 text-red-700;
+}
+
+.btn--small {
+    @apply px-3 py-2 w-fit;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.btn--large {
+    @apply px-cfa-lg py-cfa-med w-fit place-self-center;
+    font-size: 22px;
+    font-weight: 700;
+}
