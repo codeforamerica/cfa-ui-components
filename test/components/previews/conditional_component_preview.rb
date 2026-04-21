@@ -16,4 +16,7 @@ class ConditionalComponentPreview < FormComponentPreview
 
   def prefilled_dropdown
   end
+
+  def unique_alpine_store_key
+  end
 end

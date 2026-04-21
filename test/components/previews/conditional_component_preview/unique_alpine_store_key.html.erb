@@ -1,0 +1,23 @@
+<p>
+  When two forms on the same page share a field with the same name, they would normally share
+  a single Alpine store, causing each form's ConditionalComponent to react to the other form's
+  selection. Passing a <code>unique_alpine_store_key</code> to both RadioButtonsComponent and
+  ConditionalComponent scopes each pair to its own store so they operate independently. This
+  is relevant for forms that update primary and secondary filers with the same-named attribute.
+</p>
+
+<h2>Form 1</h2>
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, unique_alpine_store_key: "_form1") %>
+  <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup question for form 1", unique_alpine_store_key: "_form1") do %>
+    But why!?
+  <% end %>
+<% end %>
+
+<h2>Form 2</h2>
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, unique_alpine_store_key: "_form2") %>
+  <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup question for form 2", unique_alpine_store_key: "_form2") do %>
+    But why!?
+  <% end %>
+<% end %>
