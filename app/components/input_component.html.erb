@@ -1,10 +1,11 @@
+<% help_id = "#{@form.field_id(@method)}_help" if @help_text %>
 <div class="space-y-cfa-sm">
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
-    <p class="help_text">
+    <p id="<%= help_id %>" class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900 p-cfa-sm" %>
+  <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900 p-cfa-sm", aria: { describedby: help_id } %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
