@@ -1,7 +1,8 @@
+<% help_id = "#{@form.field_id(@method)}_help" if @help_text %>
 <div class="currency-field space-y-2">
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
-    <p class="help_text">
+    <p id="<%= help_id %>" class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
@@ -13,6 +14,7 @@
           class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2",
           inputmode: "decimal",
           placeholder: "0.00",
+          aria: { describedby: help_id },
           "x-data": "",
           "x-mask:dynamic": "$money",
           **@number_field_kwargs %>
