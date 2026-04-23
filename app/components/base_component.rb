@@ -33,6 +33,10 @@ class BaseComponent < ViewComponent::Base
     "alert" => {
       path: "icons/alert.svg",
       alt: "alert"
+    },
+    "delete" => {
+      path: "icons/delete.svg",
+      alt: "delete"
     }
   }.freeze
 
