@@ -19,4 +19,10 @@ class ConditionalComponentPreview < FormComponentPreview
 
   def unique_alpine_store_key
   end
+
+  def combobox
+  end
+
+  def prefilled_combobox
+  end
 end
