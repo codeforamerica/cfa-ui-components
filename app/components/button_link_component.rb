@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class ButtonLinkComponent < BaseComponent
-  def initialize(label:, url:, style: :primary, method: :get, size: :large, turbo: true, html_attrs: nil)
+  def initialize(label:, url:, style: :primary, method: :get, size: :large, turbo: true, icon: nil, html_attrs: nil)
     super(html_attrs:)
     @turbo = turbo
     @label = label
     @url = url
+    @icon = icon
     @button_style =
       case style
       when :primary
