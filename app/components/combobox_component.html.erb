@@ -1,4 +1,5 @@
 <div x-data x-combobox class="max-w-lg space-y-cfa-sm"
+     x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
   <%= @form.label @method, @label, class: "label block #{required_class}", "x-combobox:label": "" %>
   <% if @help_text %>
