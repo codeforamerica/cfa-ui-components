@@ -14,8 +14,4 @@ class IconComponentPreview < ViewComponent::Preview
   def circle_check
     render(IconComponent.new(icon: "circle_check"))
   end
-
-  def delete
-    render(IconComponent.new(icon: "delete"))
-  end
 end
