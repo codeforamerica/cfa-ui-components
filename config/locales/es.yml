@@ -3,7 +3,9 @@ es:
   continue: Continuar
   cfaui:
     modal:
-      close_aria: Cerrar modal 
+      close_aria: Cerrar modal
+  combobox:
+    toggle_aria: Alternar opciones
   decline: Rechazar
   remove: Eliminar
   favorite_fruits: Frutas favoritas
