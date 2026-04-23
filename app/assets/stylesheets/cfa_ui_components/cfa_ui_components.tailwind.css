@@ -24,5 +24,6 @@
 @import "./components/layout.css";
 @import "./components/forms.css";
 @import "./components/buttons.css";
+@import "./components/icons.css";
 
 @import "./utilities/state.css";

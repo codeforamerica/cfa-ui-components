@@ -56,19 +56,12 @@ class BaseComponent < ViewComponent::Base
     path = ICONS.dig(icon, :path)
     return "".html_safe unless path
 
-    url = image_path(path)
-    style = [
-      "display: inline-block",
-      "width: #{size}px",
-      "height: #{size}px",
-      "background-color: currentColor",
-      "mask: url('#{url}') no-repeat center / contain",
-      "-webkit-mask: url('#{url}') no-repeat center / contain"
-    ].join("; ")
-    class_attr = css_class ? %( class="#{css_class}") : ""
-    aria_attrs = aria_hidden ? %(aria-hidden="true") : %(role="img" aria-label="#{icon_alt_text(icon)}")
+    style = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
+    aria = aria_hidden ?
+      { "aria-hidden" => "true" } :
+      { role: "img", "aria-label" => icon_alt_text(icon) }
 
-    %(<span #{aria_attrs}#{class_attr} style="#{style}"></span>).html_safe
+    content_tag :span, "", class: ["cfa-icon", css_class].compact, style: style, **aria
   end
 
   def required_class
