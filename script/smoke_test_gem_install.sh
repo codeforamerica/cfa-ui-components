@@ -67,6 +67,9 @@ test -f app/assets/stylesheets/vendor/cfa_ui_components/cfa_ui_components.tailwi
 test -f app/javascript/vendor/cfa_ui_components/cfa_ui_components.js
 test -f app/javascript/vendor/cfa_ui_components/combobox.ts
 
+echo "==> Forcing route drawing (regression: gem routes.rb must not reference gem-only constants in host app)"
+bin/rails runner 'Rails.application.reload_routes!; puts "routes ok"'
+
 echo "==> Rendering a component via rails runner"
 bin/rails runner '
   html = ApplicationController.render(
