@@ -63,7 +63,7 @@ class BaseComponent < ViewComponent::Base
       "height: #{size}px",
       "background-color: currentColor",
       "mask: url('#{url}') no-repeat center / contain",
-      "-webkit-mask: url('#{url}') no-repeat center / contain",
+      "-webkit-mask: url('#{url}') no-repeat center / contain"
     ].join("; ")
     class_attr = css_class ? %( class="#{css_class}") : ""
     aria_attrs = aria_hidden ? %(aria-hidden="true") : %(role="img" aria-label="#{icon_alt_text(icon)}")
