@@ -50,7 +50,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick one"
     ))
     assert_selector "[x-init*=\"Alpine.store('radio_field'\"]"
     assert_selector "input[x-model=\"$store.radio_field\"]"
@@ -63,7 +64,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      unique_alpine_store_key: "_unique_key"
+      unique_alpine_store_key: "_unique_key",
+      legend: "Pick one"
     ))
     assert_selector "[x-init*=\"Alpine.store('radio_field_unique_key'\"]"
     assert_selector "input[x-model=\"$store.radio_field_unique_key\"]"
