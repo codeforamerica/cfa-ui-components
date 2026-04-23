@@ -2,6 +2,6 @@
 
 class FormErrorsComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:)
-    super(form: form, method: method)
+    super
   end
 end

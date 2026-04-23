@@ -5,8 +5,8 @@ require_relative "lib/cfa_ui_components/version"
 Gem::Specification.new do |spec|
   spec.name = "cfa_ui_components"
   spec.version = CfaUiComponents::Version
-  spec.authors = [ "Mike Rotondo" ]
-  spec.email = [ "mrotondo@codeforamerica.org" ]
+  spec.authors = ["Mike Rotondo"]
+  spec.email = ["mrotondo@codeforamerica.org"]
 
   spec.summary = "For when you want to have your UI be components"
   spec.homepage = "https://github.com/codeforamerica/cfa-ui-components/blob/main/README.md"
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     "lib/generators/**/*",
     "lib/tasks/cfa_ui_components.rake"
   ]
-  spec.require_paths = [ "lib" ]
+  spec.require_paths = ["lib"]
 
   spec.add_dependency "rails", "~> 8.0"
   spec.add_dependency "cssbundling-rails", "~> 1.0"

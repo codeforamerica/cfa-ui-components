@@ -1,10 +1,10 @@
 class RadioButtonsComponentPreview < FormComponentPreview
   def default
-    render(RadioButtonsComponent.new(form: form, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label))
+    render(RadioButtonsComponent.new(form:, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label))
   end
 
   def horizontal
-    render(RadioButtonsComponent.new(form: form, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, layout: :horizontal))
+    render(RadioButtonsComponent.new(form:, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, layout: :horizontal))
   end
 
   def prefilled

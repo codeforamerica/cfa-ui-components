@@ -1,0 +1,3 @@
+[hooks]
+  postCreate = lefthook install --reset-hooks-path
+  postCreate = yarn install && yarn build && yarn build:css

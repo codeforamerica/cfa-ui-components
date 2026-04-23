@@ -69,7 +69,7 @@ class LabelInputAssociationTest < ViewComponent::TestCase
       label = item.find("label")
       checkbox = item.find("input[type='checkbox']")
       assert_equal checkbox["id"], label["for"],
-        "Label for='#{label['for']}' should match checkbox id='#{checkbox['id']}'"
+        "Label for='#{label["for"]}' should match checkbox id='#{checkbox["id"]}'"
     end
   end
 
@@ -86,7 +86,7 @@ class LabelInputAssociationTest < ViewComponent::TestCase
       label = item.find("label")
       radio = item.find("input[type='radio']")
       assert_equal radio["id"], label["for"],
-        "Label for='#{label['for']}' should match radio id='#{radio['id']}'"
+        "Label for='#{label["for"]}' should match radio id='#{radio["id"]}'"
     end
   end
 

@@ -10,12 +10,12 @@
       $
     </span>
     <%= @form.text_field @method,
-                         class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2",
-                         inputmode: "decimal",
-                         placeholder: "0.00",
-                         "x-data": "",
-                         "x-mask:dynamic": "$money",
-                         **@number_field_kwargs %>
+          class: "w-full rounded-sm border border-zinc-900 pl-7 pr-3 py-2",
+          inputmode: "decimal",
+          placeholder: "0.00",
+          "x-data": "",
+          "x-mask:dynamic": "$money",
+          **@number_field_kwargs %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

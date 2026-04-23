@@ -2,13 +2,13 @@
   <%= @form.hidden_field @method, value: "" %>
   <div class="space-y-cfa-med">
     <% content = capture {
-      @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
-        content_tag :div, class: "checkbox_item" do
-          concat checkbox_item.checkbox("x-model" => "$store.#{@method}")
-          concat checkbox_item.label
-        end
-      end
-    } %>
+         @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
+           content_tag :div, class: "checkbox_item" do
+             concat checkbox_item.checkbox("x-model" => "$store.#{@method}")
+             concat checkbox_item.label
+           end
+         end
+       } %>
     <% concat content %>
   </div>
   <div class="mt-cfa-sm">

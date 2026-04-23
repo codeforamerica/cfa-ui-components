@@ -6,6 +6,7 @@ require "active_model"
 class DatePickerTestModel
   include ActiveModel::Model
   include ActiveModel::Attributes
+
   attribute :my_date
 end
 

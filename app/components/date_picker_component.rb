@@ -2,17 +2,16 @@
 
 class DatePickerComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil)
-      super(form: form, method: method)
-      @label     = label
-      @label_day = label_day
-      @label_month = label_month
-      @label_month_select = label_month_select
-      @label_year = label_year
-      @helper_text = helper_text
+    super(form:, method:)
+    @label = label
+    @label_day = label_day
+    @label_month = label_month
+    @label_month_select = label_month_select
+    @label_year = label_year
+    @helper_text = helper_text
   end
 
   private
-
 
   def date
     @form.object.public_send(@method)
@@ -32,10 +31,10 @@ class DatePickerComponent < AttributeBoundFormElementComponent
   end
 
   def month_options
-    Date::MONTHNAMES.compact.each_with_index.map { |m, i| [ m, i + 1 ] }
+    Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }
   end
 
   def month_value = date&.month
-  def day_value   = date&.day
-  def year_value  = date&.year
+  def day_value = date&.day
+  def year_value = date&.year
 end

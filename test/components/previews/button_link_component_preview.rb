@@ -10,6 +10,7 @@ class ButtonLinkComponentPreview < ViewComponent::Preview
   def destructive
     render(ButtonLinkComponent.new(label: I18n.t("remove"), url: "/destroy", style: :destructive, method: :post))
   end
+
   def primary_small
     render(ButtonLinkComponent.new(label: I18n.t("continue"), url: "https://www.google.com", size: :small))
   end

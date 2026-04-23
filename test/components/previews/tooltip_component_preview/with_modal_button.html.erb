@@ -8,10 +8,11 @@
   </ul>
   <% modal.with_button do %>
     <%= render(ButtonLinkComponent.new(
-      label: "Got it",
-      url: "#",
-      html_attrs: {
-        "@click.prevent": "toggle()"
-      })) %>
+          label: "Got it",
+          url: "#",
+          html_attrs: {
+            "@click.prevent": "toggle()"
+          }
+        )) %>
   <% end %>
 <% end %>

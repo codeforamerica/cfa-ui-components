@@ -1,0 +1,29 @@
+# Added according to https://thoughtbot.com/blog/a-standard-way-to-lint-your-views
+---
+EnableDefaultLinters: false
+linters:
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      require: standard
+      inherit_gem:
+        standard: config/base.yml
+      inherit_from: .erb_lint_rubocop.yml
+  AllCops:
+    DisabledByDefault: true
+  TrailingWhitespace:
+    enabled: true
+  FinalNewline:
+    enabled: true
+  SpaceAroundErbTag:
+    enabled: true
+  ExtraNewline:
+    enabled: true
+  SpaceIndentation:
+    enabled: true
+  RightTrim:
+    enabled: true
+  ClosingErbTagIndent:
+    enabled: true
+  CommentSyntax:
+    enabled: true

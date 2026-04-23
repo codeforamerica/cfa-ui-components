@@ -69,7 +69,11 @@ module CfaUiComponents
       package_json = Rails.root.join("package.json")
       if File.exist?(package_json)
         content = File.read(package_json)
-        data = JSON.parse(content) rescue {}
+        data = begin
+          JSON.parse(content)
+        rescue
+          {}
+        end
         build_script = data.dig("scripts", "build").to_s
         css_build_script = data.dig("scripts", "build:css").to_s
 

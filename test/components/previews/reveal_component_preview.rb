@@ -1,7 +1,7 @@
 class RevealComponentPreview < ViewComponent::Preview
   def default
     render(RevealComponent.new(summary_text: "I am summary")) do
-      content_tag(:p,  "Sample Details", style: "margin-top: 8px;")
+      content_tag(:p, "Sample Details", style: "margin-top: 8px;")
     end
   end
 
