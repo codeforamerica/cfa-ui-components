@@ -58,10 +58,10 @@ class BaseComponent < ViewComponent::Base
 
     style = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
     aria = aria_hidden ?
-      { "aria-hidden" => "true" } :
-      { role: "img", "aria-label" => icon_alt_text(icon) }
+      {"aria-hidden" => "true"} :
+      {:role => "img", "aria-label" => icon_alt_text(icon)}
 
-    content_tag :span, "", class: [ "cfa-icon", css_class ].compact, style: style, **aria
+    content_tag :span, "", class: ["cfa-icon", css_class].compact, style:, **aria
   end
 
   def required_class
