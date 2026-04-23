@@ -3,7 +3,7 @@
 class SingleCheckboxComponentPreview < FormComponentPreview
   def default
     render SingleCheckboxComponent.new(
-      form: form,
+      form:,
       method: :agree,
       label: "Default"
     )
@@ -11,7 +11,7 @@ class SingleCheckboxComponentPreview < FormComponentPreview
 
   def prefilled
     render SingleCheckboxComponent.new(
-      form: form,
+      form:,
       method: :agree,
       label: "Prefilled",
       checked: true
@@ -31,7 +31,7 @@ class SingleCheckboxComponentPreview < FormComponentPreview
 
   def unselectable
     render SingleCheckboxComponent.new(
-      form: form,
+      form:,
       method: :agree,
       label: "Unselectable",
       disabled: true

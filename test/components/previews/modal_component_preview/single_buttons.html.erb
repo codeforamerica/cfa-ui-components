@@ -1,6 +1,6 @@
 <button x-data @click="$dispatch('example-modal')">Open Modal</button>
 
-<%= render(ModalComponent.new(name: 'example')) do |c| %>
+<%= render(ModalComponent.new(name: "example")) do |c| %>
   <% c.with_header do %>Snack copy would go here framed as a question?<% end %>
 
   <p>
@@ -14,10 +14,11 @@
   </ul>
   <% c.with_button do %>
     <%= render(ButtonLinkComponent.new(
-      label: "Button",
-      url: "#",
-      html_attrs: {
-        "@click.prevent": "toggle()"
-      })) %>
+          label: "Button",
+          url: "#",
+          html_attrs: {
+            "@click.prevent": "toggle()"
+          }
+        )) %>
   <% end %>
 <% end %>

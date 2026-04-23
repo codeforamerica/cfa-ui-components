@@ -1,0 +1,10 @@
+# Added according to https://thoughtbot.com/blog/a-standard-way-to-lint-your-views
+
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+Layout/InitialIndentation:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false

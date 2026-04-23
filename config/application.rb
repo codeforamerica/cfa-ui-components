@@ -15,7 +15,6 @@ require "rails"
   end
 end
 
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -37,14 +36,14 @@ module CfaUiComponents
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.view_component.previews.paths = [ "#{Rails.root}/test/components/previews" ]
+    config.view_component.previews.paths = ["#{Rails.root}/test/components/previews"]
 
     config.view_component.previews.default_layout = "component_preview"
     config.lookbook.preview_controller = "PreviewController"
     config.lookbook.preview_display_options = {
       lang: [
-        [ "English", "en" ],
-        [ "Spanish", "es" ]
+        ["English", "en"],
+        ["Spanish", "es"]
       ]
     }
   end

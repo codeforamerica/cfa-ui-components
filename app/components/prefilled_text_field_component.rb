@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 class PrefilledTextFieldComponent < ViewComponent::Base
-  def initialize(text:,  label:,  style: :primary)
+  def initialize(text:, label:, style: :primary)
     @text =
-     case style
-     when :primary
-      text
-     when :currency
-      "$" +  number_with_delimiter(text)
-     else
-      raise ArgumentError.new("Invalid style")
-     end
-
+      case style
+      when :primary
+        text
+      when :currency
+        "$" + number_with_delimiter(text)
+      else
+        raise ArgumentError.new("Invalid style")
+      end
 
     @label = label
     @style =

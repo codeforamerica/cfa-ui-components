@@ -3,8 +3,8 @@
     <%= @form.check_box(
           @method,
           {
-            class: "h-5 w-5 rounded border #{ @form.object&.errors&.include?(@method) ? "border-red-600" : "border-slate-400" }",
-            disabled: @disabled,
+            class: "h-5 w-5 rounded border #{@form.object&.errors&.include?(@method) ? "border-red-600" : "border-slate-400"}",
+            disabled: @disabled
           },
           "1",
           ""

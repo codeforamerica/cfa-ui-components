@@ -2,7 +2,7 @@
 
 class SingleCheckboxComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, label:, checked: nil, disabled: false, required: false)
-    super(form: form, method: method)
+    super(form:, method:)
     @label = label
     @checked = checked
     @disabled = disabled

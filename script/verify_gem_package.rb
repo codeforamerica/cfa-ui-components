@@ -26,7 +26,7 @@ EXPECTED_GLOBS = [
 
 def sh!(cmd, chdir: REPO_ROOT)
   puts "$ #{cmd}"
-  raise "command failed: #{cmd}" unless system(cmd, chdir: chdir)
+  raise "command failed: #{cmd}" unless system(cmd, chdir:)
 end
 
 Dir.chdir(REPO_ROOT) do
@@ -43,10 +43,10 @@ Dir.mktmpdir do |dir|
   raise "unpack failed" unless unpacked
 
   expected_files = EXPECTED_GLOBS.flat_map { |g| Dir[File.join(REPO_ROOT, g)] }
-                                 .select { |p| File.file?(p) }
-                                 .map { |p| p.sub("#{REPO_ROOT}/", "") }
-                                 .sort
-                                 .uniq
+    .select { |p| File.file?(p) }
+    .map { |p| p.sub("#{REPO_ROOT}/", "") }
+    .sort
+    .uniq
 
   missing = expected_files.reject { |rel| File.file?(File.join(unpacked, rel)) }
 
