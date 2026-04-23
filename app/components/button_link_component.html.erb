@@ -1,7 +1,7 @@
 <% label_content = capture do %>
   <% if @icon.present? %>
     <span class="inline-flex items-center justify-center gap-cfa-sm">
-      <%= inline_icon(@icon, size: 20, aria_hidden: true) %>
+      <%= inline_icon(@icon, size: @icon_size, aria_hidden: true) %>
       <%= @label %>
     </span>
   <% else %>

@@ -28,5 +28,6 @@ class ButtonLinkComponent < BaseComponent
       else
         raise ArgumentError.new("Invalid button size")
       end
+    @icon_size = (size == :small) ? 16 : 20
   end
 end
