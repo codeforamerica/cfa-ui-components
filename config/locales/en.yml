@@ -20,3 +20,4 @@ en:
   combobox:
     placeholder_label: "- Select or Type -"
     no_results: No results found
+    toggle_aria: Toggle options

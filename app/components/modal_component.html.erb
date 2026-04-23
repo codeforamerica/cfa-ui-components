@@ -5,7 +5,7 @@
         <div class="space-x-cfa-xl flex flex-row">
           <h2 :id="$id('<%= @name %>-title')"><%= header %></h2>
           <div class="w-[25px] shrink-0">
-            <a href="#" @click="toggle()" class="flex flex-col items-start cursor-pointer"><%= image_tag icon_image_path("xmark"), width: "25px", alt: icon_alt_text("xmark"), "aria-label": t("cfaui.modal.close_aria") %></a>
+            <button type="button" @click="toggle()" aria-label="<%= t("cfaui.modal.close_aria") %>" class="flex flex-col items-start cursor-pointer bg-transparent p-0 border-0"><%= image_tag icon_image_path("xmark"), width: "25px", alt: "", "aria-hidden": "true" %></button>
           </div>
         </div>
         <div :id="$id('<%= @name %>-description')" class="space-y-cfa-med">
