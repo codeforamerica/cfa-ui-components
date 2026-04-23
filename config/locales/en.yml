@@ -28,6 +28,7 @@ en:
     combobox:
       placeholder: "- Select or Type -"
       no_results: No results found
+      toggle_aria: Toggle options
     memorable_date:
       day: Day
       month: Month

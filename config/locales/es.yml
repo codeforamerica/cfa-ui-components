@@ -28,6 +28,7 @@ es:
     combobox:
       placeholder: "- Seleccionar o escribir -"
       no_results: No se encontraron resultados
+      toggle_aria: Alternar opciones
     memorable_date:
       day: Día
       month: Mes
