@@ -2,5 +2,7 @@
 <% if @icon.present? %>
     <%= image_tag icon_image_path(@icon), alt: icon_alt_text(@icon), class: "size-[20px]" %>
 <% end %>
-<%= link_to @label, @url, target: "_blank", rel: "noopener noreferrer", **html_attrs %>
+<%= link_to @url, target: "_blank", rel: "noopener noreferrer", **html_attrs do %>
+    <%= @label %><span class="sr-only"> (opens in new tab)</span>
+<% end %>
 </span>
