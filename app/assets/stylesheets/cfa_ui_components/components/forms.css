@@ -22,7 +22,7 @@ form {
 }
 
 .form_errors {
-    @apply text-red-500 mt-cfa-sm;
+    @apply text-error mt-cfa-sm;
     font-size: 16px;
     font-weight: 700;
     line-height: normal;

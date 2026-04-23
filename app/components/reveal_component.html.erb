@@ -1,12 +1,14 @@
 <%= render CardComponent.new do %>
   <details class="group">
-    <summary class="flex justify-between items-center after:ml-10px after:content-[url('/icons/arrow_closed.svg')] after:transform-[0.2s] group-open:after:content-[url('/icons/arrow_open.svg')] list-none cursor-pointer">
+    <summary class="flex justify-between items-center list-none cursor-pointer">
       <p class='flex font-bold items-center gap-cfa-sm'>
          <% if @icon.present? %>
-         <%= image_tag icon_image_path(@icon), alt: icon_alt_text(@icon), class: "size-[20px]" %>
+         <%= inline_icon(@icon, size: 20) %>
          <% end %>
          <%= @summary_text %>
       </p>
+      <span class="ml-[10px] inline-flex items-center group-open:hidden"><%= inline_icon('chevron_down', size: 25) %></span>
+      <span class="ml-[10px] hidden group-open:inline-flex items-center"><%= inline_icon('chevron_up', size: 25) %></span>
     </summary>
 
      <div class="space-y-cfa-med">
