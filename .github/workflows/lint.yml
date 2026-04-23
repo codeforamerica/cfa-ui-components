@@ -1,0 +1,39 @@
+name: Apply Linter fixes
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: write
+    steps:
+      - name: Standard Ruby
+        uses: standardrb/standard-ruby-action@v1
+      - name: ERB Lint
+        run: bundle exec erb_lint --autocorrect app/views app/components
+      # The following are modified from https://github.com/standardrb/standard-ruby-action/blob/main/action.yml
+      - name: Check for modified files
+        id: check_changes
+        shell: bash
+        working-directory: '.'
+        run: |
+          if [ -n "$(git diff --name-only --diff-filter=M)" ]; then
+            echo "erb_lint_autofixes_found=true" >> $GITHUB_ENV
+          else
+            echo "erb_lint_autofixes_found=false" >> $GITHUB_ENV
+          fi
+      - name: Commit autofixes
+        shell: bash
+        if: env.erb_lint_autofixes_found == 'true'
+        run: |
+          echo "::group::Committing ERB Lint Fixes"
+          git config --global user.name 'erb_lint-ruby-action[bot]'
+          git config --global user.email 'tax-eng@codeforamerica.org'
+          # Add any files that were changed by ERB Lint
+          git diff --name-only --diff-filter=M | xargs git add
+          git commit -m "Apply ERB Lint autofixes" || echo "No changes to commit"
+          git push
+          echo "::endgroup::"
