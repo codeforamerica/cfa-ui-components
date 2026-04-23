@@ -52,7 +52,7 @@ class BaseComponent < ViewComponent::Base
   # Render the icon as a CSS-masked span so it inherits CSS `color`
   # via `background-color: currentColor`. Uses the same image-rasterization
   # path as `<img src=...>`, preserving pixel-perfect positioning.
-  def inline_icon(icon, size: 20, css_class: nil)
+  def inline_icon(icon, size: 20, css_class: nil, aria_hidden: false)
     path = ICONS.dig(icon, :path)
     return "".html_safe unless path
 
@@ -66,8 +66,9 @@ class BaseComponent < ViewComponent::Base
       "-webkit-mask: url('#{url}') no-repeat center / contain",
     ].join("; ")
     class_attr = css_class ? %( class="#{css_class}") : ""
+    aria_attrs = aria_hidden ? %(aria-hidden="true") : %(role="img" aria-label="#{icon_alt_text(icon)}")
 
-    %(<span role="img" aria-label="#{icon_alt_text(icon)}"#{class_attr} style="#{style}"></span>).html_safe
+    %(<span #{aria_attrs}#{class_attr} style="#{style}"></span>).html_safe
   end
 
   def required_class
