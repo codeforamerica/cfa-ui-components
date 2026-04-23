@@ -1,9 +1,10 @@
+<% help_id = "#{input_id(0)}_help" if @helper_text %>
 <div>
   <p class="text-[16px] mb-cfa-sm">
    <strong> <%= @label %> </strong>
   </p>
   <% if @helper_text %>
-    <p class="help_text mb-cfa-sm">
+    <p id="<%= help_id %>" class="help_text mb-cfa-sm">
       <%= @helper_text %>
     </p>
   <% end %>
@@ -14,6 +15,7 @@
             options_for_select(month_options, month_value),
             include_blank: @label_month_select,
             id: input_id(2),
+            "aria-describedby": help_id,
             class: "mr-cfa-sm outline mt-cfa-sm h-[40px] px-cfa-sm" %>
     </div>
     <div>
@@ -26,6 +28,7 @@
             minlength: 1,
             maxlength: 2,
             placeholder: "DD",
+            "aria-describedby": help_id,
             class: "w-[48px] outline mr-cfa-sm mt-cfa-sm h-[40px] px-cfa-sm" %>
     </div>
     <div>
@@ -38,6 +41,7 @@
             minlength: 4,
             maxlength: 4,
             placeholder: "YYYY",
+            "aria-describedby": help_id,
             class: "w-[72px] outline mr-cfa-sm mt-cfa-sm h-[40px] px-cfa-sm" %>
     </div>
   </div>
