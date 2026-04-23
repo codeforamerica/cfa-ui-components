@@ -7,8 +7,8 @@
          <% end %>
          <%= @summary_text %>
       </p>
-      <span class="ml-[10px] inline-flex items-center group-open:hidden"><%= inline_icon('chevron_down', size: 25) %></span>
-      <span class="ml-[10px] hidden group-open:inline-flex items-center"><%= inline_icon('chevron_up', size: 25) %></span>
+      <span class="ml-[10px] inline-flex items-center group-open:hidden"><%= inline_icon('chevron_down', size: 25, aria_hidden: true) %></span>
+      <span class="ml-[10px] hidden group-open:inline-flex items-center"><%= inline_icon('chevron_up', size: 25, aria_hidden: true) %></span>
     </summary>
 
      <div class="space-y-cfa-med">
