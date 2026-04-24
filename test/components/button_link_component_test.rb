@@ -49,4 +49,14 @@ class ButtonLinkComponentTest < ViewComponent::TestCase
     render_inline(ButtonLinkComponent.new(label: "Delete", url: "/delete", method: :post))
     assert_selector "button", text: "Delete"
   end
+
+  def test_destructive_variant_method_can_be_overridden
+    render_inline(ButtonLinkComponent.new(label: "Remove", url: "#", variant: :destructive, method: :get))
+    assert_selector "a.btn--destructive[href='#']", text: "Remove"
+  end
+
+  def test_destructive_variant_icon_can_be_overridden
+    render_inline(ButtonLinkComponent.new(label: "Remove", url: "/delete", variant: :destructive, icon: "close"))
+    assert_no_selector ".usa-icon use[href*='#delete']"
+  end
 end

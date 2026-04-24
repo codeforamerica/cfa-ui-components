@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 
 class ButtonLinkComponent < BaseComponent
-  def initialize(label:, url:, variant: :primary, method: :get, size: :large, turbo: true, icon: nil, html_attrs: nil)
+  def initialize(label:, url:, variant: :primary, method: nil, size: :large, turbo: true, icon: nil, html_attrs: nil)
     super(html_attrs:)
     @turbo = turbo
     @label = label
     @url = url
-    @icon = icon
-    @method = method
     case variant
     when :primary
       @button_style = "btn--primary"
+      @method = method || :get
+      @icon = icon
     when :secondary
       @button_style = "btn--secondary"
+      @method = method || :get
+      @icon = icon
     when :destructive
       @button_style = "btn--destructive"
-      @method = :delete
-      @icon = "delete"
+      @method = method || :delete
+      @icon = icon || "delete"
     else
       raise ArgumentError.new("Invalid button variant")
     end
