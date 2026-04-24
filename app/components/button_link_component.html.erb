@@ -12,6 +12,8 @@
   <%= link_to label_content,
         @url,
         class: "btn #{@button_style} #{@button_size}",
+        role: "button",
+        "x-on:keydown.space.prevent": "$el.click()",
         data: (@turbo ? {} : {turbo: false}),
         **html_attrs %>
 <% else %>
