@@ -49,10 +49,6 @@ module CfaUiComponents
       run "yarn add alpinejs @alpinejs/mask @alpinejs/focus"
     end
 
-    def add_font_dependencies
-      run "yarn add @fontsource-variable/inter @fontsource-variable/geologica @fontsource-variable/public-sans"
-    end
-
     def add_components_to_gitignore
       gitignore_path = ".gitignore"
       component_filename_lines = "/app/assets/stylesheets/vendor/cfa_ui_components/\n/app/javascript/vendor/cfa_ui_components/\n"

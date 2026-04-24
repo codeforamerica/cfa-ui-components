@@ -1,5 +1,3 @@
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/geologica";
-@import "@fontsource-variable/public-sans";
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 @import "./cfa_ui_components/cfa_ui_components.tailwind.css";

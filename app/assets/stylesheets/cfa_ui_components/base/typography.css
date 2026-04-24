@@ -1,5 +1,5 @@
 body {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
 
@@ -10,7 +10,7 @@ body {
 }
 
 h1 {
-    font-family: "Geologica Variable", "Geologica", sans-serif;
+    font-family: "Geologica", sans-serif;
     font-size: 48px;
     font-weight: 700;
     line-height: 1;
@@ -19,7 +19,7 @@ h1 {
 }
 
 h2 {
-    font-family: "Geologica Variable", "Geologica", sans-serif;
+    font-family: "Geologica", sans-serif;
     font-size: 22px;
     font-weight: 400;
     line-height: 1;
@@ -28,7 +28,7 @@ h2 {
 }
 
 .type-body {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1;
@@ -37,7 +37,7 @@ h2 {
 }
 
 .type-body-bold {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 700;
     line-height: 1;
@@ -46,7 +46,7 @@ h2 {
 }
 
 .type-body-label, .label {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 700;
     line-height: 1;
@@ -58,7 +58,7 @@ h2 {
 }
 
 .type-progress-text {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 400;
     line-height: 1;
@@ -67,7 +67,7 @@ h2 {
 }
 
 .type-button {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 22px;
     font-weight: 700;
     line-height: 1;
@@ -75,7 +75,7 @@ h2 {
 }
 
 .type-button-sm {
-    font-family: "Inter Variable", "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 700;
     line-height: 1;

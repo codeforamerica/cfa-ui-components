@@ -167,21 +167,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.27.0.tgz#64995295227e001f2940258617c6674efb3ac48d"
   integrity sha512-aIitBcjQeyOhMTImhLZmtxfdOcuNRpwlPNmlFKPcHQYPhEssw75Cl1TSXJXpMkzaua9FUetx/4OQKq7eJul5Cg==
 
-"@fontsource-variable/geologica@^5.0.0":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@fontsource-variable/geologica/-/geologica-5.2.8.tgz#ae1b1309fa1f59600d2df3dce6ef1dd582168f5d"
-  integrity sha512-hmUBi4k8C0xfi/pk/ArAyK7kRPqbkV5o/YN4nmJ+mtc14HKaAzdWAKb31gFWpveI75POgtcw3/iAepcGRnotYw==
-
-"@fontsource-variable/inter@^5.0.0":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@fontsource-variable/inter/-/inter-5.2.8.tgz#29b11476f5149f6a443b4df6516e26002d87941a"
-  integrity sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==
-
-"@fontsource-variable/public-sans@^5.0.0":
-  version "5.2.7"
-  resolved "https://registry.yarnpkg.com/@fontsource-variable/public-sans/-/public-sans-5.2.7.tgz#31199f97837eec82d08b750f9ad8d44721face20"
-  integrity sha512-4mvade2J3slKkvwRkS+p8T3szet/0vhWoSnuUJTVU81Uo2pRpSZY/Y8bSLRqpSwzIPxjVmRJ53oq6JKP/l/PSg==
-
 "@hotwired/stimulus@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
