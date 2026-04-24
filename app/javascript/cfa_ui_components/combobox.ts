@@ -93,6 +93,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     this.inputEl.value = el.textContent;
                     this.inputValue = el.textContent;
                     this.selectEl.value = getCorrespondingOption(this.selectEl.children, el).value;
+                    this.selectEl.dispatchEvent(new Event('change', { bubbles: true }));
                     this.isOpen = false;
                     this.isDirty = false;
                     if(setFocus) {
