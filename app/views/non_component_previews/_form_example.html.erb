@@ -17,5 +17,7 @@
   <%= render(CardComponent.new) do %>
     <%= render CheckboxesComponent.new(form: f, method: :favorite_fruits, collection: FormComponentPreview.fruit_options, item_value_method: :value, item_label_method: :label) %>
   <% end %>
+  <%= render ButtonLinkComponent.new(label: "Review answers", url: "#", variant: :primary, size: :small) %>
+  <%= render ButtonLinkComponent.new(label: "Start over", url: "#", variant: :secondary, size: :small) %>
   <%= render SubmitButtonComponent.new(form: f) %>
 <% end %>

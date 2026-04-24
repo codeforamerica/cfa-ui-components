@@ -1,11 +1,23 @@
+<% label_content = capture do %>
+  <% if @icon.present? %>
+    <span class="inline-flex items-center justify-center <%= (@icon_size == 16) ? "gap-cfa-sm" : "gap-cfa-med" %>">
+      <%= inline_icon(@icon, size: @icon_size, aria_hidden: true) %>
+      <%= @label %>
+    </span>
+  <% else %>
+    <%= @label %>
+  <% end %>
+<% end %>
 <% if @method == :get %>
-  <%= link_to @label,
+  <%= link_to label_content,
         @url,
         class: "btn #{@button_style} #{@button_size}",
+        role: "button",
+        "x-on:keydown.space.prevent": "$el.click()",
         data: (@turbo ? {} : {turbo: false}),
         **html_attrs %>
 <% else %>
-  <%= button_to @label,
+  <%= button_to label_content,
         @url,
         class: "btn #{@button_style} #{@button_size}",
         method: @method,
