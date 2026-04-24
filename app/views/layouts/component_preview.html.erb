@@ -215,14 +215,31 @@
             }
           }
 
-          // Flex/grid gap — draw bars between consecutive children
+          // Flex/grid gap — draw bars between consecutive flex items.
+          // Text nodes are also flex items in a flex container, so walk childNodes
+          // and measure text nodes with a Range to catch icon+label spans where
+          // the label is a bare text node. Newer browsers may return display as
+          // two values (e.g., "inline flex") per CSS Display L3, so match on a
+          // word boundary rather than exact equality.
           const gap = parseFloat(cs.gap);
           const display = cs.display;
-          if (gap > 0 && (display === 'flex' || display === 'inline-flex' || display === 'grid' || display === 'inline-grid') && el.children.length > 1) {
-            const isRow = display.includes('flex') && (cs.flexDirection === 'row' || cs.flexDirection === 'row-reverse');
-            const children = Array.from(el.children);
-            for (let i = 1; i < children.length; i++) {
-              const prev = children[i - 1].getBoundingClientRect();
+          const isFlex = /\bflex\b/.test(display);
+          const isGrid = /\bgrid\b/.test(display);
+          if (gap > 0 && (isFlex || isGrid)) {
+            const isRow = isFlex && (cs.flexDirection === 'row' || cs.flexDirection === 'row-reverse');
+            const items = [];
+            el.childNodes.forEach(node => {
+              if (node.nodeType === 1) {
+                items.push(node.getBoundingClientRect());
+              } else if (node.nodeType === 3 && node.nodeValue && node.nodeValue.trim()) {
+                const range = document.createRange();
+                range.selectNodeContents(node);
+                const r = range.getBoundingClientRect();
+                if (r.width > 0 || r.height > 0) items.push(r);
+              }
+            });
+            for (let i = 1; i < items.length; i++) {
+              const prev = items[i - 1];
               if (isRow) {
                 addGapBar(
                   'horizontal',
