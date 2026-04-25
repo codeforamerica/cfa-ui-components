@@ -9,10 +9,10 @@ class ModalWithButtonsTest < ViewComponent::TestCase
     render_inline(ModalComponent.new(name: "confirm")) do |modal|
       modal.with_header { "Are you sure?" }
       modal.with_button do
-        vc_test_controller.view_context.render(ButtonLinkComponent.new(label: "Confirm", url: "/confirm", style: :primary))
+        vc_test_controller.view_context.render(ButtonLinkComponent.new(label: "Confirm", url: "/confirm", variant: :primary))
       end
       modal.with_button do
-        vc_test_controller.view_context.render(ButtonLinkComponent.new(label: "Cancel", url: "#", style: :secondary))
+        vc_test_controller.view_context.render(ButtonLinkComponent.new(label: "Cancel", url: "#", variant: :secondary))
       end
       "This action cannot be undone."
     end

@@ -15,6 +15,6 @@ class LinkComponentTest < ViewComponent::TestCase
 
   def test_renders_icon_when_provided
     render_inline(LinkComponent.new(label: "Visit us", url: "https://example.com", icon: "info"))
-    assert_selector "img[alt='info icon']"
+    assert_selector "span[role='img'][aria-label='info icon']"
   end
 end
