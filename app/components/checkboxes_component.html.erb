@@ -1,4 +1,5 @@
-<div x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
+<fieldset class="border-none p-0 m-0 min-w-0" x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
+  <legend class="sr-only"><%= @legend %></legend>
   <%= @form.hidden_field @method, value: "" %>
   <div class="space-y-cfa-med">
     <% content = capture {
@@ -14,4 +15,4 @@
   <div class="mt-cfa-sm">
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
-</div>
+</fieldset>

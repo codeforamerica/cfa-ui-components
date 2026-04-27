@@ -9,7 +9,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox']", count: 2
     assert_selector "label", text: "Yes"
@@ -22,8 +23,35 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='hidden'][value='']", visible: :all
+  end
+
+  def test_renders_fieldset
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "What are your favorite fruits?"
+    ))
+
+    assert_selector "fieldset"
+  end
+
+  def test_renders_legend
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "What are your favorite fruits?"
+    ))
+
+    assert_selector "fieldset > legend", text: "What are your favorite fruits?"
   end
 end
