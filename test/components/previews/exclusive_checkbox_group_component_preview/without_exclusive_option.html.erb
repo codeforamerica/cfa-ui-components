@@ -1,0 +1,11 @@
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render ExclusiveCheckboxGroupComponent.new do %>
+    <%= render CardComponent.new do %>
+      <%= render SingleCheckboxComponent.new(form: f, method: :option_one, label: "Option one") %>
+    <% end %>
+
+    <%= render CardComponent.new do %>
+      <%= render SingleCheckboxComponent.new(form: f, method: :option_two, label: "Option two") %>
+    <% end %>
+  <% end %>
+<% end %>
