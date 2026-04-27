@@ -5,7 +5,7 @@ class ConditionalComponentPreview < FormComponentPreview
   def checkboxes
   end
 
-  def dropdown
+  def select
   end
 
   def prefilled_radio_buttons
@@ -14,7 +14,7 @@ class ConditionalComponentPreview < FormComponentPreview
   def prefilled_checkboxes
   end
 
-  def prefilled_dropdown
+  def prefilled_select
   end
 
   def unique_alpine_store_key

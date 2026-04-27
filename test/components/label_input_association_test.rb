@@ -16,10 +16,10 @@ class LabelInputAssociationTest < ViewComponent::TestCase
     assert_selector "input##{label_for}"
   end
 
-  def test_dropdown_label_for_matches_select_id
-    render_inline(DropdownComponent.new(
+  def test_select_label_for_matches_select_id
+    render_inline(SelectComponent.new(
       form: build_form,
-      method: :dropdown_field,
+      method: :select_field,
       label: "Pick one",
       collection: simple_collection,
       item_value_method: :value,
