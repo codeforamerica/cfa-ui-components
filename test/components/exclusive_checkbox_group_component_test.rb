@@ -39,6 +39,7 @@ class ExclusiveCheckboxGroupComponentTest < ViewComponent::TestCase
 
     assert_includes html, %(@change="onOptionChange($event)")
     assert_includes html, %(@change="onExclusiveChange($event)")
+    assert_includes html, %(@click="handleItemClick($event)")
     assert_includes html, "x-data="
   end
 end

@@ -16,14 +16,22 @@
     if (event.target.matches('input[type=checkbox]') && event.target.checked) {
       this.uncheckMatching('[data-exclusive-checkbox-group=options] input[type=checkbox]');
     }
+  },
+  handleItemClick(event) {
+    if (event.target.closest('input, label, button, a, [role=button], [data-no-toggle]')) return;
+    const item = Array.from(event.currentTarget.children).find((child) => child.contains(event.target));
+    if (!item) return;
+    const checkbox = item.querySelector('input[type=checkbox]');
+    if (!checkbox || checkbox.disabled) return;
+    checkbox.click();
   }
 }">
-  <div data-exclusive-checkbox-group="options" class="space-y-cfa-med" @change="onOptionChange($event)">
+  <div data-exclusive-checkbox-group="options" class="space-y-cfa-med [&>*]:cursor-pointer" @change="onOptionChange($event)" @click="handleItemClick($event)">
     <%= content %>
   </div>
 
   <% if exclusive_option? %>
-    <div data-exclusive-checkbox-group="exclusive" class="mt-cfa-med" @change="onExclusiveChange($event)">
+    <div data-exclusive-checkbox-group="exclusive" class="mt-cfa-med [&>*]:cursor-pointer" @change="onExclusiveChange($event)" @click="handleItemClick($event)">
       <%= exclusive_option %>
     </div>
   <% end %>
