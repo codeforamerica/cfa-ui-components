@@ -46,13 +46,13 @@ class FormErrorsPropagationTest < ViewComponent::TestCase
     assert_selector ".form_errors", text: "must select at least one"
   end
 
-  def test_dropdown_renders_errors_from_model
+  def test_select_renders_errors_from_model
     model = ComponentTestModel.new
-    model.errors.add(:dropdown_field, "must be selected")
+    model.errors.add(:select_field, "must be selected")
 
-    render_inline(DropdownComponent.new(
+    render_inline(SelectComponent.new(
       form: build_form(model),
-      method: :dropdown_field,
+      method: :select_field,
       label: "Pick one",
       collection: simple_collection,
       item_value_method: :value,

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DropdownComponent < AttributeBoundFormElementComponent
+class SelectComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, help_text: nil, required: false)
     super(form:, method:)
     @label = label

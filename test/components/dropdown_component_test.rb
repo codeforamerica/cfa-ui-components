@@ -2,11 +2,11 @@
 
 require "test_helper"
 
-class DropdownComponentTest < ViewComponent::TestCase
+class SelectComponentTest < ViewComponent::TestCase
   def test_renders_label_and_options
-    render_inline(DropdownComponent.new(
+    render_inline(SelectComponent.new(
       form: build_form,
-      method: :dropdown_field,
+      method: :select_field,
       label: "Pick one",
       collection: simple_collection,
       item_value_method: :value,
@@ -18,9 +18,9 @@ class DropdownComponentTest < ViewComponent::TestCase
   end
 
   def test_renders_help_text
-    render_inline(DropdownComponent.new(
+    render_inline(SelectComponent.new(
       form: build_form,
-      method: :dropdown_field,
+      method: :select_field,
       label: "Pick one",
       collection: simple_collection,
       item_value_method: :value,
@@ -31,9 +31,9 @@ class DropdownComponentTest < ViewComponent::TestCase
   end
 
   def test_required_adds_class_to_label
-    render_inline(DropdownComponent.new(
+    render_inline(SelectComponent.new(
       form: build_form,
-      method: :dropdown_field,
+      method: :select_field,
       label: "Pick one",
       collection: simple_collection,
       item_value_method: :value,

@@ -10,7 +10,7 @@ class ComponentTestModel
   attribute :text_field
   attribute :checkbox_field
   attribute :radio_field
-  attribute :dropdown_field
+  attribute :select_field
   attribute :combobox_field
   attribute :checkboxes_field
   attribute :my_date
