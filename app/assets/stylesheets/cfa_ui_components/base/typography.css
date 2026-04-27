@@ -1,28 +1,85 @@
 body {
-    font-family: "Public Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
 
     font-size: 16px;
     font-weight: 400;
 
-    @apply antialiased leading-none;
+    line-height: normal;
+    @apply antialiased;
 }
 
 h1 {
+    font-family: "Geologica", sans-serif;
     font-size: 48px;
     font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+    margin-bottom: 60px;
 }
 
 h2 {
+    font-family: "Geologica", sans-serif;
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    margin-bottom: 28px;
 }
 
-.label {
-    @apply text-zinc-900;
+.type-body {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    margin-bottom: 18px;
+}
+
+.type-body-bold {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.type-body-label, .label {
+    font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+
+    & ul > li + li,
+    & ol > li + li { margin-top: 15px; }
+}
+
+.type-progress-text {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    margin-bottom: 18px;
+}
+
+.type-button {
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+}
+
+.type-button-sm {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
 }
 
 .label.required::after {
