@@ -7,15 +7,24 @@
 }
 
 .btn--primary {
-    @apply bg-black border-none text-gray-50;
+    @apply bg-primary border-primary text-text-default;
+    @apply hover:bg-primary-hover;
+    @apply active:border-primary;
+    @apply disabled:bg-background-disabled disabled:text-text-disabled disabled:border-border-disabled;
 }
 
 .btn--secondary {
-    @apply bg-white border-2 text-black;
+    @apply bg-background-secondary border-2 border-border-default text-text-default;
+    @apply hover:bg-primary-hover;
+    @apply active:border-primary;
+    @apply disabled:bg-background-disabled disabled:text-text-disabled disabled:border-border-disabled;
 }
 
 .btn--destructive {
-    @apply bg-white border-2 border-error text-destructive;
+    @apply bg-white border-2 border-border-error text-destructive;
+    @apply hover:bg-background-destructive-hover;
+    @apply active:bg-background-destructive-active;
+    @apply disabled:bg-background-disabled disabled:text-text-disabled disabled:border-border-disabled;
 }
 
 .btn--small {
