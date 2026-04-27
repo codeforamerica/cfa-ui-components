@@ -19,11 +19,13 @@ class InputCurrencyComponentTest < ViewComponent::TestCase
     assert_selector "label.required"
   end
 
-  def test_strips_mask_formatting_on_form_submit
+  def test_strips_mask_formatting_on_form_submit_and_reformats_seeded_value
     render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number"))
     input = page.find("input")
-    handler = input["x-on:submit.window"]
-    assert handler.present?, "expected x-on:submit.window handler to be set"
+    handler = input["x-init"]
+    assert handler.present?, "expected x-init handler to be set"
+    assert_includes handler, "form?.addEventListener('submit'"
     assert_includes handler, "replace"
+    assert_includes handler, "dispatchEvent(new Event('input'))"
   end
 end
