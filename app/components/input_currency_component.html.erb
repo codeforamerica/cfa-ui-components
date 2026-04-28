@@ -15,7 +15,7 @@
           placeholder: "0.00",
           "x-data": "",
           "x-mask:dynamic": "$money",
-          "x-init": "$el.form?.addEventListener('submit', () => { $el.value = $el.value.replace(/[^0-9.]/g, '') }); $el.dispatchEvent(new Event('input'))",
+          "x-init": "$el.form?.addEventListener('formdata', (e) => { e.formData.set($el.name, $el.value.replace(/[^0-9.]/g, '')) }); $el.dispatchEvent(new Event('input'))",
           **@number_field_kwargs %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
