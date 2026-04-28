@@ -4,7 +4,7 @@ class FormComponentPreview < ViewComponent::Preview
   include ActionView::Helpers::FormHelper
   include ActionView::Helpers::FormOptionsHelper
 
-  def form(model: TestModel.new)
+  private def form(model: TestModel.new)
     form_with(url: "/", method: :post, model:) do |f|
       return f
     end
