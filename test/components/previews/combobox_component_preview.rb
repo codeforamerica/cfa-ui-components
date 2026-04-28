@@ -21,4 +21,9 @@ class ComboboxComponentPreview < FormComponentPreview
   def required
     render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), help_text: I18n.t(:fruit_help_text), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label, required: true))
   end
+
+  def with_disabled_options
+    collection = self.class.combobox_fruit_options.map { |o| OpenStruct.new(value: o.value, label: o.label, unavailable: o.value.start_with?("b")) }
+    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection:, item_value_method: :value, item_label_method: :label, item_disabled_method: :unavailable))
+  end
 end
