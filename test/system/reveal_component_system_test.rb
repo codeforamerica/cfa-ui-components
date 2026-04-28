@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class RevealComponentTest < JavaScriptSystemTestCase
+class RevealComponentSystemTest < JavaScriptSystemTestCase
   test "content is hidden on page load" do
     visit "/rails/view_components/reveal_component/default"
 
