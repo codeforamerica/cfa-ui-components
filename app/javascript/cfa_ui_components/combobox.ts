@@ -169,7 +169,7 @@ const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)
         'x-init'() {
             el.id = '';
             el.hidden = true;
-            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value }));
+            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled }));
             this.selectEl = el;
         },
         ':foo'() {
