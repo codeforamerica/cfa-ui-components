@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 class ButtonLinkComponent < BaseComponent
-  def initialize(label:, url:, variant: :primary, method: nil, size: :large, turbo: true, icon: nil, html_attrs: nil)
+  def initialize(label:, url:, variant: :primary, method: nil, size: :large, turbo: true, icon: nil, disabled: false, html_attrs: nil)
+    html_attrs ||= {}
+    if disabled
+      html_attrs = html_attrs.merge(disabled: true, "aria-disabled": true, tabindex: -1)
+    end
     super(html_attrs:)
     @turbo = turbo
+    @disabled = disabled
     @label = label
     @url = url
     case variant
