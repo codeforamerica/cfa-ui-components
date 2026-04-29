@@ -18,6 +18,8 @@ class ComboboxComponent < AttributeBoundFormElementComponent
 
   def disabled_values
     return [] unless @item_disabled_method
-    @collection.select { |o| disabled?(o) }.map { |o| o.send(@item_value_method).to_s }
+
+    disabled_items = @collection.select { |item| disabled?(item) }
+    disabled_items.map { |item| item.send(@item_value_method).to_s }
   end
 end
