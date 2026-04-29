@@ -5,10 +5,10 @@
        capture do
          @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
            content_tag :div, class: "radio_button_item" do
-concat radio_button_item.radio_button(
-  "x-model" => "$store.#{@method.to_s + @unique_alpine_store_key.to_s}",
-  class: "#{'radio-error' if has_error}"
-)
+             concat radio_button_item.radio_button(
+               "x-model" => "$store.#{@method.to_s + @unique_alpine_store_key.to_s}",
+               :class => ("radio-error" if has_error).to_s
+             )
              concat radio_button_item.label
            end
          end
