@@ -1,10 +1,11 @@
 <div class="space-y-cfa-sm" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
+  <% has_error = @form.object.errors[@method].any? %>
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
     <p class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-model" => "$store.#{@method}", :class => "w-full max-w-sm"} %>
+  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-model" => "$store.#{@method}", :class => "w-full max-w-sm #{'select-error' if has_error}"} %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

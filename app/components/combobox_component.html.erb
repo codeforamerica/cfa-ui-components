@@ -1,9 +1,10 @@
 <div x-data x-combobox class="max-w-lg space-y-cfa-sm"
      x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
+  <% has_error = @form.object.errors[@method].any? %>
   <%= @form.label @method, @label, class: "label block #{required_class}", "x-combobox:label": "" %>
   <% if @help_text %>
-    <p x-combobox:desc class="help_text" >
+    <p x-combobox:desc class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
@@ -12,7 +13,7 @@
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-cfa-sm">
       <div class="flex w-full">
-        <input x-combobox:input class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
+        <input x-combobox:input class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent <%= 'combobox-input-error' if has_error %>" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
         <div class="absolute z-10 inset-y-0 right-0 flex">
             <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
               <template x-if="$combobox.isOpen">
@@ -22,8 +23,8 @@
                 <%= render(IconComponent.new(icon: "chevron_down")) %>
               </template>
             </button>
+          </div>
         </div>
-      </div>
       <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
           <li x-combobox:item

@@ -1,10 +1,14 @@
 <div x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
   <%= @form.hidden_field @method, value: "" %>
-  <div class="space-y-cfa-med">
+  <% has_error = @form.object.errors[@method].any? %>
+  <div class="space-y-cfa-med <%= 'has-error' if has_error %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            content_tag :div, class: "checkbox_item" do
-             concat checkbox_item.checkbox("x-model" => "$store.#{@method}")
+             concat checkbox_item.checkbox(
+               "x-model" => "$store.#{@method}",
+               class: "#{'checkbox-error' if has_error}"
+             )
              concat checkbox_item.label
            end
          end

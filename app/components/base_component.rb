@@ -31,7 +31,7 @@ class BaseComponent < ViewComponent::Base
       alt: "chevron up"
     },
     "alert" => {
-      path: "icons/alert.svg",
+      path: "icons/error_icon.svg",
       alt: "alert"
     },
     "delete" => {

@@ -43,15 +43,89 @@ select {
 }
 
 .form_errors {
-    @apply text-error mt-cfa-sm;
-    font-size: 16px;
+    @apply  mt-cfa-sm;
+    font-size: 13px;
     font-weight: 700;
     line-height: normal;
     a {
         text-decoration: underline;
     }
 }
+.checkbox-error {
+  appearance: none;
+  -webkit-appearance: none;
 
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid  var(--color-border-error);
+  border-radius: 4px;
+  background: white;
+  display: inline-grid;
+  place-content: center;
+}
+
+.checkbox-error:checked {
+  background:  var(--color-border-error);
+  border-color:  var(--color-border-error);
+}
+
+.checkbox-error:checked::before {
+  content: "✓";
+  color: white;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.select-error {
+  border: 2px solid  var(--color-border-error) !important;
+  border-radius: 4px;
+}
+
+.radio-error {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-border-error);
+  border-radius: 50%;
+  background: white;
+  display: inline-grid;
+  place-content: center;
+}
+
+.radio-error:checked {
+  border-color: var(--color-border-error);
+}
+
+.radio-error:checked::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--color-border-error);
+}
+.date-picker-input-error {
+  border-color: var(--color-border-error) !important; 
+  outline-color: var(--color-border-error) !important; 
+}
+
+.combobox-input-error {
+  border-color: var(--color-border-error) !important;
+  outline-color: var(--color-border-error) !important;
+}
+
+.combobox-input-error:focus {
+  outline-color: var(--color-border-error) !important;
+}
+.text-input-error {
+  border-color: var(--color-border-error) !important;
+  outline-color: var(--color-border-error) !important;
+}
+
+.text-input-error:focus {
+  outline-color: var(--color-border-error) !important;
+}
 .field_with_errors {
     display: inline;
     input {
