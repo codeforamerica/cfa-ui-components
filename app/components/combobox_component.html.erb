@@ -13,7 +13,7 @@
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-cfa-sm">
       <div class="flex w-full">
-        <input x-combobox:input class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent <%= 'combobox-input-error' if has_error %>" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
+        <input x-combobox:input class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent <%= 'input-error' if has_error %>" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
         <div class="absolute z-10 inset-y-0 right-0 flex">
             <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
               <template x-if="$combobox.isOpen">
