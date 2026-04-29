@@ -5,6 +5,6 @@
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm border border-zinc-900 p-cfa-sm" %>
+  <%= @form.text_field @method, class: "w-full max-w-sm" %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
