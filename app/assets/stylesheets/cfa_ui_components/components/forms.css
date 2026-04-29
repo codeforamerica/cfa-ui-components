@@ -126,6 +126,29 @@ select {
 .text-input-error:focus {
   outline-color: var(--color-border-error) !important;
 }
+
+.single-checkbox-error {
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 2px solid var(--color-border-error) !important;
+  background-color: white;
+  display: inline-grid;
+  place-content: center;
+  flex-shrink: 0;
+}
+
+.single-checkbox-error:checked {
+  background-color: var(--color-border-error);
+  border-color: var(--color-border-error) !important;
+}
+
+.single-checkbox-error:checked::before {
+  content: "✓";
+  color: white;
+  font-size: 0.75rem;
+  line-height: 1;
+}
 .field_with_errors {
     display: inline;
     input {
