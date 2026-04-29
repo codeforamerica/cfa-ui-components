@@ -7,8 +7,8 @@ function stringContainsSubstring(label: string, substring: string): boolean {
     return label.toLowerCase().includes(substring.toLowerCase());
 }
 
-function filterResults(allOptions, filterString: string): Array<{ label: string, value: string }> {
-    return [...allOptions].map((o) => ({ label: o.textContent, value: o.value })).filter((o) => stringContainsSubstring(o.label, filterString));
+function filterResults(allOptions, filterString: string): Array<{ label: string, value: string, disabled: boolean }> {
+    return [...allOptions].map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled })).filter((o) => stringContainsSubstring(o.label, filterString));
 }
 
 function getCorrespondingOption(allOptions, liElement: HTMLElement): HTMLElement {
@@ -76,7 +76,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                 isLoaded: false,
                 isOpen: false,
                 isDirty: false,
-                allOptions: [] as Array<{ label: string, value: string }>,
+                allOptions: [] as Array<{ label: string, value: string, disabled: boolean }>,
                 get selectedValue() {
                     return this.selectedEl ? this.selectedEl.textContent : ''
                 },
@@ -89,6 +89,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     this.select(this.selectEl.options[this.selectEl.selectedIndex], false);
                 },
                 select(el: HTMLElement, setFocus=true) {
+                    if (el.dataset.disabled === 'true') return;
                     this.selectedEl = el
                     this.inputEl.value = el.textContent;
                     this.inputValue = el.textContent;
@@ -147,7 +148,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     // If typed value matches an option value, set it as selectedEl
                     if (this.isDirty) {
                         const found = [...this.listEl.getElementsByTagName('LI')]
-                            .find((li) => li.textContent === this.inputValue)
+                            .find((li) => li.textContent === this.inputValue && li.dataset.disabled !== 'true')
                         this.selectedEl = found ? found : this.selectedEl
                     }
                     this.isDirty = false;
@@ -168,7 +169,7 @@ const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)
         'x-init'() {
             el.id = '';
             el.hidden = true;
-            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value }));
+            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled }));
             this.selectEl = el;
         },
         ':foo'() {
@@ -318,6 +319,9 @@ const comboboxListItem = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
         ':aria-selected'() {
             return el === this.selectedEl;
         },
+        ':aria-disabled'() {
+            return el.dataset.disabled === 'true';
+        },
         ':data-active'() {
             return el === this.activeEl;
         },
@@ -341,11 +345,13 @@ const comboboxListItem = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
             return true
         },
         '@mouseup.prevent'() {
+            if (el.dataset.disabled === 'true') return;
             this.select(el);
             this.isDirty = false;
             this.isOpen = false;
         },
         '@keydown.prevent.enter'() {
+            if (el.dataset.disabled === 'true') return;
             this.select(el);
             this.isDirty = false;
             this.isOpen = false;
