@@ -105,25 +105,12 @@ select {
   border-radius: 50%;
   background: var(--color-border-error);
 }
-.date-picker-input-error {
-  border-color: var(--color-border-error); 
+.input-error {
+  border-color: var(--color-border-error);
   outline-color: var(--color-border-error); 
 }
 
-.combobox-input-error {
-  border-color: var(--color-border-error);
-  outline-color: var(--color-border-error);
-}
-
-.combobox-input-error:focus {
-  outline-color: var(--color-border-error);
-}
-.text-input-error {
-  border-color: var(--color-border-error);
-  outline-color: var(--color-border-error);
-}
-
-.text-input-error:focus {
+.input-error:focus {
   outline-color: var(--color-border-error);
 }
 
