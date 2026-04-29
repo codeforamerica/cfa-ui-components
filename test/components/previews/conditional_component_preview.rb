@@ -1,4 +1,5 @@
 class ConditionalComponentPreview < FormComponentPreview
+  # @!group Default
   def radio_buttons
   end
 
@@ -8,6 +9,11 @@ class ConditionalComponentPreview < FormComponentPreview
   def select
   end
 
+  def combobox
+  end
+  # @!endgroup
+
+  # @!group Prefilled
   def prefilled_radio_buttons
   end
 
@@ -17,12 +23,10 @@ class ConditionalComponentPreview < FormComponentPreview
   def prefilled_select
   end
 
-  def unique_alpine_store_key
-  end
-
-  def combobox
-  end
-
   def prefilled_combobox
+  end
+  # @!endgroup
+
+  def unique_alpine_store_key
   end
 end

@@ -1,4 +1,5 @@
 class BackButtonComponentPreview < ViewComponent::Preview
+  # @!group Back
   def default
     render(BackButtonComponent.new(back_url: "/"))
   end
@@ -6,4 +7,5 @@ class BackButtonComponentPreview < ViewComponent::Preview
   def disabled
     render(BackButtonComponent.new(back_url: "/", disabled: true))
   end
+  # @!endgroup
 end
