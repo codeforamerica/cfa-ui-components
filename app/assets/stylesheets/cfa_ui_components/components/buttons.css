@@ -1,30 +1,71 @@
 .btn {
-    @apply block text-center rounded border cursor-pointer;
+    @apply relative block text-center rounded-lg border-2 cursor-pointer;
 
     a {
         @apply text-inherit no-underline;
     }
 }
 
+.btn[disabled],
+.btn:disabled {
+    @apply pointer-events-none cursor-not-allowed;
+}
+
 .btn--primary {
-    @apply bg-primary border-primary text-text-default;
-    @apply hover:bg-primary-hover;
-    @apply active:border-primary;
-    @apply disabled:bg-background-disabled disabled:text-text-disabled disabled:border-border-disabled;
+    @apply bg-primary border-border-default text-text-default;
+    @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
+}
+
+.btn--primary[disabled],
+.btn--primary:disabled {
+    @apply bg-background-disabled text-text-disabled border-transparent shadow-none;
+}
+
+.btn--primary:active {
+    @apply bg-primary-hover border-primary;
+}
+
+.btn--primary:active::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    pointer-events: none;
 }
 
 .btn--secondary {
-    @apply bg-background-secondary border-2 border-border-default text-text-default;
-    @apply hover:bg-primary-hover;
-    @apply active:border-primary;
-    @apply disabled:bg-background-disabled disabled:text-text-disabled disabled:border-border-disabled;
+    @apply bg-background-secondary border-primary text-text-default;
+    @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
+}
+
+.btn--secondary[disabled],
+.btn--secondary:disabled {
+    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
+}
+
+.btn--secondary:active {
+    @apply bg-primary-hover;
+}
+
+.btn--secondary:active::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    pointer-events: none;
 }
 
 .btn--destructive {
-    @apply bg-white border-2 border-border-error text-destructive;
-    @apply hover:bg-background-destructive-hover;
-    @apply active:bg-background-destructive-active;
-    @apply disabled:bg-background-disabled disabled:text-text-disabled disabled:border-border-disabled;
+    @apply bg-white border-border-error text-destructive;
+    @apply hover:bg-background-destructive-hover hover:outline-2 hover:outline-border-error hover:shadow-[0_4px_0_0_var(--color-background-destructive-hover)];
+    @apply active:bg-background-destructive-active active:outline-2 active:outline-border-error;
+}
+
+.btn--destructive[disabled],
+.btn--destructive:disabled {
+    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn--small {

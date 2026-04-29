@@ -38,4 +38,16 @@ class ButtonLinkComponentPreview < ViewComponent::Preview
   def secondary_small_with_icon
     render(ButtonLinkComponent.new(label: I18n.t("decline"), url: "/decline", variant: :secondary, size: :small, icon: "circle_xmark"))
   end
+
+  def primary_disabled
+    render(ButtonLinkComponent.new(label: I18n.t("continue"), url: "https://www.google.com", disabled: true))
+  end
+
+  def secondary_disabled
+    render(ButtonLinkComponent.new(label: I18n.t("decline"), url: "/decline", variant: :secondary, disabled: true))
+  end
+
+  def destructive_disabled
+    render(ButtonLinkComponent.new(label: I18n.t("remove"), url: "/destroy", variant: :destructive, disabled: true))
+  end
 end
