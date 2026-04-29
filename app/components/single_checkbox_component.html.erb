@@ -3,7 +3,7 @@
     <%= @form.check_box(
           @method,
           {
-            class: "h-5 w-5 rounded border #{@form.object&.errors&.include?(@method) ? "border-red-600" : "border-slate-400"}",
+            class: "h-5 w-5 rounded border #{@form.object&.errors&.include?(@method) ? "border-border-error" : "border-border-default"}",
             disabled: @disabled
           },
           "1",
@@ -13,7 +13,7 @@
     <%= @form.label(
           @method,
           @label,
-          class: (@disabled ? "text-slate-400" : "text-slate-900")
+          class: (@disabled ? "text-text-disabled" : "text-text-default")
         ) %>
   </div>
 
