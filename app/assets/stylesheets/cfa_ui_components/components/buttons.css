@@ -113,3 +113,45 @@
     font-size: 22px;
     font-weight: 700;
 }
+
+.yes-no-buttons__group {
+    @apply flex items-center gap-cfa-lg;
+}
+
+.yes-no-buttons__button {
+    @apply relative flex flex-1 items-center justify-center rounded cursor-pointer;
+    @apply bg-background-secondary text-text-default;
+    @apply border-2 border-border-default;
+    gap: 10px;
+    padding: 16px 24px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.yes-no-buttons__button .yes-no-buttons__check {
+    display: none;
+}
+
+.yes-no-buttons__button:hover,
+.yes-no-buttons__button.is-selected {
+    border-width: 4px;
+    padding: 14px 22px;
+}
+
+.yes-no-buttons__button.is-selected {
+    background-color: #D8DFFF;
+}
+
+.yes-no-buttons__button.is-selected .yes-no-buttons__check {
+    display: inline-block;
+}
+
+.yes-no-buttons__button:focus-visible {
+    outline: 4px solid var(--color-focus);
+    outline-offset: 4px;
+}
+
+.yes-no-buttons__unsure {
+    @apply mt-cfa-med text-center;
+}
