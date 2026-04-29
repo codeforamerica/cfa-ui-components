@@ -51,47 +51,35 @@ select {
         text-decoration: underline;
     }
 }
+/* Checkbox (group) */
 .checkbox-error {
-  appearance: none;
-  -webkit-appearance: none;
-
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid  var(--color-border-error);
-  border-radius: 4px;
-  background: white;
-  display: inline-grid;
-  place-content: center;
+  @apply appearance-none w-4 h-4 border-2 rounded bg-white inline-grid place-content-center;
+  border-color: var(--color-border-error);
 }
 
 .checkbox-error:checked {
-  background:  var(--color-border-error);
-  border-color:  var(--color-border-error);
+  @apply border-2;
+  background-color: var(--color-border-error);
+  border-color: var(--color-border-error);
 }
 
 .checkbox-error:checked::before {
   content: "✓";
-  color: white;
-  font-size: 0.75rem;
-  line-height: 1;
+  @apply text-white text-xs leading-none;
 }
 
+
+/* Select */
 .select-error {
-  border: 2px solid  var(--color-border-error) !important;
-  border-radius: 4px;
+  @apply border-2 rounded;
+  border-color: var(--color-border-error) !important;
 }
 
-.radio-error {
-  appearance: none;
-  -webkit-appearance: none;
 
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid var(--color-border-error);
-  border-radius: 50%;
-  background: white;
-  display: inline-grid;
-  place-content: center;
+/* Radio */
+.radio-error {
+  @apply appearance-none w-5 h-5 border-2 rounded-full bg-white inline-grid place-content-center;
+  border-color: var(--color-border-error);
 }
 
 .radio-error:checked {
@@ -100,29 +88,27 @@ select {
 
 .radio-error:checked::before {
   content: "";
-  width: 0.65rem;
-  height: 0.65rem;
-  border-radius: 50%;
-  background: var(--color-border-error);
+  @apply w-[0.65rem] h-[0.65rem] rounded-full;
+  background-color: var(--color-border-error);
 }
+
+
+/* Text / inputs / select / combobox */
 .input-error {
+  @apply border outline;
   border-color: var(--color-border-error);
-  outline-color: var(--color-border-error); 
+  outline-color: var(--color-border-error);
 }
 
 .input-error:focus {
   outline-color: var(--color-border-error);
 }
 
-.single-checkbox-error {
-  appearance: none;
-  -webkit-appearance: none;
 
-  border: 2px solid var(--color-border-error) !important;
-  background-color: white;
-  display: inline-grid;
-  place-content: center;
-  flex-shrink: 0;
+/* Single checkbox (keeps external sizing like h-5 w-5) */
+.single-checkbox-error {
+  @apply appearance-none border-2 bg-white inline-grid place-content-center flex-shrink-0;
+  border-color: var(--color-border-error) !important;
 }
 
 .single-checkbox-error:checked {
@@ -132,9 +118,7 @@ select {
 
 .single-checkbox-error:checked::before {
   content: "✓";
-  color: white;
-  font-size: 0.75rem;
-  line-height: 1;
+  @apply text-white text-xs leading-none;
 }
 .field_with_errors {
     display: inline;
