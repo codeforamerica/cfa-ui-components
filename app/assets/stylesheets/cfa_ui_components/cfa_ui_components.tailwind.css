@@ -6,15 +6,47 @@
     --spacing-cfa-xl: 32px;
     --spacing-cfa-2xl: 40px;
 
+    /* Background colors */
+    --color-background-app: #FFFFF5;
+    --color-background-navigation: #011E29;
+    --color-background-secondary: #EEF1FF;
+    --color-background-container: #EBECDC;
+    --color-background-destructive-hover: #F8DEDE;
+    --color-background-destructive-active: #E8B5B5;
+    --color-background-disabled: #CCCCCC;
+
+    /* Text colors */
+    --color-text-default: #011E29;
+    --color-text-body-secondary: #1A353E;
+    --color-text-disabled: #999999;
+
+    /* Icon colors */
+    --color-icon-default: #011E29;
+    --color-icon-primary: #FFFFFF;
+
+    /* Border colors */
+    --color-border-default: #011E29;
+    --color-border-error: #B50909;
+    --color-border-disabled: #999999;
+
+    /* Link colors */
     --color-link-unvisited: #007C7C;
     --color-link-visited: #4C2C92;
-    --color-text-body-secondary: #1A353E;
-    --color-background-navigation: #011E29;
-    --color-icon-primary: #FFF;
-    --color-text-button-link: #007C7C;
-    --color-border-error: #B50909;
+
+    /* Brand / interactive colors */
+    --color-primary: #9EB0FF;
+    --color-primary-hover: #ECEFFF;
+    --color-accent: #637FFF;
+    --color-focus: #007C7C;
+
+    /* State colors */
     --color-error: #B50909;
     --color-destructive: #7F0606;
+    --color-warning: #B27A00;
+
+    /* Neutrals */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
 }
 
 @import "./base/typography.css";

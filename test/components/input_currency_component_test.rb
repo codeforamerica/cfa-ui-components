@@ -18,4 +18,15 @@ class InputCurrencyComponentTest < ViewComponent::TestCase
     render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number", required: true))
     assert_selector "label.required"
   end
+
+  def test_strips_mask_formatting_from_submitted_formdata_and_reformats_seeded_value
+    render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number"))
+    input = page.find("input")
+    handler = input["x-init"]
+    assert handler.present?, "expected x-init handler to be set"
+    assert_includes handler, "form?.addEventListener('formdata'"
+    assert_includes handler, "formData.set($el.name"
+    assert_includes handler, "replace"
+    assert_includes handler, "dispatchEvent(new Event('input'))"
+  end
 end

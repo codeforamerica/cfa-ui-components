@@ -1,0 +1,22 @@
+<%= form_with(url: "/", method: :post, model: FormComponentPreview::TestModel.new, html: { id: "currency-demo-form" }) do |f| %>
+  <%= render(InputCurrencyComponent.new(form: f, method: :my_number, label: I18n.t(:my_number), min: 0)) %>
+  <button type="submit" class="mt-4 px-4 py-2 bg-zinc-900 text-white rounded">Submit</button>
+<% end %>
+
+<div class="mt-6">
+  <p class="text-sm text-zinc-600">Submitted FormData (visible field value is preserved):</p>
+  <pre id="currency-demo-output" class="mt-2 p-3 bg-zinc-100 text-sm whitespace-pre-wrap">(submit the form)</pre>
+</div>
+
+<script>
+  (() => {
+    const form = document.getElementById('currency-demo-form');
+    const out = document.getElementById('currency-demo-output');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const lines = [...data.entries()].map(([k, v]) => `${k} = ${JSON.stringify(v)}`);
+      out.textContent = lines.join('\n') || '(empty)';
+    });
+  })();
+</script>

@@ -1,0 +1,23 @@
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render ExclusiveCheckboxGroupComponent.new do |c| %>
+    <% c.with_exclusive_option do %>
+      <%= render CardComponent.new do %>
+        <%= render SingleCheckboxComponent.new(form: f, method: :none_apply, label: "None of these apply") %>
+      <% end %>
+    <% end %>
+
+    <%= render CardComponent.new do %>
+      <%= render SingleCheckboxComponent.new(form: f, method: :option_one, label: "Option one") %>
+      <p class="italic text-sm text-slate-700">Description of option one.</p>
+    <% end %>
+
+    <%= render CardComponent.new do %>
+      <%= render SingleCheckboxComponent.new(form: f, method: :option_two, label: "Option two") %>
+      <p class="italic text-sm text-slate-700">Description of option two.</p>
+    <% end %>
+
+    <%= render CardComponent.new do %>
+      <%= render SingleCheckboxComponent.new(form: f, method: :option_three, label: "Option three") %>
+    <% end %>
+  <% end %>
+<% end %>

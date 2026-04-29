@@ -11,6 +11,9 @@ class InputCurrencyComponentPreview < FormComponentPreview
     render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), help_text: "pick a number", min: 0))
   end
 
+  def submission_demo
+  end
+
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
