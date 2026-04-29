@@ -1,3 +1,23 @@
-<div class="cfa-card border border-zinc-300 rounded-md p-cfa-lg">
-  <%= content %>
-</div>
+<% if action? %>
+  <div class="cfa-card border border-border-secondary rounded-lg overflow-clip <%= image? ? "bg-background-secondary" : "bg-white" %>">
+    <div class="flex flex-col gap-px">
+      <% if image? %>
+        <%= image %>
+      <% end %>
+      <div class="bg-white p-cfa-lg space-y-cfa-sm">
+        <%= content %>
+      </div>
+      <% if buttons? %>
+        <div class="bg-white px-cfa-lg pt-cfa-sm pb-cfa-lg space-y-cfa-med [&_.btn]:mx-0!">
+          <% buttons.each do |button| %>
+            <%= button %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="cfa-card bg-white border border-border-secondary rounded-lg p-cfa-lg">
+    <%= content %>
+  </div>
+<% end %>
