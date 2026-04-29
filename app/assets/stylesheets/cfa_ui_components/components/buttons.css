@@ -74,6 +74,32 @@
     font-weight: 700;
 }
 
+.btn--back {
+    @apply rounded bg-white border-primary text-text-default;
+    font-weight: 400;
+}
+
+.btn--back:hover,
+.btn--back.is-hover {
+    @apply bg-primary-hover;
+}
+
+.btn--back:active,
+.btn--back.is-active {
+    @apply bg-primary-hover border-border-default;
+}
+
+.btn--back:focus-visible,
+.btn--back.is-focused {
+    outline: 4px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+.btn--back[disabled],
+.btn--back:disabled {
+    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
+}
+
 .btn--large {
     @apply px-cfa-lg py-cfa-med w-fit mx-auto;
     font-size: 22px;

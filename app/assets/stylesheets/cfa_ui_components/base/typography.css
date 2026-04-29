@@ -47,6 +47,7 @@ h2 {
 }
 
 .type-body-label, .label {
+    @apply text-text-default;
     font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 700;
@@ -83,12 +84,12 @@ h2 {
 }
 
 .label.required::after {
-    @apply text-red-700;
+    @apply text-error;
     content: " *";
 }
 
 .help_text {
-    @apply block text-zinc-500;
+    @apply block text-text-body-secondary;
     font-size: 13px;
     font-weight: 400;
 }
