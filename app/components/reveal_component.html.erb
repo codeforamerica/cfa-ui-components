@@ -1,17 +1,15 @@
-<%= render CardComponent.new do %>
-  <details class="group">
-    <summary class="flex justify-between items-center list-none cursor-pointer">
-      <p class='flex font-bold items-center gap-cfa-sm'>
-         <% if @icon.present? %>
-         <%= inline_icon(@icon, size: 20) %>
-         <% end %>
-         <%= @summary_text %>
-      </p>
-      <span class="ml-[10px] inline-flex items-center transition-transform duration-200 group-open:rotate-180"><%= inline_icon("chevron_down", size: 25, aria_hidden: true) %></span>
-    </summary>
+<details class="group bg-background-secondary border-2 border-primary rounded-lg p-cfa-med">
+  <summary class="flex justify-between items-center list-none cursor-pointer">
+    <p class="flex font-bold items-center gap-cfa-sm">
+      <% if @icon.present? %>
+        <%= inline_icon(@icon, size: 24) %>
+      <% end %>
+      <%= @summary_text %>
+    </p>
+    <span class="ml-[10px] inline-flex items-center transition-transform duration-200 group-open:rotate-180"><%= inline_icon("chevron_down", size: 25, aria_hidden: true) %></span>
+  </summary>
 
-     <div class="space-y-cfa-med">
-       <%= content %>
-     </div>
-  </details>
-<% end %>
+  <div class="space-y-cfa-med mt-cfa-sm">
+    <%= content %>
+  </div>
+</details>
