@@ -1,4 +1,5 @@
 <div class="currency-field space-y-cfa-sm">
+  <% has_error = @form.object.errors[@method].any? %>
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
     <p class="help_text">
@@ -10,7 +11,7 @@
       $
     </span>
     <%= @form.text_field @method,
-          class: "w-full !pl-cfa-xl",
+          class: "w-full !pl-cfa-xl #{'text-input-error' if has_error}",
           inputmode: "decimal",
           placeholder: "0.00",
           "x-data": "",
