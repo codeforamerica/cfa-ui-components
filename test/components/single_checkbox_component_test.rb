@@ -24,6 +24,6 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     model = ComponentTestModel.new
     model.errors.add(:checkbox_field, "must be accepted")
     render_inline(SingleCheckboxComponent.new(form: build_form(model), method: :checkbox_field, label: "I agree"))
-    assert_selector "input.checkbox-error"
+    assert_selector "input.single-checkbox-error"
   end
 end
