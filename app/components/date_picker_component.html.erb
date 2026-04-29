@@ -14,7 +14,7 @@
             options_for_select(month_options, month_value),
             include_blank: @label_month_select,
             id: input_id(2),
-            class: "mr-cfa-sm outline mt-cfa-sm h-[40px] px-cfa-sm" %>
+            class: "mr-cfa-sm mt-cfa-sm h-[40px]" %>
     </div>
     <div>
       <%= label_tag input_id(3), @label_day, class: "label" %><br>
@@ -26,7 +26,7 @@
             minlength: 1,
             maxlength: 2,
             placeholder: "DD",
-            class: "w-[48px] outline mr-cfa-sm mt-cfa-sm h-[40px] px-cfa-sm" %>
+            class: "w-[48px] mr-cfa-sm mt-cfa-sm h-[40px]" %>
     </div>
     <div>
       <%= label_tag input_id(1), @label_year, class: "label" %><br>
@@ -38,7 +38,7 @@
             minlength: 4,
             maxlength: 4,
             placeholder: "YYYY",
-            class: "w-[72px] outline mr-cfa-sm mt-cfa-sm h-[40px] px-cfa-sm" %>
+            class: "w-[72px] mr-cfa-sm mt-cfa-sm h-[40px]" %>
     </div>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
