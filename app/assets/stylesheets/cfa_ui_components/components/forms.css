@@ -2,6 +2,27 @@ form {
     @apply flex flex-col gap-y-cfa-xl;
 }
 
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+textarea,
+select {
+    @apply border border-border-default rounded-lg px-cfa-sm py-cfa-sm bg-white text-text-default;
+
+    &:focus-visible {
+        @apply outline-2 outline-offset-2 outline-focus;
+    }
+
+    &:disabled {
+        @apply bg-background-disabled text-text-disabled border-border-disabled cursor-not-allowed;
+    }
+}
+
 .radio_button_item {
     @apply space-x-cfa-sm;
 }
