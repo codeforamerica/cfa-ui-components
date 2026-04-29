@@ -1,5 +1,11 @@
 <% if @form.object.errors[@method].any? %>
-  <p class="form_errors">
-    <%= inline_icon("alert", size: 18, css_class: "inline align-text-bottom text-error mr-[8px]") %> <%= safe_join(@form.object.errors.where(@method).map { |e| e.message.html_safe? ? e.full_message.html_safe : e.full_message }, ", ") %>
+  <p class="form_errors flex items-center gap-2">
+    <%= inline_icon("alert", size: 20, css_class: "text-error") %>
+    <span>
+      <%= safe_join(
+            @form.object.errors.where(@method).map { |e| e.message.html_safe? ? e.full_message.html_safe : e.full_message },
+            ", "
+          ) %>
+    </span>
   </p>
 <% end %>
