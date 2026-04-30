@@ -5,10 +5,12 @@
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            content_tag :div, class: "checkbox_item" do
-             concat checkbox_item.checkbox(
+             checkbox_html = checkbox_item.checkbox(
                "x-model" => "$store.#{@method}",
-               :class => ("checkbox-error" if has_error).to_s
+               :class => "cfa-checkbox h-6 w-6 rounded #{has_error ? "border-2 border-border-error" : "border checked:border-2 disabled:border-border-disabled border-border-default"}"
              )
+             icon_html = inline_icon("check", size: 24, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default")
+             concat content_tag(:span, checkbox_html + icon_html, class: "cfa-checkbox-wrap relative inline-flex h-6 w-6")
              concat checkbox_item.label
            end
          end

@@ -1,14 +1,18 @@
+<% has_error = @form.object&.errors&.include?(@method) %>
 <div class="space-y-cfa-sm">
-  <div class="flex items-start gap-cfa-sm <%= "opacity-50" if @disabled %>">
-    <%= @form.check_box(
-          @method,
-          {
-            class: "h-5 w-5 rounded border #{@form.object&.errors&.include?(@method) ? "border-border-error" : "border-border-default"}",
-            disabled: @disabled
-          },
-          "1",
-          ""
-        ) %>
+  <div class="flex items-center gap-cfa-sm">
+    <span class="cfa-checkbox-wrap relative inline-flex h-6 w-6">
+      <%= @form.check_box(
+            @method,
+            {
+              class: "cfa-checkbox h-6 w-6 rounded #{has_error ? "border-2 border-border-error" : "border checked:border-2 disabled:border-border-disabled border-border-default"}",
+              disabled: @disabled
+            },
+            "1",
+            ""
+          ) %>
+      <%= inline_icon("check", size: 24, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default") %>
+    </span>
     <%= @form.label(
           @method,
           @label,

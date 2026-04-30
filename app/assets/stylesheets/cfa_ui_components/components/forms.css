@@ -28,7 +28,7 @@ select {
 }
 
 .checkbox_item {
-    @apply space-x-cfa-sm;
+    @apply flex items-center space-x-cfa-sm;
 }
 
 /* the css rules below are to remove the spin button from the input currency component */
@@ -51,21 +51,26 @@ select {
         text-decoration: underline;
     }
 }
-/* Checkbox (group) */
-.checkbox-error {
-  @apply appearance-none w-4 h-4 border-2 rounded bg-white inline-grid place-content-center;
-  border-color: var(--color-border-error);
+/* Checkbox */
+.cfa-checkbox {
+  @apply appearance-none bg-white cursor-pointer flex-shrink-0;
+  box-sizing: border-box;
 }
 
-.checkbox-error:checked {
-  @apply border-2;
-  background-color: var(--color-border-error);
-  border-color: var(--color-border-error);
+.cfa-checkbox:checked {
+  background-color: var(--color-primary);
 }
 
-.checkbox-error:checked::before {
-  content: "✓";
-  @apply text-white text-xs leading-none;
+.cfa-checkbox:disabled {
+  cursor: not-allowed;
+}
+
+.cfa-checkbox-wrap .cfa-icon {
+  display: none;
+}
+
+.cfa-checkbox-wrap:has(.cfa-checkbox:checked) .cfa-icon {
+  display: inline-block;
 }
 
 
@@ -105,21 +110,6 @@ select {
 }
 
 
-/* Single checkbox (keeps external sizing like h-5 w-5) */
-.single-checkbox-error {
-  @apply appearance-none border-2 bg-white inline-grid place-content-center flex-shrink-0;
-  border-color: var(--color-border-error) !important;
-}
-
-.single-checkbox-error:checked {
-  background-color: var(--color-border-error);
-  border-color: var(--color-border-error);
-}
-
-.single-checkbox-error:checked::before {
-  content: "✓";
-  @apply text-white text-xs leading-none;
-}
 .field_with_errors {
     display: inline;
     input {
