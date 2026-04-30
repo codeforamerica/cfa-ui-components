@@ -7,7 +7,7 @@
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.select(@method, @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] }, {prompt: I18n.t("combobox.placeholder_label").to_s}, html_options = {"x-combobox:values": ""}) %>
+  <%= @form.select(@method, @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] }, {prompt: I18n.t("combobox.placeholder_label").to_s, disabled: disabled_values}, html_options = {"x-combobox:values": ""}) %>
 
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-cfa-sm">
@@ -26,7 +26,10 @@
       </div>
       <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
-          <li x-combobox:item class="p-cfa-sm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus" x-text="option.label"></li>
+          <li x-combobox:item
+              :data-disabled="option.disabled"
+              :class="option.disabled ? 'p-cfa-sm !m-0 cursor-not-allowed opacity-50' : 'p-cfa-sm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus'"
+              x-text="option.label"></li>
         </template>
         <template x-if="$combobox.noResults">
           <li class="p-cfa-sm cursor-not-allowed">
