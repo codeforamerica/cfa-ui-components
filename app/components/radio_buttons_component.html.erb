@@ -1,21 +1,45 @@
-<div x-data x-init="Alpine.store('<%= @method.to_s + @unique_alpine_store_key.to_s %>', '<%= current_value %>');">
+<% store_suffix = @unique_id ? "_#{@unique_id}" : @unique_alpine_store_key.to_s %>
+<% store_key = "#{@method}#{store_suffix}" %>
+<div x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
   <% has_error = @form.object.errors[@method].any? %>
+  <% has_warning = @warning_message.present? %>
   <%= @form.hidden_field @method, value: "" %>
-  <% content = content_tag(:div, class: "#{@layout} space-y-cfa-med") do
+  <% radio_classes = ["cfa-radio"]
+     radio_classes << "cfa-radio--small" if @small
+     radio_classes << "cfa-radio--error" if has_error
+     radio_classes << "cfa-radio--warning" if has_warning && !has_error %>
+  <% if @legend.present? %>
+    <p class="text-[13px] font-bold text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
+  <% end %>
+  <% content = content_tag(:div, class: @layout) do
        capture do
          @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
+           item_value = radio_button_item.value.to_s
+           radio_attrs = {
+             "x-model" => "$store.#{store_key}",
+             :class => radio_classes.join(" ")
+           }
+           if @unique_id
+             input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@unique_id}"
+             radio_attrs[:id] = input_id
+           end
+           label_opts = {}
+           label_opts[:for] = input_id if @unique_id
            content_tag :div, class: "radio_button_item" do
-             concat radio_button_item.radio_button(
-               "x-model" => "$store.#{@method.to_s + @unique_alpine_store_key.to_s}",
-               :class => ("radio-error" if has_error).to_s
-             )
-             concat radio_button_item.label
+             concat radio_button_item.radio_button(radio_attrs)
+             concat(label_opts.empty? ? radio_button_item.label : radio_button_item.label(label_opts))
            end
          end
        end
      end %>
   <% concat content %>
   <div class="mt-cfa-sm">
-    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+    <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
+    <% if has_warning && !has_error %>
+      <p class="form_warning flex items-center gap-2 text-text-body-secondary">
+        <%= inline_icon("alert", size: @small ? 16 : 24, css_class: "text-warning") %>
+        <span><%= @warning_message %></span>
+      </p>
+    <% end %>
   </div>
 </div>
