@@ -42,7 +42,8 @@ select {
   -moz-appearance: textfield;
 }
 
-.form_errors {
+.form_errors,
+.form_warning {
     @apply  mt-cfa-sm;
     font-size: 13px;
     font-weight: 700;
@@ -71,6 +72,26 @@ select {
 
 .cfa-checkbox-wrap:has(.cfa-checkbox:checked) .cfa-icon {
   display: inline-block;
+}
+
+.cfa-checkbox:indeterminate {
+  background-color: var(--color-primary);
+}
+
+.cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate) .cfa-icon {
+  display: none;
+}
+
+.cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 

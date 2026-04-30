@@ -9,9 +9,9 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     assert_selector "label", text: "I agree"
   end
 
-  def test_disabled_adds_opacity_and_disables_input
+  def test_disabled_styles_label_and_disables_input
     render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", disabled: true))
-    assert_selector ".opacity-50"
+    assert_selector "label.text-text-disabled"
     assert_selector "input[disabled]"
   end
 
@@ -24,6 +24,6 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     model = ComponentTestModel.new
     model.errors.add(:checkbox_field, "must be accepted")
     render_inline(SingleCheckboxComponent.new(form: build_form(model), method: :checkbox_field, label: "I agree"))
-    assert_selector "input.single-checkbox-error"
+    assert_selector "input.border-border-error"
   end
 end
