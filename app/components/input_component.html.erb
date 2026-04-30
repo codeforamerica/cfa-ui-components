@@ -6,6 +6,6 @@
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm #{'input-error' if has_error}" %>
+  <%= @form.text_field @method, class: "w-full max-w-sm #{"input-error" if has_error}" %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
