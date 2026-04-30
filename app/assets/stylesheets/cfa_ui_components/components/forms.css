@@ -24,11 +24,11 @@ select {
 }
 
 .radio_button_item {
-    @apply space-x-cfa-sm;
+    @apply flex items-center gap-cfa-sm;
 }
 
 .checkbox_item {
-    @apply flex items-center space-x-cfa-sm;
+    @apply flex items-center gap-cfa-sm;
 }
 
 /* the css rules below are to remove the spin button from the input currency component */
@@ -103,19 +103,55 @@ select {
 
 
 /* Radio */
-.radio-error {
-  @apply appearance-none w-5 h-5 border-2 rounded-full bg-white inline-grid place-content-center;
-  border-color: var(--color-border-error);
+.cfa-radio {
+  @apply appearance-none border border-border-default rounded-full bg-white cursor-pointer relative;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.radio-error:checked {
-  border-color: var(--color-border-error);
+.cfa-radio:checked {
+  border-width: 2px;
+  background-color: var(--color-primary);
 }
 
-.radio-error:checked::before {
+.cfa-radio:checked::after {
   content: "";
-  @apply w-[0.65rem] h-[0.65rem] rounded-full;
-  background-color: var(--color-border-error);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background-color: var(--color-text-default);
+}
+
+.cfa-radio:disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-background-disabled);
+  cursor: not-allowed;
+}
+
+.cfa-radio--small {
+  width: 16px;
+  height: 16px;
+}
+
+.cfa-radio--small:checked::after {
+  width: 6px;
+  height: 6px;
+}
+
+.cfa-radio--error {
+  border-width: 2px;
+  border-color: var(--color-border-error);
+}
+
+.cfa-radio--warning {
+  border-width: 2px;
+  border-color: var(--color-border-warning);
 }
 
 
@@ -132,7 +168,7 @@ select {
 
 
 .field_with_errors {
-    display: inline;
+    display: contents;
     input {
         border-color: var(--color-border-error) !important;
     }
