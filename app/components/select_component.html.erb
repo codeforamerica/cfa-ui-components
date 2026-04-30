@@ -6,6 +6,6 @@
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-model" => "$store.#{@method}", :class => "w-full max-w-sm #{'select-error' if has_error}"} %>
+  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-model" => "$store.#{@method}", :class => "w-full max-w-sm #{"select-error" if has_error}"} %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
