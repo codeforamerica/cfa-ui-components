@@ -12,9 +12,9 @@
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-cfa-sm">
       <div class="flex w-full">
-        <input x-combobox:input class="pr-10 p-cfa-sm bg-white w-full h-10 rounded-sm border focus:outline focus:outline-offset-4 focus:outline-4 focus:!outline-blue-800 selection:!rounded-t-sm data-[invalid]:ring-4 data-[invalid]:ring-red-60v data-[invalid]:border-transparent data-[invalid]:outline-offset-4" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
+        <input x-combobox:input class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
         <div class="absolute z-10 inset-y-0 right-0 flex">
-            <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline focus:-outline-offset-4 focus:outline-4 focus:outline-blue-40v/60 bg-transparent">
+            <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
               <template x-if="$combobox.isOpen">
                 <%= render(IconComponent.new(icon: "chevron_up")) %>
               </template>
@@ -24,11 +24,11 @@
             </button>
         </div>
       </div>
-      <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-gray-60 bg-white max-h-52 overflow-y-scroll w-full z-10">
+      <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
           <li x-combobox:item
               :data-disabled="option.disabled"
-              :class="option.disabled ? 'p-cfa-sm !m-0 cursor-not-allowed opacity-50' : 'p-cfa-sm !m-0 cursor-pointer aria-selected:bg-blue-60v data-active:outline data-active:outline-4 data-active:!outline-blue-800 data-active:-outline-offset-4'"
+              :class="option.disabled ? 'p-cfa-sm !m-0 cursor-not-allowed opacity-50' : 'p-cfa-sm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus'"
               x-text="option.label"></li>
         </template>
         <template x-if="$combobox.noResults">

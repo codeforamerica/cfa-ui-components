@@ -37,6 +37,10 @@ class BaseComponent < ViewComponent::Base
     "delete" => {
       path: "icons/delete.svg",
       alt: "delete"
+    },
+    "arrow_left" => {
+      path: "icons/arrow_left.svg",
+      alt: "back"
     }
   }.freeze
 
