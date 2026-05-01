@@ -23,7 +23,7 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
   end
 
   def has_warning?
-    @warning_message.present? && !has_error?
+    @warning_message.present?
   end
 
   def box_classes

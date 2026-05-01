@@ -30,6 +30,12 @@ class CheckboxesComponentPreview < FormComponentPreview
   def mixed_states
     render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, item_states: {"orange" => :indeterminate, "apple" => :disabled}, unique_id: "mixed_states"))
   end
+
+  def mixed_states_with_error_and_warning
+    custom_model = TestModel.new
+    custom_model.valid?
+    render(CheckboxesComponent.new(form: form(model: custom_model), method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, warning_message: "Message goes here.", item_states: {"orange" => :indeterminate, "apple" => :disabled}, unique_id: "mixed_states_with_error_and_warning"))
+  end
   # @!endgroup
 
   # @!group Small
@@ -54,6 +60,20 @@ class CheckboxesComponentPreview < FormComponentPreview
 
   def small_indeterminate
     render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, small: true, item_states: {"orange" => :indeterminate}, unique_id: "small_indeterminate"))
+  end
+
+  def small_disabled_item
+    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, small: true, item_states: {"orange" => :disabled}, unique_id: "small_disabled_item"))
+  end
+
+  def small_mixed_states
+    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, small: true, item_states: {"orange" => :indeterminate, "apple" => :disabled}, unique_id: "small_mixed_states"))
+  end
+
+  def small_mixed_states_with_error_and_warning
+    custom_model = TestModel.new
+    custom_model.valid?
+    render(CheckboxesComponent.new(form: form(model: custom_model), method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, small: true, warning_message: "Message goes here.", item_states: {"orange" => :indeterminate, "apple" => :disabled}, unique_id: "small_mixed_states_with_error_and_warning"))
   end
   # @!endgroup
 end
