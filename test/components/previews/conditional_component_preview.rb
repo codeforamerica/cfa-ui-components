@@ -27,6 +27,6 @@ class ConditionalComponentPreview < FormComponentPreview
   end
   # @!endgroup
 
-  def instance_key
+  def scope
   end
 end

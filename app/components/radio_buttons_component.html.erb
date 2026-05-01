@@ -11,12 +11,12 @@
              "x-model" => "$store.#{store_key}",
              :class => radio_classes
            }
-           if @instance_key.present?
-             input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@instance_key}"
+           if @scope.present?
+             input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@scope}"
              radio_attrs[:id] = input_id
            end
            label_opts = {}
-           label_opts[:for] = input_id if @instance_key.present?
+           label_opts[:for] = input_id if @scope.present?
            content_tag :div, class: "radio_button_item" do
              concat radio_button_item.radio_button(radio_attrs)
              concat(label_opts.empty? ? radio_button_item.label : radio_button_item.label(label_opts))

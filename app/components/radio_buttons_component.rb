@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class RadioButtonsComponent < AttributeBoundFormElementComponent
-  # instance_key namespaces both the Alpine store key and the input id/label-for,
+  # scope namespaces both the Alpine store key and the input id/label-for,
   # so multiple instances of this component can coexist on a single page.
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, instance_key: nil, layout: :vertical, small: false, warning_message: nil, legend: nil)
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, scope: nil, layout: :vertical, small: false, warning_message: nil, legend: nil)
     super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
     @item_label_method = item_label_method
-    @instance_key = instance_key
+    @scope = scope
     @small = small
     @warning_message = warning_message
     @legend = legend
@@ -46,7 +46,7 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
   end
 
   def store_key
-    suffix = @instance_key.present? ? "_#{@instance_key}" : ""
+    suffix = @scope.present? ? "_#{@scope}" : ""
     "#{@method}#{suffix}"
   end
 end
