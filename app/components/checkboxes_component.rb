@@ -3,9 +3,9 @@
 class CheckboxesComponent < AttributeBoundFormElementComponent
   ALLOWED_ITEM_STATES = [:disabled, :indeterminate].freeze
 
-  # instance_key namespaces both the Alpine store key and the input id/label-for,
+  # scope namespaces both the Alpine store key and the input id/label-for,
   # so multiple instances of this component can coexist on a single page.
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, small: false, warning_message: nil, item_states: {}, instance_key: nil)
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, small: false, warning_message: nil, item_states: {}, scope: nil)
     super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
@@ -15,7 +15,7 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
     @item_states = item_states.transform_keys(&:to_s).transform_values(&:to_sym)
     invalid = @item_states.values - ALLOWED_ITEM_STATES
     raise ArgumentError, "Unknown item_states: #{invalid.inspect}. Allowed: #{ALLOWED_ITEM_STATES.inspect}" if invalid.any?
-    @instance_key = instance_key
+    @scope = scope
   end
 
   private
@@ -47,7 +47,7 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
   end
 
   def store_key
-    suffix = @instance_key.present? ? "_#{@instance_key}" : ""
+    suffix = @scope.present? ? "_#{@scope}" : ""
     "#{@method}#{suffix}"
   end
 end
