@@ -30,6 +30,12 @@ class RadioButtonsComponentPreview < FormComponentPreview
   def with_warning
     render(RadioButtonsComponent.new(form:, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, warning_message: "Message goes here.", unique_id: "with_warning"))
   end
+
+  def with_error_and_warning
+    custom_model = TestModel.new
+    custom_model.valid?
+    render(RadioButtonsComponent.new(form: form(model: custom_model), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, warning_message: "Message goes here.", unique_id: "with_error_and_warning"))
+  end
   # @!endgroup
 
   # @!group Small
@@ -50,6 +56,12 @@ class RadioButtonsComponentPreview < FormComponentPreview
 
   def small_with_warning
     render(RadioButtonsComponent.new(form:, method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, small: true, warning_message: "Message goes here.", unique_id: "small_with_warning"))
+  end
+
+  def small_with_error_and_warning
+    custom_model = TestModel.new
+    custom_model.valid?
+    render(RadioButtonsComponent.new(form: form(model: custom_model), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, small: true, warning_message: "Message goes here.", unique_id: "small_with_error_and_warning"))
   end
   # @!endgroup
 end
