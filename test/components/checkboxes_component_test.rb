@@ -133,20 +133,20 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     end
   end
 
-  def test_unique_id_namespaces_input_ids_and_label_for
+  def test_instance_key_namespaces_input_ids_and_label_for
     render_inline(CheckboxesComponent.new(
       form: build_form,
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      unique_id: "abc"
+      instance_key: "abc"
     ))
     assert_selector "input[type='checkbox'][id$='_abc']", count: 2
     assert_selector "label[for$='_abc']", count: 2
   end
 
-  def test_no_unique_id_keeps_default_input_ids
+  def test_no_instance_key_keeps_default_input_ids
     render_inline(CheckboxesComponent.new(
       form: build_form,
       method: :checkboxes_field,
