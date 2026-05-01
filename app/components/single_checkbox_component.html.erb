@@ -1,6 +1,6 @@
-<% has_error = @form.object&.errors&.include?(@method) %>
+<% has_error = @form.object.errors[@method].any? %>
 <div class="space-y-cfa-sm">
-  <div class="flex items-center gap-cfa-sm">
+  <div class="flex items-center gap-cfa-sm <%= "opacity-50" if @disabled %>">
     <span class="cfa-checkbox-wrap relative inline-flex h-6 w-6">
       <%= @form.check_box(
             @method,

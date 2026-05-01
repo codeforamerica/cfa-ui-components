@@ -23,31 +23,31 @@
           class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent"
           placeholder="<%= I18n.t("combobox.placeholder_label") %>"
         >
-          <div class="absolute z-10 inset-y-0 right-0 flex">
-            <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
-              <template x-if="$combobox.isOpen">
-                <%= render(IconComponent.new(icon: "chevron_up")) %>
-              </template>
-              <template x-if="!$combobox.isOpen">
-                <%= render(IconComponent.new(icon: "chevron_down")) %>
-              </template>
-            </button>
-          </div>
+        <div class="absolute z-10 inset-y-0 right-0 flex">
+          <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
+            <template x-if="$combobox.isOpen">
+              <%= render(IconComponent.new(icon: "chevron_up")) %>
+            </template>
+            <template x-if="!$combobox.isOpen">
+              <%= render(IconComponent.new(icon: "chevron_down")) %>
+            </template>
+          </button>
         </div>
-        <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
-          <template x-for="option in $combobox.allOptions" :key="option.value">
-            <li x-combobox:item
+      </div>
+      <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
+        <template x-for="option in $combobox.allOptions" :key="option.value">
+          <li x-combobox:item
               :data-disabled="option.disabled"
               :class="option.disabled ? 'p-cfa-sm !m-0 cursor-not-allowed opacity-50' : 'p-cfa-sm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus'"
               x-text="option.label"></li>
-          </template>
-          <template x-if="$combobox.noResults">
-            <li class="p-cfa-sm cursor-not-allowed">
-              <%= I18n.t("combobox.no_results") %>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </template>
-    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
-  </div>
+        </template>
+        <template x-if="$combobox.noResults">
+          <li class="p-cfa-sm cursor-not-allowed">
+            <%= I18n.t("combobox.no_results") %>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </template>
+  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+</div>

@@ -1,13 +1,5 @@
-<% store_suffix = @unique_id ? "_#{@unique_id}" : @unique_alpine_store_key.to_s %>
-<% store_key = "#{@method}#{store_suffix}" %>
 <div x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
-  <% has_error = @form.object.errors[@method].any? %>
-  <% has_warning = @warning_message.present? %>
   <%= @form.hidden_field @method, value: "" %>
-  <% radio_classes = ["cfa-radio"]
-     radio_classes << "cfa-radio--small" if @small
-     radio_classes << "cfa-radio--error" if has_error
-     radio_classes << "cfa-radio--warning" if has_warning && !has_error %>
   <% if @legend.present? %>
     <p class="text-[13px] font-bold text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
   <% end %>
@@ -17,7 +9,7 @@
            item_value = radio_button_item.value.to_s
            radio_attrs = {
              "x-model" => "$store.#{store_key}",
-             :class => radio_classes.join(" ")
+             :class => radio_classes
            }
            if @unique_id
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@unique_id}"
@@ -35,9 +27,9 @@
   <% concat content %>
   <div class="mt-cfa-sm">
     <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
-    <% if has_warning && !has_error %>
-      <p class="form_warning flex items-center gap-2 text-text-body-secondary">
-        <%= inline_icon("alert", size: @small ? 16 : 24, css_class: "text-warning") %>
+    <% if has_warning? %>
+      <p class="form_warning flex items-center gap-cfa-sm text-text-body-secondary">
+        <%= inline_icon("alert", size: icon_size, css_class: "text-warning") %>
         <span><%= @warning_message %></span>
       </p>
     <% end %>

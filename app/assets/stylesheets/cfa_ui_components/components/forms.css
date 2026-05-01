@@ -66,6 +66,10 @@ select {
   cursor: not-allowed;
 }
 
+.cfa-checkbox-wrap {
+  flex-shrink: 0;
+}
+
 .cfa-checkbox-wrap .cfa-icon {
   display: none;
 }
@@ -165,7 +169,7 @@ select {
 
 
 .field_with_errors {
-    display: contents;
+    display: inline;
     input {
         border-color: var(--color-border-error) !important;
     }

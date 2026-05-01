@@ -138,6 +138,7 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     ))
     assert_selector "input[type='radio'].cfa-radio--warning", count: 2
     assert_selector ".form_warning", text: "Heads up!"
+    assert_selector ".form_warning .cfa-icon.text-warning"
   end
 
   def test_warning_suppressed_when_error_present
