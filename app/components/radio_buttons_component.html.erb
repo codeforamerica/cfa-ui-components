@@ -1,7 +1,7 @@
 <div x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
   <%= @form.hidden_field @method, value: "" %>
   <% if @legend.present? %>
-    <p class="text-[13px] font-bold text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
+    <p class="label text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
   <% end %>
   <% content = content_tag(:div, class: @layout) do
        capture do
