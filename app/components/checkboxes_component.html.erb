@@ -9,8 +9,8 @@
              "x-model" => "$store.#{store_key}",
              :class => "cfa-checkbox #{box_classes} rounded #{border_class}"
            }
-           if @unique_id
-             input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@unique_id}"
+           if @instance_key.present?
+             input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@instance_key}"
              checkbox_attrs[:id] = input_id
            end
            checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if item_state == :indeterminate
@@ -18,7 +18,7 @@
            content_tag :div, class: "checkbox_item" do
              concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
              label_opts = {}
-             label_opts[:for] = input_id if @unique_id
+             label_opts[:for] = input_id if @instance_key.present?
              label_opts[:class] = "text-text-disabled" if item_state == :disabled
              concat(label_opts.empty? ? checkbox_item.label : checkbox_item.label(label_opts))
            end

@@ -76,14 +76,14 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     assert_selector "input[x-model=\"$store.radio_field\"]"
   end
 
-  def test_unique_alpine_store_key_appended_to_method_name
+  def test_instance_key_appended_to_method_name
     render_inline(RadioButtonsComponent.new(
       form: build_form,
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      unique_alpine_store_key: "_unique_key"
+      instance_key: "unique_key"
     ))
     assert_selector "[x-init*=\"Alpine.store('radio_field_unique_key'\"]"
     assert_selector "input[x-model=\"$store.radio_field_unique_key\"]"
@@ -157,14 +157,14 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     assert_no_selector "input.cfa-radio--warning"
   end
 
-  def test_unique_id_namespaces_input_ids_label_for_and_store_key
+  def test_instance_key_namespaces_input_ids_label_for_and_store_key
     render_inline(RadioButtonsComponent.new(
       form: build_form,
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      unique_id: "abc"
+      instance_key: "abc"
     ))
     assert_selector "input[type='radio'][id$='_abc']", count: 2
     assert_selector "label[for$='_abc']", count: 2
