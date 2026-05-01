@@ -65,7 +65,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     assert_selector ".form_warning .cfa-icon.text-warning"
   end
 
-  def test_warning_suppressed_when_error_present
+  def test_warning_and_error_render_together
     model = ComponentTestModel.new
     model.errors.add(:checkboxes_field, "is required")
     render_inline(CheckboxesComponent.new(
@@ -77,7 +77,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       warning_message: "Heads up!"
     ))
     assert_selector ".form_errors"
-    assert_no_selector ".form_warning"
+    assert_selector ".form_warning", text: "Heads up!"
   end
 
   def test_item_states_indeterminate_sets_alpine_init_on_matching_items
