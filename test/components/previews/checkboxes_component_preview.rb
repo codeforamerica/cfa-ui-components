@@ -20,7 +20,15 @@ class CheckboxesComponentPreview < FormComponentPreview
   end
 
   def indeterminate
-    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, indeterminate: ["orange"], unique_id: "indeterminate"))
+    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, item_states: {"orange" => :indeterminate}, unique_id: "indeterminate"))
+  end
+
+  def disabled_item
+    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, item_states: {"orange" => :disabled}, unique_id: "disabled_item"))
+  end
+
+  def mixed_states
+    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, item_states: {"orange" => :indeterminate, "apple" => :disabled}, unique_id: "mixed_states"))
   end
   # @!endgroup
 
@@ -45,7 +53,7 @@ class CheckboxesComponentPreview < FormComponentPreview
   end
 
   def small_indeterminate
-    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, small: true, indeterminate: ["orange"], unique_id: "small_indeterminate"))
+    render(CheckboxesComponent.new(form:, method: :favorite_fruits, collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, small: true, item_states: {"orange" => :indeterminate}, unique_id: "small_indeterminate"))
   end
   # @!endgroup
 end

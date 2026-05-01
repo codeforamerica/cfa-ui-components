@@ -80,17 +80,57 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     assert_no_selector ".form_warning"
   end
 
-  def test_indeterminate_sets_alpine_init_on_matching_items
+  def test_item_states_indeterminate_sets_alpine_init_on_matching_items
     render_inline(CheckboxesComponent.new(
       form: build_form,
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      indeterminate: ["yes"]
+      item_states: {"yes" => :indeterminate}
     ))
     assert_selector "input[type='checkbox'][value='yes'][x-init='$nextTick(() => $el.indeterminate = true)']"
     assert_no_selector "input[type='checkbox'][value='no'][x-init]"
+  end
+
+  def test_item_states_disabled_disables_input_and_styles_label
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      item_states: {"yes" => :disabled}
+    ))
+    assert_selector "input[type='checkbox'][value='yes'][disabled]"
+    assert_no_selector "input[type='checkbox'][value='no'][disabled]"
+    assert_selector "label.text-text-disabled", text: "Yes"
+  end
+
+  def test_item_states_mixed_per_item
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      item_states: {"yes" => :disabled, "no" => :indeterminate}
+    ))
+    assert_selector "input[type='checkbox'][value='yes'][disabled]"
+    assert_selector "input[type='checkbox'][value='no'][x-init='$nextTick(() => $el.indeterminate = true)']"
+  end
+
+  def test_item_states_rejects_unknown_state
+    assert_raises(ArgumentError) do
+      CheckboxesComponent.new(
+        form: build_form,
+        method: :checkboxes_field,
+        collection: simple_collection,
+        item_value_method: :value,
+        item_label_method: :label,
+        item_states: {"yes" => :bogus}
+      )
+    end
   end
 
   def test_unique_id_namespaces_input_ids_and_label_for

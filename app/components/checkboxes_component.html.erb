@@ -4,7 +4,7 @@
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            item_value = checkbox_item.value.to_s
-           is_indeterminate = @indeterminate.include?(item_value)
+           item_state = state_for(item_value)
            checkbox_attrs = {
              "x-model" => "$store.#{store_key}",
              :class => "cfa-checkbox #{box_classes} rounded #{border_class}"
@@ -13,11 +13,13 @@
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@unique_id}"
              checkbox_attrs[:id] = input_id
            end
-           checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if is_indeterminate
+           checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if item_state == :indeterminate
+           checkbox_attrs[:disabled] = true if item_state == :disabled
            content_tag :div, class: "checkbox_item" do
              concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
              label_opts = {}
              label_opts[:for] = input_id if @unique_id
+             label_opts[:class] = "text-text-disabled" if item_state == :disabled
              concat(label_opts.empty? ? checkbox_item.label : checkbox_item.label(label_opts))
            end
          end

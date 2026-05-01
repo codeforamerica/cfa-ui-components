@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 class CheckboxesComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, small: false, warning_message: nil, indeterminate: [], unique_id: nil)
+  ALLOWED_ITEM_STATES = [:disabled, :indeterminate].freeze
+
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, small: false, warning_message: nil, item_states: {}, unique_id: nil)
     super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
     @item_label_method = item_label_method
     @small = small
     @warning_message = warning_message
-    @indeterminate = Array(indeterminate).map(&:to_s)
+    @item_states = item_states.transform_keys(&:to_s).transform_values(&:to_sym)
+    invalid = @item_states.values - ALLOWED_ITEM_STATES
+    raise ArgumentError, "Unknown item_states: #{invalid.inspect}. Allowed: #{ALLOWED_ITEM_STATES.inspect}" if invalid.any?
     @unique_id = unique_id
   end
 
@@ -34,6 +38,10 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
     return "border-2 border-border-error" if has_error?
     return "border-2 border-border-warning" if has_warning?
     "border checked:border-2 disabled:border-border-disabled border-border-default"
+  end
+
+  def state_for(value)
+    @item_states[value.to_s]
   end
 
   def store_key
