@@ -6,7 +6,7 @@
               class="yes-no-buttons__button"
               @click="selected = '<%= val %>'"
               :class="{ 'is-selected': selected === '<%= val %>' }">
-        <%= inline_icon("circle_check", size: 24, aria_hidden: true, css_class: "yes-no-buttons__check") %>
+        <%= inline_icon(:circle_check, size: 24, aria_hidden: true, css_class: "yes-no-buttons__check") %>
         <span class="yes-no-buttons__label"><%= label %></span>
       </button>
     <% end %>

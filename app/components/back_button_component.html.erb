@@ -1,7 +1,7 @@
 <% extra_class = html_attrs&.delete(:class) %>
 <% label_content = capture do %>
   <span class="inline-flex items-center justify-center gap-cfa-xsm">
-    <%= inline_icon("arrow_left", size: 24, aria_hidden: true) %>
+    <%= inline_icon(:arrow_left, size: 24, aria_hidden: true) %>
     <%= I18n.t("back") %>
   </span>
 <% end %>
