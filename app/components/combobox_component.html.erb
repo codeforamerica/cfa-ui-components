@@ -11,8 +11,8 @@
   <%= @form.select(
         @method,
         @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] },
-        { prompt: I18n.t("combobox.placeholder_label").to_s, disabled: disabled_values },
-        { "x-combobox:values": "", aria: { invalid: invalid } }
+        {prompt: I18n.t("combobox.placeholder_label").to_s, disabled: disabled_values},
+        {"x-combobox:values": "", aria: {invalid: invalid}}
       ) %>
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-cfa-sm">
