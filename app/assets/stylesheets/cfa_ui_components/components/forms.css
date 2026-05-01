@@ -94,14 +94,6 @@ select {
   pointer-events: none;
 }
 
-
-/* Select */
-/* .select-error {
-  @apply border-2 rounded;
-  border-color: var(--color-border-error) !important;
-} */
-
-
 /* Radio */
 .cfa-radio {
   @apply appearance-none border border-border-default rounded-full bg-white cursor-pointer relative;
@@ -153,18 +145,6 @@ select {
   border-width: 2px;
   border-color: var(--color-border-warning);
 }
-
-
-/* Text / inputs / select / combobox */
-/* .input-error {
-  @apply border outline;
-  border-color: var(--color-border-error);
-  outline-color: var(--color-border-error);
-}
-
-.input-error:focus {
-  outline-color: var(--color-border-error);
-} */
 
 /* Standard invalid fields */
 [aria-invalid="true"],
