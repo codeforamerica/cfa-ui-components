@@ -96,10 +96,10 @@ select {
 
 
 /* Select */
-.select-error {
+/* .select-error {
   @apply border-2 rounded;
   border-color: var(--color-border-error) !important;
-}
+} */
 
 
 /* Radio */
@@ -156,7 +156,7 @@ select {
 
 
 /* Text / inputs / select / combobox */
-.input-error {
+/* .input-error {
   @apply border outline;
   border-color: var(--color-border-error);
   outline-color: var(--color-border-error);
@@ -164,6 +164,23 @@ select {
 
 .input-error:focus {
   outline-color: var(--color-border-error);
+} */
+
+/* Standard invalid fields */
+[aria-invalid="true"],
+.field_with_errors input,
+.field_with_errors select,
+.field_with_errors textarea {
+  border-color: var(--color-border-error) !important;
+  outline-color: var(--color-border-error) !important;
+}
+
+/* Focus state */
+[aria-invalid="true"]:focus,
+.field_with_errors input:focus,
+.field_with_errors select:focus,
+.field_with_errors textarea:focus {
+  outline-color: var(--color-border-error) !important;
 }
 
 

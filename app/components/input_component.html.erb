@@ -1,11 +1,10 @@
 <div class="space-y-cfa-sm">
-  <% has_error = @form.object.errors[@method].any? %>
   <%= @form.label @method, @label, class: "label block #{required_class}" %>
   <% if @help_text %>
     <p class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm #{"input-error" if has_error}" %>
+  <%= @form.text_field @method, class: "w-full max-w-sm" %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
