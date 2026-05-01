@@ -20,8 +20,8 @@ class IconComponentPreview < ViewComponent::Preview
     render(IconComponent.new(icon: "xmark"))
   end
 
-  def alert
-    render(IconComponent.new(icon: "alert"))
+  def warn
+    render(IconComponent.new(icon: "warn"))
   end
 
   def delete

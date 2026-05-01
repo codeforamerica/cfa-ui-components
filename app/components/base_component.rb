@@ -34,12 +34,12 @@ class BaseComponent < ViewComponent::Base
       path: "icons/arrow_open.svg",
       alt: "chevron up"
     },
-    "alert" => {
-      path: "icons/alert.svg",
-      alt: "alert"
+    "warn" => {
+      path: "icons/alert_triangle.svg",
+      alt: "warning"
     },
     "error" => {
-      path: "icons/error_icon.svg",
+      path: "icons/alert_round.svg",
       alt: "error"
     },
     "delete" => {
