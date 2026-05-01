@@ -1,20 +1,29 @@
 <div x-data x-combobox class="max-w-lg space-y-cfa-sm"
      x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
-  <% has_error = @form.object.errors[@method].any? %>
+  <% invalid = @form.object.errors[@method].any? %>
   <%= @form.label @method, @label, class: "label block #{required_class}", "x-combobox:label": "" %>
   <% if @help_text %>
     <p x-combobox:desc class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.select(@method, @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] }, {prompt: I18n.t("combobox.placeholder_label").to_s, disabled: disabled_values}, html_options = {"x-combobox:values": ""}) %>
-
+  <%= @form.select(
+        @method,
+        @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] },
+        { prompt: I18n.t("combobox.placeholder_label").to_s, disabled: disabled_values },
+        { "x-combobox:values": "", aria: { invalid: invalid } }
+      ) %>
   <template x-if="$combobox.isLoaded">
     <div class="relative mt-cfa-sm">
       <div class="flex w-full">
-        <input x-combobox:input class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent <%= "input-error" if has_error %>" placeholder="<%= I18n.t("combobox.placeholder_label") %>">
-        <div class="absolute z-10 inset-y-0 right-0 flex">
+        <input
+          x-combobox:input
+          aria-invalid="<%= invalid %>"
+          class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent"
+          placeholder="<%= I18n.t("combobox.placeholder_label") %>"
+        >
+          <div class="absolute z-10 inset-y-0 right-0 flex">
             <button x-combobox:toggle class="h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
               <template x-if="$combobox.isOpen">
                 <%= render(IconComponent.new(icon: "chevron_up")) %>
@@ -25,20 +34,20 @@
             </button>
           </div>
         </div>
-      <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
-        <template x-for="option in $combobox.allOptions" :key="option.value">
-          <li x-combobox:item
+        <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-default bg-white max-h-52 overflow-y-scroll w-full z-10">
+          <template x-for="option in $combobox.allOptions" :key="option.value">
+            <li x-combobox:item
               :data-disabled="option.disabled"
               :class="option.disabled ? 'p-cfa-sm !m-0 cursor-not-allowed opacity-50' : 'p-cfa-sm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus'"
               x-text="option.label"></li>
-        </template>
-        <template x-if="$combobox.noResults">
-          <li class="p-cfa-sm cursor-not-allowed">
-            <%= I18n.t("combobox.no_results") %>
-          </li>
-        </template>
-      </ul>
-    </div>
-  </template>
-  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
-</div>
+          </template>
+          <template x-if="$combobox.noResults">
+            <li class="p-cfa-sm cursor-not-allowed">
+              <%= I18n.t("combobox.no_results") %>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </template>
+    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+  </div>
