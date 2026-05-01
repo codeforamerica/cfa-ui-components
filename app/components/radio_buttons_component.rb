@@ -21,4 +21,31 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
         raise ArgumentError.new("Invalid layout")
       end
   end
+
+  private
+
+  def has_error?
+    @form.object.errors[@method].any?
+  end
+
+  def has_warning?
+    @warning_message.present? && !has_error?
+  end
+
+  def icon_size
+    @small ? 16 : 24
+  end
+
+  def radio_classes
+    classes = ["cfa-radio"]
+    classes << "cfa-radio--small" if @small
+    classes << "cfa-radio--error" if has_error?
+    classes << "cfa-radio--warning" if has_warning?
+    classes.join(" ")
+  end
+
+  def store_key
+    suffix = @unique_id ? "_#{@unique_id}" : @unique_alpine_store_key.to_s
+    "#{@method}#{suffix}"
+  end
 end

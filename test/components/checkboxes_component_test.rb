@@ -62,6 +62,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     ))
     assert_selector ".form_warning", text: "Heads up!"
     assert_selector "input[type='checkbox'].border-border-warning", count: 2
+    assert_selector ".form_warning .cfa-icon.text-warning"
   end
 
   def test_warning_suppressed_when_error_present
@@ -88,7 +89,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       item_label_method: :label,
       indeterminate: ["yes"]
     ))
-    assert_selector "input[type='checkbox'][value='yes'][x-init='$el.indeterminate = true']"
+    assert_selector "input[type='checkbox'][value='yes'][x-init='$nextTick(() => $el.indeterminate = true)']"
     assert_no_selector "input[type='checkbox'][value='no'][x-init]"
   end
 

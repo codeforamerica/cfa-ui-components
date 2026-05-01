@@ -1,5 +1,5 @@
 <% if @form.object.errors[@method].any? %>
-  <p class="form_errors flex items-center gap-2 text-text-body-secondary">
+  <p class="form_errors flex items-center gap-cfa-sm text-text-body-secondary">
     <%= inline_icon("error", size: @small ? 16 : 24, css_class: "text-error") %>
     <span>
       <%= safe_join(

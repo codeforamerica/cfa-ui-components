@@ -1,19 +1,6 @@
-<% suffix = @unique_id ? "_#{@unique_id}" : "" %>
-<% store_key = "#{@method}#{suffix}" %>
 <div x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
   <%= @form.hidden_field @method, value: "" %>
-  <% has_error = @form.object.errors[@method].any? %>
-  <% has_warning = @warning_message.present? %>
-  <% box_classes = @small ? "h-4 w-4" : "h-6 w-6" %>
-  <% icon_size = @small ? 16 : 24 %>
-  <% border_class = if has_error
-       "border-2 border-border-error"
-     elsif has_warning
-       "border-2 border-border-warning"
-     else
-       "border checked:border-2 disabled:border-border-disabled border-border-default"
-     end %>
-  <div class="space-y-cfa-med <%= "has-error" if has_error %>">
+  <div class="space-y-cfa-med <%= "has-error" if has_error? %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            item_value = checkbox_item.value.to_s
@@ -26,7 +13,7 @@
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@unique_id}"
              checkbox_attrs[:id] = input_id
            end
-           checkbox_attrs["x-init"] = "$el.indeterminate = true" if is_indeterminate
+           checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if is_indeterminate
            content_tag :div, class: "checkbox_item" do
              checkbox_html = checkbox_item.checkbox(checkbox_attrs)
              icon_html = inline_icon("check", size: icon_size, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default")
@@ -41,9 +28,9 @@
   </div>
   <div class="mt-cfa-sm">
     <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
-    <% if has_warning && !has_error %>
-      <p class="form_warning flex items-center gap-2 text-text-body-secondary">
-        <%= inline_icon("alert", size: @small ? 16 : 24, css_class: "text-warning") %>
+    <% if has_warning? %>
+      <p class="form_warning flex items-center gap-cfa-sm text-text-body-secondary">
+        <%= inline_icon("alert", size: icon_size, css_class: "text-warning") %>
         <span><%= @warning_message %></span>
       </p>
     <% end %>
