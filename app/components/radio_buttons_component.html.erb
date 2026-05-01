@@ -29,7 +29,7 @@
     <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
     <% if has_warning? %>
       <p class="form_warning flex items-center gap-cfa-sm text-text-body-secondary">
-        <%= inline_icon(:alert, size: icon_size, css_class: "text-warning") %>
+        <%= inline_icon(:warn, size: icon_size, css_class: "text-warning") %>
         <span><%= @warning_message %></span>
       </p>
     <% end %>
