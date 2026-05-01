@@ -29,7 +29,7 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
   end
 
   def has_warning?
-    @warning_message.present? && !has_error?
+    @warning_message.present?
   end
 
   def icon_size
@@ -40,7 +40,7 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
     classes = ["cfa-radio"]
     classes << "cfa-radio--small" if @small
     classes << "cfa-radio--error" if has_error?
-    classes << "cfa-radio--warning" if has_warning?
+    classes << "cfa-radio--warning" if has_warning? && !has_error?
     classes.join(" ")
   end
 

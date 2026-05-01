@@ -141,7 +141,7 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     assert_selector ".form_warning .cfa-icon.text-warning"
   end
 
-  def test_warning_suppressed_when_error_present
+  def test_warning_and_error_render_together
     model = ComponentTestModel.new
     model.errors.add(:radio_field, "is required")
     render_inline(RadioButtonsComponent.new(
@@ -153,7 +153,7 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       warning_message: "Heads up!"
     ))
     assert_selector ".form_errors"
-    assert_no_selector ".form_warning"
+    assert_selector ".form_warning", text: "Heads up!"
     assert_no_selector "input.cfa-radio--warning"
   end
 
