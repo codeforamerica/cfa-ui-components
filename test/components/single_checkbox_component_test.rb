@@ -11,7 +11,6 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
 
   def test_disabled_styles_label_and_disables_input
     render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", disabled: true))
-    assert_selector ".opacity-50"
     assert_selector "label.text-text-disabled"
     assert_selector "input[disabled]"
   end

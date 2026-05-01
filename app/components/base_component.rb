@@ -83,4 +83,11 @@ class BaseComponent < ViewComponent::Base
   def required_class
     @required ? "required" : ""
   end
+
+  def checkbox_wrap(checkbox_html, small: false)
+    size = small ? 16 : 24
+    box = small ? "h-4 w-4" : "h-6 w-6"
+    icon = inline_icon("check", size:, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default")
+    content_tag :span, checkbox_html + icon, class: "cfa-checkbox-wrap relative inline-flex #{box}"
+  end
 end

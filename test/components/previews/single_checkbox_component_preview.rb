@@ -37,4 +37,14 @@ class SingleCheckboxComponentPreview < FormComponentPreview
       disabled: true
     )
   end
+
+  def unselectable_prefilled
+    render SingleCheckboxComponent.new(
+      form:,
+      method: :agree,
+      label: "Unselectable, prefilled",
+      checked: true,
+      disabled: true
+    )
+  end
 end

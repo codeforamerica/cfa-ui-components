@@ -63,6 +63,8 @@ select {
 }
 
 .cfa-checkbox:disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-background-disabled);
   cursor: not-allowed;
 }
 

@@ -15,9 +15,7 @@
            end
            checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if is_indeterminate
            content_tag :div, class: "checkbox_item" do
-             checkbox_html = checkbox_item.checkbox(checkbox_attrs)
-             icon_html = inline_icon("check", size: icon_size, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default")
-             concat content_tag(:span, checkbox_html + icon_html, class: "cfa-checkbox-wrap relative inline-flex #{box_classes}")
+             concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
              label_opts = {}
              label_opts[:for] = input_id if @unique_id
              concat(label_opts.empty? ? checkbox_item.label : checkbox_item.label(label_opts))
