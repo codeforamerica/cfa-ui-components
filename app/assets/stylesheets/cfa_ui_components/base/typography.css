@@ -7,7 +7,7 @@ body {
     font-weight: 400;
 
     line-height: normal;
-    @apply antialiased;
+    @apply antialiased bg-background-app;
 }
 
 h1 {
