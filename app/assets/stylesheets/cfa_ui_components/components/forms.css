@@ -171,7 +171,7 @@ select {
 
 
 .field_with_errors {
-    display: inline;
+    display: block;
     input {
         border-color: var(--color-border-error) !important;
     }
