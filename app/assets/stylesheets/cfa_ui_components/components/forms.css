@@ -114,17 +114,6 @@ select {
   background-color: var(--color-primary);
 }
 
-.cfa-radio:checked::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  border-radius: 9999px;
-  background-color: var(--color-text-default);
-}
 
 .cfa-radio:disabled {
   border-color: var(--color-border-disabled);
@@ -137,10 +126,6 @@ select {
   height: 16px;
 }
 
-.cfa-radio--small:checked::after {
-  width: 6px;
-  height: 6px;
-}
 
 .cfa-radio--error {
   border-width: 2px;
