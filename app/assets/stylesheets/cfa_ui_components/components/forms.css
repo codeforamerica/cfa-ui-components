@@ -81,7 +81,7 @@ select {
 }
 
 .cfa-checkbox:indeterminate {
-  background-color: var(--color-primary);
+  background-color: var(--color-background-indeterminate);
 }
 
 .cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate) .cfa-icon {
