@@ -15,8 +15,10 @@
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@scope}"
              radio_attrs[:id] = input_id
            end
+           label_classes = @small ? ["type-progress-text"] : []
            label_opts = {}
            label_opts[:for] = input_id if @scope.present?
+           label_opts[:class] = label_classes.join(" ") if label_classes.any?
            content_tag :div, class: "radio_button_item" do
              concat radio_button_item.radio_button(radio_attrs)
              concat(label_opts.empty? ? radio_button_item.label : radio_button_item.label(label_opts))

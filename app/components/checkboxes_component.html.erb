@@ -17,9 +17,11 @@
            checkbox_attrs[:disabled] = true if item_state == :disabled
            content_tag :div, class: "checkbox_item" do
              concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
+             label_classes = @small ? ["type-progress-text"] : []
+             label_classes << "text-text-disabled" if item_state == :disabled
              label_opts = {}
              label_opts[:for] = input_id if @scope.present?
-             label_opts[:class] = "text-text-disabled" if item_state == :disabled
+             label_opts[:class] = label_classes.join(" ") if label_classes.any?
              concat(label_opts.empty? ? checkbox_item.label : checkbox_item.label(label_opts))
            end
          end
