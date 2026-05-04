@@ -27,6 +27,6 @@ class ConditionalComponentPreview < FormComponentPreview
   end
   # @!endgroup
 
-  def unique_alpine_store_key
+  def scope
   end
 end

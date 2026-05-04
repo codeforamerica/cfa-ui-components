@@ -14,6 +14,7 @@
     --color-background-destructive-hover: #F8DEDE;
     --color-background-destructive-active: #E8B5B5;
     --color-background-disabled: #CCCCCC;
+    --color-background-indeterminate: #E2E7FF;
 
     /* Text colors */
     --color-text-default: #011E29;
@@ -28,6 +29,7 @@
     --color-border-default: #011E29;
     --color-border-secondary: #CCD2D4;
     --color-border-error: #B50909;
+    --color-border-warning: #B27A00;
     --color-border-disabled: #999999;
 
     /* Link colors */

@@ -1,6 +1,7 @@
 <div>
+  <% invalid = @form.object.errors[@method].any? %>
   <p class="text-[16px] mb-cfa-sm">
-   <strong> <%= @label %> </strong>
+    <strong><%= @label %></strong>
   </p>
   <% if @helper_text %>
     <p class="help_text mb-cfa-sm">
@@ -14,6 +15,7 @@
             options_for_select(month_options, month_value),
             include_blank: @label_month_select,
             id: input_id(2),
+            aria: {invalid: invalid},
             class: "mr-cfa-sm mt-cfa-sm h-[40px]" %>
     </div>
     <div>
@@ -26,6 +28,7 @@
             minlength: 1,
             maxlength: 2,
             placeholder: "DD",
+            aria: {invalid: invalid},
             class: "w-[48px] mr-cfa-sm mt-cfa-sm h-[40px]" %>
     </div>
     <div>
@@ -38,6 +41,7 @@
             minlength: 4,
             maxlength: 4,
             placeholder: "YYYY",
+            aria: {invalid: invalid},
             class: "w-[72px] mr-cfa-sm mt-cfa-sm h-[40px]" %>
     </div>
   </div>

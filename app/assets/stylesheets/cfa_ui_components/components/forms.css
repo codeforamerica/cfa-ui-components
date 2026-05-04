@@ -24,11 +24,11 @@ select {
 }
 
 .radio_button_item {
-    @apply space-x-cfa-sm;
+    @apply flex items-center gap-cfa-sm;
 }
 
 .checkbox_item {
-    @apply space-x-cfa-sm;
+    @apply flex items-center gap-cfa-sm;
 }
 
 /* the css rules below are to remove the spin button from the input currency component */
@@ -42,18 +42,121 @@ select {
   -moz-appearance: textfield;
 }
 
-.form_errors {
-    @apply text-error mt-cfa-sm;
-    font-size: 16px;
+.form_errors,
+.form_warning {
+    @apply  mt-cfa-sm;
+    font-size: 13px;
     font-weight: 700;
     line-height: normal;
     a {
         text-decoration: underline;
     }
 }
+/* Checkbox */
+.cfa-checkbox {
+  @apply appearance-none bg-white cursor-pointer flex-shrink-0;
+  box-sizing: border-box;
+}
+
+.cfa-checkbox:checked {
+  background-color: var(--color-primary);
+}
+
+.cfa-checkbox:disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-background-disabled);
+  cursor: not-allowed;
+}
+
+.cfa-checkbox-wrap {
+  flex-shrink: 0;
+}
+
+.cfa-checkbox-wrap .cfa-icon {
+  display: none;
+}
+
+.cfa-checkbox-wrap:has(.cfa-checkbox:checked) .cfa-icon {
+  display: inline-block;
+}
+
+.cfa-checkbox:indeterminate {
+  background-color: var(--color-background-indeterminate);
+}
+
+.cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate) .cfa-icon {
+  display: none;
+}
+
+.cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Radio */
+.cfa-radio {
+  @apply appearance-none border border-border-default rounded-full bg-white cursor-pointer relative;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.cfa-radio:checked {
+  border-width: 2px;
+  background-color: var(--color-primary);
+}
+
+
+.cfa-radio:disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-background-disabled);
+  cursor: not-allowed;
+}
+
+.cfa-radio--small {
+  width: 16px;
+  height: 16px;
+}
+
+
+.cfa-radio--error {
+  border-width: 2px;
+  border-color: var(--color-border-error);
+}
+
+.cfa-radio--warning {
+  border-width: 2px;
+  border-color: var(--color-border-warning);
+}
+
+/* Standard invalid fields */
+[aria-invalid="true"],
+.field_with_errors input,
+.field_with_errors select,
+.field_with_errors textarea {
+  border-color: var(--color-border-error) !important;
+  outline-color: var(--color-border-error) !important;
+}
+
+/* Focus state */
+[aria-invalid="true"]:focus,
+.field_with_errors input:focus,
+.field_with_errors select:focus,
+.field_with_errors textarea:focus {
+  outline-color: var(--color-border-error) !important;
+}
+
 
 .field_with_errors {
-    display: inline;
+    display: block;
     input {
         border-color: var(--color-border-error) !important;
     }

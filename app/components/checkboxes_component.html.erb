@@ -1,17 +1,40 @@
-<div x-data x-init="Alpine.store('<%= @method %>', <%= current_value&.to_s || [] %>);">
+<div x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
   <%= @form.hidden_field @method, value: "" %>
-  <div class="space-y-cfa-med">
+  <div class="space-y-cfa-med <%= "has-error" if has_error? %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
+           item_value = checkbox_item.value.to_s
+           item_state = state_for(item_value)
+           checkbox_attrs = {
+             "x-model" => "$store.#{store_key}",
+             :class => "cfa-checkbox #{box_classes} rounded #{border_class}"
+           }
+           if @scope.present?
+             input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@scope}"
+             checkbox_attrs[:id] = input_id
+           end
+           checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if item_state == :indeterminate
+           checkbox_attrs[:disabled] = true if item_state == :disabled
            content_tag :div, class: "checkbox_item" do
-             concat checkbox_item.checkbox("x-model" => "$store.#{@method}")
-             concat checkbox_item.label
+             concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
+             label_classes = @small ? ["type-progress-text"] : []
+             label_classes << "text-text-disabled" if item_state == :disabled
+             label_opts = {}
+             label_opts[:for] = input_id if @scope.present?
+             label_opts[:class] = label_classes.join(" ") if label_classes.any?
+             concat(label_opts.empty? ? checkbox_item.label : checkbox_item.label(label_opts))
            end
          end
        } %>
     <% concat content %>
   </div>
   <div class="mt-cfa-sm">
-    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+    <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
+    <% if has_warning? %>
+      <p class="form_warning flex items-center gap-cfa-sm text-text-body-secondary">
+        <%= inline_icon(:warn, size: icon_size, css_class: "text-warning") %>
+        <span><%= @warning_message %></span>
+      </p>
+    <% end %>
   </div>
 </div>

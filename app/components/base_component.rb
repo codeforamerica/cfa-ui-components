@@ -18,6 +18,10 @@ class BaseComponent < ViewComponent::Base
       path: "icons/circle_check.svg",
       alt: "check mark"
     },
+    "check" => {
+      path: "icons/check.svg",
+      alt: "check mark"
+    },
     "circle_xmark" => {
       path: "icons/circle_xmark.svg",
       alt: "x mark"
@@ -30,9 +34,13 @@ class BaseComponent < ViewComponent::Base
       path: "icons/arrow_open.svg",
       alt: "chevron up"
     },
-    "alert" => {
-      path: "icons/alert.svg",
-      alt: "alert"
+    "warn" => {
+      path: "icons/alert_triangle.svg",
+      alt: "warning"
+    },
+    "error" => {
+      path: "icons/alert_round.svg",
+      alt: "error"
     },
     "delete" => {
       path: "icons/delete.svg",
@@ -49,11 +57,11 @@ class BaseComponent < ViewComponent::Base
   end
 
   def icon_image_path(icon)
-    ICONS.dig(icon, :path) || ""
+    ICONS.dig(icon.to_s, :path) || ""
   end
 
   def icon_alt_text(icon)
-    base = ICONS.dig(icon, :alt)
+    base = ICONS.dig(icon.to_s, :alt)
     base ? "#{base} icon" : ""
   end
 
@@ -61,7 +69,7 @@ class BaseComponent < ViewComponent::Base
   # via `background-color: currentColor`. Uses the same image-rasterization
   # path as `<img src=...>`, preserving pixel-perfect positioning.
   def inline_icon(icon, size: 20, css_class: nil, aria_hidden: false)
-    path = ICONS.dig(icon, :path)
+    path = ICONS.dig(icon.to_s, :path)
     return "".html_safe unless path
 
     style = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
@@ -74,5 +82,12 @@ class BaseComponent < ViewComponent::Base
 
   def required_class
     @required ? "required" : ""
+  end
+
+  def checkbox_wrap(checkbox_html, small: false)
+    size = small ? 16 : 24
+    box = small ? "h-4 w-4" : "h-6 w-6"
+    icon = inline_icon(:check, size:, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default")
+    content_tag :span, checkbox_html + icon, class: "cfa-checkbox-wrap relative inline-flex #{box}"
   end
 end
