@@ -56,12 +56,12 @@ select {
         label { cursor: not-allowed; }
     }
 
-    &:has(.cfa-radio--error) {
-        border-color: var(--color-border-error);
+    &.radio_button_item--warning {
+        border-color: var(--color-border-warning);
     }
 
-    &:has(.cfa-radio--warning) {
-        border-color: var(--color-border-warning);
+    &:has(.cfa-radio--error) {
+        border-color: var(--color-border-error);
     }
 }
 
