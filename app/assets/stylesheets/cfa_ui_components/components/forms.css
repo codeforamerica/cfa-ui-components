@@ -95,17 +95,17 @@ select {
 }
 
 .cfa-checkbox:checked {
-  border-width: 2px;
+  @apply border-2;
   background-color: var(--color-primary);
 }
 
 .cfa-checkbox--error {
-  border-width: 2px;
+  @apply border-2;
   border-color: var(--color-border-error);
 }
 
 .cfa-checkbox--warning {
-  border-width: 2px;
+  @apply border-2;
   border-color: var(--color-border-warning);
 }
 
