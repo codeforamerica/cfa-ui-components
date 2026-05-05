@@ -29,21 +29,20 @@ select {
     .field_with_errors { display: contents; }
 }
 
-.radio_group--boxed {
-    @apply border-2 border-border-default rounded-lg p-cfa-med;
 
-    &:has(.cfa-radio--error) {
-        border-color: var(--color-border-error);
+.radio_button_item--bordered {
+    @apply relative border-2 border-border-default rounded-lg p-cfa-med;
+
+    label {
+        cursor: pointer;
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            border-radius: inherit;
+        }
     }
-
-    &:has(.cfa-radio--warning) {
-        border-color: var(--color-border-warning);
-    }
-}
-
-.radio_button_item--boxed {
-    @apply border-2 border-border-default rounded-lg p-cfa-med cursor-pointer;
-    label { cursor: pointer; }
 
     &:has(input:checked) {
         background-color: var(--color-primary-hover);

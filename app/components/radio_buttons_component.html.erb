@@ -3,8 +3,7 @@
   <% if @legend.present? %>
     <p class="label text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
   <% end %>
-  <% container_classes = [@layout, ((@horizontal && @boxed) ? "radio_group--boxed" : nil)].compact.join(" ")
-     content = content_tag(:div, class: container_classes) do
+  <% content = content_tag(:div, class: @layout) do
        capture do
          @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
            item_value = radio_button_item.value.to_s
@@ -20,7 +19,7 @@
            label_opts = {}
            label_opts[:for] = input_id if @scope.present?
            label_opts[:class] = label_classes.join(" ") if label_classes.any?
-           content_tag :div, class: ["radio_button_item", ("radio_button_item--boxed" if @boxed && !@horizontal)].compact.join(" ") do
+           content_tag :div, class: ["radio_button_item", ("radio_button_item--bordered" if @bordered)].compact.join(" ") do
              concat radio_button_item.radio_button(radio_attrs)
              concat(label_opts.empty? ? radio_button_item.label : radio_button_item.label(label_opts))
            end

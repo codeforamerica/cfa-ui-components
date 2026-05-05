@@ -3,22 +3,22 @@
 class RadioButtonsComponent < AttributeBoundFormElementComponent
   # scope namespaces both the Alpine store key and the input id/label-for,
   # so multiple instances of this component can coexist on a single page.
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, scope: nil, layout: :vertical, small: false, boxed: false, warning_message: nil, legend: nil)
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, scope: nil, layout: :vertical, small: false, bordered: false, warning_message: nil, legend: nil)
     super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
     @item_label_method = item_label_method
     @scope = scope
     @small = small
-    @boxed = boxed
+    @bordered = bordered
     @warning_message = warning_message
     @legend = legend
-    @horizontal, @layout =
+    @layout =
       case layout
       when :horizontal
-        [true, "flex items-center gap-cfa-lg"]
+        "flex items-center gap-cfa-lg"
       when :vertical
-        [false, "space-y-cfa-med"]
+        "space-y-cfa-med"
       else
         raise ArgumentError.new("Invalid layout")
       end
