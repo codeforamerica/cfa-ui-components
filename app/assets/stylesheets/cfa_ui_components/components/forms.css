@@ -31,7 +31,10 @@ select {
 
 
 .radio_button_item--bordered {
-    @apply relative border-2 border-border-default rounded-lg p-cfa-med;
+    --border-width: 2px;
+    @apply relative border-border-default rounded-lg;
+    border-width: var(--border-width);
+    padding: calc(var(--spacing-cfa-med) - var(--border-width) + 2px);
 
     label {
         cursor: pointer;
@@ -46,8 +49,7 @@ select {
 
     &:has(input:checked) {
         background-color: var(--color-primary-hover);
-        border-width: 4px;
-        padding: calc(var(--spacing-cfa-med) - 2px);
+        --border-width: 4px;
     }
 
     &:has(input:disabled) {
@@ -84,22 +86,27 @@ select {
 
 .form_errors,
 .form_warning {
-    @apply  mt-cfa-sm;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: normal;
-    a {
-        text-decoration: underline;
-    }
+    @apply mt-cfa-sm type-body-label;
 }
 /* Checkbox */
 .cfa-checkbox {
-  @apply appearance-none bg-white cursor-pointer flex-shrink-0;
+  @apply appearance-none border border-border-default bg-white cursor-pointer flex-shrink-0;
   box-sizing: border-box;
 }
 
 .cfa-checkbox:checked {
+  border-width: 2px;
   background-color: var(--color-primary);
+}
+
+.cfa-checkbox--error {
+  border-width: 2px;
+  border-color: var(--color-border-error);
+}
+
+.cfa-checkbox--warning {
+  border-width: 2px;
+  border-color: var(--color-border-warning);
 }
 
 .cfa-checkbox:disabled {
@@ -167,12 +174,10 @@ select {
 
 
 .cfa-radio--error {
-  border-width: 2px;
   border-color: var(--color-border-error);
 }
 
 .cfa-radio--warning {
-  border-width: 2px;
   border-color: var(--color-border-warning);
 }
 

@@ -37,9 +37,8 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
   end
 
   def border_class
-    return "border-2 border-border-error" if has_error?
-    return "border-2 border-border-warning" if has_warning?
-    "border checked:border-2 disabled:border-border-disabled border-border-default"
+    return "cfa-checkbox--error" if has_error?
+    "cfa-checkbox--warning" if has_warning?
   end
 
   def state_for(value)
