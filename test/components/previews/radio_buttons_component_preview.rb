@@ -43,6 +43,10 @@ class RadioButtonsComponentPreview < FormComponentPreview
     render(RadioButtonsComponent.new(form: form(scope: :radio_bordered), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, bordered: true, scope: "bordered"))
   end
 
+  def bordered_with_warning
+    render(RadioButtonsComponent.new(form: form(scope: :radio_bordered_with_warning), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, bordered: true, warning_message: "Message goes here.", scope: "bordered_with_warning"))
+  end
+
   def bordered_with_error_and_warning
     custom_model = TestModel.new
     custom_model.valid?
