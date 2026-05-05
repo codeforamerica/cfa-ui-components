@@ -25,6 +25,7 @@ select {
 
 .radio_button_item {
     @apply flex items-center gap-cfa-sm;
+    label { margin-bottom: 0; }
 }
 
 .checkbox_item {
@@ -102,7 +103,7 @@ select {
 
 /* Radio */
 .cfa-radio {
-  @apply appearance-none border border-border-default rounded-full bg-white cursor-pointer relative;
+  @apply appearance-none border-2 border-border-default rounded-full bg-white cursor-pointer relative;
   box-sizing: border-box;
   width: 24px;
   height: 24px;
@@ -110,8 +111,7 @@ select {
 }
 
 .cfa-radio:checked {
-  border-width: 2px;
-  background-color: var(--color-primary);
+  background: radial-gradient(circle, black 42%, white 42%);
 }
 
 
