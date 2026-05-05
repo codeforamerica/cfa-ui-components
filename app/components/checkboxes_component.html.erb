@@ -15,7 +15,7 @@
            end
            checkbox_attrs["x-init"] = "$nextTick(() => $el.indeterminate = true)" if item_state == :indeterminate
            checkbox_attrs[:disabled] = true if item_state == :disabled
-           content_tag :div, class: "checkbox_item" do
+           content_tag :div, class: "form_item" do
              concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
              label_classes = @small ? ["type-progress-text"] : []
              label_classes << "text-text-disabled" if item_state == :disabled

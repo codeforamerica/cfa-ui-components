@@ -23,14 +23,13 @@ select {
     }
 }
 
-.radio_button_item {
+.form_item {
     @apply flex items-center gap-cfa-sm;
     label { margin-bottom: 0; }
     .field_with_errors { display: contents; }
 }
 
-
-.radio_button_item--bordered {
+.form_item--bordered {
     --border-width: 2px;
     @apply relative border-border-default rounded-lg;
     border-width: var(--border-width);
@@ -58,19 +57,13 @@ select {
         label { cursor: not-allowed; }
     }
 
-    &.radio_button_item--warning {
+    &.form_item--warning {
         border-color: var(--color-border-warning);
     }
 
     &:has(.cfa-radio--error) {
         border-color: var(--color-border-error);
     }
-}
-
-.checkbox_item {
-    @apply flex items-center gap-cfa-sm;
-    label { margin-bottom: 0; }
-    .field_with_errors { display: contents; }
 }
 
 /* the css rules below are to remove the spin button from the input currency component */
@@ -92,59 +85,57 @@ select {
 .cfa-checkbox {
   @apply appearance-none border border-border-default bg-white cursor-pointer flex-shrink-0;
   box-sizing: border-box;
-}
 
-.cfa-checkbox:checked {
-  @apply border-2;
-  background-color: var(--color-primary);
-}
+  &:checked {
+    @apply border-2;
+    background-color: var(--color-primary);
+  }
 
-.cfa-checkbox--error {
-  @apply border-2;
-  border-color: var(--color-border-error);
-}
+  &:disabled {
+    border-color: var(--color-border-disabled);
+    background-color: var(--color-background-disabled);
+    cursor: not-allowed;
+  }
 
-.cfa-checkbox--warning {
-  @apply border-2;
-  border-color: var(--color-border-warning);
-}
+  &:indeterminate {
+    background-color: var(--color-background-indeterminate);
+  }
 
-.cfa-checkbox:disabled {
-  border-color: var(--color-border-disabled);
-  background-color: var(--color-background-disabled);
-  cursor: not-allowed;
+  &.cfa-checkbox--error {
+    @apply border-2 border-border-error;
+  }
+
+  &.cfa-checkbox--warning {
+    @apply border-2 border-border-warning;
+  }
 }
 
 .cfa-checkbox-wrap {
   flex-shrink: 0;
-}
 
-.cfa-checkbox-wrap .cfa-icon {
-  display: none;
-}
+  .cfa-icon {
+    display: none;
+  }
 
-.cfa-checkbox-wrap:has(.cfa-checkbox:checked) .cfa-icon {
-  display: inline-block;
-}
+  &:has(.cfa-checkbox:checked) .cfa-icon {
+    display: inline-block;
+  }
 
-.cfa-checkbox:indeterminate {
-  background-color: var(--color-background-indeterminate);
-}
+  &:has(.cfa-checkbox:indeterminate) .cfa-icon {
+    display: none;
+  }
 
-.cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate) .cfa-icon {
-  display: none;
-}
-
-.cfa-checkbox-wrap:has(.cfa-checkbox:indeterminate)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  right: 20%;
-  height: 2px;
-  background-color: var(--color-text-default);
-  transform: translateY(-50%);
-  pointer-events: none;
+  &:has(.cfa-checkbox:indeterminate)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background-color: var(--color-text-default);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
 }
 
 /* Radio */
@@ -154,31 +145,29 @@ select {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-}
 
-.cfa-radio:checked {
-  background: radial-gradient(circle, var(--color-icon-default) 60%, white 60%);
-}
+  &:checked {
+    background: radial-gradient(circle, var(--color-icon-default) 60%, white 60%);
+  }
 
+  &:disabled {
+    border-color: var(--color-border-disabled);
+    background-color: var(--color-background-disabled);
+    cursor: not-allowed;
+  }
 
-.cfa-radio:disabled {
-  border-color: var(--color-border-disabled);
-  background-color: var(--color-background-disabled);
-  cursor: not-allowed;
-}
+  &.cfa-radio--small {
+    width: 16px;
+    height: 16px;
+  }
 
-.cfa-radio--small {
-  width: 16px;
-  height: 16px;
-}
+  &.cfa-radio--error {
+    @apply border-border-error;
+  }
 
-
-.cfa-radio--error {
-  border-color: var(--color-border-error);
-}
-
-.cfa-radio--warning {
-  border-color: var(--color-border-warning);
+  &.cfa-radio--warning {
+    @apply border-border-warning;
+  }
 }
 
 /* Standard invalid fields */
@@ -201,7 +190,4 @@ select {
 
 .field_with_errors {
     display: block;
-    input {
-        border-color: var(--color-border-error) !important;
-    }
 }
