@@ -38,7 +38,7 @@ class RadioButtonsComponentPreview < FormComponentPreview
   end
   # @!endgroup
 
-  # @!group Boxed
+  # @!group Bordered
   def bordered_default
     render(RadioButtonsComponent.new(form: form(scope: :radio_bordered_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, bordered: true, scope: "bordered_default"))
   end
