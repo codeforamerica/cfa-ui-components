@@ -1,4 +1,4 @@
-<fieldset class="border-none p-0 m-0 min-w-0" x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
+<fieldset class="fieldset-group" x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
   <legend class="sr-only"><%= @legend %></legend>
   <%= @form.hidden_field @method, value: "" %>
   <% content = content_tag(:div, class: @layout) do
