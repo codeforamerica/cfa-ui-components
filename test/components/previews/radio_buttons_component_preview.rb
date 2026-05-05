@@ -38,6 +38,37 @@ class RadioButtonsComponentPreview < FormComponentPreview
   end
   # @!endgroup
 
+  # @!group Boxed
+  def boxed_default
+    render(RadioButtonsComponent.new(form: form(scope: :radio_boxed_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, boxed: true, scope: "boxed_default"))
+  end
+
+  def boxed_prefilled
+    custom_model = TestModel.new(pineapple_pizza_preference: "yes")
+    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_boxed_prefilled), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, boxed: true, scope: "boxed_prefilled"))
+  end
+
+  def boxed_with_error
+    custom_model = TestModel.new
+    custom_model.valid?
+    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_boxed_with_error), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, boxed: true, scope: "boxed_with_error"))
+  end
+
+  def boxed_with_warning
+    render(RadioButtonsComponent.new(form: form(scope: :radio_boxed_with_warning), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, boxed: true, warning_message: "Message goes here.", scope: "boxed_with_warning"))
+  end
+
+  def boxed_horizontal
+    render(RadioButtonsComponent.new(form: form(scope: :radio_boxed_horizontal), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, boxed: true, layout: :horizontal, scope: "boxed_horizontal"))
+  end
+
+  def boxed_horizontal_with_error
+    custom_model = TestModel.new
+    custom_model.valid?
+    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_boxed_horizontal_with_error), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, boxed: true, layout: :horizontal, scope: "boxed_horizontal_with_error"))
+  end
+  # @!endgroup
+
   # @!group Small
   def small_default
     render(RadioButtonsComponent.new(form: form(scope: :radio_small_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, small: true, scope: "small_default"))

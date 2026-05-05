@@ -29,6 +29,43 @@ select {
     .field_with_errors { display: contents; }
 }
 
+.radio_group--boxed {
+    @apply border-2 border-border-default rounded-lg p-cfa-med;
+
+    &:has(.cfa-radio--error) {
+        border-color: var(--color-border-error);
+    }
+
+    &:has(.cfa-radio--warning) {
+        border-color: var(--color-border-warning);
+    }
+}
+
+.radio_button_item--boxed {
+    @apply border-2 border-border-default rounded-lg p-cfa-med cursor-pointer;
+    label { cursor: pointer; }
+
+    &:has(input:checked) {
+        background-color: var(--color-primary-hover);
+        border-width: 4px;
+        padding: calc(var(--spacing-cfa-med) - 2px);
+    }
+
+    &:has(input:disabled) {
+        border-color: var(--color-border-disabled);
+        cursor: not-allowed;
+        label { cursor: not-allowed; }
+    }
+
+    &:has(.cfa-radio--error) {
+        border-color: var(--color-border-error);
+    }
+
+    &:has(.cfa-radio--warning) {
+        border-color: var(--color-border-warning);
+    }
+}
+
 .checkbox_item {
     @apply flex items-center gap-cfa-sm;
     label { margin-bottom: 0; }
