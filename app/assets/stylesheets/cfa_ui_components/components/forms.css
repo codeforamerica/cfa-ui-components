@@ -150,7 +150,7 @@ select {
 }
 
 .cfa-radio:checked {
-  background: radial-gradient(circle, black 60%, white 60%);
+  background: radial-gradient(circle, var(--color-icon-default) 60%, white 60%);
 }
 
 
