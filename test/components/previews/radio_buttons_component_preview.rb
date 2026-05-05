@@ -39,13 +39,8 @@ class RadioButtonsComponentPreview < FormComponentPreview
   # @!endgroup
 
   # @!group Bordered
-  def bordered_default
-    render(RadioButtonsComponent.new(form: form(scope: :radio_bordered_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, bordered: true, scope: "bordered_default"))
-  end
-
-  def bordered_prefilled
-    custom_model = TestModel.new(pineapple_pizza_preference: "yes")
-    render(RadioButtonsComponent.new(form: form(model: custom_model, scope: :radio_bordered_prefilled), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, bordered: true, scope: "bordered_prefilled"))
+  def bordered
+    render(RadioButtonsComponent.new(form: form(scope: :radio_bordered), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, bordered: true, scope: "bordered"))
   end
 
   def bordered_with_error
