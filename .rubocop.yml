@@ -1,4 +1,10 @@
-inherit_gem: { standard: config/base.yml }
+plugins:
+  - rubocop-performance
+  - standard-custom
+
+inherit_gem:
+  standard: config/base.yml
+  standard-performance: config/base.yml
 
 # Overwrite or add rules to create your own house style
 #
