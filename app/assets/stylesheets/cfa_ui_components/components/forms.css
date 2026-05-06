@@ -2,12 +2,68 @@ form {
     @apply flex flex-col gap-y-cfa-xl;
 }
 
-.radio_button_item {
-    @apply space-x-cfa-sm;
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+textarea,
+select {
+    @apply border border-border-default rounded-lg px-cfa-sm py-cfa-sm bg-white text-text-default;
+
+    &:focus-visible {
+        @apply outline-2 outline-offset-2 outline-focus;
+    }
+
+    &:disabled {
+        @apply bg-background-disabled text-text-disabled border-border-disabled cursor-not-allowed;
+    }
 }
 
-.checkbox_item {
-    @apply space-x-cfa-sm;
+.form_item {
+    @apply flex items-center gap-cfa-sm;
+    label { margin-bottom: 0; }
+    .field_with_errors { display: contents; }
+}
+
+.form_item--bordered {
+    --border-width: 2px;
+    @apply relative border-border-default rounded-lg;
+    border-width: var(--border-width);
+    padding: calc(var(--spacing-cfa-med) - var(--border-width) + 2px);
+
+    label {
+        cursor: pointer;
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            border-radius: inherit;
+        }
+    }
+
+    &:has(input:checked) {
+        background-color: var(--color-primary-hover);
+        --border-width: 4px;
+    }
+
+    &:has(input:disabled) {
+        border-color: var(--color-border-disabled);
+        cursor: not-allowed;
+        label { cursor: not-allowed; }
+    }
+
+    &.form_item--warning {
+        border-color: var(--color-border-warning);
+    }
+
+    &:has(.cfa-radio--error) {
+        border-color: var(--color-border-error);
+    }
 }
 
 /* the css rules below are to remove the spin button from the input currency component */
@@ -21,19 +77,117 @@ form {
   -moz-appearance: textfield;
 }
 
-.form_errors {
-    @apply text-error mt-cfa-sm;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: normal;
-    a {
-        text-decoration: underline;
-    }
+.form_errors,
+.form_warning {
+    @apply mt-cfa-sm;
+}
+/* Checkbox */
+.cfa-checkbox {
+  @apply appearance-none border border-border-default bg-white cursor-pointer flex-shrink-0;
+  box-sizing: border-box;
+
+  &:checked {
+    @apply border-2;
+    background-color: var(--color-primary);
+  }
+
+  &:disabled {
+    border-color: var(--color-border-disabled);
+    background-color: var(--color-background-disabled);
+    cursor: not-allowed;
+  }
+
+  &:indeterminate {
+    background-color: var(--color-background-indeterminate);
+  }
+
+  &.cfa-checkbox--error {
+    @apply border-2 border-border-error;
+  }
+
+  &.cfa-checkbox--warning {
+    @apply border-2 border-border-warning;
+  }
 }
 
+.cfa-checkbox-wrap {
+  flex-shrink: 0;
+
+  .cfa-icon {
+    display: none;
+  }
+
+  &:has(.cfa-checkbox:checked) .cfa-icon {
+    display: inline-block;
+  }
+
+  &:has(.cfa-checkbox:indeterminate) .cfa-icon {
+    display: none;
+  }
+
+  &:has(.cfa-checkbox:indeterminate)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background-color: var(--color-text-default);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+/* Radio */
+.cfa-radio {
+  @apply appearance-none border-2 border-border-default rounded-full bg-white cursor-pointer relative;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+
+  &:checked {
+    background: radial-gradient(circle, var(--color-icon-default) 60%, white 60%);
+  }
+
+  &:disabled {
+    border-color: var(--color-border-disabled);
+    background-color: var(--color-background-disabled);
+    cursor: not-allowed;
+  }
+
+  &.cfa-radio--small {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.cfa-radio--error {
+    @apply border-border-error;
+  }
+
+  &.cfa-radio--warning {
+    @apply border-border-warning;
+  }
+}
+
+/* Standard invalid fields */
+[aria-invalid="true"],
+.field_with_errors input,
+.field_with_errors select,
+.field_with_errors textarea {
+  border-color: var(--color-border-error) !important;
+  outline-color: var(--color-border-error) !important;
+}
+
+/* Focus state */
+[aria-invalid="true"]:focus,
+.field_with_errors input:focus,
+.field_with_errors select:focus,
+.field_with_errors textarea:focus {
+  outline-color: var(--color-border-error) !important;
+}
+
+
 .field_with_errors {
-    display: inline;
-    input {
-        border-color: var(--color-border-error) !important;
-    }
+    display: block;
 }

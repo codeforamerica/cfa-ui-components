@@ -4,8 +4,10 @@ class FormComponentPreview < ViewComponent::Preview
   include ActionView::Helpers::FormHelper
   include ActionView::Helpers::FormOptionsHelper
 
-  private def form(model: TestModel.new)
-    form_with(url: "/", method: :post, model:) do |f|
+  private def form(model: TestModel.new, scope: nil)
+    opts = {url: "/", method: :post, model:}
+    opts[:scope] = scope if scope
+    form_with(**opts) do |f|
       return f
     end
   end
