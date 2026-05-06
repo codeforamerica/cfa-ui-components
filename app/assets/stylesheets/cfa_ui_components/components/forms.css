@@ -79,7 +79,7 @@ select {
 
 .form_errors,
 .form_warning {
-    @apply mt-cfa-sm type-body-label;
+    @apply mt-cfa-sm;
 }
 /* Checkbox */
 .cfa-checkbox {
