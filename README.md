@@ -24,6 +24,32 @@ Run `bin/dev` and navigate to localhost:3000
 # Contributing
 
 ## Setup
+
+### Ruby & Node Installation (via mise)
+
+We use [mise](https://mise.jdx.dev/) to manage Ruby and Node versions (replaces rbenv/nvm):
+
+```sh
+brew install mise
+# set mise to use legacy dotfiles like .ruby-version and .node-version
+mise settings add idiomatic_version_file_enable_tools ruby
+mise settings add idiomatic_version_file_enable_tools node
+```
+
+Follow the [mise activation instructions](https://mise.jdx.dev/getting-started.html#activate-mise) for your shell. e.g. for zsh:
+
+```sh
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Then, from the project directory:
+
+```sh
+mise install    # installs Ruby and Node
+```
+
+### Git hooks
 Install [lefthook](https://github.com/evilmartians/lefthook) and enable the git hooks:
 
 ```sh
