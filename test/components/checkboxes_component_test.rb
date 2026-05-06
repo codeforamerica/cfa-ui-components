@@ -61,7 +61,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       warning_message: "Heads up!"
     ))
     assert_selector ".form_warning", text: "Heads up!"
-    assert_selector "input[type='checkbox'].border-border-warning", count: 2
+    assert_selector "input[type='checkbox'].cfa-checkbox--warning", count: 2
     assert_selector ".form_warning .cfa-icon.text-warning"
   end
 
