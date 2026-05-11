@@ -1,12 +1,12 @@
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
-  <h2>
+  <h2 id="claimed-question-heading">
     Have you been claimed by anyone else on a tax return for 2024?
   </h2>
   <p>
     Explanation of what it means to be claimed.
   </p>
   <%= render(CardComponent.new) do %>
-    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, legend: "Have you been claimed by anyone else on a tax return for 2024?") %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, aria_labelledby: "claimed-question-heading") %>
   <% end %>
   <%= render(CardComponent.new) do %>
     <%= render InputComponent.new(form: f, method: :first_name, label: "Text input label") %>

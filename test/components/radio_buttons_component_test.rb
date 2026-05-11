@@ -77,7 +77,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick one"
     ))
     assert_selector "input[type='radio'].cfa-radio", count: 2
     assert_no_selector "input.cfa-radio--small"
@@ -90,7 +91,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      small: true
+      small: true,
+      legend: "Pick one"
     ))
     assert_selector "input[type='radio'].cfa-radio.cfa-radio--small", count: 2
   end
@@ -118,7 +120,33 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       legend: "Do you like pineapple on pizza?"
     ))
 
-    assert_selector "fieldset > legend", text: "Do you like pineapple on pizza?"
+    assert_selector "fieldset > legend.sr-only", text: "Do you like pineapple on pizza?"
+  end
+
+  def test_aria_labelledby_sets_fieldset_attribute_without_legend
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      aria_labelledby: "external-heading"
+    ))
+
+    assert_selector "fieldset[aria-labelledby='external-heading']"
+    assert_no_selector "legend"
+  end
+
+  def test_raises_when_neither_legend_nor_aria_labelledby_provided
+    assert_raises(ArgumentError) do
+      RadioButtonsComponent.new(
+        form: build_form,
+        method: :radio_field,
+        collection: simple_collection,
+        item_value_method: :value,
+        item_label_method: :label
+      )
+    end
   end
 
   def test_error_state_applies_error_modifier
@@ -129,7 +157,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick one"
     ))
     assert_selector "input[type='radio'].cfa-radio--error", count: 2
     assert_selector ".form_errors"
@@ -142,7 +171,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      warning_message: "Heads up!"
+      warning_message: "Heads up!",
+      legend: "Pick one"
     ))
     assert_selector "input[type='radio'].cfa-radio--warning", count: 2
     assert_selector ".form_warning", text: "Heads up!"
@@ -158,7 +188,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      warning_message: "Heads up!"
+      warning_message: "Heads up!",
+      legend: "Pick one"
     ))
     assert_selector ".form_errors"
     assert_selector ".form_warning", text: "Heads up!"
@@ -172,7 +203,8 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      scope: "abc"
+      scope: "abc",
+      legend: "Pick one"
     ))
     assert_selector "input[type='radio'][id$='_abc']", count: 2
     assert_selector "label[for$='_abc']", count: 2

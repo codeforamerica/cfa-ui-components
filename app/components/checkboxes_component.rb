@@ -5,7 +5,8 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
 
   # scope namespaces both the Alpine store key and the input id/label-for,
   # so multiple instances of this component can coexist on a single page.
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, legend:, small: false, warning_message: nil, item_states: {}, scope: nil)
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, legend: nil, aria_labelledby: nil, small: false, warning_message: nil, item_states: {}, scope: nil)
+    raise ArgumentError, "must provide legend: or aria_labelledby:" if legend.nil? && aria_labelledby.nil?
     super(form:, method:)
     @collection = collection
     @item_value_method = item_value_method
@@ -17,6 +18,7 @@ class CheckboxesComponent < AttributeBoundFormElementComponent
     raise ArgumentError, "Unknown item_states: #{invalid.inspect}. Allowed: #{ALLOWED_ITEM_STATES.inspect}" if invalid.any?
     @scope = scope
     @legend = legend
+    @aria_labelledby = aria_labelledby
   end
 
   private

@@ -1,5 +1,7 @@
-<fieldset class="fieldset-group" x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
-  <legend class="sr-only"><%= @legend %></legend>
+<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+  <% if @legend %>
+    <legend class="sr-only"><%= @legend %></legend>
+  <% end %>
   <%= @form.hidden_field @method, value: "" %>
   <div class="space-y-cfa-med <%= "has-error" if has_error? %>">
     <% content = capture {
