@@ -49,6 +49,10 @@ class BaseComponent < ViewComponent::Base
     "arrow_left" => {
       path: "icons/arrow_left.svg",
       alt: "back"
+    },
+    "cancel_circle" => {
+      path: "icons/cancel_circle.svg",
+      alt: "cancel"
     }
   }.freeze
 
