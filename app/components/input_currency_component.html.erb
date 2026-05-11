@@ -1,5 +1,5 @@
 <div class="currency-field space-y-cfa-sm">
-  <%= @form.label @method, @label, class: "label block #{required_class}" %>
+  <%= @form.label @method, label_with_optional_marker, class: "label block" %>
   <% if @help_text %>
     <p class="help_text">
       <%= @help_text %>
@@ -16,6 +16,7 @@
           "x-data": "",
           "x-mask:dynamic": "$money",
           "x-init": "$el.form?.addEventListener('formdata', (e) => { e.formData.set($el.name, $el.value.replace(/[^0-9.]/g, '')) }); $el.dispatchEvent(new Event('input'))",
+          **aria_required_attrs,
           **@number_field_kwargs %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>

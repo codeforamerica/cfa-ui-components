@@ -83,11 +83,6 @@ h2 {
     letter-spacing: 0;
 }
 
-.label.required::after {
-    @apply text-error;
-    content: " *";
-}
-
 .help_text {
     @apply block text-text-body-secondary;
     font-size: 13px;

@@ -6,5 +6,6 @@ class SingleCheckboxComponent < AttributeBoundFormElementComponent
     @label = label
     @checked = checked
     @disabled = disabled
+    @required = required
   end
 end

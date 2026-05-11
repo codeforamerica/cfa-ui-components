@@ -31,7 +31,7 @@ class ComboboxComponentTest < ViewComponent::TestCase
     assert_selector ".help_text", text: "Pick one"
   end
 
-  def test_required_adds_class_to_label
+  def test_required_sets_aria_required_and_omits_optional_marker
     render_inline(ComboboxComponent.new(
       form: build_form,
       method: :combobox_field,
@@ -41,7 +41,22 @@ class ComboboxComponentTest < ViewComponent::TestCase
       item_label_method: :label,
       required: true
     ))
-    assert_selector "label.required"
+    assert_selector "label", text: "Choose fruit"
+    assert_no_text "(optional)"
+    assert_selector "select[aria-required='true']"
+  end
+
+  def test_optional_appends_optional_marker_and_omits_aria_required
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    assert_selector "label", text: "Choose fruit (optional)"
+    assert_no_selector "select[aria-required]"
   end
 
   def test_item_disabled_method_marks_options_disabled

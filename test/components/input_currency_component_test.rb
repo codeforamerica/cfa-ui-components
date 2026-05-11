@@ -14,9 +14,17 @@ class InputCurrencyComponentTest < ViewComponent::TestCase
     assert_selector ".help_text", text: "Enter your Number"
   end
 
-  def test_required_adds_class_to_label
+  def test_required_sets_aria_required_and_omits_optional_marker
     render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number", required: true))
-    assert_selector "label.required"
+    assert_selector "label", text: "Number"
+    assert_no_text "(optional)"
+    assert_selector "input[type='text'][aria-required='true']"
+  end
+
+  def test_optional_appends_optional_marker_and_omits_aria_required
+    render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number"))
+    assert_selector "label", text: "Number (optional)"
+    assert_no_selector "input[aria-required]"
   end
 
   def test_strips_mask_formatting_from_submitted_formdata_and_reformats_seeded_value
