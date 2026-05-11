@@ -49,6 +49,10 @@ class BaseComponent < ViewComponent::Base
     "arrow_left" => {
       path: "icons/arrow_left.svg",
       alt: "back"
+    },
+    "loading" => {
+      path: "icons/loading.svg",
+      alt: "loading"
     }
   }.freeze
 
