@@ -53,6 +53,10 @@ class BaseComponent < ViewComponent::Base
     "loading" => {
       path: "icons/loading.svg",
       alt: "loading"
+    },
+    "cancel_circle" => {
+      path: "icons/cancel_circle.svg",
+      alt: "cancel"
     }
   }.freeze
 
