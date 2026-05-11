@@ -17,6 +17,7 @@ class FormComponentPreview < ViewComponent::Preview
     include ActiveModel::Attributes
 
     attribute :first_name
+    attribute :middle_name
     attribute :last_name
     attribute :pineapple_pizza_preference
     attribute :favorite_fruits
