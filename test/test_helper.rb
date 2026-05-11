@@ -16,6 +16,21 @@ class ComponentTestModel
   attribute :my_date
 end
 
+class RequiredFieldTestModel
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :text_field
+  attribute :select_field
+  attribute :combobox_field
+  attribute :checkbox_field
+
+  validates :text_field, presence: true
+  validates :select_field, presence: true
+  validates :combobox_field, presence: true
+  validates :checkbox_field, presence: true
+end
+
 module FormBuildable
   def build_form(model = ComponentTestModel.new)
     f = nil

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SelectComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, help_text: nil, required: false)
+  def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, help_text: nil, required: nil)
     super(form:, method:)
     @label = label
     @help_text = help_text

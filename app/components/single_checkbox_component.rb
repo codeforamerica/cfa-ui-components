@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SingleCheckboxComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, checked: nil, disabled: false, required: false)
+  def initialize(form:, method:, label:, checked: nil, disabled: false, required: nil)
     super(form:, method:)
     @label = label
     @checked = checked

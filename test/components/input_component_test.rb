@@ -26,4 +26,17 @@ class InputComponentTest < ViewComponent::TestCase
     assert_selector "label", text: "Full name (optional)"
     assert_no_selector "input[aria-required]"
   end
+
+  def test_infers_required_from_model_presence_validator
+    render_inline(InputComponent.new(form: build_form(RequiredFieldTestModel.new), method: :text_field, label: "Full name"))
+    assert_selector "label", text: "Full name"
+    assert_no_text "(optional)"
+    assert_selector "input[type='text'][aria-required='true']"
+  end
+
+  def test_explicit_required_false_overrides_inferred_presence_validator
+    render_inline(InputComponent.new(form: build_form(RequiredFieldTestModel.new), method: :text_field, label: "Full name", required: false))
+    assert_selector "label", text: "Full name (optional)"
+    assert_no_selector "input[aria-required]"
+  end
 end
