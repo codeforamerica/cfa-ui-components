@@ -12,20 +12,20 @@ body {
 
 h1 {
     font-family: "Geologica", sans-serif;
-    font-size: 48px;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0;
-    margin-bottom: 60px;
-}
-
-h2 {
-    font-family: "Geologica", sans-serif;
     font-size: 22px;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
     margin-bottom: 28px;
+}
+
+.type-display {
+    font-family: "Geologica", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+    margin-bottom: 60px;
 }
 
 .type-body {
