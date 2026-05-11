@@ -2,6 +2,14 @@ a {
     &:not(.btn) {
         @apply text-link-unvisited underline;
     }
+
+    &:not(.btn):hover {
+        @apply no-underline;
+    }
+
+    &:not(.btn):focus-visible {
+        @apply outline-2 outline-offset-2 outline-focus rounded-sm;
+    }
 }
 
 a:visited {
