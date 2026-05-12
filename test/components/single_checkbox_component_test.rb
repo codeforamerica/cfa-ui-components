@@ -26,11 +26,4 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     render_inline(SingleCheckboxComponent.new(form: build_form(model), method: :checkbox_field, label: "I agree"))
     assert_selector "input.border-border-error"
   end
-
-  def test_infers_required_from_acceptance_validator
-    render_inline(SingleCheckboxComponent.new(form: build_form(RequiredFieldTestModel.new), method: :consent_field, label: "I agree"))
-    assert_selector "label", text: "I agree"
-    assert_no_text "(optional)"
-    assert_selector "input[type='checkbox'][aria-required='true']"
-  end
 end

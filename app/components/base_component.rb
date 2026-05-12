@@ -95,7 +95,7 @@ class BaseComponent < ViewComponent::Base
   def required?
     return @required unless @required.nil?
     return false unless @form&.object.class.respond_to?(:validators_on)
-    @form.object.class.validators_on(@method).any? { |v| v.kind == :presence || v.kind == :acceptance }
+    @form.object.class.validators_on(@method).any? { |v| v.kind == :presence }
   end
 
   def label_with_optional_marker

@@ -24,13 +24,11 @@ class RequiredFieldTestModel
   attribute :select_field
   attribute :combobox_field
   attribute :checkbox_field
-  attribute :consent_field
 
   validates :text_field, presence: true
   validates :select_field, presence: true
   validates :combobox_field, presence: true
   validates :checkbox_field, presence: true
-  validates :consent_field, acceptance: true
 end
 
 module FormBuildable
