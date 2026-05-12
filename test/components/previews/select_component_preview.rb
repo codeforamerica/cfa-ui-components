@@ -14,8 +14,8 @@ class SelectComponentPreview < FormComponentPreview
     render(SelectComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
-  def required
-    render(SelectComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label))
+  def optional
+    render(SelectComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, optional: true))
   end
 
   def with_help_text
