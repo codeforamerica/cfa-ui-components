@@ -12,7 +12,7 @@
     <%= render InputComponent.new(form: f, method: :first_name, label: "First name") %>
   <% end %>
   <%= render(CardComponent.new) do %>
-    <%= render InputComponent.new(form: f, method: :middle_name, label: "Middle name") %>
+    <%= render InputComponent.new(form: f, method: :middle_name, label: "Middle name", optional: true) %>
   <% end %>
   <%= render(CardComponent.new) do %>
     <%= render InputComponent.new(form: f, method: :last_name, label: "Last name", help_text: "Help text") %>

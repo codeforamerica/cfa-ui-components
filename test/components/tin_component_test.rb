@@ -14,15 +14,15 @@ class TinComponentTest < ViewComponent::TestCase
     assert_selector ".help_text", text: "Enter your SSN"
   end
 
-  def test_required_sets_aria_required_and_omits_optional_marker
-    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number", required: true))
+  def test_required_by_default_sets_aria_required_and_omits_optional_marker
+    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
     assert_selector "label", text: "Social Security Number"
     assert_no_text "(optional)"
     assert_selector "input[type='text'][aria-required='true']"
   end
 
   def test_optional_appends_optional_marker_and_omits_aria_required
-    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
+    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number", optional: true))
     assert_selector "label", text: "Social Security Number (optional)"
     assert_no_selector "input[type='text'][aria-required]"
   end

@@ -93,12 +93,12 @@ class BaseComponent < ViewComponent::Base
   end
 
   def label_with_optional_marker
-    return @label if @required
+    return @label unless @optional
     "#{@label} (#{I18n.t("cfaui.optional")})"
   end
 
   def aria_required_attrs
-    @required ? {"aria-required" => "true"} : {}
+    @optional ? {} : {"aria-required" => "true"}
   end
 
   def checkbox_wrap(checkbox_html, small: false)

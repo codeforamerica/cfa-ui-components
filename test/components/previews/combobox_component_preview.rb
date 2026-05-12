@@ -19,7 +19,7 @@ class ComboboxComponentPreview < FormComponentPreview
   end
 
   def required
-    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), help_text: I18n.t(:fruit_help_text), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label, required: true))
+    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), help_text: I18n.t(:fruit_help_text), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
   def with_disabled_options
