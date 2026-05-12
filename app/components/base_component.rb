@@ -50,6 +50,10 @@ class BaseComponent < ViewComponent::Base
       path: "icons/arrow_left.svg",
       alt: "back"
     },
+    "loading" => {
+      path: "icons/loading.svg",
+      alt: "loading"
+    },
     "cancel_circle" => {
       path: "icons/cancel_circle.svg",
       alt: "cancel"
