@@ -9,14 +9,14 @@ class PrefilledTextFieldComponentTest < ViewComponent::TestCase
     assert_selector "span", text: "John"
   end
 
-  def test_currency_style_formats_with_dollar_sign_and_delimiter
-    render_inline(PrefilledTextFieldComponent.new(text: 1234, label: "Amount", style: :currency))
+  def test_currency_variant_formats_with_dollar_sign_and_delimiter
+    render_inline(PrefilledTextFieldComponent.new(text: 1234, label: "Amount", variant: :currency))
     assert_selector "span", text: "$1,234"
   end
 
-  def test_invalid_style_raises
+  def test_invalid_variant_raises
     assert_raises(ArgumentError) do
-      PrefilledTextFieldComponent.new(text: "foo", label: "bar", style: :invalid)
+      PrefilledTextFieldComponent.new(text: "foo", label: "bar", variant: :invalid)
     end
   end
 end
