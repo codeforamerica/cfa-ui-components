@@ -16,7 +16,6 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 28px;
 }
 
 .type-display {
@@ -33,7 +32,6 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
 .type-body-bold, h3 {
@@ -42,7 +40,6 @@ h1 {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 20px;
 }
 
 .type-body-label, .label {
@@ -63,7 +60,6 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
 .type-button {
