@@ -24,9 +24,8 @@ select {
 }
 
 .form_item {
-    @apply flex items-center;
-    label { margin-bottom: 0; margin-left: var(--spacing-cfa-sm); }
-    .field_with_errors { display: inline-flex; }
+    @apply flex items-center gap-cfa-sm;
+    .field_with_errors { display: contents; }
 }
 
 .form_item--bordered {

@@ -12,20 +12,19 @@ body {
 
 h1 {
     font-family: "Geologica", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+}
+
+.type-display {
+    font-family: "Geologica", sans-serif;
     font-size: 48px;
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0;
     margin-bottom: 60px;
-}
-
-h2 {
-    font-family: "Geologica", sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0;
-    margin-bottom: 28px;
 }
 
 .type-body {
@@ -34,7 +33,6 @@ h2 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
 .type-body-bold, h3 {
@@ -43,7 +41,6 @@ h2 {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 20px;
 }
 
 .type-body-label, .label {
@@ -64,7 +61,6 @@ h2 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
 .type-button {
