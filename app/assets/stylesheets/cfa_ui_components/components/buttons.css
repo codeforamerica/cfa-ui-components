@@ -145,7 +145,7 @@
 }
 
 .yes-no-buttons__button.is-selected {
-    background-color: #D8DFFF;
+    @apply bg-background-secondary-hover;
 }
 
 .yes-no-buttons__button.is-selected .yes-no-buttons__check {
