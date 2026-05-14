@@ -49,8 +49,8 @@
 }
 
 .btn--secondary {
-    @apply bg-background-secondary border-primary text-text-default;
-    @apply hover:bg-background-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
+    @apply bg-button-surface-secondary border-primary text-text-default;
+    @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
 .btn--secondary[disabled],
@@ -125,7 +125,7 @@
 
 .yes-no-buttons__button {
     @apply relative flex flex-1 items-center justify-center rounded cursor-pointer;
-    @apply bg-background-secondary text-text-default;
+    @apply bg-button-surface-secondary text-text-default;
     @apply border-2 border-border-default;
     gap: 10px;
     padding: 16px 24px;
@@ -145,7 +145,7 @@
 }
 
 .yes-no-buttons__button.is-selected {
-    @apply bg-background-secondary-hover;
+    @apply bg-button-surface-secondary-hover;
 }
 
 .yes-no-buttons__button.is-selected .yes-no-buttons__check {

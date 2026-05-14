@@ -9,7 +9,8 @@
     /* Background colors */
     --color-background-app: #FFFFF5;
     --color-background-navigation: #011E29;
-    --color-background-secondary: #EEF1FF;
+    --color-button-surface-secondary: #EEF1FF;
+    --color-background-secondary: #E5E5E5;
     --color-background-container: #EBECDC;
     --color-background-destructive-hover: #F8DEDE;
     --color-background-destructive-active: #E8B5B5;
@@ -30,7 +31,7 @@
     --color-border-secondary: #CCD2D4;
     --color-border-error: #B50909;
     --color-border-warning: #B27A00;
-    --color-border-disabled: #999999;
+    --color-border-disabled: #B3BBBF;
 
     /* Link colors */
     --color-link-unvisited: #007C7C;
@@ -40,7 +41,7 @@
     --color-primary: #9EB0FF;
     --color-primary-hover: #ECEFFF;
     --color-primary-pressed: #E2E7FF;
-    --color-background-secondary-hover: #CFD7FF;
+    --color-button-surface-secondary-hover: #CFD7FF;
     --color-accent: #637FFF;
     --color-focus: #339696;
 
