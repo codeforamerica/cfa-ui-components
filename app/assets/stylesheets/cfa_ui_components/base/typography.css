@@ -25,7 +25,6 @@ h1 {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 60px;
 }
 
 .type-body {
@@ -58,7 +57,7 @@ h1 {
     & ol > li + li { margin-top: 15px; }
 }
 
-.type-progress-text {
+.type-progress-text, .help_text {
     font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -90,6 +89,4 @@ h1 {
 
 .help_text {
     @apply block text-text-body-secondary;
-    font-size: 13px;
-    font-weight: 400;
 }
