@@ -21,7 +21,7 @@ class CardComponentTest < ViewComponent::TestCase
   def test_informational_variant_renders_content
     render_inline(CardComponent.new(variant: :informational)) { "Info body" }
     assert_text "Info body"
-    assert_selector "div.rounded-md"
+    assert_selector "div.rounded-lg"
     assert_no_selector "div.border"
   end
 end
