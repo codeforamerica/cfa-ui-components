@@ -11,11 +11,11 @@ class SubmitButtonComponentPreview < FormComponentPreview
 
   # @!group Secondary
   def secondary
-    render(SubmitButtonComponent.new(form:, style: :secondary))
+    render(SubmitButtonComponent.new(form:, variant: :secondary))
   end
 
   def secondary_disabled
-    render(SubmitButtonComponent.new(form:, style: :secondary, disabled: true))
+    render(SubmitButtonComponent.new(form:, variant: :secondary, disabled: true))
   end
   # @!endgroup
 
