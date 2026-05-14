@@ -83,13 +83,13 @@
 }
 
 .btn--small {
-    @apply px-3 py-2 w-fit;
+    @apply px-3 py-2 w-fit rounded;
     font-size: 16px;
     font-weight: 700;
 }
 
 .btn--back {
-    @apply rounded-lg bg-white border-primary text-text-default;
+    @apply bg-white border-primary text-text-default;
     font-weight: 400;
 }
 
