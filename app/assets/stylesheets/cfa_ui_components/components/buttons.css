@@ -94,7 +94,7 @@
 }
 
 .btn--back {
-    @apply rounded bg-white border-primary text-text-default;
+    @apply bg-white border-primary text-text-default;
     font-weight: 400;
 }
 
