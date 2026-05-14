@@ -53,9 +53,9 @@
     --color-black: #000000;
 }
 
-@import "./base/typography.css";
-@import "./base/lists.css";
-@import "./base/links.css";
+@import "./base/typography.css" layer(base);
+@import "./base/lists.css" layer(base);
+@import "./base/links.css" layer(base);
 
 @import "./components/layout.css";
 @import "./components/forms.css";
