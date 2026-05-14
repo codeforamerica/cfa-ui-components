@@ -36,7 +36,7 @@
 }
 
 .btn--primary:active {
-    @apply bg-primary-hover border-primary;
+    @apply bg-primary-pressed border-primary;
 }
 
 .btn--primary:active::before {
@@ -50,7 +50,7 @@
 
 .btn--secondary {
     @apply bg-background-secondary border-primary text-text-default;
-    @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
+    @apply hover:bg-background-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
 .btn--secondary[disabled],
@@ -59,7 +59,7 @@
 }
 
 .btn--secondary:active {
-    @apply bg-primary-hover;
+    @apply bg-primary-pressed;
 }
 
 .btn--secondary:active::before {
