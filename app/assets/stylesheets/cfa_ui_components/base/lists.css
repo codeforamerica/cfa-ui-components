@@ -13,3 +13,15 @@ ol {
 ul ul, ul ol, ol ul, ol ol {
     @apply space-y-cfa-sm mt-cfa-sm;
 }
+
+p + ul, p + ol {
+    @apply mt-cfa-med;
+}
+
+ol ol {
+    list-style-type: lower-alpha;
+}
+
+ol ol ol {
+    list-style-type: lower-roman;
+}

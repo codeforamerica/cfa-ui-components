@@ -13,7 +13,7 @@
     <%= @form.label(
           @method,
           @label,
-          class: (@disabled ? "text-text-disabled" : "text-text-default")
+          class: ("text-text-disabled" if @disabled)
         ) %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
