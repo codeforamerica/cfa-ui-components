@@ -36,21 +36,21 @@
 }
 
 .btn--primary:active {
-    @apply bg-primary-hover border-primary;
+    @apply bg-primary-pressed border-border-default;
 }
 
 .btn--primary:active::before {
     content: '';
     position: absolute;
     inset: 4px;
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-border-default);
     border-radius: 8px;
     pointer-events: none;
 }
 
 .btn--secondary {
-    @apply bg-background-secondary border-primary text-text-default;
-    @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
+    @apply bg-button-surface-secondary border-primary text-text-default;
+    @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
 .btn--secondary[disabled],
@@ -59,7 +59,7 @@
 }
 
 .btn--secondary:active {
-    @apply bg-primary-hover;
+    @apply bg-primary-pressed;
 }
 
 .btn--secondary:active::before {
@@ -83,9 +83,14 @@
 }
 
 .btn--small {
-    @apply px-3 py-2 w-fit;
+    @apply px-3 py-2 w-fit rounded;
     font-size: 16px;
     font-weight: 700;
+}
+
+.btn--small:active::before,
+.btn--small.is-active::before {
+    border-radius: 4px;
 }
 
 .btn--back {
@@ -120,7 +125,7 @@
 
 .yes-no-buttons__button {
     @apply relative flex flex-1 items-center justify-center rounded cursor-pointer;
-    @apply bg-background-secondary text-text-default;
+    @apply bg-button-surface-secondary text-text-default;
     @apply border-2 border-border-default;
     gap: 10px;
     padding: 16px 24px;
@@ -140,7 +145,7 @@
 }
 
 .yes-no-buttons__button.is-selected {
-    background-color: #D8DFFF;
+    @apply bg-button-surface-secondary-hover;
 }
 
 .yes-no-buttons__button.is-selected .yes-no-buttons__check {
