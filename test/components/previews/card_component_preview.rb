@@ -26,6 +26,19 @@ class CardComponentPreview < ViewComponent::Preview
     end
   end
 
+  def informational
+    render(CardComponent.new(variant: :informational)) do
+      content_tag(:h3, "Informational card") +
+        content_tag(:ul) do
+          safe_join([
+            content_tag(:li, "Lorem ipsum dolor sit amet"),
+            content_tag(:li, "Consectetur adipiscing elit"),
+            content_tag(:li, "Ut volutpat ornare elit a vestibulum")
+          ])
+        end
+    end
+  end
+
   def action
     render(CardComponent.new) do |card|
       card.with_image { content_tag(:div, "", class: "h-[194px] bg-zinc-200") }

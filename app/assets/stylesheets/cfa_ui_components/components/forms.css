@@ -24,14 +24,14 @@ select {
 }
 
 .form_item {
-    @apply flex items-center gap-cfa-sm;
-    label { margin-bottom: 0; }
-    .field_with_errors { display: contents; }
+    @apply flex items-center;
+    label { margin-bottom: 0; margin-left: var(--spacing-cfa-sm); }
+    .field_with_errors { display: inline-flex; }
 }
 
 .form_item--bordered {
     --border-width: 2px;
-    @apply relative border-border-default rounded-lg;
+    @apply relative border-border-default rounded-lg bg-white;
     border-width: var(--border-width);
     padding: calc(var(--spacing-cfa-med) - var(--border-width) + 2px);
 
@@ -98,6 +98,7 @@ select {
   }
 
   &:indeterminate {
+    @apply border-2;
     background-color: var(--color-background-indeterminate);
   }
 
@@ -132,7 +133,7 @@ select {
     left: 20%;
     right: 20%;
     height: 2px;
-    background-color: var(--color-text-default);
+    background-color: var(--color-icon-default);
     transform: translateY(-50%);
     pointer-events: none;
   }
@@ -140,7 +141,7 @@ select {
 
 /* Radio */
 .cfa-radio {
-  @apply appearance-none border-2 border-border-default rounded-full bg-white cursor-pointer relative;
+  @apply appearance-none border-2 border-icon-default rounded-full bg-white cursor-pointer relative;
   box-sizing: border-box;
   width: 24px;
   height: 24px;

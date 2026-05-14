@@ -49,6 +49,14 @@ class BaseComponent < ViewComponent::Base
     "arrow_left" => {
       path: "icons/arrow_left.svg",
       alt: "back"
+    },
+    "loading" => {
+      path: "icons/loading.svg",
+      alt: "loading"
+    },
+    "cancel_circle" => {
+      path: "icons/cancel_circle.svg",
+      alt: "cancel"
     }
   }.freeze
 
@@ -87,7 +95,7 @@ class BaseComponent < ViewComponent::Base
   def checkbox_wrap(checkbox_html, small: false)
     size = small ? 16 : 24
     box = small ? "h-4 w-4" : "h-6 w-6"
-    icon = inline_icon(:check, size:, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-text-default")
+    icon = inline_icon(:check, size:, aria_hidden: true, css_class: "absolute inset-0 pointer-events-none text-icon-default")
     content_tag :span, checkbox_html + icon, class: "cfa-checkbox-wrap relative inline-flex #{box}"
   end
 end
