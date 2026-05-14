@@ -2,6 +2,10 @@ form {
     @apply flex flex-col gap-y-cfa-xl;
 }
 
+.fieldset-group {
+    @apply border-none p-0 m-0 min-w-0;
+}
+
 input[type="text"],
 input[type="number"],
 input[type="email"],

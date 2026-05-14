@@ -62,7 +62,8 @@ class LabelInputAssociationTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
 
     page.all(".checkbox_item").each do |item|
@@ -79,7 +80,8 @@ class LabelInputAssociationTest < ViewComponent::TestCase
       method: :radio_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick one"
     ))
 
     page.all(".radio_button_item").each do |item|

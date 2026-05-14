@@ -1,8 +1,8 @@
-<div x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
-  <%= @form.hidden_field @method, value: "" %>
-  <% if @legend.present? %>
-    <p class="label text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
+<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
+  <% if @legend %>
+    <legend class="sr-only"><%= @legend %></legend>
   <% end %>
+  <%= @form.hidden_field @method, value: "" %>
   <% content = content_tag(:div, class: @layout) do
        capture do
          @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
@@ -33,4 +33,4 @@
       <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
     <% end %>
   </div>
-</div>
+</fieldset>
