@@ -18,6 +18,10 @@ class BaseComponent < ViewComponent::Base
       path: "icons/circle_check.svg",
       alt: "check mark"
     },
+    "circle_check_filled" => {
+      path: "icons/circle_check_filled.svg",
+      alt: "check mark"
+    },
     "check" => {
       path: "icons/check.svg",
       alt: "check mark"
