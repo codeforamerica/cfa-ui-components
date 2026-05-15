@@ -9,6 +9,7 @@
 .btn[disabled],
 .btn:disabled {
     @apply pointer-events-none cursor-not-allowed;
+    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn:focus-visible::after,
@@ -30,11 +31,6 @@
     @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
-.btn--primary[disabled],
-.btn--primary:disabled {
-    @apply bg-background-disabled text-text-disabled border-transparent shadow-none;
-}
-
 .btn--primary:active {
     @apply bg-primary-pressed border-border-default;
 }
@@ -51,11 +47,6 @@
 .btn--secondary {
     @apply bg-button-surface-secondary border-primary text-text-default;
     @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
-}
-
-.btn--secondary[disabled],
-.btn--secondary:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn--secondary:active {
@@ -75,11 +66,6 @@
     @apply bg-white border-border-error text-destructive;
     @apply hover:bg-background-destructive-hover hover:outline-2 hover:outline-border-error hover:shadow-[0_4px_0_0_var(--color-background-destructive-hover)];
     @apply active:bg-background-destructive-active active:outline-2 active:outline-border-error;
-}
-
-.btn--destructive[disabled],
-.btn--destructive:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn--small {
@@ -106,11 +92,6 @@
 .btn--back:active,
 .btn--back.is-active {
     @apply bg-primary-hover border-border-default;
-}
-
-.btn--back[disabled],
-.btn--back:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn--large {
