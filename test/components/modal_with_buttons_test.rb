@@ -2,17 +2,17 @@
 
 require "test_helper"
 
-# Tests that ModalComponent correctly composes with ButtonLinkComponent
+# Tests that ModalComponent correctly composes with ButtonComponent
 # in its button slots.
 class ModalWithButtonsTest < ViewComponent::TestCase
-  def test_modal_renders_button_link_components_in_slots
+  def test_modal_renders_button_components_in_slots
     render_inline(ModalComponent.new(name: "confirm")) do |modal|
       modal.with_header { "Are you sure?" }
       modal.with_button do
-        vc_test_controller.view_context.render(ButtonLinkComponent.new(label: "Confirm", url: "/confirm", variant: :primary))
+        vc_test_controller.view_context.render(ButtonComponent.new(label: "Confirm", url: "/confirm", variant: :primary))
       end
       modal.with_button do
-        vc_test_controller.view_context.render(ButtonLinkComponent.new(label: "Cancel", url: "#", variant: :secondary))
+        vc_test_controller.view_context.render(ButtonComponent.new(label: "Cancel", url: "#", variant: :secondary))
       end
       "This action cannot be undone."
     end
