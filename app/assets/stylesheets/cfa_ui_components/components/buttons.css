@@ -80,18 +80,18 @@
 }
 
 .btn--back {
-    @apply bg-white border-primary text-text-default;
+    @apply bg-white border-border-default text-text-default;
     font-weight: 400;
 }
 
 .btn--back:hover,
 .btn--back.is-hover {
-    @apply bg-primary-hover;
+    @apply bg-primary-hover border-transparent;
 }
 
 .btn--back:active,
 .btn--back.is-active {
-    @apply bg-primary-hover border-border-default;
+    @apply bg-primary-pressed border-border-default;
 }
 
 .btn--large {
