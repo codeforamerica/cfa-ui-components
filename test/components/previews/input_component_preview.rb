@@ -7,8 +7,8 @@ class InputComponentPreview < FormComponentPreview
     render(InputComponent.new(form:, method: :first_name, label: I18n.t(:first_name), help_text: "Or preferred name"))
   end
 
-  def required
-    render(InputComponent.new(form:, method: :first_name, label: I18n.t(:first_name), required: true))
+  def optional
+    render(InputComponent.new(form:, method: :first_name, label: I18n.t(:first_name), optional: true))
   end
 
   def prefilled

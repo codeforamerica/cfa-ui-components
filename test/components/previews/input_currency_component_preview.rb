@@ -3,8 +3,8 @@ class InputCurrencyComponentPreview < FormComponentPreview
     render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), min: 0))
   end
 
-  def required
-    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), min: 0, required: true))
+  def optional
+    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), min: 0, optional: true))
   end
 
   def with_helper_text
