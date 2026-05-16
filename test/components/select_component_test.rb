@@ -30,7 +30,21 @@ class SelectComponentTest < ViewComponent::TestCase
     assert_selector ".help_text", text: "Select an option"
   end
 
-  def test_required_adds_class_to_label
+  def test_required_by_default_sets_aria_required_and_omits_optional_marker
+    render_inline(SelectComponent.new(
+      form: build_form,
+      method: :select_field,
+      label: "Pick one",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    assert_selector "label", text: "Pick one"
+    assert_no_text "(optional)"
+    assert_selector "select[aria-required='true']"
+  end
+
+  def test_optional_appends_optional_marker_and_omits_aria_required
     render_inline(SelectComponent.new(
       form: build_form,
       method: :select_field,
@@ -38,8 +52,9 @@ class SelectComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      required: true
+      optional: true
     ))
-    assert_selector "label.required"
+    assert_selector "label", text: "Pick one (optional)"
+    assert_no_selector "select[aria-required]"
   end
 end

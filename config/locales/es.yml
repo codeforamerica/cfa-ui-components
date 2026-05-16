@@ -2,8 +2,9 @@ es:
   back: Regresa
   continue: Continuar
   cfaui:
+    optional: opcional
     modal:
-      close_aria: Cerrar modal 
+      close_aria: Cerrar modal
   decline: Rechazar
   remove: Eliminar
   favorite_fruits: Frutas favoritas
