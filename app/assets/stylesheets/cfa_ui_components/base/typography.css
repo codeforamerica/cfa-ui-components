@@ -12,20 +12,19 @@ body {
 
 h1 {
     font-family: "Geologica", sans-serif;
-    font-size: 48px;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0;
-    margin-bottom: 60px;
-}
-
-h2 {
-    font-family: "Geologica", sans-serif;
     font-size: 22px;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
     margin-bottom: 28px;
+}
+
+.type-display {
+    font-family: "Geologica", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
 }
 
 .type-body {
@@ -58,7 +57,7 @@ h2 {
     & ol > li + li { margin-top: 15px; }
 }
 
-.type-progress-text {
+.type-progress-text, .help_text {
     font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -85,6 +84,4 @@ h2 {
 
 .help_text {
     @apply block text-text-body-secondary;
-    font-size: 13px;
-    font-weight: 400;
 }
