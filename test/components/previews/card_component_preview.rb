@@ -8,7 +8,7 @@ class CardComponentPreview < ViewComponent::Preview
 
   def with_heading
     render(CardComponent.new) do
-      content_tag(:h2, "Sample form card") +
+      content_tag(:h3, "Sample form card") +
         content_tag(:p, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", class: "m-0") +
         content_tag(:p, "Ut volutpat ornare elit a vestibulum.", class: "m-0")
     end
