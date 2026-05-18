@@ -36,6 +36,6 @@ class ModalWithButtonsTest < ViewComponent::TestCase
     end
 
     assert_selector "dialog"
-    assert_selector "input[type='submit'][value='Submit']"
+    assert_selector "button[type='submit']", text: "Submit"
   end
 end
