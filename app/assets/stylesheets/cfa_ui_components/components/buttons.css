@@ -9,6 +9,7 @@
 .btn[disabled],
 .btn:disabled {
     @apply pointer-events-none cursor-not-allowed;
+    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn:focus-visible::after,
@@ -30,11 +31,6 @@
     @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
-.btn--primary[disabled],
-.btn--primary:disabled {
-    @apply bg-background-disabled text-text-disabled border-transparent shadow-none;
-}
-
 .btn--primary:active {
     @apply bg-primary-pressed border-border-default;
 }
@@ -51,11 +47,6 @@
 .btn--secondary {
     @apply bg-button-surface-secondary border-primary text-text-default;
     @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
-}
-
-.btn--secondary[disabled],
-.btn--secondary:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn--secondary:active {
@@ -77,11 +68,6 @@
     @apply active:bg-background-destructive-active active:outline-2 active:outline-border-error;
 }
 
-.btn--destructive[disabled],
-.btn--destructive:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
-}
-
 .btn--small {
     @apply px-3 py-2 w-fit rounded;
     font-size: 16px;
@@ -94,23 +80,18 @@
 }
 
 .btn--back {
-    @apply bg-white border-primary text-text-default;
+    @apply bg-white border-border-default text-text-default;
     font-weight: 400;
 }
 
 .btn--back:hover,
 .btn--back.is-hover {
-    @apply bg-primary-hover;
+    @apply bg-primary-hover border-transparent;
 }
 
 .btn--back:active,
 .btn--back.is-active {
-    @apply bg-primary-hover border-border-default;
-}
-
-.btn--back[disabled],
-.btn--back:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
+    @apply bg-primary-pressed border-border-default;
 }
 
 .btn--large {

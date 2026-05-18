@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ButtonLinkComponent < BaseComponent
+class ButtonComponent < BaseComponent
   def initialize(label:, url:, variant: :primary, method: nil, size: :large, turbo: true, icon: nil, disabled: false, html_attrs: nil)
     html_attrs ||= {}
     if disabled
