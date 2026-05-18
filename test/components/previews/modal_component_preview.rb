@@ -4,9 +4,6 @@ class ModalComponentPreview < ViewComponent::Preview
   # @!group Basic
   def default
   end
-
-  def link_call_to_action
-  end
   # @!endgroup
 
   # @!group Button combinations
