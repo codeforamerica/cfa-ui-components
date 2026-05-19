@@ -120,7 +120,6 @@ options_for_js = month_options.map { |label, value| {label: label, value: value}
           class="memorable-date__listbox"
           role="listbox"
           :aria-labelledby="'<%= input_id(2) %>-label'"
-          tabindex="-1"
         >
           <% month_options.each_with_index do |(label, value), idx| %>
             <li
@@ -130,7 +129,7 @@ options_for_js = month_options.map { |label, value| {label: label, value: value}
               :class="{ 'memorable-date__option--active': activeIndex === <%= idx %> }"
               :aria-selected="value === '<%= value %>' ? 'true' : 'false'"
               @click="selectAt(<%= idx %>)"
-              @mousemove="activeIndex = <%= idx %>"
+              @mouseenter="activeIndex = <%= idx %>"
             >
               <%= label %>
             </li>
