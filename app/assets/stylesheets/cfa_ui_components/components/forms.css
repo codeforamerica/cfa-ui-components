@@ -194,27 +194,124 @@ select {
 }
 
 
-/* Chevron block (matches Figma right-side area) */
-.chevron-wrap {
-  width: 48px;
-  height: 100%;
+/* Memorable date component */
+.memorable-date__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.memorable-date__label {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  color: var(--color-text-default);
+}
+
+.memorable-date .help_text {
+  margin: 0;
+}
+
+.memorable-date__input {
+  @apply border border-border-default rounded bg-white text-text-default;
+  height: 41px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 8px;
+
+  &:focus-visible {
+    @apply outline-none border-focus;
+    border-width: 2px;
+  }
+}
+
+.memorable-date__input--day { width: 48px; }
+.memorable-date__input--year { width: 72px; }
+
+.memorable-date__select {
+  @apply flex items-center justify-between w-full border border-border-default rounded bg-white text-text-default overflow-hidden;
+  height: 41px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  &:focus-visible {
+    @apply outline-none border-focus;
+    border-width: 2px;
+  }
+
+  &[aria-expanded="true"] {
+    @apply rounded-b-none;
+  }
+}
+
+.memorable-date__select--open {
+  @apply rounded-b-none;
+}
+
+.memorable-date__chevron-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e5e7eb; /* light grey */
-  border-left: 1px solid #c8ced2;
+  width: 40px;
+  height: 100%;
+  background: #e9e9e9;
+  border-left: 1px solid var(--color-border-default);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
-/* Chevron (smaller, correct scale) */
-.chevron {
+.memorable-date__chevron {
   width: 8px;
   height: 8px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
+  border-right: 2px solid var(--color-text-default);
+  border-bottom: 2px solid var(--color-text-default);
   transform: rotate(45deg);
   transition: transform 0.15s ease;
+  margin-top: -3px;
 }
 
-.chevron--open {
+.memorable-date__chevron--open {
   transform: rotate(225deg);
+  margin-top: 3px;
+}
+
+ul.memorable-date__listbox {
+  position: absolute;
+  left: 0;
+  top: 41px;
+  z-index: 10;
+  width: 100%;
+  background: white;
+  border-left: 1px solid var(--color-border-secondary);
+  border-right: 1px solid var(--color-border-secondary);
+  border-bottom: 1px solid var(--color-border-secondary);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & > li + li { margin-top: 0; }
+}
+
+li.memorable-date__option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-text-default);
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  height: 41px;
+  padding: 0 8px;
+  margin: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border-secondary);
+
+  &:first-child { border-top: 0; }
+  &:hover { background-color: var(--color-primary-hover); }
 }

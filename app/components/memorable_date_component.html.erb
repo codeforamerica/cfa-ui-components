@@ -1,66 +1,47 @@
-<div>
+<div class="memorable-date">
   <% invalid = @form.object.errors[@method].any? %>
-  <p class="text-[16px] mb-cfa-sm">
-    <strong><%= @label %></strong>
-  </p>
-  <% if @helper_text %>
-    <p class="help_text mb-cfa-sm">
-      <%= @helper_text %>
-    </p>
-  <% end %>
-  <div class="flex">
-    <div>
-      <%= label_tag input_id(2), @label_month, class: "label" %><br>
+  <div class="memorable-date__heading">
+    <p class="memorable-date__label"><%= @label %></p>
+    <% if @helper_text %>
+      <p class="help_text"><%= @helper_text %></p>
+    <% end %>
+  </div>
+  <div class="flex gap-cfa-sm items-end">
+    <div class="w-[177px]">
+      <%= label_tag input_id(2), @label_month, class: "label block mb-cfa-xsm" %>
       <div
         x-data="{ open: false, value: '<%= month_value %>', label: '<%= month_value.present? ? month_options.to_h.invert[month_value] : @label_month_select %>' }"
-        class="relative mr-cfa-sm mt-cfa-sm w-[210px]"
+        class="relative"
         @click.outside="open = false"
         @keydown.escape.window="open = false"
       >
         <button
           type="button"
           id="<%= input_id(2) %>"
-          class="
-            flex h-[48px] w-full items-center justify-between overflow-hidden
-            rounded border border-border-secondary bg-white
-            pl-[12px] text-[20px] leading-none text-text-default
-            focus-visible:outline
-            focus-visible:outline-[3px]
-            focus-visible:outline-offset-[3px]
-            focus-visible:outline-focus
-          "
-          :class="open ? 'rounded-b-none border-b-0' : ''"
+          class="memorable-date__select"
+          :class="open ? 'memorable-date__select--open' : ''"
           aria-haspopup="listbox"
           aria-controls="<%= input_id(2) %>-listbox"
           aria-invalid="<%= invalid %>"
           :aria-expanded="open.toString()"
           @click="open = !open"
         >
-          <span x-text="label"></span>
-          <span class="chevron-wrap">
-            <span class="chevron" :class="open ? 'chevron--open' : ''"></span>
+          <span x-text="label" class="truncate text-left flex-1 pl-cfa-sm"></span>
+          <span class="memorable-date__chevron-wrap">
+            <span class="memorable-date__chevron" :class="open ? 'memorable-date__chevron--open' : ''"></span>
           </span>
         </button>
         <ul
           id="<%= input_id(2) %>-listbox"
           x-show="open"
           x-cloak
-          class="
-            absolute left-0 top-[48px] z-10 w-full
-            !m-0 !list-none !p-0 !pl-0 !space-y-0
-            border-x border-b border-border-secondary bg-white
-          "
+          class="memorable-date__listbox"
           role="listbox"
         >
           <% month_options.each do |label, value| %>
             <li
               role="option"
-              class="
-                flex h-[51px] w-full items-center
-                border-t border-border-secondary
-                px-[16px] text-[20px] leading-none text-text-default
-                first:border-t-0 hover:bg-background-disabled
-              "
+              class="memorable-date__option"
               @click="
                 value = '<%= value %>';
                 label = '<%= label %>';
@@ -75,7 +56,7 @@
       </div>
     </div>
     <div>
-      <%= label_tag input_id(3), @label_day, class: "label" %><br>
+      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
       <%= @form.text_field "#{@method}(3i)",
             value: day_value,
             id: input_id(3),
@@ -85,16 +66,10 @@
             maxlength: 2,
             placeholder: "DD",
             aria: {invalid: invalid},
-            class: "
-              mr-cfa-sm mt-cfa-sm h-[48px] w-[56px]
-              focus-visible:outline
-              focus-visible:outline-[3px]
-              focus-visible:outline-offset-[3px]
-              focus-visible:outline-[#2f9c95]
-            " %>
+            class: "memorable-date__input memorable-date__input--day" %>
     </div>
     <div>
-      <%= label_tag input_id(1), @label_year, class: "label" %><br>
+      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
       <%= @form.text_field "#{@method}(1i)",
             value: year_value,
             id: input_id(1),
@@ -104,13 +79,7 @@
             maxlength: 4,
             placeholder: "YYYY",
             aria: {invalid: invalid},
-            class: "
-              mr-cfa-sm mt-cfa-sm h-[48px] w-[86px]
-              focus-visible:outline
-              focus-visible:outline-[3px]
-              focus-visible:outline-offset-[3px]
-              focus-visible:outline-[#2f9c95]
-            " %>
+            class: "memorable-date__input memorable-date__input--year" %>
     </div>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
