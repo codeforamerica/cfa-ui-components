@@ -86,8 +86,14 @@
 }
 
 .btn--back {
-    @apply bg-white border-border-default text-text-default;
+    @apply bg-white border-border-default text-text-default rounded;
+    @apply inline-flex items-center justify-center;
+    height: 40px;
+    padding: 0 12px;
+    gap: var(--spacing-cfa-xsm);
+    font-size: 16px;
     font-weight: 400;
+    line-height: 1;
 }
 
 .btn--back:hover,
