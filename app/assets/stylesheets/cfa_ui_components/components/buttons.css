@@ -70,7 +70,7 @@
     @apply bg-background-destructive-hover;
     box-shadow:
         inset 0 0 0 2px var(--color-border-error),
-        0 6px 0 0 var(--color-background-destructive-hover);
+        0 4px 0 0 var(--color-background-destructive-hover);
 }
 
 .btn--destructive:active {
