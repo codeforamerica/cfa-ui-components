@@ -8,7 +8,7 @@ class CardComponentPreview < ViewComponent::Preview
 
   def with_heading
     render(CardComponent.new) do
-      content_tag(:h2, "Sample form card") +
+      content_tag(:h3, "Sample form card") +
         content_tag(:p, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", class: "m-0") +
         content_tag(:p, "Ut volutpat ornare elit a vestibulum.", class: "m-0")
     end
@@ -44,7 +44,7 @@ class CardComponentPreview < ViewComponent::Preview
       card.with_image { content_tag(:div, "", class: "h-[194px] bg-zinc-200") }
       card.with_button { content_tag(:button, "Button", class: "btn btn--primary btn--large") }
       safe_join([
-        content_tag(:h2, "This is the card title", class: "m-0"),
+        content_tag(:h1, "This is the card title", class: "m-0"),
         content_tag(:p, "This is the card content", class: "m-0")
       ])
     end
@@ -54,7 +54,7 @@ class CardComponentPreview < ViewComponent::Preview
     render(CardComponent.new) do |card|
       card.with_button { content_tag(:button, "Button", class: "btn btn--primary btn--large") }
       safe_join([
-        content_tag(:h2, "This is the card title", class: "m-0"),
+        content_tag(:h1, "This is the card title", class: "m-0"),
         content_tag(:p, "This is the card content", class: "m-0")
       ])
     end
