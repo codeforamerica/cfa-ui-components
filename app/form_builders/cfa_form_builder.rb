@@ -12,7 +12,7 @@ class CfaFormBuilder < ActionView::Helpers::FormBuilder
 
   def input(method, as: :text, **opts)
     component = COMPONENTS.fetch(as) do
-      raise ArgumentError, "Unknown CfaFormBuilder component :#{as}. Valid: #{COMPONENTS.keys}"
+      raise ArgumentError, "Unknown CfaFormBuilder component: #{as}. Valid: #{COMPONENTS.keys}"
     end
     opts[:form] = self
     opts[:method] = method
