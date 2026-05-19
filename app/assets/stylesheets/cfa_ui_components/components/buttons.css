@@ -38,9 +38,9 @@
 .btn--primary:active::before {
     content: '';
     position: absolute;
-    inset: 4px;
+    inset: 2px;
     border: 2px solid var(--color-border-default);
-    border-radius: 8px;
+    border-radius: 6px;
     pointer-events: none;
 }
 
@@ -56,16 +56,26 @@
 .btn--secondary:active::before {
     content: '';
     position: absolute;
-    inset: 4px;
+    inset: 2px;
     border: 2px solid var(--color-primary);
-    border-radius: 8px;
+    border-radius: 6px;
     pointer-events: none;
 }
 
 .btn--destructive {
     @apply bg-white border-border-error text-destructive;
-    @apply hover:bg-background-destructive-hover hover:outline-2 hover:outline-border-error hover:shadow-[0_4px_0_0_var(--color-background-destructive-hover)];
-    @apply active:bg-background-destructive-active active:outline-2 active:outline-border-error;
+}
+
+.btn--destructive:hover {
+    @apply bg-background-destructive-hover;
+    box-shadow:
+        inset 0 0 0 2px var(--color-border-error),
+        0 6px 0 0 var(--color-background-destructive-hover);
+}
+
+.btn--destructive:active {
+    @apply bg-background-destructive-active;
+    box-shadow: inset 0 0 0 2px var(--color-border-error);
 }
 
 .btn--small {
