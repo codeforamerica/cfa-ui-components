@@ -10,7 +10,7 @@ class DatePickerTestModel
   attribute :my_date
 end
 
-class DatePickerComponentTest < ViewComponent::TestCase
+class MemorableDateComponentTest < ViewComponent::TestCase
   def build_form
     f = nil
     vc_test_controller.view_context.form_with(url: "/", model: DatePickerTestModel.new) { |fb| f = fb }
@@ -18,7 +18,7 @@ class DatePickerComponentTest < ViewComponent::TestCase
   end
 
   def test_label_for_attributes_match_input_ids
-    render_inline(DatePickerComponent.new(
+    render_inline(MemorableDateComponent.new(
       form: build_form,
       method: :my_date,
       label: "Date of birth",

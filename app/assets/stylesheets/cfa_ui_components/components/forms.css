@@ -192,3 +192,34 @@ select {
 .field_with_errors {
     display: block;
 }
+
+
+/* Chevron block (matches Figma right-side area) */
+.chevron-wrap {
+  width: 48px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb; /* light grey */
+  border-left: 1px solid #c8ced2;
+}
+
+/* Chevron (smaller, correct scale) */
+.chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.chevron--open {
+  transform: rotate(225deg);
+}
+
+/* Prevent Alpine flash */
+[x-cloak] {
+  display: none !important;
+}

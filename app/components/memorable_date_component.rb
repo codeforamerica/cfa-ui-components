@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DatePickerComponent < AttributeBoundFormElementComponent
+class MemorableDateComponent < AttributeBoundFormElementComponent
   def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil)
     super(form:, method:)
     @label = label
