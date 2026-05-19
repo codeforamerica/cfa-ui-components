@@ -31,7 +31,7 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_selector "label[for='date_picker_test_model_my_date_2i']"
     assert_selector "label[for='date_picker_test_model_my_date_3i']"
     assert_selector "label[for='date_picker_test_model_my_date_1i']"
-    assert_selector "select#date_picker_test_model_my_date_2i"
+    assert_selector "button#date_picker_test_model_my_date_2i[aria-haspopup='listbox']"
     assert_selector "input#date_picker_test_model_my_date_3i"
     assert_selector "input#date_picker_test_model_my_date_1i"
   end
