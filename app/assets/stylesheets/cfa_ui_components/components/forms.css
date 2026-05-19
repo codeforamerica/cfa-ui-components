@@ -218,8 +218,3 @@ select {
 .chevron--open {
   transform: rotate(225deg);
 }
-
-/* Prevent Alpine flash */
-[x-cloak] {
-  display: none !important;
-}
