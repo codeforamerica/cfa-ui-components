@@ -9,7 +9,6 @@
     </p>
   <% end %>
   <div class="flex">
-    <!-- MONTH -->
     <div>
       <%= label_tag input_id(2), @label_month, class: "label" %><br>
       <div
@@ -18,38 +17,46 @@
         @click.outside="open = false"
         @keydown.escape.window="open = false"
       >
-        <!-- Trigger -->
         <button
           type="button"
           id="<%= input_id(2) %>"
           class="
             flex h-[48px] w-full items-center justify-between overflow-hidden
-            rounded border border-[#c8ced2] bg-white
+            rounded border border-border-secondary bg-white
             pl-[12px] text-[20px] leading-none text-text-default
             focus-visible:outline
             focus-visible:outline-[3px]
             focus-visible:outline-offset-[3px]
+<<<<<<< Updated upstream
             focus-visible:outline-[#2f9c95]
+=======
+            focus-visible:outline-focus
+>>>>>>> Stashed changes
           "
           :class="open ? 'rounded-b-none border-b-0' : ''"
           aria-haspopup="listbox"
+          aria-controls="<%= input_id(2) %>-listbox"
+          aria-invalid="<%= invalid %>"
           :aria-expanded="open.toString()"
           @click="open = !open"
         >
           <span x-text="label"></span>
+<<<<<<< Updated upstream
           <!-- Chevron block -->
+=======
+>>>>>>> Stashed changes
           <span class="chevron-wrap">
             <span class="chevron" :class="open ? 'chevron--open' : ''"></span>
           </span>
         </button>
-        <!-- Dropdown -->
         <ul
+          id="<%= input_id(2) %>-listbox"
           x-show="open"
           x-cloak
           class="
             absolute left-0 top-[48px] z-10 w-full
             !m-0 !list-none !p-0 !pl-0 !space-y-0
-            border-x border-b border-[#c8ced2] bg-white
+            border-x border-b border-border-secondary bg-white
           "
           role="listbox"
         >
@@ -58,10 +65,9 @@
               role="option"
               class="
                 flex h-[51px] w-full items-center
-                border-t border-[#c8ced2]
+                border-t border-border-secondary
                 px-[16px] text-[20px] leading-none text-text-default
-                first:border-t-0
-                hover:bg-background-disabled
+                first:border-t-0 hover:bg-background-disabled
               "
               @click="
                 value = '<%= value %>';
@@ -76,7 +82,6 @@
         <%= hidden_field_tag param_name(2), month_value, "x-model": "value" %>
       </div>
     </div>
-    <!-- DAY -->
     <div>
       <%= label_tag input_id(3), @label_day, class: "label" %><br>
       <%= @form.text_field "#{@method}(3i)",
@@ -96,7 +101,6 @@
               focus-visible:outline-[#2f9c95]
             " %>
     </div>
-    <!-- YEAR -->
     <div>
       <%= label_tag input_id(1), @label_year, class: "label" %><br>
       <%= @form.text_field "#{@method}(1i)",
