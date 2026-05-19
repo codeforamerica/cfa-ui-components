@@ -8,23 +8,105 @@
   </div>
   <div class="flex gap-cfa-sm items-end">
     <div class="w-[177px]">
-      <%= label_tag input_id(2), @label_month, class: "label block mb-cfa-xsm" %>
+      <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-xsm" %>
+options_for_js = month_options.map { |label, value| {label: label, value: value} }
+        initial_idx = month_value.present? ? month_options.find_index { |_, v| v == month_value } || -1 : -1
+      %>
       <div
-        x-data="{ open: false, value: '<%= month_value %>', label: '<%= month_value.present? ? month_options.to_h.invert[month_value] : @label_month_select %>' }"
+        x-data="{
+          open: false,
+          value: '<%= month_value %>',
+          label: '<%= month_value.present? ? month_options.to_h.invert[month_value] : @label_month_select %>',
+          options: <%= options_for_js.to_json %>,
+          activeIndex: <%= initial_idx %>,
+          typeahead: '',
+          typeaheadTimer: null,
+          listboxId: '<%= input_id(2) %>-listbox',
+          buttonId: '<%= input_id(2) %>',
+          optionId(i) { return this.buttonId + '-option-' + i; },
+          openList(focusSelected) {
+            this.open = true;
+            if (focusSelected) {
+              const sel = this.options.findIndex(o => String(o.value) === String(this.value));
+              this.activeIndex = sel >= 0 ? sel : 0;
+            } else if (this.activeIndex < 0) {
+              this.activeIndex = 0;
+            }
+            this.$nextTick(() => this.scrollActive());
+          },
+          closeList(restoreFocus) {
+            this.open = false;
+            if (restoreFocus) this.$refs.button.focus();
+          },
+          selectAt(i) {
+            const opt = this.options[i];
+            this.value = String(opt.value);
+            this.label = opt.label;
+            this.activeIndex = i;
+            this.closeList(true);
+          },
+          move(delta) {
+            if (!this.open) { this.openList(true); return; }
+            const n = this.options.length;
+            const start = this.activeIndex < 0 ? (delta > 0 ? -1 : 0) : this.activeIndex;
+            this.activeIndex = (start + delta + n) % n;
+            this.scrollActive();
+          },
+          moveTo(i) {
+            if (!this.open) this.openList(false);
+            this.activeIndex = i;
+            this.scrollActive();
+          },
+          scrollActive() {
+            const el = document.getElementById(this.optionId(this.activeIndex));
+            if (el) el.scrollIntoView({ block: 'nearest' });
+          },
+          handleType(e) {
+            if (e.altKey || e.ctrlKey || e.metaKey) return;
+            if (!e.key || e.key.length !== 1) return;
+            if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || e.key === 'Escape') return;
+            e.preventDefault();
+            clearTimeout(this.typeaheadTimer);
+            this.typeahead += e.key.toLowerCase();
+            this.typeaheadTimer = setTimeout(() => { this.typeahead = ''; }, 500);
+            const n = this.options.length;
+            const startFrom = this.typeahead.length > 1 ? this.activeIndex : (this.activeIndex + 1);
+            for (let i = 0; i < n; i++) {
+              const idx = ((startFrom < 0 ? 0 : startFrom) + i) % n;
+              if (this.options[idx].label.toLowerCase().startsWith(this.typeahead)) {
+                if (!this.open) this.openList(false);
+                this.activeIndex = idx;
+                this.scrollActive();
+                return;
+              }
+            }
+          },
+        }"
         class="relative"
-        @click.outside="open = false"
-        @keydown.escape.window="open = false"
+        @click.outside="closeList(false)"
       >
         <button
           type="button"
+          x-ref="button"
           id="<%= input_id(2) %>"
           class="memorable-date__select"
           :class="open ? 'memorable-date__select--open' : ''"
+          role="combobox"
           aria-haspopup="listbox"
-          aria-controls="<%= input_id(2) %>-listbox"
+          :aria-controls="listboxId"
           aria-invalid="<%= invalid %>"
           :aria-expanded="open.toString()"
-          @click="open = !open"
+          :aria-activedescendant="open && activeIndex >= 0 ? optionId(activeIndex) : null"
+          @click="open ? closeList(false) : openList(true)"
+          @keydown.arrow-down.prevent="move(1)"
+          @keydown.arrow-up.prevent="move(-1)"
+          @keydown.home.prevent="open && moveTo(0)"
+          @keydown.end.prevent="open && moveTo(options.length - 1)"
+          @keydown.enter.prevent="open ? selectAt(activeIndex) : openList(true)"
+          @keydown.space.prevent="open ? selectAt(activeIndex) : openList(true)"
+          @keydown.escape.prevent="open && closeList(true)"
+          @keydown.tab="open && (open = false)"
+          @keydown="handleType($event)"
         >
           <span x-text="label" class="truncate text-left flex-1 pl-cfa-sm"></span>
           <span class="memorable-date__chevron-wrap">
@@ -32,21 +114,23 @@
           </span>
         </button>
         <ul
-          id="<%= input_id(2) %>-listbox"
+          :id="listboxId"
           x-show="open"
           x-cloak
           class="memorable-date__listbox"
           role="listbox"
+          :aria-labelledby="'<%= input_id(2) %>-label'"
+          tabindex="-1"
         >
-          <% month_options.each do |label, value| %>
+          <% month_options.each_with_index do |(label, value), idx| %>
             <li
               role="option"
+              :id="optionId(<%= idx %>)"
               class="memorable-date__option"
-              @click="
-                value = '<%= value %>';
-                label = '<%= label %>';
-                open = false;
-              "
+              :class="{ 'memorable-date__option--active': activeIndex === <%= idx %> }"
+              :aria-selected="value === '<%= value %>' ? 'true' : 'false'"
+              @click="selectAt(<%= idx %>)"
+              @mousemove="activeIndex = <%= idx %>"
             >
               <%= label %>
             </li>
