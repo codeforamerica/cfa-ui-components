@@ -26,7 +26,10 @@
             flex h-[48px] w-full items-center justify-between overflow-hidden
             rounded border border-[#c8ced2] bg-white
             pl-[12px] text-[20px] leading-none text-text-default
-            focus-visible:outline-4 focus-visible:outline-[#2f9c95]
+            focus-visible:outline
+            focus-visible:outline-[3px]
+            focus-visible:outline-offset-[3px]
+            focus-visible:outline-[#2f9c95]
           "
           :class="open ? 'rounded-b-none border-b-0' : ''"
           aria-haspopup="listbox"
@@ -34,7 +37,7 @@
           @click="open = !open"
         >
           <span x-text="label"></span>
-          <!-- Right chevron block -->
+          <!-- Chevron block -->
           <span class="chevron-wrap">
             <span class="chevron" :class="open ? 'chevron--open' : ''"></span>
           </span>
@@ -85,7 +88,13 @@
             maxlength: 2,
             placeholder: "DD",
             aria: { invalid: invalid },
-            class: "mr-cfa-sm mt-cfa-sm h-[48px] w-[56px]" %>
+            class: "
+              mr-cfa-sm mt-cfa-sm h-[48px] w-[56px]
+              focus-visible:outline
+              focus-visible:outline-[3px]
+              focus-visible:outline-offset-[3px]
+              focus-visible:outline-[#2f9c95]
+            " %>
     </div>
     <!-- YEAR -->
     <div>
@@ -99,7 +108,13 @@
             maxlength: 4,
             placeholder: "YYYY",
             aria: { invalid: invalid },
-            class: "mr-cfa-sm mt-cfa-sm h-[48px] w-[86px]" %>
+            class: "
+              mr-cfa-sm mt-cfa-sm h-[48px] w-[86px]
+              focus-visible:outline
+              focus-visible:outline-[3px]
+              focus-visible:outline-offset-[3px]
+              focus-visible:outline-[#2f9c95]
+            " %>
     </div>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
