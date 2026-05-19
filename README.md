@@ -5,6 +5,27 @@
 2. Add the CfA UI Components gem by adding `gem "cfa_ui_components", github: "codeforamerica/cfa-ui-components"` to your `Gemfile`, and run `bundle install`
 3. Run `bin/rails g cfa_ui_components:install`
 
+## Using CfaFormBuilder
+
+The gem ships a `CfaFormBuilder` that renders CfA input components via a single `input` helper. Opt in per form:
+
+```erb
+<%= form_with model: @user, builder: CfaFormBuilder do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email, as: :text %>
+  <%= f.input :state, as: :select, options: us_states %>
+  <%= f.input :birthdate, as: :date %>
+<% end %>
+```
+
+Or set it as the app default in `ApplicationController`:
+
+```ruby
+default_form_builder CfaFormBuilder
+```
+
+Supported `as:` values: `:text`, `:currency`, `:select`, `:combobox`, `:tin`, `:checkbox`, `:radios`, `:date`. The `optional` flag is inferred from presence/acceptance validators on the model.
+
 # Adding a new component to CFA UI Components
 1. Run `bin/rails g view_component:component <COMPONENT_NAME>` to create all the relevant files.
 2. Make local changes
