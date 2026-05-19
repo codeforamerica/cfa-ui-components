@@ -34,6 +34,19 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
     Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }
   end
 
+  def month_options_json
+    month_options.map { |label, value| {label:, value:} }.to_json
+  end
+
+  def initial_month_label
+    month_value.present? ? month_options.to_h.invert[month_value] : @label_month_select
+  end
+
+  def initial_active_index
+    return -1 if month_value.blank?
+    month_options.find_index { |_, v| v == month_value } || -1
+  end
+
   def month_value = date&.month
   def day_value = date&.day
   def year_value = date&.year
