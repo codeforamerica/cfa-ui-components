@@ -9,16 +9,13 @@
   <div class="flex gap-cfa-sm items-end">
     <div class="w-[177px]">
       <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-xsm" %>
-options_for_js = month_options.map { |label, value| {label: label, value: value} }
-        initial_idx = month_value.present? ? month_options.find_index { |_, v| v == month_value } || -1 : -1
-      %>
       <div
         x-data="{
           open: false,
           value: '<%= month_value %>',
-          label: '<%= month_value.present? ? month_options.to_h.invert[month_value] : @label_month_select %>',
-          options: <%= options_for_js.to_json %>,
-          activeIndex: <%= initial_idx %>,
+          label: '<%= initial_month_label %>',
+          options: <%= month_options_json %>,
+          activeIndex: <%= initial_active_index %>,
           typeahead: '',
           typeaheadTimer: null,
           listboxId: '<%= input_id(2) %>-listbox',
