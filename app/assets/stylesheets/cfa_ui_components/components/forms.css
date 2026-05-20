@@ -1,5 +1,5 @@
 form {
-    @apply flex flex-col gap-y-cfa-xl;
+    @apply cfa-stack;
 }
 
 input[type="text"],
