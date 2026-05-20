@@ -7,7 +7,9 @@
 
 ## Using CfaFormBuilder
 
-The gem ships a `CfaFormBuilder` that renders CfA input components via a single `input` helper. Opt in per form:
+The gem ships a `CfaFormBuilder` that renders CfA input components via a single `input` helper. Its API is inspired by [simple_form](https://github.com/heartcombo/simple_form) — but it's a thin shim over the CfA components, not a wrapper around simple_form itself, so don't expect simple_form's wrappers, custom inputs, or config to be available.
+
+Opt in per form:
 
 ```erb
 <%= form_with model: @user, builder: CfaFormBuilder do |f| %>
