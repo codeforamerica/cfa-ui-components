@@ -4,6 +4,6 @@ class LinkComponentPreview < ViewComponent::Preview
   end
 
   def with_icon
-    render(LinkComponent.new(label: I18n.t("continue"), url: "/continue", icon: "info"))
+    render(LinkComponent.new(label: I18n.t("continue"), url: "/continue", icon: true))
   end
 end
