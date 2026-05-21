@@ -6,7 +6,7 @@
   is relevant for forms that update primary and secondary filers with the same-named attribute.
 </p>
 
-<h2>Form 1</h2>
+<h3>Form 1</h3>
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
   <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "form1") %>
   <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup question for form 1", scope: "form1") do %>
@@ -14,7 +14,7 @@
   <% end %>
 <% end %>
 
-<h2>Form 2</h2>
+<h3>Form 2</h3>
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
   <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "form2") %>
   <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup question for form 2", scope: "form2") do %>

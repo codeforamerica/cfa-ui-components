@@ -10,7 +10,7 @@ body {
     @apply antialiased bg-background-app text-text-default;
 }
 
-h1 {
+h1, h2 {
     font-family: "Geologica", sans-serif;
     font-size: 22px;
     font-weight: 400;
