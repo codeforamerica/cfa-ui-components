@@ -61,6 +61,10 @@ class BaseComponent < ViewComponent::Base
     "cancel_circle" => {
       path: "icons/cancel_circle.svg",
       alt: "cancel"
+    },
+    "external_link" => {
+      path: "icons/external_link.svg",
+      alt: "external link"
     }
   }.freeze
 
