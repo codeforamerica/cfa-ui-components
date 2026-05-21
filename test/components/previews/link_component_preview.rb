@@ -1,25 +1,26 @@
 class LinkComponentPreview < ViewComponent::Preview
+  # Browsers apply `:visited` based on history, which makes previews unstable.
+  # Force the desired colors via `!` utilities so each variant renders consistently.
+  UNVISITED_CLASSES = "text-link-unvisited! border-link-unvisited!".freeze
+  VISITED_CLASSES = "text-link-visited! border-link-visited!".freeze
+
   # @!group Default
-  # Use a random fragment so the browser never reports the link as visited,
-  # guaranteeing the unvisited styling renders.
   def default
-    render(LinkComponent.new(label: I18n.t("continue"), url: "##{SecureRandom.hex(8)}"))
+    render(LinkComponent.new(label: "Continue to IRS.gov", url: "https://www.irs.gov", html_attrs: {class: UNVISITED_CLASSES}))
   end
 
   def with_icon
-    render(LinkComponent.new(label: I18n.t("continue"), url: "##{SecureRandom.hex(8)}", icon: true))
+    render(LinkComponent.new(label: "Continue to IRS.gov", url: "https://www.irs.gov", icon: true, html_attrs: {class: UNVISITED_CLASSES}))
   end
   # @!endgroup
 
   # @!group Visited
-  # Links to the current page (`#`) are reported as visited by the browser,
-  # so these previews show the visited styling without relying on history.
   def visited
-    render(LinkComponent.new(label: I18n.t("continue"), url: "#"))
+    render(LinkComponent.new(label: "Continue to IRS.gov", url: "https://www.irs.gov", html_attrs: {class: VISITED_CLASSES}))
   end
 
   def visited_with_icon
-    render(LinkComponent.new(label: I18n.t("continue"), url: "#", icon: true))
+    render(LinkComponent.new(label: "Continue to IRS.gov", url: "https://www.irs.gov", icon: true, html_attrs: {class: VISITED_CLASSES}))
   end
   # @!endgroup
 end
