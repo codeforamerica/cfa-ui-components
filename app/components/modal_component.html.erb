@@ -12,7 +12,7 @@
           <%= content %>
         </div>
         <% if buttons? %>
-          <div :id="$id('<%= @name %>-buttons')" class="mt-cfa-2xl flex flex-col gap-y-cfa-med">
+          <div :id="$id('<%= @name %>-buttons')" class="pt-cfa-lg flex flex-col gap-y-cfa-med">
             <% buttons.each do |button| %>
               <%= button %>
             <% end %>
