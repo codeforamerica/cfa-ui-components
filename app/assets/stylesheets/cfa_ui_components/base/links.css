@@ -3,7 +3,7 @@ a:not(.btn) {
 }
 
 a:not(.btn):hover {
-  @apply border-b-0;
+  @apply border-transparent;
 }
 
 a:not(.btn):visited {
@@ -12,9 +12,4 @@ a:not(.btn):visited {
 
 a:not(.btn):focus-visible {
   @apply rounded-sm outline-2 outline-offset-2 outline-focus;
-}
-
-a:not(.btn) svg {
-  @apply shrink-0;
-  color: currentColor;
 }
