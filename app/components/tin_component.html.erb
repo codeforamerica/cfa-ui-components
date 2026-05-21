@@ -35,7 +35,7 @@
 </script>
 
 <div x-data="tinToggle()">
-  <div class="flex flex-col gap-y-cfa-sm">
+  <div class="cfa-stack-sm">
     <%= @form.label @method, label_with_optional_marker, class: "label block", for: @form.field_id(@method) %>
 
     <% if @help_text %>

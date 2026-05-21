@@ -1,11 +1,11 @@
 ul {
-    @apply flex flex-col gap-y-cfa-med pl-6;
+    @apply cfa-stack-med pl-6;
     list-style-type: disc;
     list-style-position: outside;
 }
 
 ol {
-    @apply flex flex-col gap-y-cfa-med pl-6;
+    @apply cfa-stack-med pl-6;
     list-style-type: decimal;
     list-style-position: outside;
 }

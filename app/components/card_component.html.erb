@@ -8,11 +8,11 @@
       <% if image? %>
         <%= image %>
       <% end %>
-      <div class="bg-white p-cfa-lg flex flex-col gap-y-cfa-sm">
+      <div class="bg-white p-cfa-lg cfa-stack-sm">
         <%= content %>
       </div>
       <% if buttons? %>
-        <div class="bg-white px-cfa-lg pt-cfa-sm pb-cfa-lg flex flex-col gap-y-cfa-med [&_.btn]:mx-0!">
+        <div class="bg-white px-cfa-lg pt-cfa-sm pb-cfa-lg cfa-stack-med [&_.btn]:mx-0!">
           <% buttons.each do |button| %>
             <%= button %>
           <% end %>
