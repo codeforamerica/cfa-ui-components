@@ -55,9 +55,11 @@
     --color-black: #000000;
 }
 
-@import "./base/typography.css" layer(base);
-@import "./base/lists.css" layer(base);
-@import "./base/links.css" layer(base);
+@layer theme, base, components, utilities, cfa-base;
+
+@import "./base/typography.css" layer(cfa-base);
+@import "./base/lists.css" layer(cfa-base);
+@import "./base/links.css" layer(cfa-base);
 
 @import "./components/layout.css";
 @import "./components/forms.css";
