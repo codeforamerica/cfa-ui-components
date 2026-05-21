@@ -12,6 +12,10 @@ main {
     margin-top: var(--spacing-cfa-sm);
 }
 
+.cfa-card > :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-top: var(--spacing-cfa-med);
+}
+
 header,
 .toolbar {
     @apply bg-background-navigation text-white px-cfa-med py-cfa-sm;
