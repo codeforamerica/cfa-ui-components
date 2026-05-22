@@ -171,6 +171,16 @@ select {
   }
 }
 
+/* Combobox */
+.cfa-combobox__input:hover:not(:disabled):not([aria-invalid="true"]),
+.cfa-combobox__input:focus-visible:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--color-focus);
+}
+
+.cfa-combobox__toggle:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
 /* Standard invalid fields */
 [aria-invalid="true"],
 .field_with_errors input,
