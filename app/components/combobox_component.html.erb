@@ -3,7 +3,7 @@
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
   <% invalid = @form.object.errors[@method].any? %>
   <div>
-    <%= @form.label @method, @label, class: "label block #{required_class}", "x-combobox:label": "" %>
+    <%= @form.label @method, label_with_optional_marker, class: "label block", "x-combobox:label": "" %>
     <% if @help_text %>
       <p x-combobox:desc class="help_text">
         <%= @help_text %>
@@ -14,7 +14,7 @@
         @method,
         @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] },
         {prompt: I18n.t("combobox.placeholder_label").to_s, disabled: disabled_values},
-        {"x-combobox:values": "", aria: {invalid: invalid}}
+        {"x-combobox:values": "", aria: {invalid: invalid, required: @optional ? nil : "true"}.compact}
       ) %>
   <template x-if="$combobox.isLoaded">
     <div class="relative">

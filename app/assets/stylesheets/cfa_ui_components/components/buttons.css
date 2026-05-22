@@ -9,6 +9,7 @@
 .btn[disabled],
 .btn:disabled {
     @apply pointer-events-none cursor-not-allowed;
+    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn:focus-visible::after,
@@ -30,11 +31,6 @@
     @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
-.btn--primary[disabled],
-.btn--primary:disabled {
-    @apply bg-background-disabled text-text-disabled border-transparent shadow-none;
-}
-
 .btn--primary:active {
     @apply bg-primary-pressed border-border-default;
 }
@@ -42,20 +38,15 @@
 .btn--primary:active::before {
     content: '';
     position: absolute;
-    inset: 4px;
+    inset: 2px;
     border: 2px solid var(--color-border-default);
-    border-radius: 8px;
+    border-radius: 6px;
     pointer-events: none;
 }
 
 .btn--secondary {
     @apply bg-button-surface-secondary border-primary text-text-default;
     @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
-}
-
-.btn--secondary[disabled],
-.btn--secondary:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
 }
 
 .btn--secondary:active {
@@ -65,21 +56,22 @@
 .btn--secondary:active::before {
     content: '';
     position: absolute;
-    inset: 4px;
+    inset: 2px;
     border: 2px solid var(--color-primary);
-    border-radius: 8px;
+    border-radius: 6px;
     pointer-events: none;
 }
 
 .btn--destructive {
     @apply bg-white border-border-error text-destructive;
-    @apply hover:bg-background-destructive-hover hover:outline-2 hover:outline-border-error hover:shadow-[0_4px_0_0_var(--color-background-destructive-hover)];
-    @apply active:bg-background-destructive-active active:outline-2 active:outline-border-error;
 }
 
-.btn--destructive[disabled],
-.btn--destructive:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
+.btn--destructive:hover {
+    @apply bg-background-destructive-hover shadow-[inset_0_0_0_2px_var(--color-border-error),0_4px_0_0_var(--color-background-destructive-hover)];
+}
+
+.btn--destructive:active {
+    @apply bg-background-destructive-active shadow-[inset_0_0_0_2px_var(--color-border-error)];
 }
 
 .btn--small {
@@ -94,23 +86,24 @@
 }
 
 .btn--back {
-    @apply rounded bg-white border-primary text-text-default;
+    @apply bg-white border-border-default text-text-default rounded;
+    @apply inline-flex items-center justify-center;
+    height: 40px;
+    padding: 0 12px;
+    gap: var(--spacing-cfa-xsm);
+    font-size: 16px;
     font-weight: 400;
+    line-height: 1;
 }
 
 .btn--back:hover,
 .btn--back.is-hover {
-    @apply bg-primary-hover;
+    @apply bg-primary-hover border-transparent;
 }
 
 .btn--back:active,
 .btn--back.is-active {
-    @apply bg-primary-hover border-border-default;
-}
-
-.btn--back[disabled],
-.btn--back:disabled {
-    @apply bg-background-disabled text-text-disabled border-border-disabled shadow-none;
+    @apply bg-primary-pressed border-border-default;
 }
 
 .btn--large {

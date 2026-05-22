@@ -92,8 +92,13 @@ class BaseComponent < ViewComponent::Base
     content_tag :span, "", class: ["cfa-icon", css_class].compact, style:, **aria
   end
 
-  def required_class
-    @required ? "required" : ""
+  def label_with_optional_marker
+    return @label unless @optional
+    safe_join([@label, " ", tag.span("(#{I18n.t("cfaui.optional")})", class: "font-normal")])
+  end
+
+  def aria_required_attrs
+    @optional ? {} : {"aria-required" => "true"}
   end
 
   def checkbox_wrap(checkbox_html, small: false)

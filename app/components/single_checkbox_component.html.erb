@@ -5,14 +5,15 @@
           @method,
           {
             class: "cfa-checkbox h-6 w-6 rounded #{has_error ? "border-2 border-border-error" : "border checked:border-2 disabled:border-border-disabled border-border-default"}",
-            disabled: @disabled
+            disabled: @disabled,
+            **aria_required_attrs
           },
           "1",
           ""
         )) %>
     <%= @form.label(
           @method,
-          @label,
+          label_with_optional_marker,
           class: ("text-text-disabled" if @disabled)
         ) %>
   </div>

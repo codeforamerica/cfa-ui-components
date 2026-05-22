@@ -5,6 +5,7 @@ en:
   back: Go back
   continue: Continue
   cfaui:
+    optional: optional
     modal:
       close_aria: Close modal
   decline: Decline

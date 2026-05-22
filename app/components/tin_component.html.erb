@@ -36,7 +36,7 @@
 
 <div x-data="tinToggle()">
   <div class="space-y-cfa-sm">
-    <%= @form.label @method, @label, class: "label block #{required_class}", for: @form.field_id(@method) %>
+    <%= @form.label @method, label_with_optional_marker, class: "label block", for: @form.field_id(@method) %>
 
     <% if @help_text %>
       <p class="help_text">
@@ -50,7 +50,8 @@
           placeholder: "000-00-0000",
           "x-ref": "input",
           "x-mask": "999-99-9999",
-          "x-bind:style": "show ? '' : '-webkit-text-security: disc;'" %>
+          "x-bind:style": "show ? '' : '-webkit-text-security: disc;'",
+          **aria_required_attrs %>
 
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>

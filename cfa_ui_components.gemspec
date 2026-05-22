@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
     "lib/cfa_ui_components.rb",
     "lib/cfa_ui_components/**/*",
     "app/components/**/*",
+    "app/form_builders/**/*",
     "app/assets/stylesheets/cfa_ui_components/**/*",
     "app/javascript/cfa_ui_components/**/*",
     "app/assets/images/icons/*",
