@@ -1,4 +1,4 @@
-<div x-data x-combobox class="cfa-combobox max-w-lg space-y-cfa-sm"
+<div x-data x-combobox class="max-w-lg space-y-cfa-sm"
      x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
   <% invalid = @form.object.errors[@method].any? %>
