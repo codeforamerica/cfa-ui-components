@@ -1,8 +1,10 @@
-<button x-data @click="$dispatch('first-modal')">Open Modal</button>
+<div class="min-w-[900px] space-y-cfa-med">
+  <%= render(TooltipComponent.new(label: "What relationships qualify?", modal_name: "disables-scroll", header: "Snack copy would go here framed as a question?")) %>
 
-<button type="button" class="bg-violet-200 px-cfa-lg py-cfa-med rounded ml-cfa-med">
-  Page-level button (should be hidden behind overlay when modal is open)
-</button>
+  <div class="flex justify-between gap-cfa-med">
+    <%= render(ButtonComponent.new(label: "Left page button", url: "#", variant: :secondary)) %>
+    <%= render(ButtonComponent.new(label: "Right page button", url: "#", variant: :secondary)) %>
+  </div>
 
 <p>
   You will rejoice to hear that no disaster has accompanied the commencement of
@@ -115,8 +117,9 @@
   and save me, that I may again and again testify my gratitude for all your love
   and kindness.
 </p>
+</div>
 
-<%= render(ModalComponent.new(name: "first")) do |c| %>
+<%= render(ModalComponent.new(name: "disables-scroll")) do |c| %>
   <% c.with_header do %>Snack copy would go here framed as a question?<% end %>
 
   <p>
