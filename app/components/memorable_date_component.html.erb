@@ -138,28 +138,28 @@
           <div>
             <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
             <%= @form.text_field "#{@method}(3i)",
-            value: day_value,
-            id: input_id(3),
-            type: "text",
-            inputmode: "numeric",
-            minlength: 1,
-            maxlength: 2,
-            placeholder: "DD",
-            aria: {invalid: invalid},
-            class: "memorable-date__input memorable-date__input--day" %>
+                  value: day_value,
+                  id: input_id(3),
+                  type: "text",
+                  inputmode: "numeric",
+                  minlength: 1,
+                  maxlength: 2,
+                  placeholder: "DD",
+                  aria: {invalid: invalid},
+                  class: "memorable-date__input memorable-date__input--day" %>
           </div>
           <div>
             <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
             <%= @form.text_field "#{@method}(1i)",
-            value: year_value,
-            id: input_id(1),
-            type: "text",
-            inputmode: "numeric",
-            minlength: 4,
-            maxlength: 4,
-            placeholder: "YYYY",
-            aria: {invalid: invalid},
-            class: "memorable-date__input memorable-date__input--year" %>
+                  value: year_value,
+                  id: input_id(1),
+                  type: "text",
+                  inputmode: "numeric",
+                  minlength: 4,
+                  maxlength: 4,
+                  placeholder: "YYYY",
+                  aria: {invalid: invalid},
+                  class: "memorable-date__input memorable-date__input--year" %>
           </div>
         </div>
         <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
