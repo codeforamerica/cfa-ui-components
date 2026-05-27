@@ -20,74 +20,77 @@
           typeaheadTimer: null,
           listboxId: '<%= input_id(2) %>-listbox',
           buttonId: '<%= input_id(2) %>',
-          optionId(i) { return this.buttonId + '-option-' + i; },
+          optionId(i) { return this.buttonId + '-option-' + i },
           openList(focusSelected) {
-            this.open = true;
+            this.open = true
             if (focusSelected) {
-              const sel = this.options.findIndex(o => String(o.value) === String(this.value));
-        this.activeIndex = sel >= 0 ? sel : 0;
+              const sel = this.options.findIndex(o => String(o.value) === String(this.value))
+        this.activeIndex = sel >= 0 ? sel : 0
         } else if (this.activeIndex < 0) {
-              this.activeIndex = 0;
+              this.activeIndex = 0
             }
-            this.$nextTick(() => this.scrollActive());
+            this.$nextTick(() => this.scrollActive())
           },
           closeList(restoreFocus) {
-          this.open = false;
-          if (restoreFocus) this.$refs.button.focus();
+          this.open = false
+          if (restoreFocus) this.$refs.button.focus()
           },
           selectAt(i) {
-          const opt = this.options[i];
-          this.value = String(opt.value);
-          this.label = opt.label;
-          this.activeIndex = i;
-          this.closeList(true);
+          const opt = this.options[i]
+          this.value = String(opt.value)
+          this.label = opt.label
+          this.activeIndex = i
+          this.closeList(true)
           },
           move(delta) {
-          if (!this.open) { this.openList(true); return; }
-          const n = this.options.length;
-          const start = this.activeIndex < 0 ? (delta > 0 ? -1 : 0) : this.activeIndex;
-            this.activeIndex = (start + delta + n) % n;
-            this.scrollActive();
+          if (!this.open) {
+          this.openList(true)
+          return
+          }
+          const n = this.options.length
+          const start = this.activeIndex < 0 ? (delta > 0 ? -1 : 0) : this.activeIndex
+            this.activeIndex = (start + delta + n) % n
+            this.scrollActive()
             },
             moveTo(i) {
-            if (!this.open) this.openList(false);
-            this.activeIndex = i;
-            this.scrollActive();
+            if (!this.open) this.openList(false)
+            this.activeIndex = i
+            this.scrollActive()
             },
             scrollActive() {
-            const el = document.getElementById(this.optionId(this.activeIndex));
-            if (el) el.scrollIntoView({ block: 'nearest' });
+            const el = document.getElementById(this.optionId(this.activeIndex))
+            if (el) el.scrollIntoView({ block: 'nearest' })
             },
             handleType(e) {
-            if (e.altKey || e.ctrlKey || e.metaKey) return;
-            if (!e.key || e.key.length !== 1) return;
-            if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || e.key === 'Escape') return;
-            e.preventDefault();
-            clearTimeout(this.typeaheadTimer);
-            this.typeahead += e.key.toLowerCase();
-            this.typeaheadTimer = setTimeout(() => { this.typeahead = ''; }, 500);
-            const n = this.options.length;
-            const startFrom = this.typeahead.length > 1 ? this.activeIndex : (this.activeIndex + 1);
+            if (e.altKey || e.ctrlKey || e.metaKey) return
+            if (!e.key || e.key.length !== 1) return
+            if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || e.key === 'Escape') return
+            e.preventDefault()
+            clearTimeout(this.typeaheadTimer)
+            this.typeahead += e.key.toLowerCase()
+            this.typeaheadTimer = setTimeout(() => { this.typeahead = '' }, 500)
+            const n = this.options.length
+            const startFrom = this.typeahead.length > 1 ? this.activeIndex : this.activeIndex + 1
             for (let i = 0; i < n; i++) {
-              const idx = ((startFrom < 0 ? 0 : startFrom) + i) % n;
+              const idx = ((startFrom < 0 ? 0 : startFrom) + i) % n
               if (this.options[idx].label.toLowerCase().startsWith(this.typeahead)) {
-                if (!this.open) this.openList(false);
-                this.activeIndex = idx;
-                this.scrollActive();
-                return;
+                if (!this.open) this.openList(false)
+                this.activeIndex = idx
+                this.scrollActive()
+                return
               }
             }
-          },
+          }
         }"
-        class="relative"
+        class="cfa-custom-select"
         @click.outside="closeList(false)"
       >
               <button
           type="button"
           x-ref="button"
           id="<%= input_id(2) %>"
-          class="memorable-date__select"
-          :class="open ? 'memorable-date__select--open' : ''"
+          class="cfa-custom-select__button"
+          :class="open ? 'cfa-custom-select__button--open' : ''"
           role="combobox"
           aria-haspopup="listbox"
           :aria-controls="listboxId"
@@ -105,16 +108,16 @@
                 @keydown.tab="open && (open = false)"
                 @keydown="handleType($event)"
                 >
-                <span x-text="label" class="truncate text-left flex-1 pl-cfa-sm"></span>
-                <span class="memorable-date__chevron-wrap"  :class="open ? 'memorable-date__chevron-wrap--open' : ''">
-                  <span class="memorable-date__chevron" :class="open ? 'memorable-date__chevron--open' : ''"></span>
+                <span x-text="label" class="cfa-custom-select__value"></span>
+                <span class="cfa-custom-select__chevron-wrap" :class="open ? 'cfa-custom-select__chevron-wrap--open' : ''">
+                  <span class="cfa-custom-select__chevron" :class="open ? 'cfa-custom-select__chevron--open' : ''"></span>
                 </span>
               </button>
               <ul
           :id="listboxId"
           x-show="open"
           x-cloak
-          class="memorable-date__listbox"
+          class="cfa-custom-select__listbox"
           role="listbox"
           :aria-labelledby="'<%= input_id(2) %>-label'"
         >
@@ -122,8 +125,8 @@
                   <li
               role="option"
               :id="optionId(<%= idx %>)"
-              class="memorable-date__option"
-              :class="{ 'memorable-date__option--active': activeIndex === <%= idx %> }"
+              class="cfa-custom-select__option"
+              :class="{ 'cfa-custom-select__option--active': activeIndex === <%= idx %> }"
               :aria-selected="value === '<%= value %>' ? 'true' : 'false'"
               @click="selectAt(<%= idx %>)"
               @mouseenter="activeIndex = <%= idx %>"
@@ -138,28 +141,28 @@
           <div>
             <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
             <%= @form.text_field "#{@method}(3i)",
-                  value: day_value,
-                  id: input_id(3),
-                  type: "text",
-                  inputmode: "numeric",
-                  minlength: 1,
-                  maxlength: 2,
-                  placeholder: "DD",
-                  aria: {invalid: invalid},
-                  class: "memorable-date__input memorable-date__input--day" %>
+            value: day_value,
+            id: input_id(3),
+            type: "text",
+            inputmode: "numeric",
+            minlength: 1,
+            maxlength: 2,
+            placeholder: "DD",
+            aria: { invalid: invalid },
+            class: "memorable-date__input memorable-date__input--day" %>
           </div>
           <div>
             <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
             <%= @form.text_field "#{@method}(1i)",
-                  value: year_value,
-                  id: input_id(1),
-                  type: "text",
-                  inputmode: "numeric",
-                  minlength: 4,
-                  maxlength: 4,
-                  placeholder: "YYYY",
-                  aria: {invalid: invalid},
-                  class: "memorable-date__input memorable-date__input--year" %>
+            value: year_value,
+            id: input_id(1),
+            type: "text",
+            inputmode: "numeric",
+            minlength: 4,
+            maxlength: 4,
+            placeholder: "YYYY",
+            aria: { invalid: invalid },
+            class: "memorable-date__input memorable-date__input--year" %>
           </div>
         </div>
         <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
