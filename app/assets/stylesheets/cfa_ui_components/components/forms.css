@@ -172,12 +172,17 @@ select {
 }
 
 /* Combobox */
-.cfa-combobox__input:focus-visible:not(:disabled):not([aria-invalid="true"]) {
-  border-color: var(--color-focus);
+.cfa-combobox__toggle {
+  @apply rounded-r;
 }
 
 .cfa-combobox__toggle:hover:not(:disabled) {
   background-color: var(--color-background-secondary);
+}
+
+.cfa-combobox__toggle:active:not(:disabled) {
+  background-color: var(--color-background-secondary);
+  border: 2px solid var(--color-primary);
 }
 
 /* Standard invalid fields */
