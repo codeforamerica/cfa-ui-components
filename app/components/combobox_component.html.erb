@@ -2,14 +2,12 @@
      x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
   <% invalid = @form.object.errors[@method].any? %>
-  <div>
-    <%= @form.label @method, label_with_optional_marker, class: "label block", "x-combobox:label": "" %>
-    <% if @help_text %>
-      <p x-combobox:desc class="help_text">
-        <%= @help_text %>
-      </p>
-    <% end %>
-  </div>
+  <%= @form.label @method, label_with_optional_marker, class: "label block", "x-combobox:label": "" %>
+  <% if @help_text %>
+    <p x-combobox:desc class="help_text">
+      <%= @help_text %>
+    </p>
+  <% end %>
   <%= @form.select(
         @method,
         @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] },
