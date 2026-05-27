@@ -1,14 +1,13 @@
-<div class="space-y-cfa-sm">
+<div class="select-field">
   <% invalid = @form.object.errors[@method].any? %>
-  <%= @form.label @method, @label, id: "#{@method}-label", class: "label block #{required_class}" %>
+  <%= @form.label @method, label_with_optional_marker, id: "#{@method}-label", class: "label block" %>
   <% if @help_text %>
-    <p class="help_text">
-      <%= @help_text %>
-    </p>
+    <p class="help_text"><%= @help_text %></p>
   <% end %>
   <div
     x-data="{
       open: false,
+      disabled: <%= @disabled ? 'true' : 'false' %>,
       value: '<%= current_value %>',
       label: '<%= current_label %>',
       options: <%= options_json %>,
@@ -17,15 +16,20 @@
       typeaheadTimer: null,
       listboxId: '<%= @method %>-listbox',
       buttonId: '<%= @method %>',
+
       optionId(i) { return this.buttonId + '-option-' + i },
+
       openList(focusSelected) {
+        if (this.disabled) return
         this.open = true
+
         if (focusSelected) {
-          const sel = this.options.findIndex(o => String(o.value) === String(this.value))
-    this.activeIndex = sel >= 0 ? sel : 0
+          const selectedIndex = this.options.findIndex(o => String(o.value) === String(this.value))
+    this.activeIndex = selectedIndex >= 0 ? selectedIndex : 0
     } else if (this.activeIndex < 0) {
           this.activeIndex = 0
         }
+
         this.$nextTick(() => this.scrollActive())
       },
       closeList(restoreFocus) {
@@ -33,13 +37,15 @@
       if (restoreFocus) this.$refs.button.focus()
       },
       selectAt(i) {
-      const opt = this.options[i]
-      this.value = String(opt.value)
-      this.label = opt.label
+      if (this.disabled) return
+      const option = this.options[i]
+      this.value = String(option.value)
+      this.label = option.label
       this.activeIndex = i
       this.closeList(true)
       },
       move(delta) {
+      if (this.disabled) return
       if (!this.open) {
       this.openList(true)
       return
@@ -50,6 +56,7 @@
         this.scrollActive()
         },
         moveTo(i) {
+        if (this.disabled) return
         if (!this.open) this.openList(false)
         this.activeIndex = i
         this.scrollActive()
@@ -59,6 +66,7 @@
         if (el) el.scrollIntoView({ block: 'nearest' })
         },
         handleType(e) {
+        if (this.disabled) return
         if (e.altKey || e.ctrlKey || e.metaKey) return
         if (!e.key || e.key.length !== 1) return
         if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || e.key === 'Escape') return
@@ -70,6 +78,7 @@
         const startFrom = this.typeahead.length > 1 ? this.activeIndex : this.activeIndex + 1
         for (let i = 0; i < n; i++) {
           const idx = ((startFrom < 0 ? 0 : startFrom) + i) % n
+
           if (this.options[idx].label.toLowerCase().startsWith(this.typeahead)) {
             if (!this.open) this.openList(false)
             this.activeIndex = idx
@@ -79,7 +88,7 @@
         }
       }
     }"
-    class="cfa-custom-select w-full max-w-sm"
+    class="cfa-custom-select select-field__wrapper"
     @click.outside="closeList(false)"
   >
           <button
@@ -87,12 +96,17 @@
       x-ref="button"
       id="<%= @method %>"
       class="cfa-custom-select__button"
-      :class="open ? 'cfa-custom-select__button--open' : ''"
+      :class="{
+        'cfa-custom-select__button--open': open,
+        'cfa-custom-select__button--disabled': disabled
+      }"
       role="combobox"
       aria-haspopup="listbox"
       :aria-controls="listboxId"
       aria-invalid="<%= invalid %>"
       :aria-expanded="open.toString()"
+      aria-disabled="<%= @disabled %>"
+      <%= "tabindex=-1" if @disabled %>
       :aria-activedescendant="open && activeIndex >= 0 ? optionId(activeIndex) : null"
             @click="open ? closeList(false) : openList(true)"
             @keydown.arrow-down.prevent="move(1)"
@@ -106,8 +120,14 @@
             @keydown="handleType($event)"
             >
             <span x-text="label" class="cfa-custom-select__value"></span>
-            <span class="cfa-custom-select__chevron-wrap" :class="open ? 'cfa-custom-select__chevron-wrap--open' : ''">
-              <span class="cfa-custom-select__chevron" :class="open ? 'cfa-custom-select__chevron--open' : ''"></span>
+            <span
+        class="cfa-custom-select__chevron-wrap"
+        :class="open ? 'cfa-custom-select__chevron-wrap--open' : ''"
+      >
+              <span
+          class="cfa-custom-select__chevron"
+          :class="open ? 'cfa-custom-select__chevron--open' : ''"
+        ></span>
             </span>
           </button>
           <ul
@@ -132,7 +152,7 @@
               </li>
             <% end %>
           </ul>
-          <%= @form.hidden_field @method, "x-model": "value" %>
+          <%= @form.hidden_field @method, "x-model": "value", disabled: @disabled %>
         </div>
         <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
       </div>

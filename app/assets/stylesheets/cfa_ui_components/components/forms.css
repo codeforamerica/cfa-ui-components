@@ -192,6 +192,7 @@ select {
 .field_with_errors {
     display: block;
 }
+/* Shared custom select */
 
 .cfa-custom-select {
   position: relative;
@@ -219,6 +220,19 @@ select {
   @apply rounded-b-none;
 }
 
+.cfa-custom-select__button--disabled {
+  background: var(--color-background-disabled);
+  color: var(--color-text-disabled);
+  border-color: var(--color-border-disabled);
+  cursor: not-allowed;
+}
+
+.cfa-custom-select__button--disabled:focus-visible {
+  outline: none;
+  border-color: var(--color-border-disabled);
+  border-width: 1px;
+}
+
 .cfa-custom-select__value {
   @apply truncate text-left flex-1 pl-cfa-sm;
 }
@@ -239,6 +253,12 @@ select {
   background: #e9e9e9;
 }
 
+.cfa-custom-select__button--disabled .cfa-custom-select__chevron-wrap,
+.cfa-custom-select__button--disabled .cfa-custom-select__chevron-wrap:hover {
+  background: var(--color-background-disabled);
+  border-left-color: var(--color-border-disabled);
+}
+
 .cfa-custom-select__chevron {
   width: 8px;
   height: 8px;
@@ -252,6 +272,11 @@ select {
 .cfa-custom-select__chevron--open {
   transform: rotate(225deg);
   margin-top: 3px;
+}
+
+.cfa-custom-select__button--disabled .cfa-custom-select__chevron {
+  border-right-color: var(--color-text-disabled);
+  border-bottom-color: var(--color-text-disabled);
 }
 
 ul.cfa-custom-select__listbox {
@@ -311,6 +336,7 @@ li.cfa-custom-select__option {
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 700;
+  line-height: normal;
   margin: 0;
   color: var(--color-text-default);
 }
@@ -334,8 +360,15 @@ li.cfa-custom-select__option {
   }
 }
 
-.memorable-date__input--day { width: 48px; }
-.memorable-date__input--year { width: 72px; }
+.memorable-date__input--day {
+  width: 48px;
+}
+
+.memorable-date__input--year {
+  width: 72px;
+}
+
+/* Select component */
 
 .select-field {
   @apply space-y-cfa-sm;

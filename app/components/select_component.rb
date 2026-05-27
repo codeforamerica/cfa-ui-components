@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SelectComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, help_text: nil, optional: false)
+  def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, help_text: nil, optional: false, disabled: false)
     super(form:, method:)
     @label = label
     @help_text = help_text
@@ -9,6 +9,7 @@ class SelectComponent < AttributeBoundFormElementComponent
     @item_value_method = item_value_method
     @item_label_method = item_label_method
     @optional = optional
+    @disabled = disabled
   end
 
   private
@@ -41,9 +42,5 @@ class SelectComponent < AttributeBoundFormElementComponent
   def initial_active_index
     index = options.find_index { |option| option[:value] == current_value }
     index || 0
-  end
-
-  def required_class
-    @required ? "required" : ""
   end
 end
