@@ -233,11 +233,7 @@ select {
   }
 
   .chevron-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 100%;
+    @apply flex items-center justify-center w-10 h-full;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   }
@@ -259,12 +255,7 @@ select {
   }
 
   .chevron-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: var(--color-icon-default);
+    @apply inline-flex items-center justify-center w-6 h-6 text-icon-default;
     transition: transform 0.15s ease;
   }
 
@@ -273,39 +264,20 @@ select {
   }
 
   ul {
-    position: absolute;
-    left: 0;
+    @apply absolute left-0 z-10 w-full bg-white border-l border-r border-b border-border-secondary m-0 p-0 list-none;
     top: 41px;
-    z-index: 10;
-    width: 100%;
-    background: white;
-    border-left: 1px solid var(--color-border-secondary);
-    border-right: 1px solid var(--color-border-secondary);
-    border-bottom: 1px solid var(--color-border-secondary);
-    margin: 0;
-    padding: 0;
-    list-style: none;
     & > li + li {
       margin-top: 0;
     }
   }
 
   li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    cursor: pointer;
-    color: var(--color-text-default);
+    @apply flex items-center justify-between gap-cfa-sm cursor-pointer text-text-default px-cfa-sm m-0 list-none border-t border-border-secondary;
     font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 1;
     height: 41px;
-    padding: 0 8px;
-    margin: 0;
-    list-style: none;
-    border-top: 1px solid var(--color-border-secondary);
 
     &:first-child {
       border-top: 0;
@@ -327,19 +299,13 @@ select {
     }
 
     .option-check {
-      display: inline-flex;
-      align-items: center;
-      color: var(--color-icon-default);
-      flex-shrink: 0;
+      @apply inline-flex items-center text-icon-default flex-shrink-0;
     }
   }
 }
 
 .memorable-date__heading {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 8px;
+  @apply flex flex-col gap-cfa-xsm mb-cfa-sm;
 }
 
 .memorable-date__label {
@@ -356,13 +322,12 @@ select {
 }
 
 .memorable-date__input {
-  @apply border border-border-default rounded bg-white text-text-default;
+  @apply border border-border-default rounded bg-white text-text-default px-cfa-sm;
 
   height: 41px;
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  padding: 0 8px;
 
   &:focus-visible {
     @apply outline-none border-focus;
@@ -371,7 +336,7 @@ select {
 }
 
 .memorable-date__input--day {
-  width: 48px;
+  @apply w-12;
 }
 
 .memorable-date__input--year {
@@ -391,11 +356,4 @@ select {
   padding: 0;
   margin: 0;
   min-inline-size: 0; /* fixes weird width issues in some browsers */
-}
-
-.memorable-date__heading {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 8px;
 }
