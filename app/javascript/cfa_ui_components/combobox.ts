@@ -12,7 +12,7 @@ function filterResults(allOptions, filterString: string): Array<{ label: string,
 }
 
 function getCorrespondingOption(allOptions, liElement: HTMLElement): HTMLElement {
-    return [...allOptions].filter((o) => o.label === liElement.textContent).pop()
+    return [...allOptions].filter((o) => o.label === liElement.textContent.trim()).pop()
 }
 
 export default function (Alpine: Alpine) {
@@ -78,7 +78,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                 isDirty: false,
                 allOptions: [] as Array<{ label: string, value: string, disabled: boolean }>,
                 get selectedValue() {
-                    return this.selectedEl ? this.selectedEl.textContent : ''
+                    return this.selectedEl ? this.selectedEl.textContent.trim() : ''
                 },
                 get noResults() {
                     return this.isDirty && !this.allOptions.some(o => stringContainsSubstring(o.label, this.inputValue))
@@ -91,8 +91,8 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                 select(el: HTMLElement, setFocus=true) {
                     if (el.dataset.disabled === 'true') return;
                     this.selectedEl = el
-                    this.inputEl.value = el.textContent;
-                    this.inputValue = el.textContent;
+                    this.inputEl.value = el.textContent.trim();
+                    this.inputValue = el.textContent.trim();
                     this.selectEl.value = getCorrespondingOption(this.selectEl.children, el).value;
                     this.selectEl.dispatchEvent(new Event('change', { bubbles: true }));
                     this.isOpen = false;
@@ -148,7 +148,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     // If typed value matches an option value, set it as selectedEl
                     if (this.isDirty) {
                         const found = [...this.listEl.getElementsByTagName('LI')]
-                            .find((li) => li.textContent === this.inputValue && li.dataset.disabled !== 'true')
+                            .find((li) => li.textContent.trim() === this.inputValue && li.dataset.disabled !== 'true')
                         this.selectedEl = found ? found : this.selectedEl
                     }
                     this.isDirty = false;
@@ -330,7 +330,7 @@ const comboboxListItem = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
         },
         'x-init'() {
             this.$nextTick(() => {
-                this.label = el.textContent
+                this.label = el.textContent.trim()
             })
         },
         'x-data'() {
