@@ -18,6 +18,8 @@
           options: <%= month_options_json %>,
           activeIndex: <%= initial_active_index %>,
           keyboardActive: false,
+          typeahead: '',
+          typeaheadTimer: null,
           listboxId: '<%= input_id(2) %>-listbox',
           buttonId: '<%= input_id(2) %>',
           optionId(i) { return this.buttonId + '-option-' + i },
@@ -38,11 +40,35 @@
             this.closeList()
             this.$refs.button.focus()
           },
+          onTypeahead(char) {
+            if (this.typeaheadTimer) clearTimeout(this.typeaheadTimer)
+            this.typeaheadTimer = setTimeout(() => { this.typeahead = '' }, 500)
+            this.typeahead += char.toLowerCase()
+            const buf = this.typeahead
+            const allSame = buf.length > 1 && buf.split('').every(c => c === buf[0])
+            const search = allSame ? buf[0] : buf
+            const start = allSame ? (this.activeIndex + 1) % this.options.length : 0
+            for (let i = 0; i < this.options.length; i++) {
+              const idx = (start + i) % this.options.length
+              if (this.options[idx].label.toLowerCase().startsWith(search)) {
+                this.activeIndex = idx
+                this.keyboardActive = true
+                if (!this.open) this.openList()
+                return
+              }
+            }
+          },
           onButtonKeydown(e) {
             switch (e.key) {
               case 'ArrowDown':
-              case 'ArrowUp':
-                e.preventDefault(); this.openList(); this.moveActive(e.key === 'ArrowDown' ? 1 : -1); break
+              case 'ArrowUp': {
+                e.preventDefault()
+                this.moveActive(e.key === 'ArrowDown' ? 1 : -1)
+                if (this.open) break
+                const opt = this.options[this.activeIndex]
+                this.value = String(opt.value); this.label = opt.label
+                break
+              }
               case 'Enter':
               case ' ':
                 e.preventDefault()
@@ -53,6 +79,21 @@
                 if (this.open) { e.preventDefault(); this.activeIndex = 0 } break
               case 'End':
                 if (this.open) { e.preventDefault(); this.activeIndex = this.options.length - 1 } break
+              case 'Tab':
+                if (this.open) {
+                  if (this.activeIndex >= 0) {
+                    const opt = this.options[this.activeIndex]
+                    this.value = String(opt.value)
+                    this.label = opt.label
+                  }
+                  this.closeList()
+                }
+                break
+              default:
+                if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                  e.preventDefault()
+                  this.onTypeahead(e.key)
+                }
             }
           }
         }"
