@@ -7,7 +7,7 @@ class CfaFormBuilder < ActionView::Helpers::FormBuilder
     tin: TinComponent,
     checkbox: SingleCheckboxComponent,
     radios: RadioButtonsComponent,
-    date: DatePickerComponent
+    date: MemorableDateComponent
   }.freeze
 
   def input(method, as: :text, **opts)
