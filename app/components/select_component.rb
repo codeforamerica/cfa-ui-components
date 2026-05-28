@@ -43,4 +43,8 @@ class SelectComponent < AttributeBoundFormElementComponent
     index = options.find_index { |option| option[:value] == current_value }
     index || 0
   end
+
+  def input_id
+    "#{@form.object_name}_#{@method}"
+  end
 end

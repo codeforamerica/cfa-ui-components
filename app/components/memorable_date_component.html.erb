@@ -1,12 +1,13 @@
-<div class="memorable-date">
+<fieldset class="memorable-date">
   <% invalid = @form.object.errors[@method].any? %>
-  <div class="memorable-date__heading">
-    <p class="memorable-date__label"><%= @label %></p>
+  <legend class="memorable-date__heading">
+    <span class="memorable-date__label"><%= @label %></span>
     <% if @helper_text %>
-      <p class="help_text"><%= @helper_text %></p>
+      <span class="help_text"><%= @helper_text %></span>
     <% end %>
-  </div>
+  </legend>
   <div class="flex gap-cfa-sm items-end">
+    <!-- MONTH -->
     <div class="w-[177px]">
       <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-xsm" %>
       <div
@@ -16,154 +17,76 @@
           label: '<%= initial_month_label %>',
           options: <%= month_options_json %>,
           activeIndex: <%= initial_active_index %>,
-          typeahead: '',
-          typeaheadTimer: null,
           listboxId: '<%= input_id(2) %>-listbox',
           buttonId: '<%= input_id(2) %>',
           optionId(i) { return this.buttonId + '-option-' + i },
-          openList(focusSelected) {
-            this.open = true
-            if (focusSelected) {
-              const sel = this.options.findIndex(o => String(o.value) === String(this.value))
-        this.activeIndex = sel >= 0 ? sel : 0
-        } else if (this.activeIndex < 0) {
-              this.activeIndex = 0
-            }
-            this.$nextTick(() => this.scrollActive())
-          },
-          closeList(restoreFocus) {
-          this.open = false
-          if (restoreFocus) this.$refs.button.focus()
-          },
+          openList() { this.open = true },
+          closeList() { this.open = false },
           selectAt(i) {
-          const opt = this.options[i]
-          this.value = String(opt.value)
-          this.label = opt.label
-          this.activeIndex = i
-          this.closeList(true)
-          },
-          move(delta) {
-          if (!this.open) {
-          this.openList(true)
-          return
-          }
-          const n = this.options.length
-          const start = this.activeIndex < 0 ? (delta > 0 ? -1 : 0) : this.activeIndex
-            this.activeIndex = (start + delta + n) % n
-            this.scrollActive()
-            },
-            moveTo(i) {
-            if (!this.open) this.openList(false)
+            const opt = this.options[i]
+            this.value = String(opt.value)
+            this.label = opt.label
             this.activeIndex = i
-            this.scrollActive()
-            },
-            scrollActive() {
-            const el = document.getElementById(this.optionId(this.activeIndex))
-            if (el) el.scrollIntoView({ block: 'nearest' })
-            },
-            handleType(e) {
-            if (e.altKey || e.ctrlKey || e.metaKey) return
-            if (!e.key || e.key.length !== 1) return
-            if (e.key === ' ' || e.key === 'Enter' || e.key === 'Tab' || e.key === 'Escape') return
-            e.preventDefault()
-            clearTimeout(this.typeaheadTimer)
-            this.typeahead += e.key.toLowerCase()
-            this.typeaheadTimer = setTimeout(() => { this.typeahead = '' }, 500)
-            const n = this.options.length
-            const startFrom = this.typeahead.length > 1 ? this.activeIndex : this.activeIndex + 1
-            for (let i = 0; i < n; i++) {
-              const idx = ((startFrom < 0 ? 0 : startFrom) + i) % n
-              if (this.options[idx].label.toLowerCase().startsWith(this.typeahead)) {
-                if (!this.open) this.openList(false)
-                this.activeIndex = idx
-                this.scrollActive()
-                return
-              }
-            }
+            this.closeList()
           }
         }"
         class="cfa-custom-select"
-        @click.outside="closeList(false)"
+        @click.outside="closeList()"
       >
-              <button
+        <button
           type="button"
-          x-ref="button"
           id="<%= input_id(2) %>"
           class="cfa-custom-select__button"
           :class="open ? 'cfa-custom-select__button--open' : ''"
-          role="combobox"
           aria-haspopup="listbox"
           :aria-controls="listboxId"
           aria-invalid="<%= invalid %>"
           :aria-expanded="open.toString()"
-          :aria-activedescendant="open && activeIndex >= 0 ? optionId(activeIndex) : null"
-                @click="open ? closeList(false) : openList(true)"
-                @keydown.arrow-down.prevent="move(1)"
-                @keydown.arrow-up.prevent="move(-1)"
-                @keydown.home.prevent="open && moveTo(0)"
-                @keydown.end.prevent="open && moveTo(options.length - 1)"
-                @keydown.enter.prevent="open ? selectAt(activeIndex) : openList(true)"
-                @keydown.space.prevent="open ? selectAt(activeIndex) : openList(true)"
-                @keydown.escape.prevent="open && closeList(true)"
-                @keydown.tab="open && (open = false)"
-                @keydown="handleType($event)"
-                >
-                <span x-text="label" class="cfa-custom-select__value"></span>
-                <span class="cfa-custom-select__chevron-wrap" :class="open ? 'cfa-custom-select__chevron-wrap--open' : ''">
-                  <span class="cfa-custom-select__chevron" :class="open ? 'cfa-custom-select__chevron--open' : ''"></span>
-                </span>
-              </button>
-              <ul
+          @click="open ? closeList() : openList()"
+        >
+          <span x-text="label" class="cfa-custom-select__value"></span>
+          <span class="cfa-custom-select__chevron-wrap" :class="open ? 'cfa-custom-select__chevron-wrap--open' : ''">
+            <span class="cfa-custom-select__chevron-icon" :class="open ? 'cfa-custom-select__chevron-icon--open' : ''">
+              <%= render(IconComponent.new(icon: "chevron")) %>
+            </span>
+          </span>
+        </button>
+        <ul
           :id="listboxId"
           x-show="open"
           x-cloak
           class="cfa-custom-select__listbox"
           role="listbox"
-          :aria-labelledby="'<%= input_id(2) %>-label'"
         >
-                <% month_options.each_with_index do |(label, value), idx| %>
-                  <li
+          <% month_options.each_with_index do |(label, value), idx| %>
+            <li
               role="option"
-              :id="optionId(<%= idx %>)"
               class="cfa-custom-select__option"
-              :class="{ 'cfa-custom-select__option--active': activeIndex === <%= idx %> }"
-              :aria-selected="value === '<%= value %>' ? 'true' : 'false'"
               @click="selectAt(<%= idx %>)"
-              @mouseenter="activeIndex = <%= idx %>"
             >
-                    <%= label %>
-                  </li>
-                <% end %>
-              </ul>
-              <%= hidden_field_tag param_name(2), month_value, "x-model": "value" %>
-            </div>
-          </div>
-          <div>
-            <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
-            <%= @form.text_field "#{@method}(3i)",
-                  value: day_value,
-                  id: input_id(3),
-                  type: "text",
-                  inputmode: "numeric",
-                  minlength: 1,
-                  maxlength: 2,
-                  placeholder: "DD",
-                  aria: {invalid: invalid},
-                  class: "memorable-date__input memorable-date__input--day" %>
-          </div>
-          <div>
-            <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
-            <%= @form.text_field "#{@method}(1i)",
-                  value: year_value,
-                  id: input_id(1),
-                  type: "text",
-                  inputmode: "numeric",
-                  minlength: 4,
-                  maxlength: 4,
-                  placeholder: "YYYY",
-                  aria: {invalid: invalid},
-                  class: "memorable-date__input memorable-date__input--year" %>
-          </div>
-        </div>
-        <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+              <%= label %>
+            </li>
+          <% end %>
+        </ul>
+        <%= hidden_field_tag param_name(2), month_value, "x-model": "value" %>
       </div>
+    </div>
+    <!-- DAY -->
+    <div>
+      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
+      <%= @form.text_field "#{@method}(3i)",
+            value: day_value,
+            id: input_id(3),
+            class: "memorable-date__input memorable-date__input--day" %>
+    </div>
+    <!-- YEAR -->
+    <div>
+      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
+      <%= @form.text_field "#{@method}(1i)",
+            value: year_value,
+            id: input_id(1),
+            class: "memorable-date__input memorable-date__input--year" %>
+    </div>
+  </div>
+  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+</fieldset>

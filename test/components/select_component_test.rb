@@ -12,9 +12,10 @@ class SelectComponentTest < ViewComponent::TestCase
       item_value_method: :value,
       item_label_method: :label
     ))
+
     assert_selector "label", text: "Pick one"
-    assert_selector "option", text: "Yes"
-    assert_selector "option", text: "No"
+    assert_selector "[role='option']", text: "Yes"
+    assert_selector "[role='option']", text: "No"
   end
 
   def test_renders_help_text
