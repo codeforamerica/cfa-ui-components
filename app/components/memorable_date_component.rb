@@ -34,8 +34,15 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
     Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }
   end
 
-  def month_options_json
-    month_options.map { |label, value| {label:, value:} }.to_json
+  def month_alpine_opts
+    {
+      options: month_options.map { |label, value| {label:, value:} },
+      value: month_value.to_s,
+      label: initial_month_label,
+      activeIndex: initial_active_index,
+      buttonId: input_id(2),
+      listboxId: "#{input_id(2)}-listbox"
+    }.to_json
   end
 
   def initial_month_label

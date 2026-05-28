@@ -42,7 +42,7 @@ class SelectComponentTest < ViewComponent::TestCase
     ))
     assert_selector "label", text: "Pick one"
     assert_no_text "(optional)"
-    assert_selector "select[aria-required='true']"
+    assert_selector "[role='combobox'][aria-required='true']"
   end
 
   def test_optional_appends_optional_marker_and_omits_aria_required
@@ -56,6 +56,7 @@ class SelectComponentTest < ViewComponent::TestCase
       optional: true
     ))
     assert_selector "label", text: "Pick one (optional)"
-    assert_no_selector "select[aria-required]"
+    assert_no_selector "[role='combobox'][aria-required='true']"
+    assert_selector "[role='combobox'][aria-required='false']"
   end
 end

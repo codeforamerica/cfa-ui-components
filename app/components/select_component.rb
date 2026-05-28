@@ -23,8 +23,16 @@ class SelectComponent < AttributeBoundFormElementComponent
     end
   end
 
-  def options_json
-    options.to_json
+  def alpine_opts
+    {
+      options:,
+      value: current_value,
+      label: current_label,
+      activeIndex: initial_active_index,
+      disabled: @disabled,
+      buttonId: input_id,
+      listboxId: "#{input_id}-listbox"
+    }.to_json
   end
 
   def placeholder_label

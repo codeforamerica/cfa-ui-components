@@ -5,104 +5,7 @@
     <p class="help_text"><%= @help_text %></p>
   <% end %>
   <div
-    x-data="{
-      open: false,
-      disabled: <%= @disabled ? "true" : "false" %>,
-      value: '<%= current_value %>',
-      label: '<%= current_label %>',
-      options: <%= options_json %>,
-      activeIndex: <%= initial_active_index %>,
-      keyboardActive: false,
-      typeahead: '',
-      typeaheadTimer: null,
-      listboxId: '<%= input_id %>-listbox',
-      buttonId: '<%= input_id %>',
-      optionId(i) { return this.buttonId + '-option-' + i },
-
-      openList() { if (!this.disabled) this.open = true },
-      closeList() { this.open = false; this.keyboardActive = false },
-      toggleList() { this.open ? this.closeList() : this.openList() },
-
-      moveActive(delta) {
-        if (!this.options.length) return
-        const start = this.activeIndex < 0 ? (delta > 0 ? -1 : 0) : this.activeIndex
-        this.activeIndex = (start + delta + this.options.length) % this.options.length
-        this.keyboardActive = true
-      },
-
-      selectAt(i) {
-        if (this.disabled) return
-        const opt = this.options[i]
-        this.value = String(opt.value)
-        this.label = opt.label
-        this.activeIndex = i
-        this.closeList()
-        this.$refs.button.focus()
-      },
-
-      onTypeahead(char) {
-        if (this.typeaheadTimer) clearTimeout(this.typeaheadTimer)
-        this.typeaheadTimer = setTimeout(() => { this.typeahead = '' }, 500)
-        this.typeahead += char.toLowerCase()
-        const buf = this.typeahead
-        const allSame = buf.length > 1 && buf.split('').every(c => c === buf[0])
-        const search = allSame ? buf[0] : buf
-        const start = allSame ? (this.activeIndex + 1) % this.options.length : 0
-        for (let i = 0; i < this.options.length; i++) {
-          const idx = (start + i) % this.options.length
-          if (this.options[idx].label.toLowerCase().startsWith(search)) {
-            this.activeIndex = idx
-            this.keyboardActive = true
-            if (!this.open) this.openList()
-            return
-          }
-        }
-      },
-
-      onButtonKeydown(e) {
-        if (this.disabled) return
-        switch (e.key) {
-          case 'ArrowDown':
-          case 'ArrowUp': {
-            e.preventDefault()
-            this.moveActive(e.key === 'ArrowDown' ? 1 : -1)
-            if (this.open) break
-            const opt = this.options[this.activeIndex]
-            this.value = String(opt.value); this.label = opt.label
-            break
-          }
-          case 'Enter':
-          case ' ':
-            e.preventDefault()
-            this.open ? this.selectAt(this.activeIndex) : this.openList()
-            break
-          case 'Escape':
-            if (this.open) { e.preventDefault(); this.closeList() }
-            break
-          case 'Home':
-            if (this.open) { e.preventDefault(); this.activeIndex = 0 }
-            break
-          case 'End':
-            if (this.open) { e.preventDefault(); this.activeIndex = this.options.length - 1 }
-            break
-          case 'Tab':
-            if (this.open) {
-              if (this.activeIndex >= 0) {
-                const opt = this.options[this.activeIndex]
-                this.value = String(opt.value)
-                this.label = opt.label
-              }
-              this.closeList()
-            }
-            break
-          default:
-            if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-              e.preventDefault()
-              this.onTypeahead(e.key)
-            }
-        }
-      }
-    }"
+    x-data='cfaSelect(<%= alpine_opts %>)'
     class="cfa-custom-select select-field__wrapper"
     @click.outside="closeList()"
   >
@@ -111,24 +14,20 @@
       id="<%= input_id %>"
       role="combobox"
       x-ref="button"
-      class="cfa-custom-select__button"
-      :class="{
-        'cfa-custom-select__button--open': open,
-        'cfa-custom-select__button--disabled': disabled
-      }"
       aria-haspopup="listbox"
       :aria-controls="listboxId"
       :aria-activedescendant="open ? optionId(activeIndex) : null"
       aria-invalid="<%= invalid %>"
+      aria-required="<%= !@optional %>"
       :aria-expanded="open.toString()"
       aria-disabled="<%= @disabled %>"
-      <%= 'tabindex="-1"' if @disabled %>
+      tabindex="<%= @disabled ? -1 : 0 %>"
       @click="toggleList()"
       @keydown="onButtonKeydown($event)"
     >
-      <span x-text="label" class="cfa-custom-select__value"></span>
-      <span class="cfa-custom-select__chevron-wrap" :class="open ? 'cfa-custom-select__chevron-wrap--open' : ''">
-        <span class="cfa-custom-select__chevron-icon" :class="open ? 'cfa-custom-select__chevron-icon--open' : ''">
+      <span x-text="label" class="value"></span>
+      <span class="chevron-wrap">
+        <span class="chevron-icon">
           <%= render(IconComponent.new(icon: "chevron")) %>
         </span>
       </span>
@@ -137,7 +36,6 @@
       :id="listboxId"
       x-show="open"
       x-cloak
-      class="cfa-custom-select__listbox"
       role="listbox"
       :aria-labelledby="'<%= input_id %>-label'"
     >
@@ -145,17 +43,14 @@
         <li
           :id="optionId(<%= idx %>)"
           role="option"
-          class="cfa-custom-select__option"
-          :class="{
-            'cfa-custom-select__option--active': activeIndex === <%= idx %>,
-            'cfa-custom-select__option--focused': activeIndex === <%= idx %> && keyboardActive,
-          }"
+          :data-active="activeIndex === <%= idx %> ? '' : null"
+          :data-focused="activeIndex === <%= idx %> && keyboardActive ? '' : null"
           :aria-selected="value === '<%= option[:value] %>'"
           @click="selectAt(<%= idx %>)"
           @mouseenter="activeIndex = <%= idx %>; keyboardActive = false"
         >
-          <span class="cfa-custom-select__option-label"><%= option[:label] %></span>
-          <span class="cfa-custom-select__option-check" x-show="value === '<%= option[:value] %>'" x-cloak>
+          <span class="option-label"><%= option[:label] %></span>
+          <span class="option-check" x-show="value === '<%= option[:value] %>'" x-cloak>
             <%= inline_icon(:check, size: 20, aria_hidden: true) %>
           </span>
         </li>
