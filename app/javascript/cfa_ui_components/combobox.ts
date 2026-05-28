@@ -8,7 +8,7 @@ function stringContainsSubstring(label: string, substring: string): boolean {
 }
 
 function filterResults(allOptions, filterString: string): Array<{ label: string, value: string, disabled: boolean }> {
-    return [...allOptions].map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled })).filter((o) => stringContainsSubstring(o.label, filterString));
+    return [...allOptions].filter((o) => o.value !== '').map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled })).filter((o) => stringContainsSubstring(o.label, filterString));
 }
 
 function getCorrespondingOption(allOptions, liElement: HTMLElement): HTMLElement {
@@ -169,7 +169,7 @@ const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)
         'x-init'() {
             el.id = '';
             el.hidden = true;
-            this.allOptions = [...el.children].map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled }));
+            this.allOptions = [...el.children].filter((o) => o.value !== '').map((o) => ({ label: o.textContent, value: o.value, disabled: o.disabled }));
             this.selectEl = el;
         },
         ':foo'() {

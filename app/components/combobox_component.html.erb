@@ -16,15 +16,15 @@
       ) %>
   <template x-if="$combobox.isLoaded">
     <div class="relative">
-      <div class="flex w-full">
+      <div class="cfa-combobox__field flex w-full">
         <input
           x-combobox:input
           aria-invalid="<%= invalid %>"
           class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent"
           placeholder="<%= I18n.t("combobox.placeholder_label") %>"
         >
-        <div class="absolute z-10 inset-y-0 right-0 flex">
-          <button x-combobox:toggle class="cfa-combobox__toggle h-full px-cfa-sm flex items-center focus:outline-2 focus:-outline-offset-2 focus:outline-focus bg-transparent">
+        <div class="absolute z-10 inset-y-px right-px flex">
+          <button x-combobox:toggle class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
             <template x-if="$combobox.isOpen">
               <%= render(IconComponent.new(icon: "chevron_up")) %>
             </template>
@@ -34,15 +34,15 @@
           </button>
         </div>
       </div>
-      <ul x-combobox:list class="!list-none !absolute border !border-t-0 border-border-secondary rounded-b bg-white max-h-52 overflow-y-scroll w-full z-10">
+      <ul x-combobox:list class="!list-none !pl-0 !absolute border !border-t-0 border-border-secondary divide-y divide-border-secondary rounded-b bg-white max-h-52 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
           <li x-combobox:item
               :data-disabled="option.disabled"
-              :class="option.disabled ? 'px-cfa-sm py-cfa-xsm !m-0 cursor-not-allowed opacity-50' : 'px-cfa-sm py-cfa-xsm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus'"
+              :class="option.disabled ? 'px-cfa-med py-cfa-sm !m-0 cursor-not-allowed opacity-50' : 'px-cfa-med py-cfa-sm !m-0 cursor-pointer aria-selected:bg-primary-hover data-active:outline-2 data-active:-outline-offset-2 data-active:outline-focus'"
               x-text="option.label"></li>
         </template>
         <template x-if="$combobox.noResults">
-          <li class="px-cfa-sm py-cfa-xsm cursor-not-allowed">
+          <li class="px-cfa-med py-cfa-sm cursor-not-allowed">
             <%= I18n.t("combobox.no_results") %>
           </li>
         </template>

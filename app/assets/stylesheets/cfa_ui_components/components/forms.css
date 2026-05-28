@@ -176,8 +176,12 @@ select {
   @apply rounded-r;
 }
 
-.cfa-combobox__toggle:hover:not(:disabled) {
+.cfa-combobox__field:hover:not(:has(:disabled)) .cfa-combobox__toggle {
   background-color: var(--color-background-secondary);
+}
+
+.cfa-combobox__field:has(input[aria-expanded="true"]) input {
+  @apply rounded-b-none;
 }
 
 .cfa-combobox__toggle:active:not(:disabled) {
