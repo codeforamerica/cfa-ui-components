@@ -1,18 +1,18 @@
 <fieldset class="memorable-date">
   <% invalid = @form.object.errors[@method].any? %>
-  <legend class="memorable-date__heading">
-    <span class="memorable-date__label"><%= @label %></span>
+  <legend class="flex flex-col gap-cfa-xsm mb-cfa-sm">
+    <span class="font-bold"><%= @label %></span>
     <% if @helper_text %>
       <span class="help_text"><%= @helper_text %></span>
     <% end %>
   </legend>
   <div class="flex gap-cfa-sm items-end">
     <!-- MONTH -->
-    <div class="w-[177px]">
+    <div class="w-[176px]">
       <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-xsm" %>
       <div
-        x-data='cfaSelect(<%= month_alpine_opts %>)'
-        class="cfa-custom-select"
+        x-data="cfaSelect(<%= month_alpine_opts %>)"
+        class="cfa-custom-select w-full"
         @click.outside="closeList()"
       >
         <button
@@ -67,7 +67,7 @@
       <%= @form.text_field "#{@method}(3i)",
             value: day_value,
             id: input_id(3),
-            class: "memorable-date__input memorable-date__input--day" %>
+            class: "w-12" %>
     </div>
     <!-- YEAR -->
     <div>
@@ -75,7 +75,7 @@
       <%= @form.text_field "#{@method}(1i)",
             value: year_value,
             id: input_id(1),
-            class: "memorable-date__input memorable-date__input--year" %>
+            class: "w-18" %>
     </div>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>

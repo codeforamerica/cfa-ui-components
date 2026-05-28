@@ -200,9 +200,6 @@ select {
   button {
     @apply flex items-center justify-between w-full border border-border-default rounded bg-white text-text-default overflow-hidden;
     height: 41px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
 
     &:focus-visible {
       outline: 4px solid var(--color-focus);
@@ -273,9 +270,6 @@ select {
 
   li {
     @apply flex items-center justify-between gap-cfa-sm cursor-pointer text-text-default px-cfa-sm m-0 list-none border-t border-border-secondary;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
     line-height: 1;
     height: 41px;
 
@@ -304,43 +298,18 @@ select {
   }
 }
 
-.memorable-date__heading {
-  @apply flex flex-col gap-cfa-xsm mb-cfa-sm;
-}
-
-.memorable-date__label {
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: normal;
-  margin: 0;
-  color: var(--color-text-default);
-}
-
 .memorable-date .help_text {
   margin: 0;
 }
 
-.memorable-date__input {
-  @apply border border-border-default rounded bg-white text-text-default px-cfa-sm;
-
+.memorable-date input[type="text"] {
   height: 41px;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
 
   &:focus-visible {
-    @apply outline-none border-focus;
-    border-width: 4px;
+    outline: 4px solid var(--color-focus);
+    outline-offset: -4px;
+    border-color: var(--color-focus);
   }
-}
-
-.memorable-date__input--day {
-  @apply w-12;
-}
-
-.memorable-date__input--year {
-  width: 72px;
 }
 
 .select-field {
