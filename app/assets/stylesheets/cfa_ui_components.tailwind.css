@@ -15,7 +15,6 @@
     --color-icon-primary: #FFF;
     --color-text-button-link: #007C7C;
     --color-border-error: #B50909;
-    --color-background-chevron-hover: #E9E9E9;
 }
 /* the css rules below are to remove the spin button from the input currency component */
 .currency-field input[type="number"]::-webkit-outer-spin-button,

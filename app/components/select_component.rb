@@ -15,19 +15,20 @@ class SelectComponent < AttributeBoundFormElementComponent
   private
 
   def options
-    @options ||= [
-      {label: "- Select -", value: ""},
-      *@collection.map do |item|
-        {
-          label: item.public_send(@item_label_method).to_s,
-          value: item.public_send(@item_value_method).to_s
-        }
-      end
-    ]
+    @options ||= @collection.map do |item|
+      {
+        label: item.public_send(@item_label_method).to_s,
+        value: item.public_send(@item_value_method).to_s
+      }
+    end
   end
 
   def options_json
     options.to_json
+  end
+
+  def placeholder_label
+    "- Select -"
   end
 
   def current_value
@@ -36,12 +37,11 @@ class SelectComponent < AttributeBoundFormElementComponent
 
   def current_label
     selected = options.find { |option| option[:value] == current_value }
-    selected&.dig(:label) || "- Select -"
+    selected&.dig(:label) || placeholder_label
   end
 
   def initial_active_index
-    index = options.find_index { |option| option[:value] == current_value }
-    index || 0
+    options.find_index { |option| option[:value] == current_value } || -1
   end
 
   def input_id
