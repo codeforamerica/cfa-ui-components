@@ -34,18 +34,18 @@
           </button>
         </div>
       </div>
-      <ul x-combobox:list class="!list-none !pl-0 !absolute border !border-t-0 border-border-secondary divide-y divide-border-secondary rounded-b bg-white max-h-52 overflow-y-scroll w-full z-10">
+      <ul x-combobox:list class="!list-none !pl-0 !absolute border !border-t-0 border-border-secondary divide-y divide-border-secondary rounded-b bg-white max-h-72 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
           <li x-combobox:item
               :data-disabled="option.disabled"
               :class="option.disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer group'"
-              class="px-cfa-sm py-cfa-xsm !m-0">
-            <span class="block p-cfa-sm rounded-sm group-aria-selected:bg-primary-hover group-data-active:outline-4 group-data-active:-outline-offset-2 group-data-active:outline-focus" x-text="option.label"></span>
+              class="!h-12 flex items-center !p-cfa-sm !m-0 leading-none">
+            <span class="block w-full p-cfa-sm rounded-sm group-aria-selected:bg-primary-hover group-data-active:outline-4 group-data-active:-outline-offset-2 group-data-active:outline-focus" x-text="option.label"></span>
           </li>
         </template>
         <template x-if="$combobox.noResults">
-          <li class="px-cfa-sm py-cfa-xsm cursor-not-allowed">
-            <span class="block p-cfa-sm"><%= I18n.t("combobox.no_results") %></span>
+          <li class="!h-12 flex items-center !p-cfa-sm cursor-not-allowed leading-none">
+            <span class="block w-full p-cfa-sm"><%= I18n.t("combobox.no_results") %></span>
           </li>
         </template>
       </ul>
