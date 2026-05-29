@@ -177,7 +177,7 @@ select {
 }
 
 .cfa-combobox__field:hover:not(:has(:disabled)) .cfa-combobox__toggle {
-  background-color: var(--color-background-secondary);
+  @apply bg-background-secondary;
 }
 
 .cfa-combobox__field:has(input[aria-expanded="true"]) input {
@@ -189,8 +189,7 @@ select {
 }
 
 .cfa-combobox__toggle:active:not(:disabled) {
-  background-color: var(--color-background-secondary);
-  border: 2px solid var(--color-primary);
+  @apply bg-background-secondary border-2 border-primary;
 }
 
 /* Standard invalid fields */
