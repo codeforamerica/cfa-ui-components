@@ -184,6 +184,10 @@ select {
   @apply rounded-b-none;
 }
 
+.cfa-combobox__field input[aria-expanded="true"]:focus-visible {
+  @apply outline-none;
+}
+
 .cfa-combobox__toggle:active:not(:disabled) {
   background-color: var(--color-background-secondary);
   border: 2px solid var(--color-primary);
