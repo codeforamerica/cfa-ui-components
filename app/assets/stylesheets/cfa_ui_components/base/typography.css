@@ -10,7 +10,7 @@ body {
     @apply antialiased bg-background-app text-text-default;
 }
 
-h1, h2 {
+h1 {
     font-family: "Geologica", sans-serif;
     font-size: 22px;
     font-weight: 400;
@@ -34,7 +34,7 @@ h1, h2 {
     letter-spacing: 0;
 }
 
-.type-body-bold, h3 {
+.type-body-bold, h2, h3 {
     font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 700;
