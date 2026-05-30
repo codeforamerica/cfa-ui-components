@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@alpinejs/focus@^3.15.5":
-  version "3.15.5"
-  resolved "https://registry.yarnpkg.com/@alpinejs/focus/-/focus-3.15.5.tgz#6db938d0970999e09e83fc8836959e9a87ee7e12"
-  integrity sha512-5HHI1HBFzl3Ac4QoZxRUgWkEopLPNOebYGV1PH388sO4WcbhBkY4N0AMVRo2N/A6fw2V6Au4T7jU5d4p1F3ztw==
+"@alpinejs/focus@^3.15.12":
+  version "3.15.12"
+  resolved "https://registry.yarnpkg.com/@alpinejs/focus/-/focus-3.15.12.tgz#5157e4dafbd10fb86fa177c9b71d40620e5d171f"
+  integrity sha512-lmqbFTlbQGywDgsW4dY0pv18CKhuHJrq8mffU1OO14J34uUk+lCQElmSgJdRGHYv9qBezE6zdvmhN6n2tg0A1A==
   dependencies:
-    focus-trap "^6.9.4"
-    tabbable "^5.3.3"
+    focus-trap "^8.0.0"
+    tabbable "^6.4.0"
 
 "@alpinejs/mask@^3.15.4":
   version "3.15.4"
@@ -538,12 +538,12 @@ fill-range@^7.1.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-focus-trap@^6.9.4:
-  version "6.9.4"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.9.4.tgz#436da1a1d935c48b97da63cd8f361c6f3aa16444"
-  integrity sha512-v2NTsZe2FF59Y+sDykKY+XjqZ0cPfhq/hikWVL88BqLivnNiEffAsac6rP6H45ff9wG9LL5ToiDqrLEP9GX9mw==
+focus-trap@^8.0.0:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-8.2.1.tgz#ab192bbaf6f767f869d47e2e6f804e336ea5874a"
+  integrity sha512-6CxwrrFRquH7pDXb1mWxudkU9LSfYBMRZutpgddb2o6iwCk7cIRrBhyY3c8SGKcmIKdeMTrGSNg4Bedh2RSF/w==
   dependencies:
-    tabbable "^5.3.3"
+    tabbable "^6.4.0"
 
 graceful-fs@^4.2.4:
   version "4.2.11"
@@ -704,10 +704,10 @@ source-map-js@^1.2.1:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
   integrity sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
 
-tabbable@^5.3.3:
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.3.3.tgz#aac0ff88c73b22d6c3c5a50b1586310006b47fbf"
-  integrity sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==
+tabbable@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.4.0.tgz#36eb7a06d80b3924a22095daf45740dea3bf5581"
+  integrity sha512-05PUHKSNE8ou2dwIxTngl4EzcnsCDZGJ/iCLtDflR/SHB/ny14rXc+qU5P4mG9JkusiV7EivzY9Mhm55AzAvCg==
 
 tailwindcss@4.1.14, tailwindcss@^4.1.14:
   version "4.1.14"
