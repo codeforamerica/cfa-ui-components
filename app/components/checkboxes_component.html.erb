@@ -1,6 +1,6 @@
 <div x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
   <%= @form.hidden_field @method, value: "" %>
-  <div class="space-y-cfa-med <%= "has-error" if has_error? %>">
+  <div class="cfa-stack-med <%= "has-error" if has_error? %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            item_value = checkbox_item.value.to_s

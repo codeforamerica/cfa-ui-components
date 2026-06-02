@@ -16,7 +16,6 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 28px;
 }
 
 .type-display {
@@ -33,16 +32,14 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
-.type-body-bold, h3 {
+.type-body-bold, h2, h3 {
     font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 20px;
 }
 
 .type-body-label, .label {
@@ -63,14 +60,6 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-}
-
-.type-progress-text {
-    margin-bottom: 18px;
-}
-
-.help_text {
-    margin-bottom: 8px;
 }
 
 .type-button {

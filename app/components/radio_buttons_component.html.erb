@@ -1,7 +1,7 @@
 <div x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
   <%= @form.hidden_field @method, value: "" %>
   <% if @legend.present? %>
-    <p class="label text-text-body-secondary mb-cfa-sm"><%= @legend %></p>
+    <p class="type-body-bold mb-cfa-sm"><%= @legend %></p>
   <% end %>
   <% content = content_tag(:div, class: @layout) do
        capture do
@@ -27,10 +27,12 @@
        end
      end %>
   <% concat content %>
-  <div class="mt-cfa-sm">
-    <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
-    <% if has_warning? %>
-      <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
-    <% end %>
-  </div>
+  <% if has_error? || has_warning? %>
+    <div class="mt-cfa-sm">
+      <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
+      <% if has_warning? %>
+        <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

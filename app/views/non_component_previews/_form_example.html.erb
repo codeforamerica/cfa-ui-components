@@ -9,6 +9,9 @@
     <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
   <% end %>
   <%= render(CardComponent.new) do %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, legend: "Are you filing with your spouse (married filing jointly)?", collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
+  <% end %>
+  <%= render(CardComponent.new) do %>
     <%= render InputComponent.new(form: f, method: :first_name, label: "First name") %>
   <% end %>
   <%= render(CardComponent.new) do %>
