@@ -23,6 +23,11 @@ select {
     }
 }
 
+input[type="text"] {
+  height: 40px;
+  padding: 8px;
+}
+
 .form_item {
     @apply flex items-center;
     label { margin-left: var(--spacing-cfa-sm); }
