@@ -63,7 +63,14 @@ h1 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
+}
+
+.type-progress-text {
     margin-bottom: 18px;
+}
+
+.help_text {
+    margin-bottom: 8px;
 }
 
 .type-button {
