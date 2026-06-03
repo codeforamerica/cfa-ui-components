@@ -3,7 +3,7 @@
     <dialog role="dialog" aria-modal="true" :aria-labelledby="$id('<%= @name %>-title')" :aria-describedby="$id('<%= @name %>-description')" x-transition x-show="open" @click.away="toggle()" class="relative flex flex-col min-h-50 max-h-[100vh] md:max-h-[80vh] overflow-auto bg-white rounded-lg border-border-secondary border-2" :open="open">
       <div class="p-cfa-lg cfa-stack-med max-w-[360px]">
         <div class="flex flex-row gap-x-cfa-xl">
-          <h2 :id="$id('<%= @name %>-title')"><%= header %></h2>
+          <h1 :id="$id('<%= @name %>-title')"><%= header %></h1>
           <div class="w-[25px] shrink-0">
             <a href="#" @click="toggle()" class="flex flex-col items-start cursor-pointer" style="color: inherit" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:xmark, size: 25, aria_hidden: true) %></a>
           </div>

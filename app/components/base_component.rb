@@ -65,6 +65,10 @@ class BaseComponent < ViewComponent::Base
     "external_link" => {
       path: "icons/external_link.svg",
       alt: "external link"
+    },
+    "download" => {
+      path: "icons/download.svg",
+      alt: "download"
     }
   }.freeze
 
