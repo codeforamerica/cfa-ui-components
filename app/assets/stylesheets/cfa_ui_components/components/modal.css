@@ -2,6 +2,10 @@
     @apply flex flex-col items-start cursor-pointer bg-transparent border-0 p-0 text-inherit;
 }
 
+.modal__close:focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-focus;
+}
+
 .modal__buttons :is(.btn, form) {
     @apply w-full;
 }
