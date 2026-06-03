@@ -64,6 +64,7 @@
 @import "./base/links.css" layer(cfa-base);
 
 @import "./components/layout.css";
+@import "./components/modal.css";
 @import "./components/forms.css";
 @import "./components/buttons.css";
 @import "./components/icons.css";
