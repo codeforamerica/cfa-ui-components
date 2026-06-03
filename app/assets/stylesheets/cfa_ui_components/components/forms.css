@@ -201,7 +201,6 @@ input[type="text"] {
 /* Shared custom select — block class is the scope anchor; state comes from aria/data attrs */
 .cfa-custom-select {
   position: relative;
-
   button {
     @apply flex items-center justify-between w-full border border-border-default rounded bg-white text-text-default overflow-hidden;
     height: 41px;
@@ -260,7 +259,7 @@ input[type="text"] {
   }
 
   ul {
-    @apply absolute left-0 top-[41px] z-10 w-full bg-white border-l border-r border-b border-border-secondary m-0 p-0 list-none;
+    @apply absolute left-0 top-[41px] z-10 w-full bg-white border-l border-r border-b border-border-secondary m-0 p-0 list-none gap-0;
   }
 
   li {
@@ -285,20 +284,26 @@ input[type="text"] {
   }
 }
 
-.memorable-date .help_text {
+.memorable-date {
+  border: 0;
+  padding: 0;
   margin: 0;
-}
+  min-inline-size: 0;
 
-.memorable-date input[type="text"] {
-  height: 41px;
+  & .help_text {
+    margin: 0;
+  }
 
-  &:focus-visible {
+  & input[type="text"] {
+    height: 41px;
+  }
+
+  & input[type="text"]:focus-visible {
     outline: 4px solid var(--color-focus);
     outline-offset: -4px;
     border-color: var(--color-focus);
   }
 }
-
 .select-field {
   @apply space-y-cfa-sm;
 }
@@ -307,9 +312,3 @@ input[type="text"] {
   @apply w-full max-w-sm;
 }
 
-.memorable-date {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  min-inline-size: 0; /* fixes weird width issues in some browsers */
-}

@@ -39,10 +39,6 @@ class SelectComponent < AttributeBoundFormElementComponent
     "- Select -"
   end
 
-  def current_value
-    @form.object.public_send(@method).to_s
-  end
-
   def current_label
     selected = options.find { |option| option[:value] == current_value }
     selected&.dig(:label) || placeholder_label
