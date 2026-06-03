@@ -1,43 +1,51 @@
 class IconComponentPreview < ViewComponent::Preview
   # @!group Icons
-  def info
-    render(IconComponent.new(icon: "info"))
+  def info_outline
+    render(IconComponent.new(icon: "info_outline"))
   end
 
-  def question
-    render(IconComponent.new(icon: "question"))
+  def help_outline
+    render(IconComponent.new(icon: "help_outline"))
   end
 
-  def circle_check
-    render(IconComponent.new(icon: "circle_check"))
+  def check_circle_outline
+    render(IconComponent.new(icon: "check_circle_outline"))
   end
 
-  def circle_xmark
-    render(IconComponent.new(icon: "circle_xmark"))
+  def highlight_off
+    render(IconComponent.new(icon: "highlight_off"))
   end
 
-  def xmark
-    render(IconComponent.new(icon: "xmark"))
+  def close
+    render(IconComponent.new(icon: "close"))
   end
 
-  def warn
-    render(IconComponent.new(icon: "warn"))
+  def warning
+    render(IconComponent.new(icon: "warning"))
   end
 
   def delete
     render(IconComponent.new(icon: "delete"))
   end
 
-  def arrow_left
-    render(IconComponent.new(icon: "arrow_left"))
+  def arrow_back
+    render(IconComponent.new(icon: "arrow_back"))
   end
 
-  def chevron_down
-    render(IconComponent.new(icon: "chevron_down"))
+  def expand_more
+    render(IconComponent.new(icon: "expand_more"))
   end
 
-  def chevron_up
-    render(IconComponent.new(icon: "chevron_up"))
+  def expand_less
+    render(IconComponent.new(icon: "expand_less"))
+  end
+
+  def clock
+    render(IconComponent.new(icon: "clock"))
+  end
+
+  def loading
+    render(IconComponent.new(icon: "loading"))
   end
 
   def circle_check_filled
