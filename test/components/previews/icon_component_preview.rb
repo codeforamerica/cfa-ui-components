@@ -39,5 +39,33 @@ class IconComponentPreview < ViewComponent::Preview
   def chevron_up
     render(IconComponent.new(icon: "chevron_up"))
   end
+
+  def circle_check_filled
+    render(IconComponent.new(icon: "circle_check_filled"))
+  end
+
+  def check
+    render(IconComponent.new(icon: "check"))
+  end
+
+  def error
+    render(IconComponent.new(icon: "error"))
+  end
+
+  def loading
+    render(IconComponent.new(icon: "loading"))
+  end
+
+  def cancel_circle
+    render(IconComponent.new(icon: "cancel_circle"))
+  end
+
+  def external_link
+    render(IconComponent.new(icon: "external_link"))
+  end
+
+  def download
+    render(IconComponent.new(icon: "download"))
+  end
   # @!endgroup
 end
