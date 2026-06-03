@@ -12,7 +12,7 @@ class ModalComponentTest < ViewComponent::TestCase
     render_inline(ModalComponent.new(name: "confirm")) do |c|
       c.with_header { "Are you sure?" }
     end
-    assert_selector "h2", text: "Are you sure?"
+    assert_selector "h1", text: "Are you sure?"
   end
 
   def test_renders_body_content
