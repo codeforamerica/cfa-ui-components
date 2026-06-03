@@ -69,6 +69,10 @@ class BaseComponent < ViewComponent::Base
     "chevron" => {
       path: "icons/chevron.svg",
       alt: "chevron"
+    },
+    "download" => {
+      path: "icons/download.svg",
+      alt: "download"
     }
   }.freeze
 

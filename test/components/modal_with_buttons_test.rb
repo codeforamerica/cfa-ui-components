@@ -18,7 +18,7 @@ class ModalWithButtonsTest < ViewComponent::TestCase
     end
 
     assert_selector "dialog"
-    assert_selector "h2", text: "Are you sure?"
+    assert_selector "h1", text: "Are you sure?"
     assert_text "This action cannot be undone."
     assert_link "Confirm"
     assert_link "Cancel"

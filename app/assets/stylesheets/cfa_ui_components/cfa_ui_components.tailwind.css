@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 @theme {
     --spacing-cfa-xsm: 4px;
     --spacing-cfa-sm: 8px;
@@ -55,9 +57,11 @@
     --color-black: #000000;
 }
 
-@import "./base/typography.css";
-@import "./base/lists.css";
-@import "./base/links.css";
+@layer theme, base, components, utilities, cfa-base;
+
+@import "./base/typography.css" layer(cfa-base);
+@import "./base/lists.css" layer(cfa-base);
+@import "./base/links.css" layer(cfa-base);
 
 @import "./components/layout.css";
 @import "./components/forms.css";

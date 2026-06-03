@@ -45,14 +45,14 @@ class TooltipComponentTest < ViewComponent::TestCase
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do
       "Details."
     end
-    assert_selector "h2", text: "Learn more"
+    assert_selector "h1", text: "Learn more"
   end
 
   def test_modal_header_can_be_overridden
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", header: "Custom header")) do
       "Body."
     end
-    assert_selector "h2", text: "Custom header"
-    assert_no_selector "h2", text: "Learn more"
+    assert_selector "h1", text: "Custom header"
+    assert_no_selector "h1", text: "Learn more"
   end
 end
