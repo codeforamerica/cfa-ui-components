@@ -5,14 +5,14 @@
         <div class="flex flex-row gap-x-cfa-xl">
           <h1 :id="$id('<%= @name %>-title')"><%= header %></h1>
           <div class="w-[25px] shrink-0">
-            <a href="#" @click="toggle()" class="flex flex-col items-start cursor-pointer" style="color: inherit; -webkit-tap-highlight-color: transparent" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:xmark, size: 25, aria_hidden: true) %></a>
+            <button type="button" @click="toggle()" class="modal__close" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:xmark, size: 25, aria_hidden: true) %></button>
           </div>
         </div>
         <div :id="$id('<%= @name %>-description')" class="cfa-stack-med">
           <%= content %>
         </div>
         <% if buttons? %>
-          <div :id="$id('<%= @name %>-buttons')" class="pt-cfa-lg cfa-stack-med [&_form]:w-full [&_.btn]:w-full">
+          <div :id="$id('<%= @name %>-buttons')" class="modal__buttons pt-cfa-lg cfa-stack-med">
             <% buttons.each do |button| %>
               <%= button %>
             <% end %>

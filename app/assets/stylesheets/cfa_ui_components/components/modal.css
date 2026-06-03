@@ -1,0 +1,7 @@
+.modal__close {
+    @apply flex flex-col items-start cursor-pointer bg-transparent border-0 p-0 text-inherit;
+}
+
+.modal__buttons :is(.btn, form) {
+    @apply w-full;
+}
