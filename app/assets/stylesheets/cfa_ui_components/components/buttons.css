@@ -107,7 +107,7 @@
 }
 
 .btn--large {
-    @apply px-cfa-lg py-cfa-med w-fit mx-auto;
+    @apply p-cfa-med w-fit mx-auto;
     font-size: 22px;
     font-weight: 700;
 }
