@@ -14,6 +14,17 @@ class IconComponentTest < ViewComponent::TestCase
     assert_no_selector "svg[role='img']"
   end
 
+  def test_defaults_to_icon_default_color
+    render_inline(IconComponent.new(icon: "info_outline"))
+    assert_selector "svg.cfa-icon.text-icon-default", visible: :all
+  end
+
+  def test_color_can_be_overridden
+    render_inline(IconComponent.new(icon: "info_outline", css_class: "text-error"))
+    assert_selector "svg.cfa-icon.text-error", visible: :all
+    assert_no_selector "svg.text-icon-default", visible: :all
+  end
+
   def test_loading_renders_masked_span
     render_inline(IconComponent.new(icon: "loading"))
     assert_selector "span.cfa-icon-mask[role='img'][aria-label='loading icon']", visible: :all
