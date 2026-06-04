@@ -1,6 +1,9 @@
 class PrefilledTextFieldComponentPreview < ViewComponent::Preview
   def text
-    render(PrefilledTextFieldComponent.new(label: "Your text", text: "Primary text"))
+    render PrefilledTextFieldComponent.new(label: "Your text") do
+      content_tag(:p, "Some text") +
+        content_tag(:p, "More text")
+    end
   end
 
   def currency
