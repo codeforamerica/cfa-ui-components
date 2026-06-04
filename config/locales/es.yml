@@ -1,4 +1,7 @@
 es:
+  show: Mostrar
+  visible: ITIN visible
+  hidden: ITIN oculto
   back: Regresa
   continue: Continuar
   cfaui:
@@ -9,5 +12,13 @@ es:
   remove: Eliminar
   favorite_fruits: Frutas favoritas
   first_name: Primer nombre
+  email: Correo electrónico
+  my_number: Mi número
   last_name: Apellido
   submit: Enviar
+  ssn: Número de Seguro Social o ITIN
+  ssn_help: Por ejemplo, 123-45-6789
+  fruit_help_text: Por favor elija su fruta favorita
+  combobox:
+    placeholder_label: "- Seleccione o escriba -"
+    no_results: No se encontraron resultados
