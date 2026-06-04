@@ -1,4 +1,4 @@
-class CardComponentPreview < ViewComponent::Preview
+class CardComponentPreview < FormComponentPreview
   def default
     render(CardComponent.new) do
       content_tag(:p, content_tag(:strong, "Sample form card")) +
@@ -14,21 +14,24 @@ class CardComponentPreview < ViewComponent::Preview
     end
   end
 
+  def with_progress_and_radio
+  end
+
   def with_interspersed_headings
     render(CardComponent.new) do
-      content_tag(:h3, "Name") +
+      content_tag(:h2, "Name") +
         content_tag(:p, "Text field 1", class: "m-0") +
         content_tag(:p, "Text field 2", class: "m-0") +
-        content_tag(:h3, "Date of birth") +
+        content_tag(:h2, "Date of birth") +
         content_tag(:p, "Date picker", class: "m-0") +
-        content_tag(:h3, "Social security") +
+        content_tag(:h2, "Social security") +
         content_tag(:p, "TIN field", class: "m-0")
     end
   end
 
   def informational
     render(CardComponent.new(variant: :informational)) do
-      content_tag(:h3, "Informational card") +
+      content_tag(:h2, "Informational card") +
         content_tag(:ul) do
           safe_join([
             content_tag(:li, "Lorem ipsum dolor sit amet"),
