@@ -5,7 +5,7 @@ class BaseComponent < ViewComponent::Base
   SPRITE_PATH = "uswds-sprite.svg"
 
   # The set of `id`s defined as `<symbol>`s in the sprite. Read once from the
-  # sprite shipped with the engine so `inline_icon` can ignore unknown names.
+  # sprite shipped with the engine so `inline_icon` can reject unknown names.
   USWDS_ICON_IDS = File.read(
     CfaUiComponents::Engine.root.join("app/assets/images", SPRITE_PATH)
   ).scan(/<symbol id="([^"]+)"/).flatten.to_set.freeze
@@ -32,7 +32,10 @@ class BaseComponent < ViewComponent::Base
     if (path = NON_USWDS_ICON_IDS[name])
       return masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
     end
-    return "".html_safe unless USWDS_ICON_IDS.include?(name)
+    unless USWDS_ICON_IDS.include?(name)
+      raise ArgumentError, "Unknown icon #{name.inspect}. " \
+        "It is not a USWDS sprite symbol or a file-based icon in app/assets/images/icons."
+    end
 
     href = "#{image_path(SPRITE_PATH)}##{name}"
     content_tag :svg, content_tag(:use, "", href:),

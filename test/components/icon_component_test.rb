@@ -9,9 +9,11 @@ class IconComponentTest < ViewComponent::TestCase
     assert_selector "svg use[href$='#info_outline']", visible: :all
   end
 
-  def test_renders_nothing_for_unknown_icon
-    render_inline(IconComponent.new(icon: "unknown"))
-    assert_no_selector "svg[role='img']"
+  def test_raises_for_unknown_icon
+    error = assert_raises(ArgumentError) do
+      render_inline(IconComponent.new(icon: "unknown"))
+    end
+    assert_match(/Unknown icon "unknown"/, error.message)
   end
 
   def test_defaults_to_icon_default_color
