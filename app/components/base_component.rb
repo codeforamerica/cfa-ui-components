@@ -6,35 +6,33 @@ class BaseComponent < ViewComponent::Base
 
   # The set of `id`s defined as `<symbol>`s in the sprite. Read once from the
   # sprite shipped with the engine so `inline_icon` can ignore unknown names.
-  SPRITE_ICON_IDS = File.read(
+  USWDS_ICON_IDS = File.read(
     CfaUiComponents::Engine.root.join("app/assets/images", SPRITE_PATH)
   ).scan(/<symbol id="([^"]+)"/).flatten.to_set.freeze
 
-  # Icons that ship as standalone SVG files, rendered as CSS-masked spans so
-  # they inherit color via `background-color: currentColor`. Used for icons
-  # with no USWDS sprite equivalent: the animated `loading` spinner, and our
-  # filled `clock` (the solid counterpart to the sprite's outline `alarm`).
-  MASKED_ICON_PATHS = {
-    "loading" => "icons/loading.svg",
-    "clock" => "icons/clock.svg"
-  }.freeze
+  # File-based icons not present in the USWDS sprite, keyed by basename.
+  # Built from the SVGs shipped in `app/assets/images/icons`.
+  NON_USWDS_ICON_IDS = Dir.glob(
+    CfaUiComponents::Engine.root.join("app/assets/images/icons/*.svg")
+  ).each_with_object({}) do |file, paths|
+    paths[File.basename(file, ".svg")] = "icons/#{File.basename(file)}"
+  end.freeze
+
+  if (collisions = NON_USWDS_ICON_IDS.keys.to_set & USWDS_ICON_IDS).any?
+    raise "File-based icons collide with USWDS sprite ids: #{collisions.to_a.sort.join(", ")}. " \
+      "Remove the redundant SVG(s) from app/assets/images/icons or rename them."
+  end
 
   def initialize(html_attrs:)
     @html_attrs = html_attrs
   end
 
-  # Render a USWDS sprite icon as an inline `<svg>` referencing the sprite via
-  # `<use>`. The icon inherits the surrounding text color through CSS
-  # `fill: currentColor` (see icons.css). Unknown names render nothing.
-  #
-  # `name` is a USWDS symbol id (e.g. "close", "check_circle") or one of our
-  # file-based icons (see MASKED_ICON_PATHS, e.g. "loading", "clock").
   def inline_icon(name, size: 20, css_class: nil, aria_hidden: false, label: nil)
     name = name.to_s
-    if (path = MASKED_ICON_PATHS[name])
+    if (path = NON_USWDS_ICON_IDS[name])
       return masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
     end
-    return "".html_safe unless SPRITE_ICON_IDS.include?(name)
+    return "".html_safe unless USWDS_ICON_IDS.include?(name)
 
     href = "#{image_path(SPRITE_PATH)}##{name}"
     content_tag :svg, content_tag(:use, "", href:),
