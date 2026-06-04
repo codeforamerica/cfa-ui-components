@@ -1,0 +1,29 @@
+<%# Mirrors gyraffe's BasicInfoController edit form: a CardComponent with a form inside it. %>
+<%# Each label+input renders as a cfa-stack-sm (8px); the gap *between* the stacks (and headings) %>
+<%# should be md (16px), supplied by `.cfa-card > * + *`. %>
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new, data: {turbo: false} do |f| %>
+  <%= render CardComponent.new do %>
+    <h2>Name</h2>
+    <%= render InputComponent.new(form: f, method: :first_name, label: "First name") %>
+    <%= render InputComponent.new(form: f, method: :middle_name, label: "Middle initial", optional: true) %>
+    <%= render InputComponent.new(form: f, method: :last_name, label: "Last name") %>
+    <%= render SelectComponent.new(form: f, method: :favorite_fruits,
+          label: "Suffix",
+          collection: FormComponentPreview.fruit_options,
+          item_value_method: :value,
+          item_label_method: :label,
+          optional: true) %>
+    <h2>Date of birth</h2>
+    <%= render DatePickerComponent.new(form: f, method: :my_date,
+          label: "",
+          label_day: "Day",
+          label_month: "Month",
+          label_month_select: "- Select -",
+          label_year: "Year",
+          helper_text: "For example: August 28 1986") %>
+    <h2>Social security number</h2>
+    <%= render TinComponent.new(form: f, method: :ssn,
+          label: "Enter your SSN or ITIN",
+          help_text: "For example: 123-45-6789") %>
+  <% end %>
+<% end %>

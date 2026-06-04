@@ -17,6 +17,9 @@ class CardComponentPreview < FormComponentPreview
   def with_progress_and_radio
   end
 
+  def basic_info_form
+  end
+
   def with_interspersed_headings
     render(CardComponent.new) do
       content_tag(:h2, "Name") +
