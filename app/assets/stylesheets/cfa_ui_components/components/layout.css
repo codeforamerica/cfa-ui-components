@@ -11,7 +11,7 @@
 }
 
 main {
-    @apply cfa-stack mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] py-cfa-xl;
+    @apply cfa-stack mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med md:px-0 py-cfa-xl;
 }
 
 .cfa-card > * + * {
