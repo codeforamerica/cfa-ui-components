@@ -55,4 +55,14 @@ class TooltipComponentTest < ViewComponent::TestCase
     assert_selector "h1", text: "Custom header"
     assert_no_selector "h1", text: "Learn more"
   end
+
+  def test_css_class_is_appended_without_dropping_base_classes
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", css_class: "-mt-cfa-med"))
+    assert_selector "button.-mt-cfa-med.group.text-link-unvisited"
+  end
+
+  def test_no_css_class_leaves_base_classes_clean
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info"))
+    assert_selector "button.group.text-link-unvisited"
+  end
 end
