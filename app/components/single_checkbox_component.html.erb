@@ -1,5 +1,5 @@
 <% has_error = @form.object.errors[@method].any? %>
-<div class="cfa-stack-sm">
+<div class="<%= class_names("cfa-stack-sm", @css_class) %>">
   <div class="flex items-center gap-cfa-sm">
     <%= checkbox_wrap(@form.check_box(
           @method,

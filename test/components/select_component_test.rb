@@ -57,4 +57,17 @@ class SelectComponentTest < ViewComponent::TestCase
     assert_selector "label", text: "Pick one (optional)"
     assert_no_selector "select[aria-required]"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(SelectComponent.new(
+      form: build_form,
+      method: :select_field,
+      label: "Pick one",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      css_class: "mt-cfa-lg"
+    ))
+    assert_selector "div.cfa-stack-sm.mt-cfa-lg"
+  end
 end

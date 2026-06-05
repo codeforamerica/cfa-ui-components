@@ -23,4 +23,9 @@ class SubmitButtonComponentTest < ViewComponent::TestCase
       SubmitButtonComponent.new(form: build_form, label: "Save", style: :invalid)
     end
   end
+
+  def test_css_class_is_appended_without_dropping_base_classes
+    render_inline(SubmitButtonComponent.new(form: build_form, label: "Save", css_class: "mt-cfa-lg"))
+    assert_selector "button.btn.btn--large.btn--primary.mt-cfa-lg"
+  end
 end

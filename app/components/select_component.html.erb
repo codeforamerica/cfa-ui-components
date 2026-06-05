@@ -1,4 +1,4 @@
-<div class="cfa-stack-sm" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
+<div class="<%= class_names("cfa-stack-sm", @css_class) %>" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
   <%= @form.label @method, label_with_optional_marker, class: "label block" %>
   <% if @help_text %>
     <p class="help_text">

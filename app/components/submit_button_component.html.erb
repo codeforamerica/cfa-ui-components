@@ -1,1 +1,1 @@
-<%= @form.button @label, type: :submit, name: "commit", class: "btn btn--large #{@button_style}", disabled: @disabled %>
+<%= @form.button @label, type: :submit, name: "commit", class: class_names("btn btn--large", @button_style, @css_class), disabled: @disabled %>

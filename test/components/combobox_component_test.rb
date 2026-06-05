@@ -76,4 +76,17 @@ class ComboboxComponentTest < ViewComponent::TestCase
     assert_selector "option[value='no'][disabled]"
     assert_no_selector "option[value='yes'][disabled]"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      css_class: "mt-cfa-lg"
+    ))
+    assert_selector "div.max-w-lg.mt-cfa-lg"
+  end
 end

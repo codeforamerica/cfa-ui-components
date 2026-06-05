@@ -35,4 +35,18 @@ class DatePickerComponentTest < ViewComponent::TestCase
     assert_selector "input#date_picker_test_model_my_date_3i"
     assert_selector "input#date_picker_test_model_my_date_1i"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(DatePickerComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Date of birth",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year",
+      css_class: "mt-cfa-lg"
+    ))
+    assert_selector "div.mt-cfa-lg"
+  end
 end

@@ -1,4 +1,4 @@
-<div>
+<div class="<%= class_names(@css_class) %>">
   <% invalid = @form.object.errors[@method].any? %>
   <p class="text-[16px] mb-cfa-sm">
     <strong><%= @label %></strong>

@@ -4,8 +4,9 @@ class CardComponent < ViewComponent::Base
   renders_one :image
   renders_many :buttons
 
-  def initialize(variant: nil)
+  def initialize(variant: nil, css_class: nil)
     @variant = variant
+    @css_class = css_class
     case variant
     when nil
       # default

@@ -27,4 +27,9 @@ class PrefilledTextFieldComponentTest < ViewComponent::TestCase
       PrefilledTextFieldComponent.new(text: "foo", label: "bar", style: :invalid)
     end
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(PrefilledTextFieldComponent.new(text: "foo", label: "bar", css_class: "mt-cfa-lg"))
+    assert_selector "div.cfa-stack-sm.mt-cfa-lg"
+  end
 end

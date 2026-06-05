@@ -1,4 +1,4 @@
-<div x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
+<div class="<%= class_names(@css_class) %>" x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
   <%= @form.hidden_field @method, value: "" %>
   <% if @legend.present? %>
     <p class="type-body-bold mb-cfa-sm"><%= @legend %></p>

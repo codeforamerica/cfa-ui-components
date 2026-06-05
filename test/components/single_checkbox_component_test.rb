@@ -26,4 +26,9 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     render_inline(SingleCheckboxComponent.new(form: build_form(model), method: :checkbox_field, label: "I agree"))
     assert_selector "input.border-border-error"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", css_class: "mt-cfa-lg"))
+    assert_selector "div.cfa-stack-sm.mt-cfa-lg"
+  end
 end
