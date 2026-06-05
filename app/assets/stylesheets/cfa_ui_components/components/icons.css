@@ -1,5 +1,6 @@
 .cfa-icon {
     display: inline-block;
+    flex-shrink: 0;
     background-color: currentColor;
     mask-image: var(--icon-url);
     mask-repeat: no-repeat;
