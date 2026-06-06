@@ -15,7 +15,7 @@ class TooltipComponentTest < ViewComponent::TestCase
 
   def test_renders_info_icon
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info"))
-    assert_selector "span[role='img'][aria-label='info icon']"
+    assert_selector "svg[role='img'][aria-label='info outline icon']"
   end
 
   def test_has_alpine_data_attribute

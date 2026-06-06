@@ -9,11 +9,11 @@ class ButtonComponentPreview < ViewComponent::Preview
   end
 
   def primary_with_icon
-    render(ButtonComponent.new(label: I18n.t("continue"), url: "https://www.google.com", icon: "circle_check"))
+    render(ButtonComponent.new(label: I18n.t("continue"), url: "https://www.google.com", icon: "check_circle_outline"))
   end
 
   def primary_small_with_icon
-    render(ButtonComponent.new(label: I18n.t("continue"), url: "https://www.google.com", size: :small, icon: "circle_check"))
+    render(ButtonComponent.new(label: I18n.t("continue"), url: "https://www.google.com", size: :small, icon: "check_circle_outline"))
   end
 
   def primary_disabled
@@ -31,11 +31,11 @@ class ButtonComponentPreview < ViewComponent::Preview
   end
 
   def secondary_with_icon
-    render(ButtonComponent.new(label: I18n.t("decline"), url: "/decline", variant: :secondary, icon: "circle_xmark"))
+    render(ButtonComponent.new(label: I18n.t("decline"), url: "/decline", variant: :secondary, icon: "highlight_off"))
   end
 
   def secondary_small_with_icon
-    render(ButtonComponent.new(label: I18n.t("decline"), url: "/decline", variant: :secondary, size: :small, icon: "circle_xmark"))
+    render(ButtonComponent.new(label: I18n.t("decline"), url: "/decline", variant: :secondary, size: :small, icon: "highlight_off"))
   end
 
   def secondary_disabled

@@ -6,7 +6,7 @@ class RevealComponentPreview < ViewComponent::Preview
   end
 
   def with_icon
-    render(RevealComponent.new(summary_text: "I am summary", icon: "question")) do
+    render(RevealComponent.new(summary_text: "I am summary", icon: "help_outline")) do
       content_tag(:p, "Sample form card")
     end
   end
