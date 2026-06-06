@@ -11,14 +11,10 @@
 }
 
 main {
-    @apply cfa-stack mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med py-cfa-xl;
+    @apply cfa-stack mx-auto w-full max-w-[368px] md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med md:px-0 py-cfa-xl;
 }
 
 .cfa-card > * + * {
-    margin-top: var(--spacing-cfa-sm);
-}
-
-.cfa-card > :is(h1, h2, h3, h4, h5, h6) + * {
     margin-top: var(--spacing-cfa-med);
 }
 

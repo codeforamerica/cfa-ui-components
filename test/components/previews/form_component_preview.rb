@@ -23,6 +23,7 @@ class FormComponentPreview < ViewComponent::Preview
     attribute :favorite_fruits
     attribute :my_date
     attribute :my_number
+    attribute :ssn
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :pineapple_pizza_preference, presence: true

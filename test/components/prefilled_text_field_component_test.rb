@@ -9,6 +9,14 @@ class PrefilledTextFieldComponentTest < ViewComponent::TestCase
     assert_selector "span", text: "John"
   end
 
+  def test_renders_block_content_when_no_text
+    render_inline(PrefilledTextFieldComponent.new(label: "Full name")) do
+      "<p>John Doe</p>".html_safe
+    end
+    assert_selector "span", text: "Full name"
+    assert_selector "div p", text: "John Doe"
+  end
+
   def test_currency_style_formats_with_dollar_sign_and_delimiter
     render_inline(PrefilledTextFieldComponent.new(text: 1234, label: "Amount", style: :currency))
     assert_selector "span", text: "$1,234"
