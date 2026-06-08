@@ -5,6 +5,6 @@
       "aria-disabled": @disabled,
       tabindex: (@disabled ? -1 : nil),
       **(html_attrs || {}) do %>
-  <%= inline_icon(:arrow_left, size: 24, aria_hidden: true) %>
+  <%= inline_icon(:arrow_back, size: 24, aria_hidden: true) %>
   <%= I18n.t("back") %>
 <% end %>

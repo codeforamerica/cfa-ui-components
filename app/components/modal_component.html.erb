@@ -4,7 +4,7 @@
       <div class="p-cfa-lg cfa-stack-med max-w-[360px]">
         <div class="flex flex-row gap-x-cfa-xl">
           <h1 :id="$id('<%= @name %>-title')"><%= header %></h1>
-          <button type="button" @click="toggle()" class="flex shrink-0 cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:xmark, size: 25, aria_hidden: true) %></button>
+          <button type="button" @click="toggle()" class="flex shrink-0 cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:close, size: 25, aria_hidden: true) %></button>
         </div>
         <div :id="$id('<%= @name %>-description')" class="cfa-stack-med">
           <%= content %>
