@@ -70,4 +70,17 @@ class SelectComponentTest < ViewComponent::TestCase
     ))
     assert_selector "div.cfa-stack-sm.mt-cfa-lg"
   end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(SelectComponent.new(
+      form: build_form,
+      method: :select_field,
+      label: "Pick one",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      input_attrs: {autocomplete: "country"}
+    ))
+    assert_selector "select[autocomplete='country']"
+  end
 end

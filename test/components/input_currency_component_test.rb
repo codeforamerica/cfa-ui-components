@@ -42,4 +42,9 @@ class InputCurrencyComponentTest < ViewComponent::TestCase
     render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number", css_class: "mt-cfa-lg"))
     assert_selector "div.currency-field.mt-cfa-lg"
   end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(InputCurrencyComponent.new(form: build_form, method: :text_field, label: "Number", input_attrs: {min: 0}))
+    assert_selector "input[min='0']"
+  end
 end

@@ -31,4 +31,9 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", css_class: "mt-cfa-lg"))
     assert_selector "div.cfa-stack-sm.mt-cfa-lg"
   end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", input_attrs: {data: {testid: "agree"}}))
+    assert_selector "input[type='checkbox'][data-testid='agree']"
+  end
 end

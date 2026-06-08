@@ -31,4 +31,9 @@ class InputComponentTest < ViewComponent::TestCase
     render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", css_class: "mt-cfa-lg"))
     assert_selector "div.cfa-stack-sm.mt-cfa-lg"
   end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", input_attrs: {inputmode: "tel", autocomplete: "tel"}))
+    assert_selector "input[inputmode='tel'][autocomplete='tel']"
+  end
 end

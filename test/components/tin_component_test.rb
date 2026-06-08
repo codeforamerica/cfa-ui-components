@@ -46,4 +46,9 @@ class TinComponentTest < ViewComponent::TestCase
     render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
     assert_selector "[role='alert'][aria-atomic='true'].sr-only"
   end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number", input_attrs: {autocomplete: "off"}))
+    assert_selector "input[x-ref='input'][autocomplete='off']"
+  end
 end
