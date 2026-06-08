@@ -51,7 +51,8 @@
           "x-ref": "input",
           "x-mask": "999-99-9999",
           "x-bind:style": "show ? '' : '-webkit-text-security: disc;'",
-          **aria_required_attrs %>
+          **aria_required_attrs,
+          **@input_attrs %>
 
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
