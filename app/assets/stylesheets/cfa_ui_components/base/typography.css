@@ -7,25 +7,23 @@ body {
     font-weight: 400;
 
     line-height: normal;
-    @apply antialiased bg-background-app;
+    @apply antialiased bg-background-app text-text-default;
 }
 
 h1 {
-    font-family: "Geologica", sans-serif;
-    font-size: 48px;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0;
-    margin-bottom: 60px;
-}
-
-h2 {
     font-family: "Geologica", sans-serif;
     font-size: 22px;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 28px;
+}
+
+.type-display {
+    font-family: "Geologica", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
 }
 
 .type-body {
@@ -34,16 +32,14 @@ h2 {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
-.type-body-bold {
+.type-body-bold, h2, h3 {
     font-family: "Inter", sans-serif;
     font-size: 16px;
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 20px;
 }
 
 .type-body-label, .label {
@@ -58,13 +54,12 @@ h2 {
     & ol > li + li { margin-top: 15px; }
 }
 
-.type-progress-text {
+.type-progress-text, .help_text {
     font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
-    margin-bottom: 18px;
 }
 
 .type-button {
@@ -83,13 +78,6 @@ h2 {
     letter-spacing: 0;
 }
 
-.label.required::after {
-    @apply text-error;
-    content: " *";
-}
-
 .help_text {
     @apply block text-text-body-secondary;
-    font-size: 13px;
-    font-weight: 400;
 }

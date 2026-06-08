@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class InputComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, help_text: nil, required: false)
+  def initialize(form:, method:, label:, help_text: nil, optional: false)
     super(form:, method:)
     @label = label
     @help_text = help_text
-    @required = required
+    @optional = optional
   end
 end

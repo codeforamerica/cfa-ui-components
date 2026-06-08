@@ -1,14 +1,18 @@
-<% if action? %>
+<% if variant == :informational %>
+  <div class="cfa-card rounded-lg p-cfa-lg bg-background-container">
+    <%= content %>
+  </div>
+<% elsif action? %>
   <div class="cfa-card border border-border-secondary rounded-lg overflow-clip <%= image? ? "bg-background-secondary" : "bg-white" %>">
     <div class="flex flex-col gap-px">
       <% if image? %>
         <%= image %>
       <% end %>
-      <div class="bg-white p-cfa-lg space-y-cfa-sm">
+      <div class="bg-white p-cfa-lg cfa-stack-sm">
         <%= content %>
       </div>
       <% if buttons? %>
-        <div class="bg-white px-cfa-lg pt-cfa-sm pb-cfa-lg space-y-cfa-med [&_.btn]:mx-0!">
+        <div class="bg-white px-cfa-lg pt-cfa-sm pb-cfa-lg cfa-stack-med [&_.btn]:mx-0!">
           <% buttons.each do |button| %>
             <%= button %>
           <% end %>

@@ -1,18 +1,16 @@
-<div x-id="['<%= @name %>-title', '<%= @name %>-description', '<%= @name %>-buttons']" x-transition.opacity class="absolute top-0 left-0 z-index-1000" x-show="open" x-cloak x-data="{open: false, toggle() { this.open = !this.open }, init() { const resetScrollingBehavior = () => { document.documentElement.style.overflow = ''; document.documentElement.style.paddingRight = ''; }; document.addEventListener('turbo:before-visit', resetScrollingBehavior); this.$cleanup(() => document.removeEventListener('turbo:before-visit', resetScrollingBehavior)); }}" @<%= @name %>-modal.window="toggle()">
+<div x-id="['<%= @name %>-title', '<%= @name %>-description', '<%= @name %>-buttons']" x-transition.opacity class="fixed inset-0 z-1000" x-show="open" x-cloak x-data="{open: false, toggle() { this.open = !this.open }, init() { const resetScrollingBehavior = () => { document.documentElement.style.overflow = ''; document.documentElement.style.paddingRight = ''; }; document.addEventListener('turbo:before-visit', resetScrollingBehavior); this.$cleanup(() => document.removeEventListener('turbo:before-visit', resetScrollingBehavior)); }}" @<%= @name %>-modal.window="toggle()">
   <div @keyup.esc.window="open && toggle()" class="h-screen w-screen relative flex flex-row justify-center items-center bg-stone-400/50 overflow-y-hidden" x-trap.inert.noscroll="open">
-    <dialog role="dialog" aria-modal="true" :aria-labelledby="$id('<%= @name %>-title')" :aria-describedby="$id('<%= @name %>-description')" x-transition x-show="open" @click.away="toggle()" class="relative flex flex-col min-h-50 max-h-[100vh] md:max-h-[80vh] overflow-auto bg-white rounded-sm border-border-secondary border-2" :open="open">
-      <div class="p-cfa-lg space-y-cfa-med max-w-[360px]">
-        <div class="space-x-cfa-xl flex flex-row">
-          <h2 :id="$id('<%= @name %>-title')"><%= header %></h2>
-          <div class="w-[25px] shrink-0">
-            <a href="#" @click="toggle()" class="flex flex-col items-start cursor-pointer" style="color: inherit" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:xmark, size: 25, aria_hidden: true) %></a>
-          </div>
+    <dialog role="dialog" aria-modal="true" tabindex="-1" autofocus :aria-labelledby="$id('<%= @name %>-title')" :aria-describedby="$id('<%= @name %>-description')" x-transition x-show="open" @click.away="toggle()" class="cfa-modal relative flex flex-col min-h-50 max-h-[100vh] md:max-h-[80vh] overflow-auto bg-white rounded-lg border-border-secondary border-2 focus:outline-none" :open="open">
+      <div class="p-cfa-lg cfa-stack-med max-w-[360px]">
+        <div class="flex flex-row gap-x-cfa-xl">
+          <h1 :id="$id('<%= @name %>-title')"><%= header %></h1>
+          <button type="button" @click="toggle()" class="flex shrink-0 cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus" aria-label="<%= t("cfaui.modal.close_aria") %>"><%= inline_icon(:close, size: 25, aria_hidden: true) %></button>
         </div>
-        <div :id="$id('<%= @name %>-description')" class="space-y-cfa-med">
+        <div :id="$id('<%= @name %>-description')" class="cfa-stack-med">
           <%= content %>
         </div>
         <% if buttons? %>
-          <div :id="$id('<%= @name %>-buttons')" class="mt-cfa-2xl space-y-cfa-med">
+          <div :id="$id('<%= @name %>-buttons')" class="pt-cfa-lg cfa-stack-med">
             <% buttons.each do |button| %>
               <%= button %>
             <% end %>

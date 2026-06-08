@@ -1,10 +1,10 @@
-<div class="space-y-cfa-sm">
-  <%= @form.label @method, @label, class: "label block #{required_class}" %>
+<div class="cfa-stack-sm">
+  <%= @form.label @method, label_with_optional_marker, class: "label block" %>
   <% if @help_text %>
     <p class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.text_field @method, class: "w-full max-w-sm" %>
+  <%= @form.text_field @method, class: "w-full max-w-sm", **aria_required_attrs %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

@@ -1,19 +1,20 @@
 <% has_error = @form.object.errors[@method].any? %>
-<div class="space-y-cfa-sm">
+<div class="cfa-stack-sm">
   <div class="flex items-center gap-cfa-sm">
     <%= checkbox_wrap(@form.check_box(
           @method,
           {
             class: "cfa-checkbox h-6 w-6 rounded #{has_error ? "border-2 border-border-error" : "border checked:border-2 disabled:border-border-disabled border-border-default"}",
-            disabled: @disabled
+            disabled: @disabled,
+            **aria_required_attrs
           },
           "1",
           ""
         )) %>
     <%= @form.label(
           @method,
-          @label,
-          class: (@disabled ? "text-text-disabled" : "text-text-default")
+          label_with_optional_marker,
+          class: ("text-text-disabled" if @disabled)
         ) %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>

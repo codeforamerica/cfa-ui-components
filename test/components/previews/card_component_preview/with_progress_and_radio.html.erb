@@ -1,0 +1,7 @@
+<%= render CardComponent.new do %>
+  <h2>Name</h2>
+  <p class="type-progress-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
+  <% end %>
+<% end %>

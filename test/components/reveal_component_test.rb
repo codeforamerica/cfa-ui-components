@@ -14,7 +14,7 @@ class RevealComponentTest < ViewComponent::TestCase
   end
 
   def test_renders_icon_when_provided
-    render_inline(RevealComponent.new(summary_text: "More details", icon: "info"))
-    assert_selector "span[role='img'][aria-label='info icon']"
+    render_inline(RevealComponent.new(summary_text: "More details", icon: "info_outline"))
+    assert_selector "svg[role='img'][aria-label='info outline icon']"
   end
 end

@@ -17,11 +17,13 @@ class FormComponentPreview < ViewComponent::Preview
     include ActiveModel::Attributes
 
     attribute :first_name
+    attribute :middle_name
     attribute :last_name
     attribute :pineapple_pizza_preference
     attribute :favorite_fruits
     attribute :my_date
     attribute :my_number
+    attribute :ssn
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :pineapple_pizza_preference, presence: true

@@ -1,5 +1,5 @@
 form {
-    @apply flex flex-col gap-y-cfa-xl;
+    @apply cfa-stack;
 }
 
 .fieldset-group {
@@ -16,7 +16,7 @@ input[type="password"],
 input[type="url"],
 textarea,
 select {
-    @apply border border-border-default rounded-lg px-cfa-sm py-cfa-sm bg-white text-text-default;
+    @apply border border-border-default rounded px-cfa-sm py-cfa-sm bg-white text-text-default;
 
     &:focus-visible {
         @apply outline-2 outline-offset-2 outline-focus;
@@ -27,15 +27,20 @@ select {
     }
 }
 
+input[type="text"] {
+  height: 40px;
+  padding: 8px;
+}
+
 .form_item {
-    @apply flex items-center gap-cfa-sm;
-    label { margin-bottom: 0; }
-    .field_with_errors { display: contents; }
+    @apply flex items-center;
+    label { margin-left: var(--spacing-cfa-sm); }
+    .field_with_errors { display: inline-flex; }
 }
 
 .form_item--bordered {
     --border-width: 2px;
-    @apply relative border-border-default rounded-lg;
+    @apply relative border-border-default rounded-lg bg-white;
     border-width: var(--border-width);
     padding: calc(var(--spacing-cfa-med) - var(--border-width) + 2px);
 
@@ -102,6 +107,7 @@ select {
   }
 
   &:indeterminate {
+    @apply border-2;
     background-color: var(--color-background-indeterminate);
   }
 
@@ -136,7 +142,7 @@ select {
     left: 20%;
     right: 20%;
     height: 2px;
-    background-color: var(--color-text-default);
+    background-color: var(--color-icon-default);
     transform: translateY(-50%);
     pointer-events: none;
   }
@@ -144,7 +150,7 @@ select {
 
 /* Radio */
 .cfa-radio {
-  @apply appearance-none border-2 border-border-default rounded-full bg-white cursor-pointer relative;
+  @apply appearance-none border-2 border-icon-default rounded-full bg-white cursor-pointer relative;
   box-sizing: border-box;
   width: 24px;
   height: 24px;

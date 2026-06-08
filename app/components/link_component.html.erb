@@ -1,6 +1,6 @@
-<span class='flex gap-cfa-sm'>
-<% if @icon.present? %>
-    <%= inline_icon(@icon, size: 20) %>
+<%= link_to @url, target: "_blank", rel: "noopener noreferrer", **html_attrs do %>
+  <span><%= @label %></span>
+  <% if @icon.present? %>
+    <%= inline_icon("launch", size: 20, label: "external link") %>
+  <% end %>
 <% end %>
-<%= link_to @label, @url, target: "_blank", rel: "noopener noreferrer", **html_attrs %>
-</span>

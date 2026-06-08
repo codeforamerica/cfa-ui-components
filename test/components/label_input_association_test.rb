@@ -66,7 +66,9 @@ class LabelInputAssociationTest < ViewComponent::TestCase
       legend: "Pick some"
     ))
 
-    page.all(".checkbox_item").each do |item|
+    items = page.all(".form_item")
+    assert items.any?, "expected at least one .form_item"
+    items.each do |item|
       label = item.find("label")
       checkbox = item.find("input[type='checkbox']")
       assert_equal checkbox["id"], label["for"],
@@ -84,7 +86,9 @@ class LabelInputAssociationTest < ViewComponent::TestCase
       legend: "Pick one"
     ))
 
-    page.all(".radio_button_item").each do |item|
+    items = page.all(".form_item")
+    assert items.any?, "expected at least one .form_item"
+    items.each do |item|
       label = item.find("label")
       radio = item.find("input[type='radio']")
       assert_equal radio["id"], label["for"],
