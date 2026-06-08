@@ -17,7 +17,7 @@
           "x-mask:dynamic": "$money",
           "x-init": "$el.form?.addEventListener('formdata', (e) => { e.formData.set($el.name, $el.value.replace(/[^0-9.]/g, '')) }); $el.dispatchEvent(new Event('input'))",
           **aria_required_attrs,
-          **@number_field_kwargs %>
+          **@input_attrs %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

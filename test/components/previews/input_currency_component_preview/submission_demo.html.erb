@@ -1,5 +1,5 @@
 <%= form_with(url: "/", method: :post, model: FormComponentPreview::TestModel.new, html: { id: "currency-demo-form" }) do |f| %>
-  <%= render(InputCurrencyComponent.new(form: f, method: :my_number, label: I18n.t(:my_number), min: 0)) %>
+  <%= render(InputCurrencyComponent.new(form: f, method: :my_number, label: I18n.t(:my_number), input_attrs: {min: 0})) %>
   <button type="submit" class="mt-4 px-4 py-2 bg-zinc-900 text-white rounded">Submit</button>
 <% end %>
 
