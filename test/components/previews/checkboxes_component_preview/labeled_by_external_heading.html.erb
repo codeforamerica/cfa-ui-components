@@ -1,0 +1,17 @@
+<p>
+  The fieldset is labeled by an existing visible heading via
+  <code>aria-labelledby</code>. Screen readers announce the heading text
+  when entering the group, without duplicating it in a legend.
+</p>
+
+<h2 id="fruits-question">What are your favorite fruits?</h2>
+
+<%= render CheckboxesComponent.new(
+  form:,
+  method: :favorite_fruits,
+  collection: self.class.fruit_options,
+  item_value_method: :value,
+  item_label_method: :label,
+  scope: "labeled_by_external_heading",
+  aria_labelledby: "fruits-question"
+) %>

@@ -6,17 +6,17 @@
   is relevant for forms that update primary and secondary filers with the same-named attribute.
 </p>
 
-<h2>Form 1</h2>
+<h2 id="form1-heading">Form 1</h2>
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
-  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "form1") %>
+  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "form1", aria_labelledby: "form1-heading") %>
   <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup question for form 1", scope: "form1") do %>
     But why!?
   <% end %>
 <% end %>
 
-<h2>Form 2</h2>
+<h2 id="form2-heading">Form 2</h2>
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
-  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "form2") %>
+  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "form2", aria_labelledby: "form2-heading") %>
   <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup question for form 2", scope: "form2") do %>
     But why!?
   <% end %>

@@ -1,4 +1,7 @@
-<div x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+  <% if @legend %>
+    <legend class="sr-only"><%= @legend %></legend>
+  <% end %>
   <%= @form.hidden_field @method, value: "" %>
   <div class="cfa-stack-med <%= "has-error" if has_error? %>">
     <% content = capture {
@@ -34,4 +37,4 @@
       <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
     <% end %>
   </div>
-</div>
+</fieldset>
