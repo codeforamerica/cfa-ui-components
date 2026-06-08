@@ -36,4 +36,9 @@ class InputComponentTest < ViewComponent::TestCase
     render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", input_attrs: {inputmode: "tel", autocomplete: "tel"}))
     assert_selector "input[inputmode='tel'][autocomplete='tel']"
   end
+
+  def test_input_attrs_class_augments_rather_than_clobbers_field_classes
+    render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", input_attrs: {class: "my-custom-class"}))
+    assert_selector "input.w-full.max-w-sm.my-custom-class"
+  end
 end

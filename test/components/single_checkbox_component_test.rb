@@ -36,4 +36,9 @@ class SingleCheckboxComponentTest < ViewComponent::TestCase
     render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", input_attrs: {data: {testid: "agree"}}))
     assert_selector "input[type='checkbox'][data-testid='agree']"
   end
+
+  def test_input_attrs_class_augments_rather_than_clobbers_field_classes
+    render_inline(SingleCheckboxComponent.new(form: build_form, method: :checkbox_field, label: "I agree", input_attrs: {class: "my-custom-class"}))
+    assert_selector "input[type='checkbox'].cfa-checkbox.my-custom-class"
+  end
 end

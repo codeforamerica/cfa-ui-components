@@ -44,15 +44,15 @@
       </p>
     <% end %>
 
-    <%= @form.text_field @method,
+    <%= @form.text_field @method, **field_attrs(
           type: "text",
           class: "w-full max-w-sm",
           placeholder: "000-00-0000",
           "x-ref": "input",
           "x-mask": "999-99-9999",
           "x-bind:style": "show ? '' : '-webkit-text-security: disc;'",
-          **aria_required_attrs,
-          **@input_attrs %>
+          **aria_required_attrs
+        ) %>
 
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
