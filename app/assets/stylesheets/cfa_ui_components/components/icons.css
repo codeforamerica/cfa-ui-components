@@ -1,6 +1,7 @@
 /* USWDS sprite icons rendered as inline <svg><use>. Inherit text color. */
 .cfa-icon {
     display: inline-block;
+    flex-shrink: 0;
     vertical-align: middle;
     fill: currentColor;
 }
