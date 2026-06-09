@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class DatePickerComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil)
+  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, aria_labelledby: nil)
+    raise ArgumentError, "must provide a non-blank label: or aria_labelledby:" if label.blank? && aria_labelledby.nil?
     super(form:, method:)
     @label = label
     @label_day = label_day
@@ -9,6 +10,7 @@ class DatePickerComponent < AttributeBoundFormElementComponent
     @label_month_select = label_month_select
     @label_year = label_year
     @helper_text = helper_text
+    @aria_labelledby = aria_labelledby
   end
 
   private

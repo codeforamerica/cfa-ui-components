@@ -1,8 +1,8 @@
-<div>
+<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %>>
   <% invalid = @form.object.errors[@method].any? %>
-  <p class="text-[16px] mb-cfa-sm">
-    <strong><%= @label %></strong>
-  </p>
+  <% if @label.present? %>
+    <legend class="text-[16px] mb-cfa-sm font-bold"><%= @label %></legend>
+  <% end %>
   <% if @helper_text %>
     <p class="help_text mb-cfa-sm">
       <%= @helper_text %>
@@ -46,4 +46,4 @@
     </div>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
-</div>
+</fieldset>
