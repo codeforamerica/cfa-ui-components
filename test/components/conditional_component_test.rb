@@ -14,8 +14,16 @@ class ConditionalComponentTest < ViewComponent::TestCase
     assert_selector "div[x-effect*=\"'yes'\"]"
   end
 
-  def test_custom_content_description_in_aria_live
+  def test_live_region_starts_empty_and_announces_via_announcement_state
+    render_inline(ConditionalComponent.new(method: :radio_field, value: "yes"))
+    # The live region renders empty so it is not reachable during normal
+    # navigation; Alpine fills it only when visibility changes.
+    assert_selector "p[aria-live='polite'][role='status'][x-text='announcement']"
+    assert_no_text "is now"
+  end
+
+  def test_custom_content_description_used_in_announcement
     render_inline(ConditionalComponent.new(method: :radio_field, value: "yes", content_description: "Extra fields"))
-    assert_selector "p[aria-live='polite'][x-text*='Extra fields']"
+    assert_selector "div[x-data*='Extra fields is now ']"
   end
 end

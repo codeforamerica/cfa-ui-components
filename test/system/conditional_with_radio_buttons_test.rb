@@ -28,4 +28,29 @@ class ConditionalWithRadioButtonsTest < JavaScriptSystemTestCase
 
     assert_text "Header"
   end
+
+  test "no visibility announcement is present on initial page load" do
+    visit "/rails/view_components/conditional_component/radio_buttons"
+
+    assert_no_text "is now visible"
+    assert_no_text "is now hidden"
+  end
+
+  test "prefilled value does not announce on page load" do
+    visit "/rails/view_components/conditional_component/prefilled_radio_buttons"
+
+    assert_text "Header"
+    assert_no_text "is now visible"
+    assert_no_text "is now hidden"
+  end
+
+  test "changing the selection announces the new visibility" do
+    visit "/rails/view_components/conditional_component/radio_buttons"
+
+    choose "Yes"
+    assert_selector "[role='status']", text: "is now visible"
+
+    choose "No"
+    assert_selector "[role='status']", text: "is now hidden"
+  end
 end

@@ -1,10 +1,23 @@
 <div class="contents"
-     x-data="{condition: false}"
+     x-data="{
+       condition: false,
+       announcement: '',
+       announce(visible) {
+         this.announcement = '<%= content_description %> is now ' + (visible ? 'visible' : 'hidden');
+         clearTimeout(this._clearAnnouncement);
+         this._clearAnnouncement = setTimeout(() => { this.announcement = ''; }, 1000);
+       },
+       init() {
+         // Register the watcher after the initial value settles so a prefilled
+         // value shows the section without announcing it on page load. $watch
+         // only fires on later changes, so the live region stays empty during
+         // normal navigation and announces exactly once per visibility change.
+         this.$nextTick(() => this.$watch('condition', visible => this.announce(visible)));
+       }
+     }"
      x-effect="condition = $store.<%= store_key %> === '<%= @value %>' ||
                            (Array.isArray($store.<%= store_key %>) && $store.<%= store_key %>.includes('<%= @value %>'))">
-  <p class="sr-only" aria-live="polite" role="status"
-     x-text="'<%= content_description %> is now ' + (condition ? 'visible' : 'hidden')">
-  </p>
+  <p class="sr-only" aria-live="polite" role="status" x-text="announcement"></p>
   <div x-cloak x-show="condition" class="cfa-stack-med">
     <%= content %>
   </div>
