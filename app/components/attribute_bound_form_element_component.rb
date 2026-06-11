@@ -14,16 +14,32 @@ class AttributeBoundFormElementComponent < BaseComponent
     @form.object.errors[@method].any?
   end
 
-  # DOM id of this field's FormErrorsComponent message, so inputs can point at
-  # it via aria-describedby. Only present in the DOM when the field has an error.
+  # DOM ids of this field's description elements, so inputs can point at them
+  # via aria-describedby. Each id is only present in the DOM when its element is.
   def error_dom_id
     @form.field_id(@method, :error)
   end
 
-  # Splat onto a single input widget to mark it invalid and associate it with
-  # its error message. Empty (no-op) when the field is valid.
-  def aria_error_attrs
-    return {} unless field_has_error?
-    {"aria-invalid" => "true", "aria-describedby" => error_dom_id}
+  def help_dom_id
+    @form.field_id(@method, :help)
+  end
+
+  # Space-separated aria-describedby value listing whichever descriptions are
+  # present, in reading order (help text, then error). nil when there are none.
+  def described_by_value(help: false)
+    ids = []
+    ids << help_dom_id if help
+    ids << error_dom_id if field_has_error?
+    ids.join(" ") if ids.any?
+  end
+
+  # Splat onto a single input widget: marks it invalid on error and associates
+  # it with its description(s). Empty (no-op) when there's nothing to add.
+  def aria_field_attrs(described_by_help: false)
+    attrs = {}
+    attrs["aria-invalid"] = "true" if field_has_error?
+    value = described_by_value(help: described_by_help)
+    attrs["aria-describedby"] = value if value
+    attrs
   end
 end

@@ -1,10 +1,10 @@
 <div class="cfa-stack-sm" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
   <%= @form.label @method, label_with_optional_marker, class: "label block" %>
   <% if @help_text %>
-    <p class="help_text">
+    <p id="<%= help_dom_id %>" class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
-  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-model" => "$store.#{@method}", :class => "w-full max-w-sm", **aria_required_attrs, **aria_error_attrs} %>
+  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, {"x-model" => "$store.#{@method}", :class => "w-full max-w-sm", **aria_required_attrs, **aria_field_attrs(described_by_help: @help_text.present?)} %>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

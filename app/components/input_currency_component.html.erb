@@ -1,7 +1,7 @@
 <div class="currency-field cfa-stack-sm">
   <%= @form.label @method, label_with_optional_marker, class: "label block" %>
   <% if @help_text %>
-    <p class="help_text">
+    <p id="<%= help_dom_id %>" class="help_text">
       <%= @help_text %>
     </p>
   <% end %>
@@ -17,6 +17,7 @@
           "x-mask:dynamic": "$money",
           "x-init": "$el.form?.addEventListener('formdata', (e) => { e.formData.set($el.name, $el.value.replace(/[^0-9.]/g, '')) }); $el.dispatchEvent(new Event('input'))",
           **aria_required_attrs,
+          **aria_field_attrs(described_by_help: @help_text.present?),
           **@number_field_kwargs %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
