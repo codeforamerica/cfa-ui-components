@@ -1,4 +1,4 @@
-<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if has_error? %>aria-describedby="<%= error_dom_id %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
   <% if @legend %>
     <legend class="sr-only"><%= @legend %></legend>
   <% end %>
@@ -34,7 +34,7 @@
   <div class="mt-cfa-sm">
     <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
     <% if has_warning? %>
-      <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
+      <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small, id: warning_dom_id)) %>
     <% end %>
   </div>
 </fieldset>

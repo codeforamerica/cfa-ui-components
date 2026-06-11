@@ -24,12 +24,17 @@ class AttributeBoundFormElementComponent < BaseComponent
     @form.field_id(@method, :help)
   end
 
+  def warning_dom_id
+    @form.field_id(@method, :warning)
+  end
+
   # Space-separated aria-describedby value listing whichever descriptions are
-  # present, in reading order (help text, then error). nil when there are none.
-  def described_by_value(help: false)
+  # present, in DOM/reading order (help text, error, warning). nil when none.
+  def described_by_value(help: false, warning: false)
     ids = []
     ids << help_dom_id if help
     ids << error_dom_id if field_has_error?
+    ids << warning_dom_id if warning
     ids.join(" ") if ids.any?
   end
 
