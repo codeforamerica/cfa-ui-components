@@ -14,4 +14,12 @@ class FormErrorsComponentTest < ViewComponent::TestCase
     render_inline(FormErrorsComponent.new(form: build_form(model), method: :text_field))
     assert_selector ".form_errors", text: "can't be blank"
   end
+
+  def test_icon_is_decorative_and_hidden_from_screen_readers
+    model = ComponentTestModel.new
+    model.errors.add(:text_field, "can't be blank")
+    render_inline(FormErrorsComponent.new(form: build_form(model), method: :text_field))
+    assert_selector ".form_errors svg[aria-hidden='true']"
+    assert_no_selector ".form_errors svg[role='img']"
+  end
 end

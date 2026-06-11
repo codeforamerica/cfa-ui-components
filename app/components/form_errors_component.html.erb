@@ -1,6 +1,6 @@
 <% if @form.object.errors[@method].any? %>
   <p id="<%= error_dom_id %>" class="form_errors type-body-label flex items-start gap-cfa-sm text-text-body-secondary">
-    <%= inline_icon(:error, size: @small ? 16 : 24, css_class: "text-error") %>
+    <%= inline_icon(:error, size: @small ? 16 : 24, css_class: "text-error", aria_hidden: true) %>
     <span>
       <%= safe_join(
             @form.object.errors.where(@method).map { |e| e.message.html_safe? ? e.full_message.html_safe : e.full_message },
