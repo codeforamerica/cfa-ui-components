@@ -1,4 +1,4 @@
-<div x-data x-combobox class="max-w-lg space-y-cfa-sm"
+<div x-data x-combobox class="max-w-lg cfa-stack-sm"
      x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
   <% invalid = @form.object.errors[@method].any? %>
@@ -26,10 +26,10 @@
         <div class="absolute z-10 inset-y-px right-px flex">
           <button x-combobox:toggle class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
             <template x-if="$combobox.isOpen">
-              <%= render(IconComponent.new(icon: "chevron_up")) %>
+              <%= render(IconComponent.new(icon: "expand_less")) %>
             </template>
             <template x-if="!$combobox.isOpen">
-              <%= render(IconComponent.new(icon: "chevron_down")) %>
+              <%= render(IconComponent.new(icon: "expand_more")) %>
             </template>
           </button>
         </div>

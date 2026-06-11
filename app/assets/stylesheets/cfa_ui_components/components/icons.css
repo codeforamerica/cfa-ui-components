@@ -1,4 +1,13 @@
+/* USWDS sprite icons rendered as inline <svg><use>. Inherit text color. */
 .cfa-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+    fill: currentColor;
+}
+
+/* Animated loading spinner: CSS-masked span inherits color via background-color. */
+.cfa-icon-mask {
     display: inline-block;
     background-color: currentColor;
     mask-image: var(--icon-url);
