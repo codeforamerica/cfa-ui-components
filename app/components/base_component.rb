@@ -1,108 +1,65 @@
 class BaseComponent < ViewComponent::Base
   attr_accessor :html_attrs
 
-  ICONS = {
-    "question" => {
-      path: "icons/circle_question.svg",
-      alt: "question"
-    },
-    "info" => {
-      path: "icons/circle_info.svg",
-      alt: "info"
-    },
-    "xmark" => {
-      path: "icons/xmark.svg",
-      alt: "close"
-    },
-    "circle_check" => {
-      path: "icons/circle_check.svg",
-      alt: "check mark"
-    },
-    "circle_check_filled" => {
-      path: "icons/circle_check_filled.svg",
-      alt: "check mark"
-    },
-    "check" => {
-      path: "icons/check.svg",
-      alt: "check mark"
-    },
-    "circle_xmark" => {
-      path: "icons/circle_xmark.svg",
-      alt: "x mark"
-    },
-    "chevron_down" => {
-      path: "icons/arrow_closed.svg",
-      alt: "chevron down"
-    },
-    "chevron_up" => {
-      path: "icons/arrow_open.svg",
-      alt: "chevron up"
-    },
-    "warn" => {
-      path: "icons/alert_triangle.svg",
-      alt: "warning"
-    },
-    "error" => {
-      path: "icons/alert_round.svg",
-      alt: "error"
-    },
-    "delete" => {
-      path: "icons/delete.svg",
-      alt: "delete"
-    },
-    "arrow_left" => {
-      path: "icons/arrow_left.svg",
-      alt: "back"
-    },
-    "loading" => {
-      path: "icons/loading.svg",
-      alt: "loading"
-    },
-    "cancel_circle" => {
-      path: "icons/cancel_circle.svg",
-      alt: "cancel"
-    },
-    "external_link" => {
-      path: "icons/external_link.svg",
-      alt: "external link"
-    },
-    "chevron" => {
-      path: "icons/chevron.svg",
-      alt: "chevron"
-    },
-    "download" => {
-      path: "icons/download.svg",
-      alt: "download"
-    }
-  }.freeze
+  # Path (relative to the asset pipeline) of the USWDS icon sprite.
+  SPRITE_PATH = "uswds-sprite.svg"
+
+  # The set of `id`s defined as `<symbol>`s in the sprite. Read once from the
+  # sprite shipped with the engine so `inline_icon` can reject unknown names.
+  USWDS_ICON_IDS = File.read(
+    CfaUiComponents::Engine.root.join("app/assets/images", SPRITE_PATH)
+  ).scan(/<symbol id="([^"]+)"/).flatten.to_set.freeze
+
+  # File-based icons not present in the USWDS sprite, keyed by basename.
+  # Built from the SVGs shipped in `app/assets/images/icons`.
+  NON_USWDS_ICON_IDS = Dir.glob(
+    CfaUiComponents::Engine.root.join("app/assets/images/icons/*.svg")
+  ).each_with_object({}) do |file, paths|
+    paths[File.basename(file, ".svg")] = "icons/#{File.basename(file)}"
+  end.freeze
+
+  if (collisions = NON_USWDS_ICON_IDS.keys.to_set & USWDS_ICON_IDS).any?
+    raise "File-based icons collide with USWDS sprite ids: #{collisions.to_a.sort.join(", ")}. " \
+      "Remove the redundant SVG(s) from app/assets/images/icons or rename them."
+  end
 
   def initialize(html_attrs:)
     @html_attrs = html_attrs
   end
 
-  def icon_image_path(icon)
-    ICONS.dig(icon.to_s, :path) || ""
+  def inline_icon(name, size: 20, css_class: nil, aria_hidden: false, label: nil)
+    name = name.to_s
+    if (path = NON_USWDS_ICON_IDS[name])
+      return masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
+    end
+    unless USWDS_ICON_IDS.include?(name)
+      raise ArgumentError, "Unknown icon #{name.inspect}. " \
+        "It is not a USWDS sprite symbol or a file-based icon in app/assets/images/icons."
+    end
+
+    href = "#{image_path(SPRITE_PATH)}##{name}"
+    content_tag :svg, content_tag(:use, "", href:),
+      class: ["cfa-icon", css_class].compact,
+      width: size, height: size,
+      **icon_aria(name, aria_hidden:, label:)
   end
 
-  def icon_alt_text(icon)
-    base = ICONS.dig(icon.to_s, :alt)
-    base ? "#{base} icon" : ""
+  private
+
+  def icon_aria(name, aria_hidden:, label:)
+    return {"aria-hidden" => "true", "focusable" => "false"} if aria_hidden
+    {:role => "img", "aria-label" => label || "#{name.tr("_", " ")} icon"}
   end
 
-  # Render the icon as a CSS-masked span so it inherits CSS `color`
-  # via `background-color: currentColor`. Uses the same image-rasterization
-  # path as `<img src=...>`, preserving pixel-perfect positioning.
-  def inline_icon(icon, size: 20, css_class: nil, aria_hidden: false)
-    path = ICONS.dig(icon.to_s, :path)
-    return "".html_safe unless path
-
+  # CSS-masked span for a file-based icon, which inherits color via
+  # `background-color: currentColor`.
+  def masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
     style = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
-    aria = aria_hidden ?
-      {"aria-hidden" => "true"} :
-      {:role => "img", "aria-label" => icon_alt_text(icon)}
-
-    content_tag :span, "", class: ["cfa-icon", css_class].compact, style:, **aria
+    content_tag :span, "", class: ["cfa-icon-mask", css_class].compact, style:,
+      **icon_aria(name, aria_hidden:, label:)
   end
+
+  public
 
   def label_with_optional_marker
     return @label unless @optional

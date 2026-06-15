@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
     "app/form_builders/**/*",
     "app/assets/stylesheets/cfa_ui_components/**/*",
     "app/javascript/cfa_ui_components/**/*",
+    "app/assets/images/uswds-sprite.svg",
     "app/assets/images/icons/*",
     "lib/generators/**/*",
     "lib/tasks/cfa_ui_components.rake"

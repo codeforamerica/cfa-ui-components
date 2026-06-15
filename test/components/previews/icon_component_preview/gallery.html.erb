@@ -1,0 +1,24 @@
+<%# A div-based grid: the base `ul`/`li` styles in lists.css are unlayered and %>
+<%# override Tailwind utilities, so plain divs are used for the layout. %>
+<%#
+  The preview layout wraps everything in `main`, which caps width at narrow
+  `max-width` breakpoints. The `w-screen ml-[calc(50%-50vw)]` full-bleed lets
+  the gallery span the whole preview viewport so it gets as many columns as
+  fit. `w-full` on the grid gives `auto-fill` a definite width to resolve
+  against (otherwise, as a flex child, it collapses to one column).
+%>
+<p class="type-body mb-4"><%= icons.size %> icons available.</p>
+
+<div class="w-screen ml-[calc(50%-50vw)] px-cfa-med">
+  <div class="grid w-full grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-2">
+    <% icons.each do |name| %>
+      <div class="flex flex-col items-center justify-start gap-2 p-2 rounded border border-border-default bg-white"
+           title="<%= name %>">
+        <span class="flex items-center justify-center h-7">
+          <%= render IconComponent.new(icon: name, size: 28) %>
+        </span>
+        <span class="w-full text-center text-[11px] leading-tight break-words"><%= name %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

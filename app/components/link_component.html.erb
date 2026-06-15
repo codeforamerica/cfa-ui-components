@@ -1,6 +1,6 @@
 <%= link_to @url, target: "_blank", rel: "noopener noreferrer", **html_attrs do %>
   <span><%= @label %></span>
   <% if @icon.present? %>
-    <%= inline_icon("external_link", size: 20) %>
+    <%= inline_icon("launch", size: 20, label: "external link") %>
   <% end %>
 <% end %>
