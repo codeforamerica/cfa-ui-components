@@ -357,8 +357,7 @@ const comboboxListItem = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpin
             this.isOpen = false;
         },
         '@mousemove.prevent'() {
-            this.activeEl = el
-            this.$focus.focus(el)
+            return true
         },
         '@keydown.prevent.esc'() {
             this.isOpen = false;
