@@ -66,4 +66,36 @@ class DatePickerComponentTest < ViewComponent::TestCase
     assert_selector "input#date_picker_test_model_my_date_3i[autocomplete='off']"
     assert_selector "input#date_picker_test_model_my_date_1i[autocomplete='off']"
   end
+
+  def test_input_attrs_aria_merges_with_the_fields_own_aria
+    render_inline(DatePickerComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Date of birth",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year",
+      input_attrs: {aria: {describedby: "dob-hint"}}
+    ))
+
+    # The component's own aria-invalid survives, and the caller's aria-describedby is added.
+    assert_selector "input#date_picker_test_model_my_date_3i[aria-invalid][aria-describedby='dob-hint']"
+  end
+
+  def test_input_attrs_id_raises_because_it_would_collide_across_fields
+    error = assert_raises(ArgumentError) do
+      DatePickerComponent.new(
+        form: build_form,
+        method: :my_date,
+        label: "Date of birth",
+        label_day: "Day",
+        label_month: "Month",
+        label_month_select: "Select month",
+        label_year: "Year",
+        input_attrs: {id: "dob"}
+      )
+    end
+    assert_match(/id/, error.message)
+  end
 end
