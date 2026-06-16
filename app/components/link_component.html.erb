@@ -1,7 +1,9 @@
 <%= link_to @url, target: "_blank", rel: "noopener noreferrer", **html_attrs do %>
   <span><%= @label %></span>
   <% if external? %>
-    <span class="sr-only"><%= external_link_sr_label %></span>
+    <span class="sr-only"><%= @external_sr_label %></span>
     <%= inline_icon("launch", size: 20, label: nil, css_class: "inline-block ml-0.5 align-middle") %>
+  <% else %>
+    <span class="sr-only"><%= @sr_label %></span>
   <% end %>
 <% end %>
