@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class DatePickerComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, css_class: nil)
-    super(form:, method:, css_class:)
+  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, css_class: nil, input_attrs: {})
+    super(form:, method:, css_class:, input_attrs:)
     @label = label
     @label_day = label_day
     @label_month = label_month

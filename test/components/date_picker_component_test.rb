@@ -49,4 +49,21 @@ class DatePickerComponentTest < ViewComponent::TestCase
     ))
     assert_selector "div.mt-cfa-lg"
   end
+
+  def test_input_attrs_are_forwarded_to_every_field
+    render_inline(DatePickerComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Date of birth",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year",
+      input_attrs: {autocomplete: "off"}
+    ))
+
+    assert_selector "select#date_picker_test_model_my_date_2i[autocomplete='off']"
+    assert_selector "input#date_picker_test_model_my_date_3i[autocomplete='off']"
+    assert_selector "input#date_picker_test_model_my_date_1i[autocomplete='off']"
+  end
 end
