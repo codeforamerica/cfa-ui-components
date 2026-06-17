@@ -18,6 +18,11 @@ es:
     combobox:
       placeholder_label: "- Seleccionar o escribir -"
       no_results: No se encontraron resultados
+    memorable_date:
+      day: Día
+      month: Mes
+      year: Año
+      month_select: "- Seleccionar -"
   # Standard Rails key — the date picker reads this so it inherits whatever
   # month names the host app (or Active Support) already defines. Do NOT move
   # this under `cfaui`.
@@ -26,6 +31,8 @@ es:
   # Demo-only strings used by Lookbook previews. Never shipped to end users and
   # not part of the translation deliverable.
   preview:
+    date_of_birth: Fecha de nacimiento
+    date_helper_text: "Por ejemplo: 28 de agosto de 1986"
     first_name: Primer nombre
     last_name: Apellido
     email: Correo electrónico

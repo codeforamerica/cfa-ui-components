@@ -33,8 +33,8 @@ class FormComponentPreview < ViewComponent::Preview
   end
 
   def self.yes_no_options
-    [OpenStruct.new(value: "yes", label: "Yes"),
-      OpenStruct.new(value: "no", label: "No")]
+    [OpenStruct.new(value: "yes", label: I18n.t("cfaui.yes_no.yes")),
+      OpenStruct.new(value: "no", label: I18n.t("cfaui.yes_no.no"))]
   end
 
   def self.fruit_options
