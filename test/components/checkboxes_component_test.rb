@@ -222,4 +222,17 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     assert_selector "input[type='checkbox']#component_test_model_checkboxes_field_yes"
     assert_selector "input[type='checkbox']#component_test_model_checkboxes_field_no"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "Checkbox group",
+      css_class: "mt-cfa-lg"
+    ))
+    assert_selector "fieldset.mt-cfa-lg"
+  end
 end

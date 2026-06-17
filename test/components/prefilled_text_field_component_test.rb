@@ -34,4 +34,10 @@ class PrefilledTextFieldComponentTest < ViewComponent::TestCase
       PrefilledTextFieldComponent.new(text: "foo", label: "bar", style: :invalid)
     end
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(PrefilledTextFieldComponent.new(text: "foo", label: "bar", css_class: "mt-cfa-lg"))
+    # Without a heading: this renders as a <dl> description list (semantic default).
+    assert_selector "dl.cfa-stack-sm.mt-cfa-lg"
+  end
 end

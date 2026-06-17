@@ -44,7 +44,7 @@
       </p>
     <% end %>
 
-    <%= @form.text_field @method,
+    <%= @form.text_field @method, **field_attrs(
           type: "text",
           class: "w-full max-w-sm",
           placeholder: "000-00-0000",
@@ -52,7 +52,8 @@
           "x-mask": "999-99-9999",
           "x-bind:style": "show ? '' : '-webkit-text-security: disc;'",
           **aria_required_attrs,
-          **aria_field_attrs(described_by_help: @help_text.present?) %>
+          **aria_field_attrs(described_by_help: @help_text.present?)
+        ) %>
 
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>

@@ -1,4 +1,4 @@
-<fieldset class="fieldset-group" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
+<fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
   <% if @legend %>
     <legend class="sr-only"><%= @legend %></legend>
   <% end %>
@@ -15,11 +15,10 @@
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@scope}"
              radio_attrs[:id] = input_id
            end
-           label_classes = @small ? ["type-progress-text"] : []
            label_opts = {}
            label_opts[:for] = input_id if @scope.present?
-           label_opts[:class] = label_classes.join(" ") if label_classes.any?
-           content_tag :div, class: ["form_item", ("form_item--bordered" if @bordered), ("form_item--warning" if @bordered && has_warning?)].compact.join(" ") do
+           label_opts[:class] = "type-progress-text" if @small
+           content_tag :div, class: class_names("form_item", "form_item--bordered" => @bordered, "form_item--warning" => @bordered && has_warning?) do
              concat radio_button_item.radio_button(radio_attrs)
              concat(label_opts.empty? ? radio_button_item.label : radio_button_item.label(label_opts))
            end

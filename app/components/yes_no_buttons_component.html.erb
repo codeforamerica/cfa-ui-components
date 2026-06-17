@@ -1,5 +1,5 @@
 <% field_name = "#{@form.object_name}[#{@method}]" %>
-<div class="yes-no-buttons" x-data="{ selected: null }">
+<div class="<%= class_names("yes-no-buttons", @css_class) %>" x-data="{ selected: null }">
   <div class="yes-no-buttons__group">
     <% [["yes", @yes_label], ["no", @no_label]].each do |val, label| %>
       <button type="submit" name="<%= field_name %>" value="<%= val %>"

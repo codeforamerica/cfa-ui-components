@@ -3,9 +3,9 @@
 class RadioButtonsComponent < AttributeBoundFormElementComponent
   # scope namespaces both the Alpine store key and the input id/label-for,
   # so multiple instances of this component can coexist on a single page.
-  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, legend: nil, aria_labelledby: nil, scope: nil, layout: :vertical, small: false, bordered: false, warning_message: nil)
+  def initialize(form:, method:, collection:, item_value_method:, item_label_method:, legend: nil, aria_labelledby: nil, scope: nil, layout: :vertical, small: false, bordered: false, warning_message: nil, css_class: nil)
     raise ArgumentError, "must provide legend: or aria_labelledby:" if legend.nil? && aria_labelledby.nil?
-    super(form:, method:)
+    super(form:, method:, css_class:)
     @collection = collection
     @item_value_method = item_value_method
     @item_label_method = item_label_method
@@ -41,11 +41,12 @@ class RadioButtonsComponent < AttributeBoundFormElementComponent
   end
 
   def radio_classes
-    classes = ["cfa-radio"]
-    classes << "cfa-radio--small" if @small
-    classes << "cfa-radio--error" if has_error?
-    classes << "cfa-radio--warning" if has_warning? && !has_error?
-    classes.join(" ")
+    class_names(
+      "cfa-radio",
+      "cfa-radio--small": @small,
+      "cfa-radio--error": has_error?,
+      "cfa-radio--warning": has_warning? && !has_error?
+    )
   end
 
   def store_key

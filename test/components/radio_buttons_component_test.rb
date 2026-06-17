@@ -211,4 +211,17 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     assert_selector "[x-init*=\"Alpine.store('radio_field_abc'\"]"
     assert_selector "input[x-model=\"$store.radio_field_abc\"]"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "Radio group",
+      css_class: "mt-cfa-lg"
+    ))
+    assert_selector "fieldset.mt-cfa-lg"
+  end
 end
