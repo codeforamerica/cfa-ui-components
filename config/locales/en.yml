@@ -2,11 +2,14 @@ en:
   # Strings rendered by the components themselves. Namespaced under `cfaui` so
   # they never collide with a host application's own top-level locale keys.
   cfaui:
-    back: Go back
-    continue: Continue
-    optional: optional
-    show: Show
+    base:
+      optional: optional
+    back_button:
+      label: Go back
+    submit_button:
+      label: Continue
     tin:
+      show: Show
       visible: TIN visible
       hidden: TIN hidden for security
     modal:

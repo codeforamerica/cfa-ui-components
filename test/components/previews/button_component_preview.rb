@@ -1,23 +1,23 @@
 class ButtonComponentPreview < ViewComponent::Preview
   # @!group Primary
   def primary
-    render(ButtonComponent.new(label: I18n.t("cfaui.continue"), url: "https://www.google.com"))
+    render(ButtonComponent.new(label: I18n.t("cfaui.submit_button.label"), url: "https://www.google.com"))
   end
 
   def primary_small
-    render(ButtonComponent.new(label: I18n.t("cfaui.continue"), url: "https://www.google.com", size: :small))
+    render(ButtonComponent.new(label: I18n.t("cfaui.submit_button.label"), url: "https://www.google.com", size: :small))
   end
 
   def primary_with_icon
-    render(ButtonComponent.new(label: I18n.t("cfaui.continue"), url: "https://www.google.com", icon: "check_circle_outline"))
+    render(ButtonComponent.new(label: I18n.t("cfaui.submit_button.label"), url: "https://www.google.com", icon: "check_circle_outline"))
   end
 
   def primary_small_with_icon
-    render(ButtonComponent.new(label: I18n.t("cfaui.continue"), url: "https://www.google.com", size: :small, icon: "check_circle_outline"))
+    render(ButtonComponent.new(label: I18n.t("cfaui.submit_button.label"), url: "https://www.google.com", size: :small, icon: "check_circle_outline"))
   end
 
   def primary_disabled
-    render(ButtonComponent.new(label: I18n.t("cfaui.continue"), url: "https://www.google.com", disabled: true))
+    render(ButtonComponent.new(label: I18n.t("cfaui.submit_button.label"), url: "https://www.google.com", disabled: true))
   end
   # @!endgroup
 
