@@ -8,7 +8,7 @@ en:
     show: Show
     tin:
       visible: TIN visible
-      hidden: TIN hidden
+      hidden: TIN hidden for security
     modal:
       close_aria: Close modal
     yes_no:
@@ -23,6 +23,8 @@ en:
       month: Month
       year: Year
       month_select: "- Select -"
+    select:
+      placeholder: "- Select -"
   # Standard Rails key — the date picker reads this so it inherits whatever
   # month names the host app (or Active Support) already defines. Do NOT move
   # this under `cfaui`.
