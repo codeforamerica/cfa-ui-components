@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubmitButtonComponent < ViewComponent::Base
-  def initialize(form:, label: I18n.t("continue"), style: :primary, disabled: false, css_class: nil)
+  def initialize(form:, label: I18n.t("cfaui.continue"), style: :primary, disabled: false, css_class: nil)
     @form = form
     @label = label
     @disabled = disabled

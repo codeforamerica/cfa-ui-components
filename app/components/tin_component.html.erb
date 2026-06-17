@@ -6,8 +6,8 @@
       selectionEnd: null,
       announcement: '',
 
-      visibleText: <%= raw t("visible").to_json %>,
-      hiddenText: <%= raw t("hidden").to_json %>,
+      visibleText: <%= raw t("cfaui.tin.visible").to_json %>,
+      hiddenText: <%= raw t("cfaui.tin.hidden").to_json %>,
 
       init() {
         this.$watch('show', (value) => {
@@ -69,7 +69,7 @@
         autocomplete: "off",
         "x-model": "show" %>
 
-  <%= label_tag @form.field_id(@method, :show), t("show") %>
+  <%= label_tag @form.field_id(@method, :show), t("cfaui.tin.show") %>
   </div>
 
   <div

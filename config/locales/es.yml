@@ -1,13 +1,39 @@
 es:
-  back: Regresa
-  continue: Continuar
+  # Strings rendered by the components themselves. Namespaced under `cfaui` so
+  # they never collide with a host application's own top-level locale keys.
   cfaui:
+    back: Regresa
+    continue: Continuar
     optional: opcional
+    show: Mostrar
+    tin:
+      visible: ITIN visible
+      hidden: ITIN oculto
     modal:
       close_aria: Cerrar modal
-  decline: Rechazar
-  remove: Eliminar
-  favorite_fruits: Frutas favoritas
-  first_name: Primer nombre
-  last_name: Apellido
-  submit: Enviar
+    yes_no:
+      "yes": Sí
+      "no": "No"
+      unsure: No lo sé
+    combobox:
+      placeholder_label: "- Seleccionar o escribir -"
+      no_results: No se encontraron resultados
+  # Standard Rails key — the date picker reads this so it inherits whatever
+  # month names the host app (or Active Support) already defines. Do NOT move
+  # this under `cfaui`.
+  date:
+    month_names: [~, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+  # Demo-only strings used by Lookbook previews. Never shipped to end users and
+  # not part of the translation deliverable.
+  preview:
+    first_name: Primer nombre
+    last_name: Apellido
+    email: Correo electrónico
+    my_number: Mi número
+    ssn: Número de Seguro Social o ITIN
+    ssn_help: "Por ejemplo: 123-45-6789"
+    favorite_fruits: Frutas favoritas
+    fruit_help_text: Por favor elija su fruta favorita
+    decline: Rechazar
+    remove: Eliminar
+    submit: Enviar

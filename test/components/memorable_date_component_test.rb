@@ -132,6 +132,38 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_selector "input#date_picker_test_model_my_date_3i[aria-invalid][aria-describedby='dob-hint']"
   end
 
+  def test_month_options_render_in_english_by_default
+    render_inline(DatePickerComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Date of birth",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year"
+    ))
+
+    assert_selector "select#date_picker_test_model_my_date_2i option[value='1']", text: "January"
+    assert_selector "select#date_picker_test_model_my_date_2i option[value='12']", text: "December"
+  end
+
+  def test_month_options_render_in_spanish_when_locale_is_es
+    I18n.with_locale(:es) do
+      render_inline(DatePickerComponent.new(
+        form: build_form,
+        method: :my_date,
+        label: "Fecha de nacimiento",
+        label_day: "Día",
+        label_month: "Mes",
+        label_month_select: "Seleccione el mes",
+        label_year: "Año"
+      ))
+    end
+
+    assert_selector "select#date_picker_test_model_my_date_2i option[value='1']", text: "enero"
+    assert_selector "select#date_picker_test_model_my_date_2i option[value='12']", text: "diciembre"
+  end
+
   def test_input_attrs_id_raises_because_it_would_collide_across_fields
     error = assert_raises(ArgumentError) do
       MemorableDateComponent.new(
