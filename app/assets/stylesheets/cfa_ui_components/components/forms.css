@@ -177,6 +177,11 @@ input[type="text"] {
 }
 
 /* Combobox */
+
+.cfa-combobox__list {
+  display: block;
+}
+
 .cfa-combobox__toggle {
   @apply rounded-r;
 }

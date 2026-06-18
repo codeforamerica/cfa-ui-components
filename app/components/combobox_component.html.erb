@@ -34,7 +34,7 @@
           </button>
         </div>
       </div>
-      <ul x-combobox:list class="!block !list-none !pl-0 !absolute border !border-t-0 border-border-secondary divide-y divide-border-secondary rounded-b bg-white max-h-72 overflow-y-scroll w-full z-10">
+      <ul x-combobox:list class="cfa-combobox__list !list-none !pl-0 !absolute border !border-t-0 border-border-secondary divide-y divide-border-secondary rounded-b bg-white max-h-72 overflow-y-scroll w-full z-10">
         <template x-for="option in $combobox.allOptions" :key="option.value">
           <li x-combobox:item
               :data-disabled="option.disabled"
