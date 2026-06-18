@@ -26,4 +26,19 @@ class InputComponentTest < ViewComponent::TestCase
     assert_selector "label", text: "Full name (optional)"
     assert_no_selector "input[aria-required]"
   end
+
+  def test_css_class_is_appended_to_root
+    render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", css_class: "mt-cfa-lg"))
+    assert_selector "div.cfa-stack-sm.mt-cfa-lg"
+  end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", input_attrs: {inputmode: "tel", autocomplete: "tel"}))
+    assert_selector "input[inputmode='tel'][autocomplete='tel']"
+  end
+
+  def test_input_attrs_class_augments_rather_than_clobbers_field_classes
+    render_inline(InputComponent.new(form: build_form, method: :text_field, label: "Full name", input_attrs: {class: "my-custom-class"}))
+    assert_selector "input.w-full.max-w-sm.my-custom-class"
+  end
 end

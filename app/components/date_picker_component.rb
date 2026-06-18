@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class DatePickerComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil)
-    super(form:, method:)
+  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, css_class: nil, input_attrs: {})
+    if input_attrs.key?(:id)
+      raise ArgumentError, "DatePickerComponent forwards input_attrs to all three " \
+        "(day/month/year) fields, so a single :id would collide across them. Omit it."
+    end
+    super(form:, method:, css_class:, input_attrs:)
     @label = label
     @label_day = label_day
     @label_month = label_month

@@ -1,4 +1,4 @@
-<div class="currency-field cfa-stack-sm">
+<div class="<%= class_names("currency-field cfa-stack-sm", @css_class) %>">
   <%= @form.label @method, label_with_optional_marker, class: "label block" %>
   <% if @help_text %>
     <p class="help_text">
@@ -9,15 +9,15 @@
     <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-cfa-med font-bold text-text-body-secondary">
       $
     </span>
-    <%= @form.text_field @method,
+    <%= @form.text_field @method, **field_attrs(
           class: "w-full !pl-cfa-xl",
           inputmode: "decimal",
           placeholder: "0.00",
           "x-data": "",
           "x-mask:dynamic": "$money",
           "x-init": "$el.form?.addEventListener('formdata', (e) => { e.formData.set($el.name, $el.value.replace(/[^0-9.]/g, '')) }); $el.dispatchEvent(new Event('input'))",
-          **aria_required_attrs,
-          **@number_field_kwargs %>
+          **aria_required_attrs
+        ) %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

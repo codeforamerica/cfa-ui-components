@@ -1,4 +1,6 @@
-<p class="form_warning type-body-label flex items-start gap-cfa-sm text-text-body-secondary">
-  <%= inline_icon(:warning, size: icon_size, css_class: "text-warning") %>
+<p class="<%= class_names("form_warning type-body-label flex items-start gap-cfa-sm text-text-body-secondary", @css_class) %>">
+  <span class="flex h-[1lh] shrink-0 items-center">
+    <%= inline_icon(:warning, size: icon_size, css_class: "text-warning") %>
+  </span>
   <span><%= @warning_message %></span>
 </p>
