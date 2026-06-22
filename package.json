@@ -9,7 +9,7 @@
     "@tailwindcss/cli": "^4.3.0",
     "alpinejs": "^3.15.12",
     "node": "^26.3.0",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.3.1"
   },
   "engines": {
     "node": "20.x",
