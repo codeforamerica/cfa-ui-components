@@ -46,6 +46,8 @@
 
     <%= @form.text_field @method, **field_attrs(
           type: "text",
+          inputmode: "numeric",
+          autocomplete: "off",
           class: "w-full max-w-sm",
           placeholder: "000-00-0000",
           "x-ref": "input",
@@ -64,6 +66,7 @@
         false,
         id: @form.field_id(@method, :show),
         class: "accent-text-default",
+        autocomplete: "off",
         "x-model": "show" %>
 
   <%= label_tag @form.field_id(@method, :show), t("show") %>

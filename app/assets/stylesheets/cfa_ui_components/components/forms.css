@@ -180,6 +180,32 @@ input[type="text"] {
   }
 }
 
+/* Combobox */
+
+.cfa-combobox__list {
+  display: block;
+}
+
+.cfa-combobox__toggle {
+  @apply rounded-r;
+}
+
+.cfa-combobox__field:hover:not(:has(:disabled)) .cfa-combobox__toggle {
+  @apply bg-background-secondary;
+}
+
+.cfa-combobox__field:has(input[aria-expanded="true"]) input {
+  @apply rounded-b-none;
+}
+
+.cfa-combobox__field input[aria-expanded="true"]:focus-visible {
+  @apply outline-none;
+}
+
+.cfa-combobox__toggle:active:not(:disabled) {
+  @apply bg-background-secondary border-2 border-primary;
+}
+
 /* Standard invalid fields */
 [aria-invalid="true"],
 .field_with_errors input,
