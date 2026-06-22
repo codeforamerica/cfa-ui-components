@@ -32,6 +32,11 @@ class TinComponentTest < ViewComponent::TestCase
     assert_selector "input[type='checkbox']"
   end
 
+  def test_show_toggle_disables_autocomplete_so_browser_does_not_restore_checked_state_on_back_button
+    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
+    assert_selector "input[type='checkbox'][autocomplete='off']"
+  end
+
   def test_input_has_tin_mask
     render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
     assert_selector "input[x-mask='999-99-9999']"
