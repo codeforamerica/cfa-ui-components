@@ -251,6 +251,10 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
                 this.focusFirst()
             })
         },
+        '@keydown.prevent.enter'() {
+            this.isOpen = true;
+            this.activeEl = undefined;
+        },
     })
 }
 
