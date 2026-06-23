@@ -201,6 +201,7 @@ input[type="text"] {
 /* Shared custom select — block class is the scope anchor; state comes from aria/data attrs */
 .cfa-custom-select {
   position: relative;
+
   button {
     @apply flex items-center justify-between w-full border border-border-default rounded bg-white text-text-default overflow-hidden;
     height: 41px;
@@ -263,7 +264,7 @@ input[type="text"] {
   }
 
   li {
-    @apply flex items-center justify-between gap-cfa-sm h-[41px] leading-none cursor-pointer text-text-default px-cfa-sm m-0 list-none border-t border-border-secondary first:border-t-0;
+    @apply flex items-center justify-between gap-cfa-sm min-h-[41px] cursor-pointer text-text-default px-cfa-sm py-cfa-sm m-0 list-none border-t border-border-secondary first:border-t-0;
 
     &:hover,
     &[data-active] {
@@ -275,11 +276,12 @@ input[type="text"] {
     }
 
     .option-label {
-      @apply flex-auto min-w-0;
+      @apply flex-auto min-w-0 whitespace-normal;
+      line-height: 1.2;
     }
 
     .option-check {
-      @apply inline-flex items-center text-icon-default flex-shrink-0;
+      @apply inline-flex items-center text-icon-default flex-shrink-0 self-start mt-[2px];
     }
   }
 }

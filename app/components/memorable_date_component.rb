@@ -31,12 +31,13 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
   end
 
   def month_options
-    Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }
+    [[@label_month_select, ""]] +
+      Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }
   end
 
   def month_alpine_opts
     {
-      options: month_options.map { |label, value| {label:, value:} },
+      options: month_options.map { |label, value| {label:, value: value.to_s} },
       value: month_value.to_s,
       label: initial_month_label,
       activeIndex: initial_active_index,
@@ -46,12 +47,11 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
   end
 
   def initial_month_label
-    month_value.present? ? month_options.to_h.invert[month_value] : @label_month_select
+    month_options.find { |_, value| value.to_s == month_value.to_s }&.first || @label_month_select
   end
 
   def initial_active_index
-    return -1 if month_value.blank?
-    month_options.find_index { |_, v| v == month_value } || -1
+    month_options.find_index { |_, value| value.to_s == month_value.to_s } || 0
   end
 
   def month_value = date&.month
