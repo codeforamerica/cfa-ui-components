@@ -36,6 +36,53 @@ class DatePickerComponentTest < ViewComponent::TestCase
     assert_selector "input#date_picker_test_model_my_date_1i"
   end
 
+  def test_label_renders_as_visible_fieldset_legend
+    render_inline(DatePickerComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Date of birth",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year"
+    ))
+
+    # DatePicker's label is the field's own visible label, so the legend is
+    # visible (not sr-only) unlike the radio/checkbox group components.
+    assert_selector "fieldset.fieldset-group > legend", text: "Date of birth"
+    assert_no_selector "legend.sr-only"
+  end
+
+  def test_aria_labelledby_sets_fieldset_attribute_without_legend
+    render_inline(DatePickerComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year",
+      aria_labelledby: "external-heading"
+    ))
+
+    assert_selector "fieldset[aria-labelledby='external-heading']"
+    assert_no_selector "legend"
+  end
+
+  def test_raises_when_label_blank_and_no_aria_labelledby
+    assert_raises(ArgumentError) do
+      DatePickerComponent.new(
+        form: build_form,
+        method: :my_date,
+        label: "",
+        label_day: "Day",
+        label_month: "Month",
+        label_month_select: "Select month",
+        label_year: "Year"
+      )
+    end
+  end
+
   def test_css_class_is_appended_to_root
     render_inline(DatePickerComponent.new(
       form: build_form,
@@ -47,7 +94,7 @@ class DatePickerComponentTest < ViewComponent::TestCase
       label_year: "Year",
       css_class: "mt-cfa-lg"
     ))
-    assert_selector "div.mt-cfa-lg"
+    assert_selector "fieldset.mt-cfa-lg"
   end
 
   def test_input_attrs_are_forwarded_to_every_field

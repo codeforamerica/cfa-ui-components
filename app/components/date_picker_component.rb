@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class DatePickerComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, css_class: nil, input_attrs: {})
+  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, aria_labelledby: nil, css_class: nil, input_attrs: {})
+    raise ArgumentError, "must provide a non-blank label: or aria_labelledby:" if label.blank? && aria_labelledby.nil?
     if input_attrs.key?(:id)
       raise ArgumentError, "DatePickerComponent forwards input_attrs to all three " \
         "(day/month/year) fields, so a single :id would collide across them. Omit it."
@@ -13,6 +14,7 @@ class DatePickerComponent < AttributeBoundFormElementComponent
     @label_month_select = label_month_select
     @label_year = label_year
     @helper_text = helper_text
+    @aria_labelledby = aria_labelledby
   end
 
   private

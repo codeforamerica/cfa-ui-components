@@ -211,9 +211,14 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
             return this.$id('combobox-label')
         },
         ':aria-describedby'() {
-            if(this.comboboxDesc) {
-                return this.$id('combobox-desc')
-            }
+            const ids = []
+            if (this.comboboxDesc) ids.push(this.$id('combobox-desc'))
+            // The native <select> carries aria-describedby="<error id>" when the
+            // field is invalid (set server-side); surface it on the search input
+            // so the error is announced, not just the help description.
+            const errorIds = this.selectEl?.getAttribute('aria-describedby')
+            if (errorIds) ids.push(errorIds)
+            return ids.length ? ids.join(' ') : undefined
         },
         'x-init'() {
             this.inputEl = el;

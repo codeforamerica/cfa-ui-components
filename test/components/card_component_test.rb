@@ -40,6 +40,6 @@ class CardComponentTest < ViewComponent::TestCase
       c.with_button { "Go" }
       "Card body"
     end
-    assert_selector "div.cfa-card.-mt-cfa-med.overflow-clip"
+    assert_selector "article.cfa-card.-mt-cfa-med.overflow-clip"
   end
 end

@@ -1,10 +1,10 @@
-<div class="<%= class_names(@css_class) %>">
+<fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %>>
   <% invalid = @form.object.errors[@method].any? %>
-  <p class="text-[16px] mb-cfa-sm">
-    <strong><%= @label %></strong>
-  </p>
+  <% if @label.present? %>
+    <legend class="text-[16px] mb-cfa-sm font-bold"><%= @label %></legend>
+  <% end %>
   <% if @helper_text %>
-    <p class="help_text mb-cfa-sm">
+    <p id="<%= help_dom_id %>" class="help_text mb-cfa-sm">
       <%= @helper_text %>
     </p>
   <% end %>
@@ -16,7 +16,7 @@
             **field_attrs(
               include_blank: @label_month_select,
               id: input_id(2),
-              aria: {invalid: invalid},
+              aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact,
               class: "mr-cfa-sm mt-cfa-sm h-[40px]"
             ) %>
     </div>
@@ -31,7 +31,7 @@
               minlength: 1,
               maxlength: 2,
               placeholder: "DD",
-              aria: {invalid: invalid},
+              aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact,
               class: "w-[48px] mr-cfa-sm mt-cfa-sm h-[40px]"
             ) %>
     </div>
@@ -46,10 +46,10 @@
               minlength: 4,
               maxlength: 4,
               placeholder: "YYYY",
-              aria: {invalid: invalid},
+              aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact,
               class: "w-[72px] mr-cfa-sm mt-cfa-sm h-[40px]"
             ) %>
     </div>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
-</div>
+</fieldset>
