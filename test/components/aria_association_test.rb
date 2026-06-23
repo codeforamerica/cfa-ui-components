@@ -46,15 +46,17 @@ class AriaAssociationTest < ViewComponent::TestCase
     assert_nil input["aria-describedby"]
   end
 
+  # SelectComponent is a custom Alpine combobox (button + listbox), not a native
+  # <select>, so the association lives on the button.
   def test_select_describedby_points_at_error
     render_inline(SelectComponent.new(
       form: build_form(model_with_error(:select_field)), method: :select_field,
       label: "Pick one", collection: simple_collection,
       item_value_method: :value, item_label_method: :label
     ))
-    select = page.find("select")
-    assert_equal "true", select["aria-invalid"]
-    assert_equal error_id(:select_field), select["aria-describedby"]
+    button = page.find("[role='combobox']")
+    assert_equal "true", button["aria-invalid"]
+    assert_equal error_id(:select_field), button["aria-describedby"]
   end
 
   def test_single_checkbox_describedby_points_at_error
@@ -78,12 +80,13 @@ class AriaAssociationTest < ViewComponent::TestCase
   end
 
   def test_date_picker_inputs_describedby_point_at_error
-    render_inline(DatePickerComponent.new(
+    render_inline(MemorableDateComponent.new(
       form: build_form(model_with_error(:my_date)), method: :my_date,
       label: "Date of birth", label_day: "Day", label_month: "Month",
       label_month_select: "Select month", label_year: "Year"
     ))
-    fields = page.all("input[type='text'], select")
+    # day + year are native text inputs; the month picker is a custom combobox button.
+    fields = page.all("input[type='text'], [role='combobox']")
     assert_equal 3, fields.size
     fields.each do |field|
       assert_equal "true", field["aria-invalid"]
@@ -145,7 +148,7 @@ class AriaAssociationTest < ViewComponent::TestCase
       form: build_form, method: :select_field, label: "Pick", help_text: "Choose carefully",
       collection: simple_collection, item_value_method: :value, item_label_method: :label
     ))
-    assert_equal help_id(:select_field), page.find("select")["aria-describedby"]
+    assert_equal help_id(:select_field), page.find("[role='combobox']")["aria-describedby"]
   end
 
   def test_currency_field_associates_help_and_error
@@ -167,11 +170,12 @@ class AriaAssociationTest < ViewComponent::TestCase
   end
 
   def test_date_picker_inputs_describedby_point_at_help_text
-    render_inline(DatePickerComponent.new(
+    render_inline(MemorableDateComponent.new(
       form: build_form, method: :my_date, label: "DOB", label_day: "Day", label_month: "Month",
       label_month_select: "Select month", label_year: "Year", helper_text: "MM / DD / YYYY"
     ))
-    fields = page.all("input[type='text'], select")
+    # day + year are native text inputs; the month picker is a custom combobox button.
+    fields = page.all("input[type='text'], [role='combobox']")
     assert_equal 3, fields.size
     fields.each { |field| assert_equal help_id(:my_date), field["aria-describedby"] }
   end

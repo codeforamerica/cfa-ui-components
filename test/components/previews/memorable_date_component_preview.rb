@@ -1,8 +1,8 @@
-class DatePickerComponentPreview < FormComponentPreview
+class MemorableDateComponentPreview < FormComponentPreview
   include ActionView::Helpers::DateHelper
 
   def default
-    render DatePickerComponent.new(form:,
+    render MemorableDateComponent.new(form:,
       method: :my_date,
       label: "Date Of Birth",
       label_day: "Day",
@@ -12,7 +12,7 @@ class DatePickerComponentPreview < FormComponentPreview
   end
 
   def with_helper_text
-    render DatePickerComponent.new(form:,
+    render MemorableDateComponent.new(form:,
       method: :my_date,
       label: "Date Of Birth",
       label_day: "Day",
@@ -25,7 +25,7 @@ class DatePickerComponentPreview < FormComponentPreview
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
-    render DatePickerComponent.new(form: form(model: custom_model),
+    render MemorableDateComponent.new(form: form(model: custom_model),
       method: :my_date,
       label: "Date Of Birth",
       label_day: "Day",
@@ -38,7 +38,7 @@ class DatePickerComponentPreview < FormComponentPreview
   def with_pre_filled_values
     custom_model = TestModel.new(my_date: Date.today - 10.years)
     custom_model.valid?
-    render DatePickerComponent.new(form: form(model: custom_model),
+    render MemorableDateComponent.new(form: form(model: custom_model),
       method: :my_date,
       label: "Date Of Birth",
       label_day: "Day",

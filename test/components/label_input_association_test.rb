@@ -16,7 +16,7 @@ class LabelInputAssociationTest < ViewComponent::TestCase
     assert_selector "input##{label_for}"
   end
 
-  def test_select_label_for_matches_select_id
+  def test_select_label_for_matches_combobox_id
     render_inline(SelectComponent.new(
       form: build_form,
       method: :select_field,
@@ -27,8 +27,9 @@ class LabelInputAssociationTest < ViewComponent::TestCase
     ))
 
     label_for = page.find("label")["for"]
+
     assert label_for.present?, "label should have a 'for' attribute"
-    assert_selector "select##{label_for}"
+    assert_selector "button##{label_for}[role='combobox']"
   end
 
   def test_combobox_label_for_matches_select_id
