@@ -1,0 +1,91 @@
+<fieldset class="<%= class_names("memorable-date", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %>>
+  <% invalid = @form.object.errors[@method].any? %>
+  <% if @label.present? %>
+    <legend class="flex flex-col gap-cfa-xsm mb-cfa-sm">
+      <span class="font-bold"><%= @label %></span>
+      <% if @helper_text %>
+        <span id="<%= help_dom_id %>" class="help_text"><%= @helper_text %></span>
+      <% end %>
+    </legend>
+  <% end %>
+  <div class="flex gap-cfa-sm items-end">
+    <!-- MONTH -->
+    <div class="w-[176px]">
+      <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-xsm" %>
+      <div
+        x-data="cfaSelect(<%= month_alpine_opts %>)"
+        class="cfa-custom-select w-full"
+        @click.outside="closeList()"
+      >
+        <button
+          type="button"
+          id="<%= input_id(2) %>"
+          x-ref="button"
+          role="combobox"
+          aria-haspopup="listbox"
+          :aria-controls="listboxId"
+          :aria-activedescendant="open && activeIndex >= 0 ? optionId(activeIndex) : null"
+          aria-invalid="<%= invalid %>"
+          <% if (described_by = described_by_value(help: @helper_text.present?)) %>aria-describedby="<%= described_by %>"<% end %>
+          :aria-expanded="open.toString()"
+          @click="toggleList()"
+          @keydown="onButtonKeydown($event)"
+          >
+          <span x-text="label" class="value"></span>
+          <span class="chevron-wrap">
+            <span class="chevron-icon">
+              <%= render(IconComponent.new(icon: "chevron")) %>
+            </span>
+          </span>
+        </button>
+        <ul
+          :id="listboxId"
+          x-show="open"
+          x-cloak
+          role="listbox"
+        >
+          <% month_options.each_with_index do |(label, value), idx| %>
+            <li
+              :id="optionId(<%= idx %>)"
+              role="option"
+              :data-active="activeIndex === <%= idx %> ? '' : null"
+              :data-focused="activeIndex === <%= idx %> && keyboardActive ? '' : null"
+              :aria-selected="value === '<%= value %>'"
+              @click="selectAt(<%= idx %>)"
+              @mouseenter="activeIndex = <%= idx %>; keyboardActive = false"
+            >
+              <span class="option-label"><%= label %></span>
+              <span class="option-check" x-show="value === '<%= value %>'" x-cloak>
+                <%= inline_icon(:check, size: 20, aria_hidden: true) %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+        <%= hidden_field_tag param_name(2), month_value, "x-model": "value" %>
+      </div>
+    </div>
+    <!-- DAY -->
+    <div>
+      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
+      <%= @form.text_field "#{@method}(3i)",
+            **field_attrs(
+              value: day_value,
+              id: input_id(3),
+              class: "w-12",
+              aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact
+            ) %>
+    </div>
+    <!-- YEAR -->
+    <div>
+      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
+      <%= @form.text_field "#{@method}(1i)",
+            **field_attrs(
+              value: year_value,
+              id: input_id(1),
+              class: "w-18",
+              aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact
+            ) %>
+    </div>
+  </div>
+  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+</fieldset>

@@ -1,5 +1,5 @@
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
-  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
+  <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, legend: "Do you like pineapple on pizza?") %>
   <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, value: "yes", content_description: "Followup banana question") do %>
     But why!?
   <% end %>
