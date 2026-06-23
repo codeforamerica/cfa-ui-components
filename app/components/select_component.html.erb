@@ -1,8 +1,8 @@
-<div class="cfa-stack-sm select-field" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
+<div class="<%= class_names("cfa-stack-sm", "select-field", @css_class) %>" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
   <% invalid = @form.object.errors[@method].any? %>
   <%= @form.label @method, label_with_optional_marker, id: "#{input_id}-label", class: "label block" %>
   <% if @help_text %>
-    <p class="help_text"><%= @help_text %></p>
+    <p id="<%= help_dom_id %>" class="help_text"><%= @help_text %></p>
   <% end %>
   <div
     x-data='cfaSelect(<%= alpine_opts %>)'
@@ -18,6 +18,7 @@
       :aria-controls="listboxId"
       :aria-activedescendant="open ? optionId(activeIndex) : null"
       aria-invalid="<%= invalid %>"
+      <% if (described_by = described_by_value(help: @help_text.present?)) %>aria-describedby="<%= described_by %>"<% end %>
       aria-required="<%= !@optional %>"
       :aria-expanded="open.toString()"
       aria-disabled="<%= @disabled %>"

@@ -39,19 +39,23 @@
     <%= @form.label @method, label_with_optional_marker, class: "label block", for: @form.field_id(@method) %>
 
     <% if @help_text %>
-      <p class="help_text">
+      <p id="<%= help_dom_id %>" class="help_text">
         <%= @help_text %>
       </p>
     <% end %>
 
-    <%= @form.text_field @method,
+    <%= @form.text_field @method, **field_attrs(
           type: "text",
+          inputmode: "numeric",
+          autocomplete: "off",
           class: "w-full max-w-sm",
           placeholder: "000-00-0000",
           "x-ref": "input",
           "x-mask": "999-99-9999",
           "x-bind:style": "show ? '' : '-webkit-text-security: disc;'",
-          **aria_required_attrs %>
+          **aria_required_attrs,
+          **aria_field_attrs(described_by_help: @help_text.present?)
+        ) %>
 
     <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
   </div>
@@ -62,6 +66,7 @@
         false,
         id: @form.field_id(@method, :show),
         class: "accent-text-default",
+        autocomplete: "off",
         "x-model": "show" %>
 
   <%= label_tag @form.field_id(@method, :show), t("show") %>

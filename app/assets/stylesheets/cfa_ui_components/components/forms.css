@@ -2,6 +2,10 @@ form {
     @apply cfa-stack;
 }
 
+.fieldset-group {
+    @apply border-none p-0 m-0 min-w-0;
+}
+
 input[type="text"],
 input[type="number"],
 input[type="email"],
@@ -174,6 +178,32 @@ input[type="text"] {
   &.cfa-radio--warning {
     @apply border-border-warning;
   }
+}
+
+/* Combobox */
+
+.cfa-combobox__list {
+  display: block;
+}
+
+.cfa-combobox__toggle {
+  @apply rounded-r;
+}
+
+.cfa-combobox__field:hover:not(:has(:disabled)) .cfa-combobox__toggle {
+  @apply bg-background-secondary;
+}
+
+.cfa-combobox__field:has(input[aria-expanded="true"]) input {
+  @apply rounded-b-none;
+}
+
+.cfa-combobox__field input[aria-expanded="true"]:focus-visible {
+  @apply outline-none;
+}
+
+.cfa-combobox__toggle:active:not(:disabled) {
+  @apply bg-background-secondary border-2 border-primary;
 }
 
 /* Standard invalid fields */

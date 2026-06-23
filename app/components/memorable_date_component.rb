@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
 class MemorableDateComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil)
-    super(form:, method:)
+  def initialize(form:, method:, label:, label_day:, label_month:, label_month_select:, label_year:, helper_text: nil, aria_labelledby: nil, css_class: nil, input_attrs: {})
+    raise ArgumentError, "must provide a non-blank label: or aria_labelledby:" if label.blank? && aria_labelledby.nil?
+    if input_attrs.key?(:id)
+      raise ArgumentError, "MemorableDateComponent forwards input_attrs to the " \
+        "day/month/year fields, so a single :id would collide across them. Omit it."
+    end
+    super(form:, method:, css_class:, input_attrs:)
     @label = label
     @label_day = label_day
     @label_month = label_month
     @label_month_select = label_month_select
     @label_year = label_year
     @helper_text = helper_text
+    @aria_labelledby = aria_labelledby
   end
 
   private

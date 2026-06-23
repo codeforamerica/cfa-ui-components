@@ -1,11 +1,11 @@
-<details class="group bg-white border-2 border-primary rounded-lg p-cfa-med">
+<details class="<%= class_names("group bg-white border-2 border-primary rounded-lg p-cfa-med", @css_class) %>">
   <summary class="flex justify-between items-center list-none cursor-pointer">
-    <p class="flex font-bold items-center gap-cfa-sm">
+    <span class="flex font-bold items-center gap-cfa-sm">
       <% if @icon.present? %>
         <%= inline_icon(@icon, size: 24) %>
       <% end %>
       <%= @summary_text %>
-    </p>
+    </span>
     <span class="ml-[10px] inline-flex items-center transition-transform duration-200 group-open:rotate-180"><%= inline_icon(:expand_more, size: 25, aria_hidden: true) %></span>
   </summary>
 

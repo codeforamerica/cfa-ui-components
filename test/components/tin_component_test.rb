@@ -32,6 +32,11 @@ class TinComponentTest < ViewComponent::TestCase
     assert_selector "input[type='checkbox']"
   end
 
+  def test_show_toggle_disables_autocomplete_so_browser_does_not_restore_checked_state_on_back_button
+    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
+    assert_selector "input[type='checkbox'][autocomplete='off']"
+  end
+
   def test_input_has_tin_mask
     render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
     assert_selector "input[x-mask='999-99-9999']"
@@ -45,5 +50,10 @@ class TinComponentTest < ViewComponent::TestCase
   def test_renders_screen_reader_announcement_region
     render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number"))
     assert_selector "[role='alert'][aria-atomic='true'].sr-only"
+  end
+
+  def test_input_attrs_are_forwarded_to_the_field
+    render_inline(TinComponent.new(form: build_form, method: :text_field, label: "Social Security Number", input_attrs: {autocomplete: "off"}))
+    assert_selector "input[x-ref='input'][autocomplete='off']"
   end
 end

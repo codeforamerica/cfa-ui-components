@@ -1,9 +1,9 @@
 <% if variant == :informational %>
-  <div class="cfa-card rounded-lg p-cfa-lg bg-background-container">
+  <div class="<%= class_names("cfa-card rounded-lg p-cfa-lg bg-background-container", @css_class) %>">
     <%= content %>
   </div>
 <% elsif action? %>
-  <div class="cfa-card border border-border-secondary rounded-lg overflow-clip <%= image? ? "bg-background-secondary" : "bg-white" %>">
+  <article class="<%= class_names("cfa-card border border-border-secondary rounded-lg overflow-clip", (image? ? "bg-background-secondary" : "bg-white"), @css_class) %>">
     <div class="flex flex-col gap-px">
       <% if image? %>
         <%= image %>
@@ -19,9 +19,9 @@
         </div>
       <% end %>
     </div>
-  </div>
+  </article>
 <% else %>
-  <div class="cfa-card bg-white border border-border-secondary rounded-lg p-cfa-lg">
+  <div class="<%= class_names("cfa-card bg-white border border-border-secondary rounded-lg p-cfa-lg", @css_class) %>">
     <%= content %>
   </div>
 <% end %>

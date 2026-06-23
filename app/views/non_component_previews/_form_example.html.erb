@@ -1,12 +1,12 @@
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
-  <h2>
+  <h2 id="claimed-question-heading">
     Have you been claimed by anyone else on a tax return for 2024?
   </h2>
   <p>
     Explanation of what it means to be claimed.
   </p>
   <%= render(CardComponent.new) do %>
-    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, aria_labelledby: "claimed-question-heading") %>
   <% end %>
   <%= render(CardComponent.new) do %>
     <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, legend: "Are you filing with your spouse (married filing jointly)?", collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
@@ -21,7 +21,7 @@
     <%= render InputComponent.new(form: f, method: :last_name, label: "Last name", help_text: "Help text") %>
   <% end %>
   <%= render(CardComponent.new) do %>
-    <%= render CheckboxesComponent.new(form: f, method: :favorite_fruits, collection: FormComponentPreview.fruit_options, item_value_method: :value, item_label_method: :label) %>
+    <%= render CheckboxesComponent.new(form: f, method: :favorite_fruits, collection: FormComponentPreview.fruit_options, item_value_method: :value, item_label_method: :label, legend: "What are your favorite fruits?") %>
   <% end %>
   <%= render ButtonComponent.new(label: "Review answers", url: "#", variant: :primary, size: :small) %>
   <%= render ButtonComponent.new(label: "Start over", url: "#", variant: :secondary, size: :small) %>

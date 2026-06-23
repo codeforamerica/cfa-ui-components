@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class SubmitButtonComponent < ViewComponent::Base
-  def initialize(form:, label: I18n.t("continue"), style: :primary, disabled: false)
+  def initialize(form:, label: I18n.t("continue"), style: :primary, disabled: false, css_class: nil)
     @form = form
     @label = label
     @disabled = disabled
+    @css_class = css_class
     @button_style =
       case style
       when :primary
