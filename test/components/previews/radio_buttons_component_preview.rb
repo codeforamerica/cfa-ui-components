@@ -1,17 +1,4 @@
 class RadioButtonsComponentPreview < FormComponentPreview
-  # @!group Accessibility
-  # Group is labeled by a screen-reader-only <legend>. Use when there's no
-  # visible heading above the component.
-  def labeled_by_legend
-  end
-
-  # Group is labeled by an existing visible heading via aria-labelledby.
-  # Use this when a heading is already on the page to avoid announcing the
-  # same text twice.
-  def labeled_by_external_heading
-  end
-  # @!endgroup
-
   # @!group Default
   def default
     render(RadioButtonsComponent.new(form: form(scope: :radio_default), method: :pineapple_pizza_preference, collection: self.class.yes_no_options, item_value_method: :value, item_label_method: :label, scope: "default", legend: "Do you like pineapple on pizza?"))
