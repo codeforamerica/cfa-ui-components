@@ -1,3 +1,7 @@
-.cfa-modal :is(.btn, form) {
+.cfa-modal :is(.btn, form:not([method="dialog"])) {
     @apply w-full;
+}
+
+.cfa-modal::backdrop {
+    background-color: rgb(168 162 158 / 0.5);
 }
