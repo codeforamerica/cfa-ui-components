@@ -17,7 +17,6 @@ class InputCurrencyComponentPreview < FormComponentPreview
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
-    puts "custom_model.valid? #{custom_model.valid?}"
     render(InputCurrencyComponent.new(form: form(model: custom_model), method: :my_number, label: I18n.t(:my_number)))
   end
 end
