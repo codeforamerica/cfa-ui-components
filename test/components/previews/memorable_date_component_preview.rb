@@ -1,24 +1,19 @@
 class MemorableDateComponentPreview < FormComponentPreview
   include ActionView::Helpers::DateHelper
 
+  # The day/month/year/placeholder sub-labels are intentionally omitted so the
+  # component falls back to its localized defaults and the lang display toggle
+  # actually switches them between English and Spanish.
   def default
     render MemorableDateComponent.new(form:,
       method: :my_date,
-      label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year")
+      label: "Date Of Birth")
   end
 
   def with_helper_text
     render MemorableDateComponent.new(form:,
       method: :my_date,
       label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year",
       helper_text: "For example: August 28 1986")
   end
 
@@ -28,10 +23,6 @@ class MemorableDateComponentPreview < FormComponentPreview
     render MemorableDateComponent.new(form: form(model: custom_model),
       method: :my_date,
       label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year",
       helper_text: "For example: August 28 1986")
   end
 
@@ -41,10 +32,6 @@ class MemorableDateComponentPreview < FormComponentPreview
     render MemorableDateComponent.new(form: form(model: custom_model),
       method: :my_date,
       label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year",
       helper_text: "For example: August 28 1986")
   end
 end
