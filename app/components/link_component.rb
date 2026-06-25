@@ -1,11 +1,20 @@
 # frozen_string_literal: true
 
 class LinkComponent < BaseComponent
-  def initialize(label:, url:, icon: false, html_attrs: nil)
+  def initialize(label:, url:, sr_label:, external_sr_label:, external: nil, html_attrs: nil)
     super(html_attrs:)
 
     @label = label
     @url = url
-    @icon = icon
+    @external = external
+    @sr_label = sr_label
+    @external_sr_label = external_sr_label
+  end
+
+  def external?
+    return @external unless @external.nil?
+    return false if @url.to_s.start_with?("https://www.getyourrefund.org/")
+    return false if @url.to_s.start_with?("https://simplefile.getyourrefund.org/")
+    @url.to_s.match?(%r{\Ahttps?://})
   end
 end
