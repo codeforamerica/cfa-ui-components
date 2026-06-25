@@ -20,6 +20,29 @@ class ComboboxAriaTest < JavaScriptSystemTestCase
     assert_selector "input[role='combobox']"
   end
 
+  test "reopening the dropdown after a full selection shows all options" do
+    visit "/rails/view_components/combobox_component/default"
+
+    input = find("input[role='combobox']")
+    input.click
+    find("li[role='option']", text: "Apricot").click
+    assert_equal "Apricot", input.value
+
+    input.click
+    assert_selector "li[role='option']:not([style*='display: none'])", text: "Banana"
+  end
+
+  test "reopening the dropdown with a prefilled disabled option shows valid options" do
+    visit "/rails/view_components/combobox_component/prefilled_disabled_option"
+
+    input = find("input[role='combobox']")
+    input.click
+
+    assert_selector "li[role='option']:not([style*='display: none'])", text: "Apple"
+    find("li[role='option']", text: "Apple").click
+    assert_equal "Apple", input.value
+  end
+
   test "search input aria-describedby references the error message" do
     visit "/rails/view_components/combobox_component/with_error"
 
