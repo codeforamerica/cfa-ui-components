@@ -1,10 +1,15 @@
 <div class="contents"
-     x-data="{condition: false}"
+     x-data="{condition: false, announcement: '', ready: false, announceTimer: null}"
      x-effect="condition = $store.<%= store_key %> === '<%= @value %>' ||
-                           (Array.isArray($store.<%= store_key %>) && $store.<%= store_key %>.includes('<%= @value %>'))">
-  <p class="sr-only" aria-live="polite" role="status"
-     x-text="'<%= content_description %> is now ' + (condition ? 'visible' : 'hidden')">
-  </p>
+                           (Array.isArray($store.<%= store_key %>) && $store.<%= store_key %>.includes('<%= @value %>'))"
+     x-init="$nextTick(() => ready = true);
+             $watch('condition', visible => {
+               if (!ready) return;
+               announcement = '<%= content_description %> is now ' + (visible ? 'visible' : 'hidden');
+               clearTimeout(announceTimer);
+               announceTimer = setTimeout(() => announcement = '', 1000);
+             })">
+  <p class="sr-only" aria-live="polite" role="status" x-text="announcement"></p>
   <div x-cloak x-show="condition" class="cfa-stack-med">
     <%= content %>
   </div>
