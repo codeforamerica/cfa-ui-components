@@ -8,6 +8,11 @@ en:
     optional: optional
     modal:
       close_aria: Close modal
+    memorable_date:
+      day: Day
+      month: Month
+      year: Year
+      month_select: "- Select -"
   decline: Decline
   remove: Remove
   favorite_fruits: Favorite fruits
@@ -22,3 +27,7 @@ en:
   combobox:
     placeholder_label: "- Select or Type -"
     no_results: No results found
+  # Standard Rails key — the date picker reads this so it inherits whatever
+  # month names the host app (or Active Support) already defines.
+  date:
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
