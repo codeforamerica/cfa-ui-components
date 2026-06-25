@@ -10,9 +10,13 @@ es:
       month: Mes
       year: Año
       month_select: "- Seleccionar -"
+      placeholder_day: DD
+      placeholder_year: AAAA
   decline: Rechazar
   remove: Eliminar
   favorite_fruits: Frutas favoritas
+  date_of_birth: Fecha de nacimiento
+  date_helper_text: "Por ejemplo: 28 de agosto de 1986"
   first_name: Primer nombre
   last_name: Apellido
   submit: Enviar

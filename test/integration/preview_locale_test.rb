@@ -14,16 +14,22 @@ class PreviewLocaleTest < ActionDispatch::IntegrationTest
     get "/preview/memorable_date/default?_display=#{ENCODED_SPANISH}"
 
     assert_response :success
+    assert_includes response.body, "Fecha de nacimiento"
     assert_includes response.body, "Mes"
     assert_includes response.body, "enero"
+    assert_includes response.body, "AAAA"
     assert_not_includes response.body, "January"
+    assert_not_includes response.body, "Date of birth"
+    assert_not_includes response.body, "YYYY"
   end
 
   test "preview renders English by default" do
     get "/preview/memorable_date/default"
 
     assert_response :success
+    assert_includes response.body, "Date of birth"
     assert_includes response.body, "Month"
     assert_includes response.body, "January"
+    assert_includes response.body, "YYYY"
   end
 end

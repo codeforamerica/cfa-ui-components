@@ -13,9 +13,13 @@ en:
       month: Month
       year: Year
       month_select: "- Select -"
+      placeholder_day: DD
+      placeholder_year: YYYY
   decline: Decline
   remove: Remove
   favorite_fruits: Favorite fruits
+  date_of_birth: Date of birth
+  date_helper_text: "For example: August 28, 1986"
   first_name: First name
   email: Email
   my_number: My Number
