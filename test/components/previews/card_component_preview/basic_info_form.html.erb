@@ -13,9 +13,10 @@
           item_value_method: :value,
           item_label_method: :label,
           optional: true) %>
-    <h2>Date of birth</h2>
-    <%= render DatePickerComponent.new(form: f, method: :my_date,
+    <h2 id="dob-heading">Date of birth</h2>
+    <%= render MemorableDateComponent.new(form: f, method: :my_date,
           label: "",
+          aria_labelledby: "dob-heading",
           label_day: "Day",
           label_month: "Month",
           label_month_select: "- Select -",
