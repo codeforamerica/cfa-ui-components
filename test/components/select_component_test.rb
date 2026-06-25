@@ -88,4 +88,20 @@ class SelectComponentTest < ViewComponent::TestCase
     help = page.find("p.help_text")
     assert_equal help["id"], page.find("[role='combobox']")["aria-describedby"]
   end
+
+  # Parity with the other form field components: SelectComponent must accept
+  # input_attrs without raising, even though its custom combobox has no native
+  # field to forward them onto.
+  def test_accepts_input_attrs_without_error
+    render_inline(SelectComponent.new(
+      form: build_form,
+      method: :select_field,
+      label: "Pick one",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      input_attrs: {autocomplete: "off"}
+    ))
+    assert_selector "[role='combobox']"
+  end
 end
