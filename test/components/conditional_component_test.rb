@@ -14,8 +14,16 @@ class ConditionalComponentTest < ViewComponent::TestCase
     assert_selector "div[x-effect*=\"'yes'\"]"
   end
 
-  def test_custom_content_description_in_aria_live
+  def test_live_region_is_empty_until_visibility_changes
+    render_inline(ConditionalComponent.new(method: :radio_field, value: "yes"))
+    # The live region must render empty so it is not reachable during normal
+    # navigation; it is populated only when condition changes (see x-init).
+    assert_selector "p[aria-live='polite'][x-text='announcement']"
+    assert_selector "p[aria-live='polite']", text: ""
+  end
+
+  def test_custom_content_description_used_in_announcement
     render_inline(ConditionalComponent.new(method: :radio_field, value: "yes", content_description: "Extra fields"))
-    assert_selector "p[aria-live='polite'][x-text*='Extra fields']"
+    assert_selector "div[x-init*='Extra fields is now']"
   end
 end
