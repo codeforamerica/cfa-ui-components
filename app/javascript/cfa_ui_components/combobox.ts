@@ -100,7 +100,7 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                     if(setFocus) {
                         this.$focus.focus(this.inputEl);
                     }
-                    this.allOptions = filterResults(this.selectEl.children, this.inputValue)
+                    this.allOptions = filterResults(this.selectEl.children, '')
                 },
                 reset() {
                     this.inputEl.value = '';
@@ -173,7 +173,10 @@ const comboboxValues = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine)
             this.selectEl = el;
         },
         ':foo'() {
-            this.allOptions = filterResults(el.children, this.inputValue)
+            // Only filter the visible list while the user is actively typing.
+            // When not dirty (e.g. after a selection or on reopen), show all
+            // options so the user can always pick a different value.
+            this.allOptions = filterResults(el.children, this.isDirty ? this.inputValue : '')
         },
     })
 }
