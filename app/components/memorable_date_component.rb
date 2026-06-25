@@ -39,10 +39,8 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
   end
 
   def month_options
-    # I18n.t returns the locale's month_names array ([nil, "January", ...]);
-    # Active Support ships English, and es.yml supplies the Spanish names.
     [[@label_month_select, ""]] +
-      I18n.t("date.month_names").compact.each_with_index.map { |m, i| [m, i + 1] }
+      Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }
   end
 
   def month_alpine_opts

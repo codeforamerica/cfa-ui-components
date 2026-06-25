@@ -28,11 +28,6 @@ en:
       month_select: "- Select -"
     select:
       placeholder: "- Select -"
-  # Standard Rails key — the date picker reads this so it inherits whatever
-  # month names the host app (or Active Support) already defines. Do NOT move
-  # this under `cfaui`.
-  date:
-    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
   # Demo-only strings used by Lookbook previews. Never shipped to end users and
   # not part of the translation deliverable.
   preview:
