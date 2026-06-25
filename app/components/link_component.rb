@@ -14,6 +14,7 @@ class LinkComponent < BaseComponent
   def external?
     return @external unless @external.nil?
     return false if @url.to_s.start_with?("https://www.getyourrefund.org/")
+    return false if @url.to_s.start_with?("https://simplefile.getyourrefund.org/")
     @url.to_s.match?(%r{\Ahttps?://})
   end
 end
