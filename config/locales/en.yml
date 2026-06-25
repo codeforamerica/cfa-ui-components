@@ -19,7 +19,7 @@ en:
       "no": "No"
       unsure: I don't know
     combobox:
-      placeholder_label: "- Select or Type -"
+      placeholder: "- Select or Type -"
       no_results: No results found
     memorable_date:
       day: Day

@@ -19,7 +19,7 @@ es:
       "no": "No"
       unsure: No lo sé
     combobox:
-      placeholder_label: "- Seleccionar o escribir -"
+      placeholder: "- Seleccionar o escribir -"
       no_results: No se encontraron resultados
     memorable_date:
       day: Día
