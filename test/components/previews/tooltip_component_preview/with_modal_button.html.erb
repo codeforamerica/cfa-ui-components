@@ -1,4 +1,4 @@
-<%= render(TooltipComponent.new(label: "What relationships qualify?", modal_name: "relationships_with_button")) do |modal| %>
+<%= render(TooltipComponent.new(label: "What relationships qualify?", modal_name: "relationships_with_button")) do %>
   <p>The following relationships qualify:</p>
   <ul>
     <li>Biological child</li>
@@ -6,13 +6,11 @@
     <li>Stepchild</li>
     <li>Foster child</li>
   </ul>
-  <% modal.with_button do %>
-    <%= render(ButtonComponent.new(
-          label: "Got it",
-          url: "#",
-          html_attrs: {
-            "@click.prevent": "toggle()"
-          }
-        )) %>
-  <% end %>
+  <%= render(ButtonComponent.new(
+        label: "Got it",
+        url: "#",
+        html_attrs: {
+          "@click.prevent": "toggle()"
+        }
+      )) %>
 <% end %>

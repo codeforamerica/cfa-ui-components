@@ -3,7 +3,7 @@
     <%= content %>
   </div>
 <% elsif action? %>
-  <div class="<%= class_names("cfa-card border border-border-secondary rounded-lg overflow-clip", (image? ? "bg-background-secondary" : "bg-white"), @css_class) %>">
+  <article class="<%= class_names("cfa-card border border-border-secondary rounded-lg overflow-clip", (image? ? "bg-background-secondary" : "bg-white"), @css_class) %>">
     <div class="flex flex-col gap-px">
       <% if image? %>
         <%= image %>
@@ -19,7 +19,7 @@
         </div>
       <% end %>
     </div>
-  </div>
+  </article>
 <% else %>
   <div class="<%= class_names("cfa-card bg-white border border-border-secondary rounded-lg p-cfa-lg", @css_class) %>">
     <%= content %>

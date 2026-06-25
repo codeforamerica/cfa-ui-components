@@ -42,4 +42,15 @@ class ComboboxAriaTest < JavaScriptSystemTestCase
     find("li[role='option']", text: "Apple").click
     assert_equal "Apple", input.value
   end
+
+  test "search input aria-describedby references the error message" do
+    visit "/rails/view_components/combobox_component/with_error"
+
+    input = find("input[role='combobox']")
+    error = find("p.form_errors")
+
+    assert error["id"].present?, "error message should have an id"
+    assert_includes input["aria-describedby"].to_s.split, error["id"],
+      "combobox input aria-describedby should reference the error message id"
+  end
 end

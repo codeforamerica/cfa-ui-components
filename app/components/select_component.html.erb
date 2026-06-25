@@ -1,10 +1,63 @@
-<div class="<%= class_names("cfa-stack-sm", @css_class) %>" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
-  <%= @form.label @method, label_with_optional_marker, class: "label block" %>
+<div class="<%= class_names("cfa-stack-sm", "select-field", @css_class) %>" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
+  <% invalid = @form.object.errors[@method].any? %>
+  <%= @form.label @method, label_with_optional_marker, id: "#{input_id}-label", class: "label block" %>
   <% if @help_text %>
-    <p class="help_text">
-      <%= @help_text %>
-    </p>
+    <p id="<%= help_dom_id %>" class="help_text"><%= @help_text %></p>
   <% end %>
-  <%= @form.collection_select @method, @collection, @item_value_method, @item_label_method, {prompt: "- Select -"}, field_attrs("x-model" => "$store.#{@method}", :class => "w-full max-w-sm", **aria_required_attrs) %>
+  <div
+    x-data='cfaSelect(<%= alpine_opts %>)'
+    class="cfa-custom-select select-field__wrapper"
+    @click.outside="closeList()"
+  >
+    <button
+      type="button"
+      id="<%= input_id %>"
+      role="combobox"
+      x-ref="button"
+      aria-haspopup="listbox"
+      :aria-controls="listboxId"
+      :aria-activedescendant="open ? optionId(activeIndex) : null"
+      aria-invalid="<%= invalid %>"
+      <% if (described_by = described_by_value(help: @help_text.present?)) %>aria-describedby="<%= described_by %>"<% end %>
+      aria-required="<%= !@optional %>"
+      :aria-expanded="open.toString()"
+      aria-disabled="<%= @disabled %>"
+      tabindex="<%= @disabled ? -1 : 0 %>"
+      @click="toggleList()"
+      @keydown="onButtonKeydown($event)"
+    >
+      <span x-text="label" class="value"></span>
+      <span class="chevron-wrap">
+        <span class="chevron-icon">
+          <%= render(IconComponent.new(icon: "chevron")) %>
+        </span>
+      </span>
+    </button>
+    <ul
+      :id="listboxId"
+      x-show="open"
+      x-cloak
+      role="listbox"
+      :aria-labelledby="'<%= input_id %>-label'"
+    >
+      <% options.each_with_index do |option, idx| %>
+        <li
+          :id="optionId(<%= idx %>)"
+          role="option"
+          :data-active="activeIndex === <%= idx %> ? '' : null"
+          :data-focused="activeIndex === <%= idx %> && keyboardActive ? '' : null"
+          :aria-selected="value === '<%= option[:value] %>'"
+          @click="selectAt(<%= idx %>)"
+          @mouseenter="activeIndex = <%= idx %>; keyboardActive = false"
+        >
+          <span class="option-label"><%= option[:label] %></span>
+          <span class="option-check" x-show="value === '<%= option[:value] %>'" x-cloak>
+            <%= inline_icon(:check, size: 20, aria_hidden: true) %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+    <%= @form.hidden_field @method, "x-model": "value" %>
+  </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>

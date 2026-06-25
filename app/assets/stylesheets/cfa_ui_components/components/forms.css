@@ -2,6 +2,10 @@ form {
     @apply cfa-stack;
 }
 
+.fieldset-group {
+    @apply border-none p-0 m-0 min-w-0;
+}
+
 input[type="text"],
 input[type="number"],
 input[type="email"],
@@ -223,3 +227,120 @@ input[type="text"] {
 .field_with_errors {
     display: block;
 }
+
+/* Shared custom select — block class is the scope anchor; state comes from aria/data attrs */
+.cfa-custom-select {
+  position: relative;
+
+  button {
+    @apply flex items-center justify-between w-full border border-border-default rounded bg-white text-text-default overflow-hidden;
+    height: 41px;
+
+    &:focus-visible {
+      outline: 4px solid var(--color-focus);
+      outline-offset: -4px;
+      border-color: var(--color-focus);
+    }
+
+    &[aria-expanded="true"] {
+      @apply rounded-b-none;
+    }
+
+    &[aria-disabled="true"] {
+      background: var(--color-background-disabled);
+      color: var(--color-text-disabled);
+      border-color: var(--color-border-disabled);
+      cursor: not-allowed;
+
+      &:focus-visible {
+        outline: none;
+        border-color: var(--color-border-disabled);
+        border-width: 1px;
+      }
+    }
+  }
+
+  .value {
+    @apply truncate text-left flex-1 pl-cfa-sm;
+  }
+
+  .chevron-wrap {
+    @apply flex items-center justify-center w-10 h-full rounded-r-[3px];
+  }
+
+  button:hover:not([aria-disabled="true"]) .chevron-wrap,
+  button[aria-expanded="true"] .chevron-wrap {
+    @apply bg-background-secondary;
+  }
+
+  button:active:not([aria-disabled="true"]) .chevron-wrap {
+    @apply bg-background-secondary border-2 border-primary rounded-l-none rounded-r-[3px];
+  }
+
+  button[aria-disabled="true"] .chevron-wrap {
+    @apply bg-background-disabled border-l border-border-disabled;
+  }
+
+  .chevron-icon {
+    @apply inline-flex items-center justify-center w-6 h-6 text-icon-default transition-transform duration-150 ease-in-out;
+  }
+
+  button[aria-expanded="true"] .chevron-icon {
+    @apply rotate-180;
+  }
+
+  ul {
+    @apply absolute left-0 top-[41px] z-10 w-full bg-white border-l border-r border-b border-border-secondary m-0 p-0 list-none gap-0;
+  }
+
+  li {
+    @apply flex items-center justify-between gap-cfa-sm min-h-[41px] cursor-pointer text-text-default px-cfa-sm py-cfa-sm m-0 list-none border-t border-border-secondary first:border-t-0;
+
+    &:hover,
+    &[data-active] {
+      @apply bg-primary-hover;
+    }
+
+    &[data-focused] {
+      @apply outline-4 -outline-offset-4 outline-focus;
+    }
+
+    .option-label {
+      @apply flex-auto min-w-0 whitespace-normal;
+      line-height: 1.2;
+    }
+
+    .option-check {
+      @apply inline-flex items-center text-icon-default flex-shrink-0 self-start mt-[2px];
+    }
+  }
+}
+
+.memorable-date {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0;
+
+  & .help_text {
+    margin: 0;
+  }
+
+  & input[type="text"] {
+    height: 41px;
+  }
+
+  & input[type="text"]:focus-visible {
+    outline: 4px solid var(--color-focus);
+    outline-offset: -4px;
+    border-color: var(--color-focus);
+  }
+}
+.select-field {
+  @apply space-y-cfa-sm;
+}
+
+.select-field__wrapper {
+  @apply w-full max-w-sm;
+}
+

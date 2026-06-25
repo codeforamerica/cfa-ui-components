@@ -21,4 +21,8 @@ class SelectComponentPreview < FormComponentPreview
   def with_help_text
     render(SelectComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, help_text: I18n.t(:fruit_help_text)))
   end
+
+  def disabled
+    render(SelectComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.fruit_options, item_value_method: :value, item_label_method: :label, help_text: I18n.t(:fruit_help_text), disabled: true))
+  end
 end
