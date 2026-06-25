@@ -1,5 +1,5 @@
 a:not(.btn) {
-  @apply inline-flex w-fit items-center gap-cfa-xsm border-link-unvisited text-link-unvisited underline;
+  @apply inline-flex w-fit items-center gap-cfa-xsm border-b border-link-unvisited text-link-unvisited no-underline;
 }
 
 a:not(.btn):hover {
