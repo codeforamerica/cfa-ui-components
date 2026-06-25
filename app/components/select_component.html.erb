@@ -6,6 +6,7 @@
   <% end %>
   <div
     x-data='cfaSelect(<%= alpine_opts %>)'
+    x-effect="Alpine.store('<%= @method %>', value)"
     class="cfa-custom-select select-field__wrapper"
     @click.outside="closeList()"
   >
