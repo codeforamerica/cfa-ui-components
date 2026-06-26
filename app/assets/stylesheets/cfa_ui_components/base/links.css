@@ -1,9 +1,9 @@
 a:not(.btn) {
-  @apply inline w-fit border-link-unvisited text-link-unvisited underline;
+  @apply inline w-fit border-b border-link-unvisited text-link-unvisited;
 }
 
 a:not(.btn):hover {
-  @apply border-transparent;
+  @apply border-b-0;
 }
 
 a:not(.btn):visited {
@@ -12,8 +12,4 @@ a:not(.btn):visited {
 
 a:not(.btn):focus-visible {
   @apply rounded-sm outline-2 outline-offset-2 outline-focus;
-}
-
-a:not(.btn) .link__icon {
-  @apply ml-0.5 inline-block align-text-bottom;
 }
