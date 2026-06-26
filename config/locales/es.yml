@@ -1,6 +1,9 @@
 es:
   back: Regresa
   continue: Continuar
+  edit: Editar
+  cancel: Cancelar
+  tin_ending_in: que termina en %{last_four}
   cfaui:
     optional: opcional
     modal:
