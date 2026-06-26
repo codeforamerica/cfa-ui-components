@@ -2,9 +2,6 @@ en:
   show: Show
   visible: TIN visible
   hidden: TIN hidden
-  edit: Edit
-  cancel: Cancel
-  tin_ending_in: ending in %{last_four}
   back: Go back
   continue: Continue
   cfaui:
