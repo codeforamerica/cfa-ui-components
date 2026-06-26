@@ -2,7 +2,7 @@
   <span><%= @label %></span>
   <% if external? %>
     <span class="sr-only"><%= @external_sr_label %></span>
-    <%= inline_icon("launch", size: 20, label: nil, css_class: "inline-block ml-0.5 align-middle") %>
+    <%= inline_icon("launch", size: 20, label: nil, css_class: "link__icon") %>
   <% else %>
     <span class="sr-only"><%= @sr_label %></span>
   <% end %>
