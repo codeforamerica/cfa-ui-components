@@ -29,6 +29,7 @@ class FormComponentPreview < ViewComponent::Preview
     attribute :account_number
     attribute :account_number_confirmation
     attribute :state_id_number
+    attribute :ssn_confirmation
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :pineapple_pizza_preference, presence: true
