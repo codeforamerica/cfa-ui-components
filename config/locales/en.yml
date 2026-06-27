@@ -5,6 +5,7 @@ en:
   edit: Edit
   cancel: Cancel
   ending_in: ending in %{last_four}
+  tin_ending_in: ending in %{last_four}
   back: Go back
   continue: Continue
   cfaui:
