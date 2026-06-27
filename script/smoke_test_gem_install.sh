@@ -73,7 +73,7 @@ bin/rails runner 'Rails.application.reload_routes!; puts "routes ok"'
 echo "==> Rendering a component via rails runner"
 bin/rails runner '
   html = ApplicationController.render(
-    LinkComponent.new(label: "hi", url: "/x")
+        LinkComponent.new(label: "hi", url: "/x", sr_label: "Opens in a new tab", external_sr_label: "External, opens in a new tab")
   )
   raise "empty render" if html.strip.empty?
   raise "missing label" unless html.include?("hi")
