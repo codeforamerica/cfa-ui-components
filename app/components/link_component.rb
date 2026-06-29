@@ -19,7 +19,6 @@ class LinkComponent < BaseComponent
   end
 
   def new_tab?
-    return false if @url.to_s.include?("/accounts/sign-in")
-    true
+    @url.to_s != "/accounts/sign-in"
   end
 end
