@@ -8,10 +8,15 @@ en:
       label: Go back
     submit_button:
       label: Continue
+    input:
+      ending_in: ending in %{last_four}
     tin:
       show: Show
       visible: TIN visible
       hidden: TIN hidden for security
+      edit: Edit
+      cancel: Cancel
+      tin_ending_in: ending in %{last_four}
     modal:
       close_aria: Close modal
     yes_no:
@@ -26,6 +31,8 @@ en:
       month: Month
       year: Year
       month_select: "- Select -"
+      placeholder_day: DD
+      placeholder_year: YYYY
     select:
       placeholder: "- Select -"
   # Demo-only strings used by Lookbook previews. Never shipped to end users and
@@ -44,3 +51,7 @@ en:
     decline: Decline
     remove: Remove
     submit: Submit
+  # Standard Rails key — the date picker reads this so it inherits whatever
+  # month names the host app (or Active Support) already defines.
+  date:
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]

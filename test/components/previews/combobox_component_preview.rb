@@ -26,4 +26,10 @@ class ComboboxComponentPreview < FormComponentPreview
     collection = self.class.combobox_fruit_options.map { |o| OpenStruct.new(value: o.value, label: o.label, unavailable: o.value.start_with?("b")) }
     render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), collection:, item_value_method: :value, item_label_method: :label, item_disabled_method: :unavailable))
   end
+
+  def prefilled_disabled_option
+    collection = self.class.combobox_fruit_options.map { |o| OpenStruct.new(value: o.value, label: o.label, unavailable: o.value.start_with?("b")) }
+    custom_model = TestModel.new(favorite_fruits: "banana")
+    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection:, item_value_method: :value, item_label_method: :label, item_disabled_method: :unavailable))
+  end
 end
