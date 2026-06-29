@@ -3,6 +3,7 @@ es:
   continue: Continuar
   edit: Editar
   cancel: Cancelar
+  ending_in: que termina en %{last_four}
   tin_ending_in: que termina en %{last_four}
   cfaui:
     optional: opcional
