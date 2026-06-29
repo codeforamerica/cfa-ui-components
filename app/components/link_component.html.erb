@@ -1,7 +1,7 @@
 <%= link_to @url,
-            target: ("_blank" if new_tab?),
-            rel: ("noopener noreferrer" if new_tab?),
-            **html_attrs do %>
+      target: ("_blank" if new_tab?),
+      rel: ("noopener noreferrer" if new_tab?),
+      **html_attrs do %>
   <span><%= @label %></span>
   <% if new_tab? %>
     <span class="sr-only"><%= @external_sr_label %></span>
