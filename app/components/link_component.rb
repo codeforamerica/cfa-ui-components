@@ -20,6 +20,6 @@ class LinkComponent < BaseComponent
 
   def new_tab?
     return false if @url.to_s.include?("/accounts/sign-in")
-    external?
+    true
   end
 end
