@@ -18,7 +18,9 @@ class LinkComponent < BaseComponent
     @url.to_s.match?(%r{\Ahttps?://})
   end
 
-  def new_tab?
-    @url.to_s == "/accounts/sign-in"
-  end
+def new_tab?
+  return false if @url.to_s.include?("/accounts/sign-in")
+
+  external?
+end
 end
