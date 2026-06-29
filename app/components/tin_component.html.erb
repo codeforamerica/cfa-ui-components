@@ -6,8 +6,8 @@
       selectionEnd: null,
       announcement: '',
 
-      visibleText: <%= raw t("visible").to_json %>,
-      hiddenText: <%= raw t("hidden").to_json %>,
+      visibleText: <%= raw t("cfaui.tin.visible").to_json %>,
+      hiddenText: <%= raw t("cfaui.tin.hidden").to_json %>,
 
       init() {
         this.$watch('show', (value) => {
@@ -60,7 +60,7 @@
               autocomplete: "off",
               "x-model": "show" %>
 
-        <%= label_tag @form.field_id(field[:method], :show), t("show") %>
+        <%= label_tag @form.field_id(field[:method], :show), t("cfaui.tin.show") %>
       </div>
 
       <div
@@ -88,16 +88,16 @@
     <div x-show="!editing" x-cloak class="cfa-stack-sm">
       <p class="label block"><%= @label %></p>
       <p class="[font-feature-settings:'calt'_0]" aria-hidden="true"><%= masked_value %></p>
-      <span class="sr-only"><%= t("tin_ending_in", last_four: last_four) %></span>
+      <span class="sr-only"><%= t("cfaui.tin.tin_ending_in", last_four: last_four) %></span>
       <button type="button" class="btn btn--secondary btn--small" x-on:click="edit()">
-        <%= t("edit") %>
+        <%= t("cfaui.tin.edit") %>
       </button>
     </div>
 
     <div x-show="editing" x-cloak class="cfa-stack-med">
       <%= fields_markup %>
       <button type="button" class="btn btn--secondary btn--small" x-on:click="cancel()">
-        <%= t("cancel") %>
+        <%= t("cfaui.tin.cancel") %>
       </button>
     </div>
   </div>

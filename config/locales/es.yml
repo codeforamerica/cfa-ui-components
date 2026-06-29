@@ -1,13 +1,31 @@
 es:
-  back: Regresa
-  continue: Continuar
-  edit: Editar
-  cancel: Cancelar
-  tin_ending_in: que termina en %{last_four}
+  # Strings rendered by the components themselves. Namespaced under `cfaui` so
+  # they never collide with a host application's own top-level locale keys.
   cfaui:
-    optional: opcional
+    base:
+      optional: opcional
+    back_button:
+      label: Regresar
+    submit_button:
+      label: Continuar
+    input:
+      ending_in: que termina en %{last_four}
+    tin:
+      show: Mostrar
+      visible: Número TIN, visible
+      hidden: Número TIN, oculto por seguridad
+      edit: Editar
+      cancel: Cancelar
+      tin_ending_in: que termina en %{last_four}
     modal:
       close_aria: Cerrar modal
+    yes_no:
+      "yes": Sí
+      "no": "No"
+      unsure: No sé
+    combobox:
+      placeholder: "- Seleccionar o escribir -"
+      no_results: No se encontraron resultados
     memorable_date:
       day: Día
       month: Mes
@@ -15,14 +33,24 @@ es:
       month_select: "- Seleccionar -"
       placeholder_day: DD
       placeholder_year: AAAA
-  decline: Rechazar
-  remove: Eliminar
-  favorite_fruits: Frutas favoritas
-  date_of_birth: Fecha de nacimiento
-  date_helper_text: "Por ejemplo: 28 de agosto de 1986"
-  first_name: Primer nombre
-  last_name: Apellido
-  submit: Enviar
+    select:
+      placeholder: "- Seleccionar -"
+  # Demo-only strings used by Lookbook previews. Never shipped to end users and
+  # not part of the translation deliverable.
+  preview:
+    date_of_birth: Fecha de nacimiento
+    date_helper_text: "Por ejemplo: 28 de agosto de 1986"
+    first_name: Primer nombre
+    last_name: Apellido
+    email: Correo electrónico
+    my_number: Mi número
+    ssn: Número de Seguro Social o ITIN
+    ssn_help: "Por ejemplo: 123-45-6789"
+    favorite_fruits: Frutas favoritas
+    fruit_help_text: Por favor elija su fruta favorita
+    decline: Rechazar
+    remove: Eliminar
+    submit: Enviar
   # Standard Rails key — the date picker reads this so it inherits whatever
   # month names the host app (or Active Support) already defines.
   date:
