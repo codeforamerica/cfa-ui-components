@@ -61,7 +61,7 @@ class InputComponent < AttributeBoundFormElementComponent
   # A field's label, with the "(optional)" marker appended when applicable.
   def field_label(field)
     return field[:label] unless @optional
-    safe_join([field[:label], " ", tag.span("(#{I18n.t("cfaui.optional")})", class: "font-normal")])
+    safe_join([field[:label], " ", tag.span("(#{I18n.t("cfaui.base.optional")})", class: "font-normal")])
   end
 
   # The saved value with whitespace removed, used only to derive the obfuscated
