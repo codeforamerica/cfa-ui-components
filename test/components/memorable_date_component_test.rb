@@ -147,4 +147,62 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     end
     assert_match(/id/, error.message)
   end
+
+  def test_month_options_render_in_english_by_default
+    render_inline(MemorableDateComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Date of birth",
+      label_day: "Day",
+      label_month: "Month",
+      label_month_select: "Select month",
+      label_year: "Year"
+    ))
+
+    assert_selector "span.option-label", text: "January"
+    assert_selector "span.option-label", text: "December"
+  end
+
+  def test_month_options_render_in_spanish_when_locale_is_es
+    I18n.with_locale(:es) do
+      render_inline(MemorableDateComponent.new(
+        form: build_form,
+        method: :my_date,
+        label: "Fecha de nacimiento",
+        label_day: "Día",
+        label_month: "Mes",
+        label_month_select: "Seleccionar mes",
+        label_year: "Año"
+      ))
+    end
+
+    assert_selector "span.option-label", text: "enero"
+    assert_selector "span.option-label", text: "diciembre"
+  end
+
+  def test_sub_labels_default_to_localized_strings_when_omitted
+    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth"))
+
+    assert_selector "label", text: "Month"
+    assert_selector "label", text: "Day"
+    assert_selector "label", text: "Year"
+    assert_selector "span.option-label", text: "- Select -"
+  end
+
+  def test_sub_labels_default_to_spanish_when_locale_is_es
+    I18n.with_locale(:es) do
+      render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Fecha de nacimiento"))
+    end
+
+    assert_selector "label", text: "Mes"
+    assert_selector "label", text: "Día"
+    assert_selector "label", text: "Año"
+    assert_selector "span.option-label", text: "- Seleccionar -"
+  end
+
+  def test_sub_labels_can_be_overridden
+    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth", label_day: "DD"))
+
+    assert_selector "label", text: "DD"
+  end
 end

@@ -71,6 +71,7 @@
             **field_attrs(
               value: day_value,
               id: input_id(3),
+              placeholder: @placeholder_day,
               class: "w-12",
               aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact
             ) %>
@@ -82,6 +83,7 @@
             **field_attrs(
               value: year_value,
               id: input_id(1),
+              placeholder: @placeholder_year,
               class: "w-18",
               aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact
             ) %>
