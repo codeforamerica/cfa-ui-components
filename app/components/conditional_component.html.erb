@@ -5,7 +5,9 @@
   <p class="sr-only" aria-live="polite" role="status"
      x-text="'<%= content_description %> is now ' + (condition ? 'visible' : 'hidden')">
   </p>
-  <div x-cloak x-show="condition" class="cfa-stack-med">
+  <%# No x-cloak: the content stays visible until Alpine hides it, so if Alpine %>
+  <%# never boots the conditional fields remain reachable rather than stuck hidden. %>
+  <div x-show="condition" class="cfa-stack-med">
     <%= content %>
   </div>
 </div>

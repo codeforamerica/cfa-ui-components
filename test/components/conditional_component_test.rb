@@ -18,4 +18,9 @@ class ConditionalComponentTest < ViewComponent::TestCase
     render_inline(ConditionalComponent.new(method: :radio_field, value: "yes", content_description: "Extra fields"))
     assert_selector "p[aria-live='polite'][x-text*='Extra fields']"
   end
+
+  def test_content_is_not_cloaked_so_it_survives_without_alpine
+    render_inline(ConditionalComponent.new(method: :radio_field, value: "yes")) { "Conditional content" }
+    assert_no_selector "[x-cloak]"
+  end
 end
