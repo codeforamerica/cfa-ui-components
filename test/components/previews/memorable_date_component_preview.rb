@@ -4,22 +4,14 @@ class MemorableDateComponentPreview < FormComponentPreview
   def default
     render MemorableDateComponent.new(form:,
       method: :my_date,
-      label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year")
+      label: I18n.t("date_of_birth"))
   end
 
   def with_helper_text
     render MemorableDateComponent.new(form:,
       method: :my_date,
-      label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year",
-      helper_text: "For example: August 28 1986")
+      label: I18n.t("date_of_birth"),
+      helper_text: I18n.t("date_helper_text"))
   end
 
   def with_error
@@ -27,12 +19,8 @@ class MemorableDateComponentPreview < FormComponentPreview
     custom_model.valid?
     render MemorableDateComponent.new(form: form(model: custom_model),
       method: :my_date,
-      label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year",
-      helper_text: "For example: August 28 1986")
+      label: I18n.t("date_of_birth"),
+      helper_text: I18n.t("date_helper_text"))
   end
 
   def with_pre_filled_values
@@ -40,11 +28,7 @@ class MemorableDateComponentPreview < FormComponentPreview
     custom_model.valid?
     render MemorableDateComponent.new(form: form(model: custom_model),
       method: :my_date,
-      label: "Date Of Birth",
-      label_day: "Day",
-      label_month: "Month",
-      label_month_select: "- Select -",
-      label_year: "Year",
-      helper_text: "For example: August 28 1986")
+      label: I18n.t("date_of_birth"),
+      helper_text: I18n.t("date_helper_text"))
   end
 end

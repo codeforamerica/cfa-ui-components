@@ -1,13 +1,30 @@
 es:
   back: Regresa
   continue: Continuar
+  edit: Editar
+  cancel: Cancelar
+  ending_in: que termina en %{last_four}
+  tin_ending_in: que termina en %{last_four}
   cfaui:
     optional: opcional
     modal:
       close_aria: Cerrar modal
+    memorable_date:
+      day: Día
+      month: Mes
+      year: Año
+      month_select: "- Seleccionar -"
+      placeholder_day: DD
+      placeholder_year: AAAA
   decline: Rechazar
   remove: Eliminar
   favorite_fruits: Frutas favoritas
+  date_of_birth: Fecha de nacimiento
+  date_helper_text: "Por ejemplo: 28 de agosto de 1986"
   first_name: Primer nombre
   last_name: Apellido
   submit: Enviar
+  # Standard Rails key — the date picker reads this so it inherits whatever
+  # month names the host app (or Active Support) already defines.
+  date:
+    month_names: [~, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]

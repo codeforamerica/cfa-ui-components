@@ -34,48 +34,75 @@
   }
 </script>
 
-<div x-data="tinToggle()">
-  <div class="cfa-stack-sm">
-    <%= @form.label @method, label_with_optional_marker, class: "label block", for: @form.field_id(@method) %>
+<% fields_markup = capture do %>
+  <% fields.each do |field| %>
+    <div x-data="tinToggle()">
+      <div class="cfa-stack-sm">
+        <%= @form.label field[:method], field_label(field), class: "label block", for: @form.field_id(field[:method]) %>
 
-    <% if @help_text %>
-      <p id="<%= help_dom_id %>" class="help_text">
-        <%= @help_text %>
-      </p>
-    <% end %>
+        <% if field[:help_text] %>
+          <p id="<%= @form.field_id(field[:method], :help) %>" class="help_text">
+            <%= field[:help_text] %>
+          </p>
+        <% end %>
 
-    <%= @form.text_field @method, **field_attrs(
-          type: "text",
-          inputmode: "numeric",
-          autocomplete: "off",
-          class: "w-full max-w-sm",
-          placeholder: "000-00-0000",
-          "x-ref": "input",
-          "x-mask": "999-99-9999",
-          "x-bind:style": "show ? '' : '-webkit-text-security: disc;'",
-          **aria_required_attrs,
-          **aria_field_attrs(described_by_help: @help_text.present?)
-        ) %>
+        <%= @form.text_field field[:method], **text_field_options(field) %>
 
-    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+        <%= render(FormErrorsComponent.new(form: @form, method: field[:method])) %>
+      </div>
+
+      <div class="mt-cfa-sm">
+        <%= check_box_tag "#{@form.field_id(field[:method])}_show",
+              "1",
+              false,
+              id: @form.field_id(field[:method], :show),
+              class: "accent-text-default",
+              autocomplete: "off",
+              "x-model": "show" %>
+
+        <%= label_tag @form.field_id(field[:method], :show), t("show") %>
+      </div>
+
+      <div
+        class="sr-only"
+        role="alert"
+        aria-atomic="true"
+        x-text="announcement"
+      ></div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if saved_value? %>
+  <div x-data="{
+        editing: <%= editing_initially? %>,
+        edit() {
+          this.editing = true
+          this.$nextTick(() => this.$root.querySelector('[data-tin-input]')?.focus())
+        },
+        cancel() {
+          this.editing = false
+          this.$root.querySelectorAll('[data-tin-input]').forEach((input) => { input.value = '' })
+        }
+      }">
+    <div x-show="!editing" x-cloak class="cfa-stack-sm">
+      <p class="label block"><%= @label %></p>
+      <p class="[font-feature-settings:'calt'_0]" aria-hidden="true"><%= masked_value %></p>
+      <span class="sr-only"><%= t("tin_ending_in", last_four: last_four) %></span>
+      <button type="button" class="btn btn--secondary btn--small" x-on:click="edit()">
+        <%= t("edit") %>
+      </button>
+    </div>
+
+    <div x-show="editing" x-cloak class="cfa-stack-med">
+      <%= fields_markup %>
+      <button type="button" class="btn btn--secondary btn--small" x-on:click="cancel()">
+        <%= t("cancel") %>
+      </button>
+    </div>
   </div>
-
-  <div class="mt-cfa-sm">
-  <%= check_box_tag "#{@form.field_id(@method)}_show",
-        "1",
-        false,
-        id: @form.field_id(@method, :show),
-        class: "accent-text-default",
-        autocomplete: "off",
-        "x-model": "show" %>
-
-  <%= label_tag @form.field_id(@method, :show), t("show") %>
+<% else %>
+  <div class="cfa-stack-med">
+    <%= fields_markup %>
   </div>
-
-  <div
-    class="sr-only"
-    role="alert"
-    aria-atomic="true"
-    x-text="announcement"
-  ></div>
-</div>
+<% end %>
