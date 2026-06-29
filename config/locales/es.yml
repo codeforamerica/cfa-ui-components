@@ -17,7 +17,7 @@ es:
     yes_no:
       "yes": Sí
       "no": "No"
-      unsure: No lo sé
+      unsure: No sé
     combobox:
       placeholder: "- Seleccionar o escribir -"
       no_results: No se encontraron resultados
