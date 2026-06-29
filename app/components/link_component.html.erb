@@ -1,9 +1,3 @@
+<%# Inline elements are kept whitespace-free so the only gap between label and icon is the icon's margin (matches Figma's 4px). %>
 <%= link_to @url, target: "_blank", rel: "noopener noreferrer", **html_attrs do %>
-  <span><%= @label %></span>
-  <% if external? %>
-    <span class="sr-only"><%= @external_sr_label %></span>
-    <%= inline_icon("launch", size: 20, label: nil, css_class: "inline-block ml-0.5 align-middle") %>
-  <% else %>
-    <span class="sr-only"><%= @sr_label %></span>
-  <% end %>
-<% end %>
+  <span><%= @label %></span><% if external? %><span class="sr-only"><%= @external_sr_label %></span><%= inline_icon("launch", size: 18, label: nil, css_class: "ml-cfa-xsm") %><% else %><span class="sr-only"><%= @sr_label %></span><% end %><% end %>

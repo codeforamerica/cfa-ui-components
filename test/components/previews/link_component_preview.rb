@@ -10,8 +10,9 @@ class LinkComponentPreview < ViewComponent::Preview
   end
 
   def with_icon
-    render(LinkComponent.new(label: "Continue to IRS.gov", url: "https://www.irs.gov", sr_label: "Opens in a new tab", external_sr_label: "External, opens in a new tab", html_attrs: {class: UNVISITED_CLASSES}))
+    render(LinkComponent.new(label: "Continue to IRS.gov for more information about your federal tax return", url: "https://www.irs.gov", sr_label: "Opens in a new tab", external_sr_label: "External, opens in a new tab", html_attrs: {class: UNVISITED_CLASSES}))
   end
+
   # @!endgroup
 
   # @!group Visited
