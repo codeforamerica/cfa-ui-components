@@ -93,11 +93,22 @@ class InputComponentTest < ViewComponent::TestCase
   def test_shows_edit_button_as_secondary_small_when_value_saved
     render_inline(InputComponent.new(form: saved_form, method: :text_field, label: "Routing number", obfuscate: true))
     assert_selector "button.btn.btn--secondary.btn--small", text: "Edit"
+    assert_no_selector ".translation_missing"
   end
 
   def test_shows_cancel_button_when_value_saved
     render_inline(InputComponent.new(form: saved_form, method: :text_field, label: "Routing number", obfuscate: true))
     assert_selector "button.btn.btn--secondary.btn--small", text: "Cancel"
+    assert_no_selector ".translation_missing"
+  end
+
+  def test_edit_and_cancel_buttons_are_translated_in_spanish
+    I18n.with_locale(:es) do
+      render_inline(InputComponent.new(form: saved_form, method: :text_field, label: "Routing number", obfuscate: true))
+    end
+    assert_selector "button", text: "Editar"
+    assert_selector "button", text: "Cancelar"
+    assert_no_selector ".translation_missing"
   end
 
   def test_does_not_prefill_saved_value_into_the_input_on_revisit

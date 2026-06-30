@@ -10,6 +10,8 @@ es:
       label: Continuar
     input:
       ending_in: que termina en %{last_four}
+      edit: Editar
+      cancel: Cancelar
     tin:
       show: Mostrar
       visible: Número TIN, visible

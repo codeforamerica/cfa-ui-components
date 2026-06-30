@@ -65,14 +65,14 @@
       <div x-show="!editing" x-cloak class="cfa-stack-sm">
         <%= summary_markup %>
         <button type="button" class="btn btn--secondary btn--small" x-on:click="edit()">
-          <%= t("edit") %>
+          <%= t("cfaui.input.edit") %>
         </button>
       </div>
 
       <div x-show="editing" x-cloak class="cfa-stack-med">
         <%= fields_markup %>
         <button type="button" class="btn btn--secondary btn--small" x-on:click="cancel()">
-          <%= t("cancel") %>
+          <%= t("cfaui.input.cancel") %>
         </button>
       </div>
     </div>
