@@ -73,6 +73,37 @@ class SelectComponentTest < ViewComponent::TestCase
     assert_selector "div.cfa-stack-sm.mt-cfa-lg"
   end
 
+  # The placeholder is the optional select's blank entry. The custom Alpine
+  # widget renders it as a listbox <li> (not a native <option>), so assert on
+  # the rendered option label.
+  def test_renders_localized_placeholder_prompt
+    render_inline(SelectComponent.new(
+      form: build_form,
+      method: :select_field,
+      label: "Pick one",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      optional: true
+    ))
+    assert_selector "span.option-label", text: "- Select -"
+  end
+
+  def test_placeholder_prompt_is_spanish_when_locale_is_es
+    I18n.with_locale(:es) do
+      render_inline(SelectComponent.new(
+        form: build_form,
+        method: :select_field,
+        label: "Elige uno",
+        collection: simple_collection,
+        item_value_method: :value,
+        item_label_method: :label,
+        optional: true
+      ))
+    end
+    assert_selector "span.option-label", text: "- Seleccionar -"
+  end
+
   # The control is a custom Alpine combobox (button + listbox), not a native
   # <select>, so it carries its description association on the button itself.
   def test_help_text_is_associated_with_the_combobox_button

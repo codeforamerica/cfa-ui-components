@@ -1,9 +1,9 @@
 a:not(.btn) {
-  @apply inline-flex w-fit items-center gap-cfa-xsm border-link-unvisited text-link-unvisited underline;
+  @apply inline w-fit border-b border-link-unvisited text-link-unvisited;
 }
 
 a:not(.btn):hover {
-  @apply border-transparent;
+  @apply border-b-0;
 }
 
 a:not(.btn):visited {

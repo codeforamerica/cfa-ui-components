@@ -20,6 +20,6 @@ class SubmitButtonComponentPreview < FormComponentPreview
   # @!endgroup
 
   def custom_label
-    render(SubmitButtonComponent.new(form:, label: I18n.t("submit")))
+    render(SubmitButtonComponent.new(form:, label: I18n.t("preview.submit")))
   end
 end
