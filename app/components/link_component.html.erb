@@ -1,12 +1,12 @@
 <%= link_to @url,
-      target: ("_blank" if external?),
-      rel: ("noopener noreferrer" if external?),
+      target: ("_blank" if new_tab?),
+      rel: ("noopener noreferrer" if new_tab?),
       **html_attrs do %>
   <span><%= @label %></span>
   <% if external? %>
     <span class="sr-only"><%= @external_sr_label %></span>
     <%= inline_icon("launch", size: 20, label: nil, css_class: "inline-block ml-0.5 align-middle") %>
-  <% else %>
+  <% elsif new_tab? %>
     <span class="sr-only"><%= @sr_label %></span>
   <% end %>
 <% end %>
