@@ -5,9 +5,13 @@
      x-init="$nextTick(() => ready = true);
              $watch('condition', visible => {
                if (!ready) return;
-               announcement = '<%= content_description %> is now ' + (visible ? 'visible' : 'hidden');
+               const message = '<%= content_description %> is now ' + (visible ? 'visible' : 'hidden');
                clearTimeout(announceTimer);
-               announceTimer = setTimeout(() => announcement = '', 1000);
+               announcement = '';
+               announceTimer = setTimeout(() => {
+                 announcement = message;
+                 announceTimer = setTimeout(() => announcement = '', 1000);
+               }, 100);
              })">
   <p class="sr-only" aria-live="polite" role="status" x-text="announcement"></p>
   <div x-cloak x-show="condition" class="cfa-stack-med">
