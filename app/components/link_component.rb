@@ -17,8 +17,4 @@ class LinkComponent < BaseComponent
     return false if @url.to_s.start_with?("https://simplefile.getyourrefund.org/")
     @url.to_s.match?(%r{\Ahttps?://})
   end
-
-  def new_tab?
-    @url.to_s != "/accounts/sign-in"
-  end
 end
