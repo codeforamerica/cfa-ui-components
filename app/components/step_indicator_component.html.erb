@@ -1,0 +1,19 @@
+<div class="<%= class_names("cfa-step-indicator cfa-stack-med", @css_class) %>">
+  <div class="flex gap-x-[7px]"
+       role="progressbar"
+       aria-labelledby="<%= progressbar_title_id %>"
+       aria-valuemin="0"
+       aria-valuemax="<%= total_steps %>"
+       aria-valuenow="<%= current_step %>">
+    <% total_steps.times do |index| %>
+      <span class="flex-1 min-w-px h-2 rounded-lg <%= filled?(index) ? "bg-success" : "bg-border-secondary" %>"></span>
+    <% end %>
+  </div>
+
+  <div class="cfa-stack-sm">
+    <p id="<%= progressbar_title_id %>" class="font-bold text-text-default leading-none"><%= title %></p>
+    <% if content? %>
+      <div class="text-text-default"><%= content %></div>
+    <% end %>
+  </div>
+</div>

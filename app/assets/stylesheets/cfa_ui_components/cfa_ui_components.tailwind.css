@@ -64,6 +64,7 @@
     --color-focus: #339696;
 
     /* State colors */
+    --color-success: #008817;
     --color-error: #B50909;
     --color-destructive: #7F0606;
     --color-warning: #B27A00;

@@ -37,6 +37,8 @@ es:
       placeholder_year: AAAA
     select:
       placeholder: "- Seleccionar -"
+    step_indicator:
+      section: Sección %{current} de %{total}
   # Demo-only strings used by Lookbook previews. Never shipped to end users and
   # not part of the translation deliverable.
   preview:
