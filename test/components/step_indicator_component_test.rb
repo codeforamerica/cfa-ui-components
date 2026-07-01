@@ -17,8 +17,10 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
   def test_exposes_progress_to_assistive_tech
     render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
     assert_selector "[role=progressbar][aria-valuemin='0'][aria-valuemax='5'][aria-valuenow='2']"
-    assert_selector "[role=progressbar][aria-valuetext='Section 2 of 5']"
-    assert_selector "[role=progressbar][aria-label='Progress']"
+    # Accessible name comes from the visible title via aria-labelledby.
+    title_id = page.find("[role=progressbar]")["aria-labelledby"]
+    assert title_id.present?
+    assert_selector "p##{title_id}", text: "Section 2 of 5"
   end
 
   def test_renders_default_section_label
@@ -29,7 +31,8 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
   def test_custom_title_overrides_default
     render_inline(StepIndicatorComponent.new(current_step: 1, total_steps: 3, title: "Getting started"))
     assert_text "Getting started"
-    assert_selector "[role=progressbar][aria-valuetext='Getting started']"
+    title_id = page.find("[role=progressbar]")["aria-labelledby"]
+    assert_selector "p##{title_id}", text: "Getting started"
   end
 
   def test_renders_optional_content

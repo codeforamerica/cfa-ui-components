@@ -5,7 +5,7 @@
 # Renders `total_steps` equal-width segments; the first `current_step` of them
 # are filled (completed + the current, in-progress section) and the remainder
 # are shown as remaining. Progress is exposed to assistive technology via an
-# ARIA `progressbar`, so it does not depend on the visible label.
+# ARIA `progressbar` that is named by its visible title (`aria-labelledby`).
 class StepIndicatorComponent < ViewComponent::Base
   def initialize(current_step:, total_steps:, title: nil, css_class: nil)
     unless total_steps.to_i.positive?
@@ -21,6 +21,11 @@ class StepIndicatorComponent < ViewComponent::Base
 
   def title
     @title || I18n.t("cfaui.step_indicator.section", current: @current_step, total: @total_steps)
+  end
+
+  # Unique id so the progressbar can be labelled by its own visible title.
+  def progressbar_title_id
+    @progressbar_title_id ||= "cfa-step-indicator-title-#{SecureRandom.hex(4)}"
   end
 
   def filled?(index)
