@@ -47,7 +47,6 @@
     /* Border colors */
     --color-border-default: #011E29;
     --color-border-secondary: #CCD2D4;
-    --color-border-success: #008817;
     --color-border-error: #B50909;
     --color-border-warning: #B27A00;
     --color-border-disabled: #B3BBBF;
@@ -65,6 +64,7 @@
     --color-focus: #339696;
 
     /* State colors */
+    --color-success: #008817;
     --color-error: #B50909;
     --color-destructive: #7F0606;
     --color-warning: #B27A00;

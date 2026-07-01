@@ -10,7 +10,7 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
 
   def test_fills_completed_and_current_sections
     render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
-    assert_selector "span.bg-border-success", count: 2
+    assert_selector "span.bg-success", count: 2
     assert_selector "span.bg-border-secondary", count: 3
   end
 
@@ -39,7 +39,7 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
 
   def test_clamps_current_step_to_total
     render_inline(StepIndicatorComponent.new(current_step: 99, total_steps: 5))
-    assert_selector "span.bg-border-success", count: 5
+    assert_selector "span.bg-success", count: 5
     assert_selector "[role=progressbar][aria-valuenow='5']"
   end
 

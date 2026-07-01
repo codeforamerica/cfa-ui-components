@@ -7,7 +7,7 @@
        aria-valuenow="<%= current_step %>"
        aria-valuetext="<%= title %>">
     <% total_steps.times do |index| %>
-      <span class="flex-1 min-w-px h-2 rounded-lg <%= filled?(index) ? "bg-border-success" : "bg-border-secondary" %>"></span>
+      <span class="flex-1 min-w-px h-2 rounded-lg <%= filled?(index) ? "bg-success" : "bg-border-secondary" %>"></span>
     <% end %>
   </div>
 
