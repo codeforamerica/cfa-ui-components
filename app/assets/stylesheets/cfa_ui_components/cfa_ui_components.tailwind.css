@@ -47,6 +47,7 @@
     /* Border colors */
     --color-border-default: #011E29;
     --color-border-secondary: #CCD2D4;
+    --color-border-success: #008817;
     --color-border-error: #B50909;
     --color-border-warning: #B27A00;
     --color-border-disabled: #B3BBBF;

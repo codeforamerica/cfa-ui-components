@@ -20,7 +20,7 @@ class PrefilledTextFieldComponent < ViewComponent::Base
       when :primary
         ""
       when :currency
-        "text-[22px] text-[#008817] font-bold"
+        "text-[22px] text-border-success font-bold"
       else
         raise ArgumentError.new("Invalid style")
       end
