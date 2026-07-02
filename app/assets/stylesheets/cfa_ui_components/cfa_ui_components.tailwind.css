@@ -7,13 +7,17 @@
  * The official InterVariable build below ships the `zero` feature intact.
  * Shipped in the engine at app/assets/fonts/cfa_ui_components/, so the logical
  * asset path is identical here and in consuming apps (Propshaft fingerprints it).
+ * The leading slash anchors the url() to the asset root so it resolves the same
+ * whether this file is served from the gem or copied into a consumer's
+ * app/assets/stylesheets/vendor/ (Propshaft resolves bare url()s relative to the
+ * containing file's directory, which otherwise mangles the path when vendored).
  */
 @font-face {
     font-family: "Inter";
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url("cfa_ui_components/InterVariable.woff2") format("woff2");
+    src: url("/cfa_ui_components/InterVariable.woff2") format("woff2");
 }
 
 @theme {
