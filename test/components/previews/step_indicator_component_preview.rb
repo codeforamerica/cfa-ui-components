@@ -1,30 +1,30 @@
 class StepIndicatorComponentPreview < ViewComponent::Preview
   # @!group Progress through a 5-section flow
-  def section_1_of_5
+  def step_one_example
     render(StepIndicatorComponent.new(current_step: 1, total_steps: 5)) do
       "This is the content."
     end
   end
 
-  def section_2_of_5
+  def step_two_example
     render(StepIndicatorComponent.new(current_step: 2, total_steps: 5)) do
       "This is the content."
     end
   end
 
-  def section_3_of_5
+  def step_three_example
     render(StepIndicatorComponent.new(current_step: 3, total_steps: 5)) do
       "This is the content."
     end
   end
 
-  def section_4_of_5
+  def step_four_example
     render(StepIndicatorComponent.new(current_step: 4, total_steps: 5)) do
       "This is the content."
     end
   end
 
-  def section_5_of_5
+  def step_five_example
     render(StepIndicatorComponent.new(current_step: 5, total_steps: 5)) do
       "This is the content."
     end
