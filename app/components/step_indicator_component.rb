@@ -3,7 +3,8 @@
 # Purely visual, non-interactive progress bar for multi-step flows. Renders
 # `total_steps` equal-width segments with the first `current_step` filled. The
 # segment bar is decorative (aria-hidden); progress is conveyed to screen
-# readers as text — the visible title plus a "Step N of M" count.
+# readers as text — a "Current step:" prefix, the visible title, and a
+# "Step N of M" count.
 class StepIndicatorComponent < ViewComponent::Base
   def initialize(current_step:, total_steps:, title: nil, css_class: nil)
     unless total_steps.to_i.positive?

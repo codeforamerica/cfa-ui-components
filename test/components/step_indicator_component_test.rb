@@ -25,6 +25,11 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
     assert_text "Step 3 of 4"
   end
 
+  def test_prefixes_current_step_for_screen_readers
+    render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
+    assert_selector "span.sr-only", text: "Current step:"
+  end
+
   def test_titled_indicator_adds_sr_only_count
     render_inline(StepIndicatorComponent.new(current_step: 1, total_steps: 3, title: "Getting started"))
     assert_text "Getting started"
