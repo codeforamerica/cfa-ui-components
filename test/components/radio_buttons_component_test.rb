@@ -212,6 +212,20 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     assert_selector "input[x-model=\"$store.radio_field_abc\"]"
   end
 
+  def test_sets_aria_posinset_and_setsize_for_screen_readers
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "Pick one"
+    ))
+    assert_selector "input[type='radio'][aria-setsize='2']", count: 2
+    assert_selector "input[type='radio'][aria-posinset='1']", count: 1
+    assert_selector "input[type='radio'][aria-posinset='2']", count: 1
+  end
+
   def test_css_class_is_appended_to_root
     render_inline(RadioButtonsComponent.new(
       form: build_form,
