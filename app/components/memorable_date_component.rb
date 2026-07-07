@@ -67,6 +67,7 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
   end
 
   def raw_date_parts
+    return nil unless @form.object.respond_to?(:attributes_before_type_cast)
     raw = @form.object.attributes_before_type_cast[@method.to_s]
     return raw if raw.is_a?(Hash)
     nil
