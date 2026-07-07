@@ -31,7 +31,7 @@ jobs:
     environment: ${{ inputs.environment || 'development' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.2.0
         with:
@@ -40,7 +40,7 @@ jobs:
           aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
       - name: Log into Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@v2.1.5
       - name: Check if the image exists
         id: image_exists
         uses: k4kratik/container-image-check-custom-action@v4

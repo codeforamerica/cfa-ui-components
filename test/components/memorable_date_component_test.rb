@@ -132,6 +132,32 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_selector "input#date_picker_test_model_my_date_3i[aria-invalid][aria-describedby='dob-hint']"
   end
 
+  def test_sub_labels_default_to_localized_strings_when_omitted
+    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth"))
+
+    assert_selector "label", text: "Month"
+    assert_selector "label", text: "Day"
+    assert_selector "label", text: "Year"
+    assert_selector "span.option-label", text: "- Select -"
+  end
+
+  def test_sub_labels_default_to_spanish_when_locale_is_es
+    I18n.with_locale(:es) do
+      render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Fecha de nacimiento"))
+    end
+
+    assert_selector "label", text: "Mes"
+    assert_selector "label", text: "Día"
+    assert_selector "label", text: "Año"
+    assert_selector "span.option-label", text: "- Seleccionar -"
+  end
+
+  def test_sub_labels_can_be_overridden
+    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth", label_day: "DD"))
+
+    assert_selector "label", text: "DD"
+  end
+
   def test_input_attrs_id_raises_because_it_would_collide_across_fields
     error = assert_raises(ArgumentError) do
       MemorableDateComponent.new(
@@ -178,31 +204,5 @@ class MemorableDateComponentTest < ViewComponent::TestCase
 
     assert_selector "span.option-label", text: "enero"
     assert_selector "span.option-label", text: "diciembre"
-  end
-
-  def test_sub_labels_default_to_localized_strings_when_omitted
-    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth"))
-
-    assert_selector "label", text: "Month"
-    assert_selector "label", text: "Day"
-    assert_selector "label", text: "Year"
-    assert_selector "span.option-label", text: "- Select -"
-  end
-
-  def test_sub_labels_default_to_spanish_when_locale_is_es
-    I18n.with_locale(:es) do
-      render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Fecha de nacimiento"))
-    end
-
-    assert_selector "label", text: "Mes"
-    assert_selector "label", text: "Día"
-    assert_selector "label", text: "Año"
-    assert_selector "span.option-label", text: "- Seleccionar -"
-  end
-
-  def test_sub_labels_can_be_overridden
-    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth", label_day: "DD"))
-
-    assert_selector "label", text: "DD"
   end
 end
