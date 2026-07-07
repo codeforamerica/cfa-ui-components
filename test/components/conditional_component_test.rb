@@ -16,10 +16,11 @@ class ConditionalComponentTest < ViewComponent::TestCase
 
   def test_live_region_is_empty_until_visibility_changes
     render_inline(ConditionalComponent.new(method: :radio_field, value: "yes"))
-    # The live region must render empty so it is not reachable during normal
-    # navigation; it is populated only when condition changes (see x-init).
-    assert_selector "p[aria-live='polite'][x-text='announcement']"
-    assert_selector "p[aria-live='polite']", text: ""
+    # Assertive so VoiceOver announces even while it is mid-speech navigating
+    # the radios with the arrow keys (a polite region gets preempted and dropped).
+    # The region renders empty and is populated only when condition changes.
+    assert_selector "p[aria-live='assertive'][role='alert'][x-text='announcement']"
+    assert_selector "p[aria-live='assertive']", text: ""
   end
 
   def test_custom_content_description_used_in_announcement
