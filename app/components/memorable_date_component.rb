@@ -66,7 +66,25 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
     month_options.find_index { |_, value| value.to_s == month_value.to_s } || 0
   end
 
-  def month_value = date&.month
-  def day_value = date&.day
-  def year_value = date&.year
+  def raw_date_parts
+    raw = @form.object.attributes_before_type_cast[@method.to_s]
+    return raw if raw.is_a?(Hash)
+    nil
+  end
+
+  def raw_date_part(part)
+    raw_date_parts&.[](part) || raw_date_parts&.[](part.to_s)
+  end
+
+  def month_value
+    raw_date_part(2).presence || date&.month
+  end
+
+  def day_value
+    raw_date_part(3).presence || date&.day
+  end
+
+  def year_value
+    raw_date_part(1).presence || date&.year
+  end
 end
