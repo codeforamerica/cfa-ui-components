@@ -1,4 +1,4 @@
-<div x-data="{
+<fieldset <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> x-data="{
   uncheckMatching(selector) {
     this.$root.querySelectorAll(selector).forEach((cb) => {
       if (cb.checked) {
@@ -25,7 +25,10 @@
     if (!checkbox || checkbox.disabled) return;
     checkbox.click();
   }
-}" class="cfa-stack-xl">
+}" class="fieldset-group cfa-stack-xl">
+  <% if @legend %>
+    <legend class="sr-only"><%= @legend %></legend>
+  <% end %>
   <div data-exclusive-checkbox-group="options" class="cfa-stack-xl [&>*]:cursor-pointer" @change="onOptionChange($event)" @click="handleItemClick($event)">
     <%= content %>
   </div>
@@ -35,4 +38,4 @@
       <%= exclusive_option %>
     </div>
   <% end %>
-</div>
+</fieldset>

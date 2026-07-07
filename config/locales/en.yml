@@ -1,23 +1,59 @@
 en:
-  show: Show
-  visible: TIN visible
-  hidden: TIN hidden
-  back: Go back
-  continue: Continue
+  # Strings rendered by the components themselves. Namespaced under `cfaui` so
+  # they never collide with a host application's own top-level locale keys.
   cfaui:
-    optional: optional
+    base:
+      optional: optional
+    back_button:
+      label: Go back
+    submit_button:
+      label: Continue
+    input:
+      ending_in: ending in %{last_four}
+      edit: Edit
+      cancel: Cancel
+    tin:
+      show: Show
+      visible: TIN visible
+      hidden: TIN hidden for security
+      edit: Edit
+      cancel: Cancel
+      tin_ending_in: ending in %{last_four}
     modal:
       close_aria: Close modal
-  decline: Decline
-  remove: Remove
-  favorite_fruits: Favorite fruits
-  first_name: First name
-  my_number: My Number
-  last_name: Last name
-  submit: Submit
-  ssn: Social Security Number or ITIN
-  ssn_help: For example, 123-45-6789
-  fruit_help_text: Please choose your favorite fruit
-  combobox:
-    placeholder_label: "- Select or Type -"
-    no_results: No results found
+    yes_no:
+      "yes": "Yes"
+      "no": "No"
+      unsure: I don't know
+    combobox:
+      placeholder: "- Select or Type -"
+      no_results: No results found
+    memorable_date:
+      day: Day
+      month: Month
+      year: Year
+      month_select: "- Select -"
+      placeholder_day: DD
+      placeholder_year: YYYY
+    select:
+      placeholder: "- Select -"
+  # Demo-only strings used by Lookbook previews. Never shipped to end users and
+  # not part of the translation deliverable.
+  preview:
+    date_of_birth: Date of birth
+    date_helper_text: "For example: August 28, 1986"
+    first_name: First name
+    last_name: Last name
+    email: Email
+    my_number: My Number
+    ssn: Social Security Number or ITIN
+    ssn_help: For example, 123-45-6789
+    favorite_fruits: Favorite fruits
+    fruit_help_text: Please choose your favorite fruit
+    decline: Decline
+    remove: Remove
+    submit: Submit
+  # Standard Rails key — the date picker reads this so it inherits whatever
+  # month names the host app (or Active Support) already defines.
+  date:
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]

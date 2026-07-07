@@ -1,14 +1,14 @@
 class InputCurrencyComponentPreview < FormComponentPreview
   def default
-    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), min: 0))
+    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t("preview.my_number"), input_attrs: {min: 0}))
   end
 
   def optional
-    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), min: 0, optional: true))
+    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t("preview.my_number"), input_attrs: {min: 0}, optional: true))
   end
 
   def with_helper_text
-    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t(:my_number), help_text: "pick a number", min: 0))
+    render(InputCurrencyComponent.new(form:, method: :my_number, label: I18n.t("preview.my_number"), help_text: "pick a number", input_attrs: {min: 0}))
   end
 
   def submission_demo
@@ -17,7 +17,6 @@ class InputCurrencyComponentPreview < FormComponentPreview
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
-    puts "custom_model.valid? #{custom_model.valid?}"
-    render(InputCurrencyComponent.new(form: form(model: custom_model), method: :my_number, label: I18n.t(:my_number)))
+    render(InputCurrencyComponent.new(form: form(model: custom_model), method: :my_number, label: I18n.t("preview.my_number")))
   end
 end

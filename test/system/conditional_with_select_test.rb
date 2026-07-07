@@ -8,7 +8,7 @@ class ConditionalWithSelectTest < JavaScriptSystemTestCase
 
     assert_no_text "But why!?"
 
-    select "Banana", from: "Favorite fruits"
+    select_from_combobox "Banana"
 
     assert_text "But why!?"
   end
@@ -16,10 +16,10 @@ class ConditionalWithSelectTest < JavaScriptSystemTestCase
   test "changing select away from matching value hides the conditional" do
     visit "/rails/view_components/conditional_component/select"
 
-    select "Banana", from: "Favorite fruits"
+    select_from_combobox "Banana"
     assert_text "But why!?"
 
-    select "Orange", from: "Favorite fruits"
+    select_from_combobox "Orange"
     assert_no_text "But why!?"
   end
 
@@ -27,5 +27,15 @@ class ConditionalWithSelectTest < JavaScriptSystemTestCase
     visit "/rails/view_components/conditional_component/prefilled_select"
 
     assert_text "Header"
+  end
+
+  private
+
+  # SelectComponent renders a custom Alpine combobox (a button + a role="listbox"),
+  # not a native <select>, so Capybara's `select ... from:` helper can't drive it.
+  # Open the listbox and click the matching option instead.
+  def select_from_combobox(option_label)
+    find("[role='combobox']").click
+    find("[role='option']", text: option_label).click
   end
 end

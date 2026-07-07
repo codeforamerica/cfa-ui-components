@@ -24,6 +24,12 @@ class FormComponentPreview < ViewComponent::Preview
     attribute :my_date
     attribute :my_number
     attribute :ssn
+    attribute :routing_number
+    attribute :routing_number_confirmation
+    attribute :account_number
+    attribute :account_number_confirmation
+    attribute :state_id_number
+    attribute :ssn_confirmation
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :pineapple_pizza_preference, presence: true
@@ -33,8 +39,8 @@ class FormComponentPreview < ViewComponent::Preview
   end
 
   def self.yes_no_options
-    [OpenStruct.new(value: "yes", label: "Yes"),
-      OpenStruct.new(value: "no", label: "No")]
+    [OpenStruct.new(value: "yes", label: I18n.t("cfaui.yes_no.yes")),
+      OpenStruct.new(value: "no", label: I18n.t("cfaui.yes_no.no"))]
   end
 
   def self.fruit_options

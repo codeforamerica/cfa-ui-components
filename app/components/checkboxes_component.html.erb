@@ -1,13 +1,16 @@
-<div x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+<fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
+  <% if @legend %>
+    <legend class="sr-only"><%= @legend %></legend>
+  <% end %>
   <%= @form.hidden_field @method, value: "" %>
-  <div class="cfa-stack-med <%= "has-error" if has_error? %>">
+  <div class="<%= class_names("cfa-stack-med", "has-error": has_error?) %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            item_value = checkbox_item.value.to_s
            item_state = state_for(item_value)
            checkbox_attrs = {
              "x-model" => "$store.#{store_key}",
-             :class => ["cfa-checkbox", box_classes, "rounded", border_class].compact.join(" ")
+             :class => class_names("cfa-checkbox", box_classes, "rounded", border_class)
            }
            if @scope.present?
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@scope}"
@@ -17,11 +20,10 @@
            checkbox_attrs[:disabled] = true if item_state == :disabled
            content_tag :div, class: "form_item" do
              concat checkbox_wrap(checkbox_item.checkbox(checkbox_attrs), small: @small)
-             label_classes = @small ? ["type-progress-text"] : []
-             label_classes << "text-text-disabled" if item_state == :disabled
              label_opts = {}
              label_opts[:for] = input_id if @scope.present?
-             label_opts[:class] = label_classes.join(" ") if label_classes.any?
+             label_classes = class_names("type-progress-text": @small, "text-text-disabled": item_state == :disabled)
+             label_opts[:class] = label_classes if label_classes.present?
              concat(label_opts.empty? ? checkbox_item.label : checkbox_item.label(label_opts))
            end
          end
@@ -31,7 +33,7 @@
   <div class="mt-cfa-sm">
     <%= render(FormErrorsComponent.new(form: @form, method: @method, small: @small)) %>
     <% if has_warning? %>
-      <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small)) %>
+      <%= render(FormWarningComponent.new(warning_message: @warning_message, small: @small, id: warning_dom_id)) %>
     <% end %>
   </div>
-</div>
+</fieldset>

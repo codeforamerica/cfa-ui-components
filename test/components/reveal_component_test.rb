@@ -17,4 +17,9 @@ class RevealComponentTest < ViewComponent::TestCase
     render_inline(RevealComponent.new(summary_text: "More details", icon: "info_outline"))
     assert_selector "svg[role='img'][aria-label='info outline icon']"
   end
+
+  def test_css_class_is_appended_without_dropping_base_classes
+    render_inline(RevealComponent.new(summary_text: "More details", css_class: "mt-cfa-lg"))
+    assert_selector "details.mt-cfa-lg.group.border-primary"
+  end
 end

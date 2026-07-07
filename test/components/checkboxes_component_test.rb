@@ -9,7 +9,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox']", count: 2
     assert_selector "label", text: "Yes"
@@ -22,7 +23,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='hidden'][value='']", visible: :all
   end
@@ -34,7 +36,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      small: true
+      small: true,
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox'].h-4.w-4", count: 2
     assert_no_selector "input[type='checkbox'].h-6.w-6"
@@ -46,9 +49,62 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox'].h-6.w-6", count: 2
+  end
+
+  def test_renders_fieldset
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "What are your favorite fruits?"
+    ))
+
+    assert_selector "fieldset"
+  end
+
+  def test_renders_legend
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "What are your favorite fruits?"
+    ))
+
+    assert_selector "fieldset > legend.sr-only", text: "What are your favorite fruits?"
+  end
+
+  def test_aria_labelledby_sets_fieldset_attribute_without_legend
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      aria_labelledby: "external-heading"
+    ))
+
+    assert_selector "fieldset[aria-labelledby='external-heading']"
+    assert_no_selector "legend"
+  end
+
+  def test_raises_when_neither_legend_nor_aria_labelledby_provided
+    assert_raises(ArgumentError) do
+      CheckboxesComponent.new(
+        form: build_form,
+        method: :checkboxes_field,
+        collection: simple_collection,
+        item_value_method: :value,
+        item_label_method: :label
+      )
+    end
   end
 
   def test_warning_message_renders_warning_state
@@ -58,7 +114,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      warning_message: "Heads up!"
+      warning_message: "Heads up!",
+      legend: "Pick some"
     ))
     assert_selector ".form_warning", text: "Heads up!"
     assert_selector "input[type='checkbox'].cfa-checkbox--warning", count: 2
@@ -74,7 +131,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      warning_message: "Heads up!"
+      warning_message: "Heads up!",
+      legend: "Pick some"
     ))
     assert_selector ".form_errors"
     assert_selector ".form_warning", text: "Heads up!"
@@ -87,7 +145,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      item_states: {"yes" => :indeterminate}
+      item_states: {"yes" => :indeterminate},
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox'][value='yes'][x-init='$nextTick(() => $el.indeterminate = true)']"
     assert_no_selector "input[type='checkbox'][value='no'][x-init]"
@@ -100,7 +159,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      item_states: {"yes" => :disabled}
+      item_states: {"yes" => :disabled},
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox'][value='yes'][disabled]"
     assert_no_selector "input[type='checkbox'][value='no'][disabled]"
@@ -114,7 +174,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      item_states: {"yes" => :disabled, "no" => :indeterminate}
+      item_states: {"yes" => :disabled, "no" => :indeterminate},
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox'][value='yes'][disabled]"
     assert_selector "input[type='checkbox'][value='no'][x-init='$nextTick(() => $el.indeterminate = true)']"
@@ -128,7 +189,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
         collection: simple_collection,
         item_value_method: :value,
         item_label_method: :label,
-        item_states: {"yes" => :bogus}
+        item_states: {"yes" => :bogus},
+        legend: "Pick some"
       )
     end
   end
@@ -140,7 +202,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       collection: simple_collection,
       item_value_method: :value,
       item_label_method: :label,
-      scope: "abc"
+      scope: "abc",
+      legend: "Pick some"
     ))
     assert_selector "input[type='checkbox'][id$='_abc']", count: 2
     assert_selector "label[for$='_abc']", count: 2
@@ -152,10 +215,24 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       method: :checkboxes_field,
       collection: simple_collection,
       item_value_method: :value,
-      item_label_method: :label
+      item_label_method: :label,
+      legend: "Pick some"
     ))
     assert_no_selector "input[type='checkbox'][id*='_abc']"
     assert_selector "input[type='checkbox']#component_test_model_checkboxes_field_yes"
     assert_selector "input[type='checkbox']#component_test_model_checkboxes_field_no"
+  end
+
+  def test_css_class_is_appended_to_root
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "Checkbox group",
+      css_class: "mt-cfa-lg"
+    ))
+    assert_selector "fieldset.mt-cfa-lg"
   end
 end

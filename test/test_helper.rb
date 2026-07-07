@@ -8,6 +8,7 @@ class ComponentTestModel
   include ActiveModel::Attributes
 
   attribute :text_field
+  attribute :text_field_confirmation
   attribute :checkbox_field
   attribute :radio_field
   attribute :select_field

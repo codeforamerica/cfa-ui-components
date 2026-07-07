@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ExclusiveCheckboxGroupComponentTest < JavaScriptSystemTestCase
+class ExclusiveCheckboxGroupSystemTest < JavaScriptSystemTestCase
   test "checking an option clears the exclusive option" do
     visit "/rails/view_components/exclusive_checkbox_group_component/default"
 

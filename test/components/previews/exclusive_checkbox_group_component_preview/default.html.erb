@@ -1,5 +1,5 @@
 <%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
-  <%= render ExclusiveCheckboxGroupComponent.new do |c| %>
+  <%= render ExclusiveCheckboxGroupComponent.new(legend: "Which of these apply to you?") do |c| %>
     <% c.with_exclusive_option do %>
       <%= render CardComponent.new do %>
         <%= render SingleCheckboxComponent.new(form: f, method: :none_apply, label: "None of these apply") %>

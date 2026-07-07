@@ -1,3 +1,7 @@
+html {
+    scrollbar-gutter: stable;
+}
+
 body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -5,6 +9,7 @@ body {
 
     font-size: 16px;
     font-weight: 400;
+    font-variant-numeric: slashed-zero;
 
     line-height: normal;
     @apply antialiased bg-background-app text-text-default;

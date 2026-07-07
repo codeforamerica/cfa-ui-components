@@ -1,29 +1,35 @@
 class ComboboxComponentPreview < FormComponentPreview
   def default
-    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
+    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
   def with_helper_text
-    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), help_text: I18n.t(:fruit_help_text), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
+    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), help_text: I18n.t("preview.fruit_help_text"), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
-    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
+    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
   def prefilled
     custom_model = TestModel.new(favorite_fruits: "orange")
-    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t(:favorite_fruits), help_text: I18n.t(:fruit_help_text), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
+    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), help_text: I18n.t("preview.fruit_help_text"), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 
   def optional
-    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), help_text: I18n.t(:fruit_help_text), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label, optional: true))
+    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), help_text: I18n.t("preview.fruit_help_text"), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label, optional: true))
   end
 
   def with_disabled_options
     collection = self.class.combobox_fruit_options.map { |o| OpenStruct.new(value: o.value, label: o.label, unavailable: o.value.start_with?("b")) }
-    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection:, item_value_method: :value, item_label_method: :label, item_disabled_method: :unavailable))
+    render(ComboboxComponent.new(form:, method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), collection:, item_value_method: :value, item_label_method: :label, item_disabled_method: :unavailable))
+  end
+
+  def prefilled_disabled_option
+    collection = self.class.combobox_fruit_options.map { |o| OpenStruct.new(value: o.value, label: o.label, unavailable: o.value.start_with?("b")) }
+    custom_model = TestModel.new(favorite_fruits: "banana")
+    render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t(:favorite_fruits), collection:, item_value_method: :value, item_label_method: :label, item_disabled_method: :unavailable))
   end
 end
