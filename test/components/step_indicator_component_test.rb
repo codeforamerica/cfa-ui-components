@@ -33,7 +33,7 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
   def test_custom_title_names_the_progressbar
     render_inline(StepIndicatorComponent.new(current_step: 1, total_steps: 3, title: "Getting started"))
     assert_text "Getting started"
-    assert_selector "[role=progressbar][aria-label='Getting started']"
+    assert_selector "[role=progressbar][aria-label='Current step: Getting started']"
     assert_selector "[role=progressbar][aria-valuetext='Step 1 of 3']"
   end
 

@@ -3,7 +3,7 @@
 # Purely visual, non-interactive progress bar for multi-step flows. Renders
 # `total_steps` equal-width segments with the first `current_step` filled. The
 # ARIA progressbar announces "Step N of M" via aria-valuetext (rather than a
-# meaningless percentage) and is named by the step title, or "Current step".
+# meaningless percentage) and is named "Current step[: title]".
 class StepIndicatorComponent < ViewComponent::Base
   def initialize(current_step:, total_steps:, title: nil, css_class: nil)
     unless total_steps.to_i.positive?
@@ -26,7 +26,8 @@ class StepIndicatorComponent < ViewComponent::Base
   end
 
   def accessible_name
-    @title.presence || I18n.t("cfaui.step_indicator.current_step")
+    label = I18n.t("cfaui.step_indicator.current_step")
+    @title.present? ? "#{label}: #{@title}" : label
   end
 
   def filled?(index)
