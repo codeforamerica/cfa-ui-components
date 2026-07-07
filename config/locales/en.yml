@@ -12,6 +12,9 @@ en:
       ending_in: ending in %{last_four}
       edit: Edit
       cancel: Cancel
+    link:
+      sr_label: Opens in a new tab
+      external_sr_label: External, opens in a new tab
     tin:
       show: Show
       visible: TIN visible
