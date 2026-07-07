@@ -4,17 +4,12 @@
   <% end %>
   <%= @form.hidden_field @method, value: "" %>
   <% content = content_tag(:div, class: @layout) do
-       set_size = @collection.size
-       position = 0
        capture do
          @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
-           position += 1
            item_value = radio_button_item.value.to_s
            radio_attrs = {
              "x-model" => "$store.#{store_key}",
-             :class => radio_classes,
-             "aria-setsize" => set_size,
-             "aria-posinset" => position
+             :class => radio_classes
            }
            if @scope.present?
              input_id = "#{@form.object_name}_#{@method}_#{item_value}_#{@scope}"
