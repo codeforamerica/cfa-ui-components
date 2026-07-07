@@ -6,9 +6,7 @@
   </div>
 
   <div class="cfa-stack-sm">
-    <p class="font-bold text-text-default leading-none"><span class="sr-only"><%= t("cfaui.step_indicator.current_step") %>: </span><%= title %><% if named? %><span class="sr-only">, <%= step_label %></span><% end %></p>
-    <% if content? %>
-      <div class="text-text-default"><%= content %></div>
-    <% end %>
+    <p class="font-bold text-text-default leading-none"><span class="sr-only"><%= t("cfaui.step_indicator.current_section") %>: </span><%= title %><span class="sr-only">, <%= section_label %></span></p>
+    <p class="text-text-default" aria-hidden="true"><%= section_label %></p>
   </div>
 </div>

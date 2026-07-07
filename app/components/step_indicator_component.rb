@@ -3,10 +3,10 @@
 # Purely visual, non-interactive progress bar for multi-step flows. Renders
 # `total_steps` equal-width segments with the first `current_step` filled. The
 # segment bar is decorative (aria-hidden); progress is conveyed to screen
-# readers as text — a "Current step:" prefix, the visible title, and a
-# "Step N of M" count.
+# readers as text — a "Current section:" prefix, the section title, and a
+# "Section N of M" count.
 class StepIndicatorComponent < ViewComponent::Base
-  def initialize(current_step:, total_steps:, title: nil, css_class: nil)
+  def initialize(current_step:, total_steps:, title:, css_class: nil)
     unless total_steps.to_i.positive?
       raise ArgumentError, "total_steps must be a positive integer"
     end
@@ -18,23 +18,13 @@ class StepIndicatorComponent < ViewComponent::Base
     @css_class = css_class
   end
 
-  def title
-    @title.presence || step_label
-  end
-
-  def step_label
-    I18n.t("cfaui.step_indicator.step", current: @current_step, total: @total_steps)
-  end
-
-  # When a title is given it is the visible heading, so the "Step N of M" count
-  # is added for screen readers only. Otherwise the count is the heading.
-  def named?
-    @title.present?
+  def section_label
+    I18n.t("cfaui.step_indicator.section", current: @current_step, total: @total_steps)
   end
 
   def filled?(index)
     index < @current_step
   end
 
-  attr_reader :total_steps, :current_step
+  attr_reader :total_steps, :current_step, :title
 end
