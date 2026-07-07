@@ -17,26 +17,24 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
   def test_exposes_progress_to_assistive_tech
     render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
     assert_selector "[role=progressbar][aria-valuemin='0'][aria-valuemax='5'][aria-valuenow='2']"
-    assert_selector "[role=progressbar][aria-valuetext='Section 2 of 5']"
+    assert_selector "[role=progressbar][aria-valuetext='Step 2 of 5']"
   end
 
-  def test_unnamed_progressbar_is_not_labelled
+  def test_unnamed_progressbar_is_named_current_step
     render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
-    assert_no_selector "[role=progressbar][aria-labelledby]"
+    assert_selector "[role=progressbar][aria-label='Current step']"
   end
 
-  def test_renders_default_section_label
+  def test_renders_default_step_label
     render_inline(StepIndicatorComponent.new(current_step: 3, total_steps: 4))
-    assert_text "Section 3 of 4"
+    assert_text "Step 3 of 4"
   end
 
   def test_custom_title_names_the_progressbar
     render_inline(StepIndicatorComponent.new(current_step: 1, total_steps: 3, title: "Getting started"))
     assert_text "Getting started"
-    title_id = page.find("[role=progressbar]")["aria-labelledby"]
-    assert title_id.present?
-    assert_selector "p##{title_id}", text: "Getting started"
-    assert_selector "[role=progressbar][aria-valuetext='Section 1 of 3']"
+    assert_selector "[role=progressbar][aria-label='Getting started']"
+    assert_selector "[role=progressbar][aria-valuetext='Step 1 of 3']"
   end
 
   def test_renders_optional_content

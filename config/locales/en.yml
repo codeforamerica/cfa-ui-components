@@ -38,7 +38,8 @@ en:
     select:
       placeholder: "- Select -"
     step_indicator:
-      section: Section %{current} of %{total}
+      current_step: Current step
+      step: Step %{current} of %{total}
   # Demo-only strings used by Lookbook previews. Never shipped to end users and
   # not part of the translation deliverable.
   preview:

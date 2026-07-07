@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-# Purely visual, non-interactive progress bar for multi-step flows.
-#
-# Renders `total_steps` equal-width segments; the first `current_step` of them
-# are filled (completed + the current, in-progress section) and the remainder
-# are shown as remaining. The ARIA `progressbar` announces "Section N of M" as
-# its value (via aria-valuetext) and, when a step `title` is given, is named by
-# it — reading out e.g. "Personal information, progress bar, Section 2 of 4".
+# Purely visual, non-interactive progress bar for multi-step flows. Renders
+# `total_steps` equal-width segments with the first `current_step` filled. The
+# ARIA progressbar announces "Step N of M" via aria-valuetext (rather than a
+# meaningless percentage) and is named by the step title, or "Current step".
 class StepIndicatorComponent < ViewComponent::Base
   def initialize(current_step:, total_steps:, title: nil, css_class: nil)
     unless total_steps.to_i.positive?
@@ -20,22 +17,16 @@ class StepIndicatorComponent < ViewComponent::Base
     @css_class = css_class
   end
 
-  # The visible heading: the step name when given, otherwise the section count.
   def title
-    @title.presence || section_label
+    @title.presence || step_label
   end
 
-  def section_label
-    I18n.t("cfaui.step_indicator.section", current: @current_step, total: @total_steps)
+  def step_label
+    I18n.t("cfaui.step_indicator.step", current: @current_step, total: @total_steps)
   end
 
-  def named?
-    @title.present?
-  end
-
-  # Unique id so the progressbar can be labelled by its own visible title.
-  def progressbar_title_id
-    @progressbar_title_id ||= "cfa-step-indicator-title-#{SecureRandom.hex(4)}"
+  def accessible_name
+    @title.presence || I18n.t("cfaui.step_indicator.current_step")
   end
 
   def filled?(index)

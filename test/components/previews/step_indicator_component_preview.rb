@@ -45,7 +45,7 @@ class StepIndicatorComponentPreview < ViewComponent::Preview
   end
   # @!endgroup
 
-  # A custom heading overrides the default "Section X of Y" label.
+  # A custom heading overrides the default "Step X of Y" label.
   #
   # @param current_step number
   # @param total_steps number

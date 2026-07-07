@@ -2,11 +2,11 @@
   <%= tag.div(class: "flex gap-x-[7px]",
         role: "progressbar",
         aria: {
-          labelledby: (progressbar_title_id if named?),
+          label: accessible_name,
           valuemin: 0,
           valuemax: total_steps,
           valuenow: current_step,
-          valuetext: section_label
+          valuetext: step_label
         }) do %>
     <% total_steps.times do |index| %>
       <span class="flex-1 min-w-px h-2 rounded-lg <%= filled?(index) ? "bg-success" : "bg-border-secondary" %>"></span>
@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="cfa-stack-sm">
-    <p id="<%= progressbar_title_id %>" class="font-bold text-text-default leading-none"><%= title %></p>
+    <p class="font-bold text-text-default leading-none"><%= title %></p>
     <% if content? %>
       <div class="text-text-default"><%= content %></div>
     <% end %>
