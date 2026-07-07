@@ -1,20 +1,12 @@
 <div class="<%= class_names("cfa-step-indicator cfa-stack-med", @css_class) %>">
-  <%= tag.div(class: "flex gap-x-[7px]",
-        role: "progressbar",
-        aria: {
-          label: accessible_name,
-          valuemin: 0,
-          valuemax: total_steps,
-          valuenow: current_step,
-          valuetext: step_label
-        }) do %>
+  <div class="flex gap-x-[7px]" aria-hidden="true">
     <% total_steps.times do |index| %>
       <span class="flex-1 min-w-px h-2 rounded-lg <%= filled?(index) ? "bg-success" : "bg-border-secondary" %>"></span>
     <% end %>
-  <% end %>
+  </div>
 
   <div class="cfa-stack-sm">
-    <p class="font-bold text-text-default leading-none"><%= title %></p>
+    <p class="font-bold text-text-default leading-none"><%= title %><% if named? %><span class="sr-only">, <%= step_label %></span><% end %></p>
     <% if content? %>
       <div class="text-text-default"><%= content %></div>
     <% end %>

@@ -5,7 +5,7 @@ require "test_helper"
 class StepIndicatorComponentTest < ViewComponent::TestCase
   def test_renders_one_segment_per_step
     render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
-    assert_selector ".cfa-step-indicator [role=progressbar] > span", count: 5
+    assert_selector ".cfa-step-indicator [aria-hidden='true'] > span", count: 5
   end
 
   def test_fills_completed_and_current_sections
@@ -14,15 +14,10 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
     assert_selector "span.bg-border-secondary", count: 3
   end
 
-  def test_exposes_progress_to_assistive_tech
+  def test_segment_bar_is_decorative
     render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
-    assert_selector "[role=progressbar][aria-valuemin='0'][aria-valuemax='5'][aria-valuenow='2']"
-    assert_selector "[role=progressbar][aria-valuetext='Step 2 of 5']"
-  end
-
-  def test_unnamed_progressbar_is_named_current_step
-    render_inline(StepIndicatorComponent.new(current_step: 2, total_steps: 5))
-    assert_selector "[role=progressbar][aria-label='Current step']"
+    assert_selector "[aria-hidden='true'] > span", count: 5
+    assert_no_selector "[role=progressbar]"
   end
 
   def test_renders_default_step_label
@@ -30,11 +25,11 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
     assert_text "Step 3 of 4"
   end
 
-  def test_custom_title_names_the_progressbar
+  def test_titled_indicator_adds_sr_only_count
     render_inline(StepIndicatorComponent.new(current_step: 1, total_steps: 3, title: "Getting started"))
     assert_text "Getting started"
-    assert_selector "[role=progressbar][aria-label='Current step: Getting started']"
-    assert_selector "[role=progressbar][aria-valuetext='Step 1 of 3']"
+    # The count isn't the visible heading here, so it's exposed to screen readers.
+    assert_selector "span.sr-only", text: "Step 1 of 3"
   end
 
   def test_renders_optional_content
@@ -45,7 +40,7 @@ class StepIndicatorComponentTest < ViewComponent::TestCase
   def test_clamps_current_step_to_total
     render_inline(StepIndicatorComponent.new(current_step: 99, total_steps: 5))
     assert_selector "span.bg-success", count: 5
-    assert_selector "[role=progressbar][aria-valuenow='5']"
+    assert_text "Step 5 of 5"
   end
 
   def test_is_not_interactive
