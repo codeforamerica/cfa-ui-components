@@ -27,7 +27,7 @@
 }
 
 .btn--primary {
-    @apply bg-primary border-border-default text-text-default;
+    @apply bg-primary border-border-default text-text-default min-w-[360px];
     @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
@@ -45,7 +45,7 @@
 }
 
 .btn--secondary {
-    @apply bg-button-surface-secondary border-primary text-text-default;
+    @apply bg-button-surface-secondary border-primary text-text-default min-w-[360px];
     @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
@@ -63,7 +63,7 @@
 }
 
 .btn--destructive {
-    @apply bg-white border-border-error text-destructive;
+    @apply bg-white border-border-error text-destructive min-w-[360px];
 }
 
 .btn--destructive:hover {
