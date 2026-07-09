@@ -1,0 +1,12 @@
+<div class="<%= class_names("cfa-step-indicator cfa-stack-med", @css_class) %>">
+  <div class="flex gap-x-[7px]" aria-hidden="true">
+    <% total_steps.times do |index| %>
+      <span class="flex-1 min-w-px h-2 rounded-lg <%= filled?(index) ? "bg-success" : "bg-border-secondary" %>"></span>
+    <% end %>
+  </div>
+
+  <div class="cfa-stack-sm">
+    <p class="font-bold text-text-default leading-none"><span class="sr-only"><%= t("cfaui.step_indicator.current_section") %>: </span><%= title %><span class="sr-only">, <%= section_label %></span></p>
+    <p class="text-text-default" aria-hidden="true"><%= section_label %></p>
+  </div>
+</div>
