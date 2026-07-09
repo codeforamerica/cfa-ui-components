@@ -89,4 +89,32 @@ class ComboboxComponentTest < ViewComponent::TestCase
     ))
     assert_selector "div.max-w-lg.mt-cfa-lg"
   end
+
+  def test_input_attrs_are_forwarded_to_the_select_and_filter_input
+    result = render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      input_attrs: {autocomplete: "off"}
+    ))
+    assert_selector "select[autocomplete='off']", visible: :all
+    # The filter <input> lives inside a <template>, which Capybara won't descend
+    # into, so assert on raw HTML: attribute lands on both select and input.
+    assert_equal 2, result.to_html.scan('autocomplete="off"').size
+  end
+
+  def test_omits_input_attrs_when_none_given
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    assert_no_selector "select[autocomplete]", visible: :all
+  end
 end
