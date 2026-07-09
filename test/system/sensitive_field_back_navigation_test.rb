@@ -18,8 +18,6 @@ class SensitiveFieldBackNavigationTest < JavaScriptSystemTestCase
   test "reloads a sensitive page when it is restored from the bfcache" do
     visit "/rails/view_components/tin_component/default"
 
-    # A node injected at runtime survives a Turbo restoration but not a full
-    # reload, so its disappearance proves the reload fired.
     page.execute_script(<<~JS)
       document.body.insertAdjacentHTML("beforeend", "<div id='reload-sentinel'></div>");
     JS
