@@ -40,7 +40,7 @@ class SelectComponent < AttributeBoundFormElementComponent
   end
 
   def placeholder_label
-    "- Select -"
+    I18n.t("cfaui.select.placeholder")
   end
 
   def current_label

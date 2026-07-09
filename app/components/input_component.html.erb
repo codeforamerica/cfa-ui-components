@@ -1,10 +1,85 @@
-<div class="<%= class_names("cfa-stack-sm", @css_class) %>">
-  <%= @form.label @method, label_with_optional_marker, class: "label block" %>
-  <% if @help_text %>
-    <p id="<%= help_dom_id %>" class="help_text">
-      <%= @help_text %>
-    </p>
+<% if plain? %>
+  <div class="<%= class_names("cfa-stack-sm", @css_class) %>">
+    <%= @form.label @method, label_with_optional_marker, class: "label block" %>
+    <% if @help_text %>
+      <p id="<%= help_dom_id %>" class="help_text">
+        <%= @help_text %>
+      </p>
+    <% end %>
+    <%= @form.text_field @method, **field_attrs(class: "w-full max-w-sm", **aria_required_attrs, **aria_field_attrs(described_by_help: @help_text.present?)) %>
+    <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
+  </div>
+<% else %>
+  <% fields_markup = capture do %>
+    <% fields.each do |field| %>
+      <div class="cfa-stack-sm">
+        <%= @form.label field[:method], field_label(field), class: "label block" %>
+        <% if field[:help_text] %>
+          <p id="<%= @form.field_id(field[:method], :help) %>" class="help_text">
+            <%= field[:help_text] %>
+          </p>
+        <% end %>
+        <%= @form.text_field field[:method], **text_field_options(field) %>
+        <%= render(FormErrorsComponent.new(form: @form, method: field[:method])) %>
+      </div>
+    <% end %>
   <% end %>
-  <%= @form.text_field @method, **field_attrs(class: "w-full max-w-sm", **aria_required_attrs, **aria_field_attrs(described_by_help: @help_text.present?)) %>
-  <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
-</div>
+
+  <% summary_markup = capture do %>
+    <div class="cfa-stack-sm">
+      <p class="label block"><%= @label %></p>
+      <p aria-hidden="true"><%= masked_value %></p>
+      <span class="sr-only"><%= t("cfaui.input.ending_in", last_four: last_four) %></span>
+    </div>
+  <% end %>
+
+  <% if !@obfuscate %>
+    <%# Confirmation field(s) without obfuscation. %>
+    <div class="<%= class_names("cfa-stack-med", @css_class) %>">
+      <%= fields_markup %>
+    </div>
+  <% elsif @edit_group %>
+    <%# Obfuscation driven by an ambient `editing` flag from an enclosing scope,
+        so several inputs can share one Edit button. The scope owns the buttons. %>
+    <div class="<%= @css_class %>">
+      <% if saved_value? %>
+        <div x-show="!editing" x-cloak><%= summary_markup %></div>
+        <div x-show="editing" x-cloak class="cfa-stack-med"><%= fields_markup %></div>
+      <% else %>
+        <div class="cfa-stack-med"><%= fields_markup %></div>
+      <% end %>
+    </div>
+  <% elsif saved_value? %>
+    <%# Self-contained obfuscated view: own Edit/Cancel toggle. %>
+    <div class="<%= @css_class %>" x-data="{
+          editing: <%= editing_initially? %>,
+          edit() {
+            this.editing = true
+            this.$nextTick(() => this.$root.querySelector('[data-obfuscated-input]')?.focus())
+          },
+          cancel() {
+            this.editing = false
+            this.$root.querySelectorAll('[data-obfuscated-input]').forEach((input) => { input.value = '' })
+          }
+        }">
+      <div x-show="!editing" x-cloak class="cfa-stack-sm">
+        <%= summary_markup %>
+        <button type="button" class="btn btn--secondary btn--small" x-on:click="edit()">
+          <%= t("cfaui.input.edit") %>
+        </button>
+      </div>
+
+      <div x-show="editing" x-cloak class="cfa-stack-med">
+        <%= fields_markup %>
+        <button type="button" class="btn btn--secondary btn--small" x-on:click="cancel()">
+          <%= t("cfaui.input.cancel") %>
+        </button>
+      </div>
+    </div>
+  <% else %>
+    <%# Obfuscation requested but nothing saved yet: just the empty entry form. %>
+    <div class="<%= class_names("cfa-stack-med", @css_class) %>">
+      <%= fields_markup %>
+    </div>
+  <% end %>
+<% end %>

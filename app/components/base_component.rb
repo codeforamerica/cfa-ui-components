@@ -63,7 +63,7 @@ class BaseComponent < ViewComponent::Base
 
   def label_with_optional_marker
     return @label unless @optional
-    safe_join([@label, " ", tag.span("(#{I18n.t("cfaui.optional")})", class: "font-normal")])
+    safe_join([@label, " ", tag.span("(#{I18n.t("cfaui.base.optional")})", class: "font-normal")])
   end
 
   def aria_required_attrs

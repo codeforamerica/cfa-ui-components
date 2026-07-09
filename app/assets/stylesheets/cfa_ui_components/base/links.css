@@ -1,9 +1,9 @@
 a:not(.btn) {
-  @apply inline-flex w-fit items-center gap-cfa-xsm border-link-unvisited text-link-unvisited underline;
+  @apply inline w-fit border-b border-link-unvisited text-link-unvisited;
 }
 
 a:not(.btn):hover {
-  @apply border-transparent;
+  @apply border-b-0;
 }
 
 a:not(.btn):visited {
@@ -12,4 +12,20 @@ a:not(.btn):visited {
 
 a:not(.btn):focus-visible {
   @apply rounded-sm outline-2 outline-offset-2 outline-focus;
+}
+/* Header links don't use the global link styling */
+header a:not(.btn) {
+  @apply border-0;
+}
+
+header a:not(.btn):hover,
+header a:not(.btn):visited {
+  @apply border-0;
+}
+
+/* Footer links always have a white underline */
+footer a:not(.btn),
+footer a:not(.btn):hover,
+footer a:not(.btn):visited {
+  @apply border-white;
 }
