@@ -21,6 +21,7 @@ class FormComponentPreview < ViewComponent::Preview
     attribute :last_name
     attribute :pineapple_pizza_preference
     attribute :favorite_fruits
+    attribute :favorite_fruit
     attribute :my_date
     attribute :my_number
     attribute :ssn
