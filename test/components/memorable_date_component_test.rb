@@ -7,13 +7,34 @@ class DatePickerTestModel
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  attribute :my_date
+  attribute :my_date, :date
+end
+
+# Mimics an ActiveRecord object after a failed multiparameter date cast: the
+# cast attribute is nil, but attributes_before_type_cast still holds the raw
+# {1i,2i,3i} parts the user submitted. Plain ActiveModel::Attributes supports
+# neither multiparameter assignment nor attributes_before_type_cast, so we
+# supply them by hand.
+class InvalidDateTestModel
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :my_date, :date
+
+  def initialize(raw_parts)
+    super()
+    @raw_parts = raw_parts
+  end
+
+  def attributes_before_type_cast
+    {"my_date" => @raw_parts}
+  end
 end
 
 class MemorableDateComponentTest < ViewComponent::TestCase
-  def build_form
+  def build_form(model = DatePickerTestModel.new)
     f = nil
-    vc_test_controller.view_context.form_with(url: "/", model: DatePickerTestModel.new) { |fb| f = fb }
+    vc_test_controller.view_context.form_with(url: "/", model:) { |fb| f = fb }
     f
   end
 
@@ -187,6 +208,30 @@ class MemorableDateComponentTest < ViewComponent::TestCase
 
     assert_selector "span.option-label", text: "January"
     assert_selector "span.option-label", text: "December"
+  end
+
+  # TEF-829: when the user submits an unparseable date (e.g. Feb 31), Rails
+  # casts my_date to nil but keeps the raw parts in attributes_before_type_cast.
+  # The fields must re-render exactly what the user typed instead of going blank.
+  def test_invalid_date_re_renders_the_users_raw_input
+    model = InvalidDateTestModel.new({1 => "2020", 2 => "2", 3 => "31"})
+    assert_nil model.my_date # the cast failed
+
+    render_inline(MemorableDateComponent.new(form: build_form(model), method: :my_date, label: "Date of birth"))
+
+    assert_selector "input#invalid_date_test_model_my_date_3i[value='31']"
+    assert_selector "input#invalid_date_test_model_my_date_1i[value='2020']"
+    assert_selector "input[name='invalid_date_test_model[my_date(2i)]'][value='2']", visible: :all
+  end
+
+  def test_valid_date_renders_from_the_cast_value
+    model = DatePickerTestModel.new(my_date: Date.new(1999, 3, 7))
+
+    render_inline(MemorableDateComponent.new(form: build_form(model), method: :my_date, label: "Date of birth"))
+
+    assert_selector "input#date_picker_test_model_my_date_3i[value='7']"
+    assert_selector "input#date_picker_test_model_my_date_1i[value='1999']"
+    assert_selector "input[name='date_picker_test_model[my_date(2i)]'][value='3']", visible: :all
   end
 
   def test_month_options_render_in_spanish_when_locale_is_es
