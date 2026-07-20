@@ -15,7 +15,7 @@ class PrefilledTextFieldComponent < ViewComponent::Base
       end
 
     @label = label
-    @variant =
+    @style =
       case variant
       when :primary
         ""

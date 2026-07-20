@@ -2,7 +2,7 @@
 <% if @heading %>
   <div class="<%= class_names("cfa-stack-sm", @css_class) %>">
     <%= content_tag(@heading, @label, class: "label block", id: label_id) %>
-    <%= content_tag(@text ? :span : :div, @text || content, class: class_names("w-full max-w-sm", @variant), aria: {labelledby: label_id}) %>
+    <%= content_tag(@text ? :span : :div, @text || content, class: class_names("w-full max-w-sm", @style), aria: {labelledby: label_id}) %>
   </div>
 <% else %>
   <dl class="<%= class_names("cfa-stack-sm", @css_class) %>">
