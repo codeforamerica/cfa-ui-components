@@ -54,8 +54,8 @@ class BaseComponent < ViewComponent::Base
   # CSS-masked span for a file-based icon, which inherits color via
   # `background-color: currentColor`.
   def masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
-    variant = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
-    content_tag :span, "", class: ["cfa-icon-mask", css_class].compact, variant:,
+    style = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
+    content_tag :span, "", class: ["cfa-icon-mask", css_class].compact, style:,
       **icon_aria(name, aria_hidden:, label:)
   end
 
