@@ -87,7 +87,7 @@ class ComboboxComponentTest < ViewComponent::TestCase
       item_label_method: :label,
       css_class: "mt-cfa-lg"
     ))
-    assert_selector "div.max-w-lg.mt-cfa-lg"
+    assert_selector "div.max-w-sm.mt-cfa-lg"
   end
 
   def test_input_attrs_are_forwarded_to_the_select_and_filter_input
