@@ -225,8 +225,11 @@ const comboboxInput = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) 
         },
         'x-init'() {
             this.inputEl = el;
-            // placeholderText has index of 0
-            if(this.selectEl.selectedIndex != 0) {
+            // Prefill only when a real option is selected. We can't key off
+            // selectedIndex: Rails omits the placeholder <option> once a value
+            // is selected, so the first real option sits at index 0 too. The
+            // empty-valued placeholder is the only option with value === ''.
+            if(this.selectEl.value !== '') {
                 this.setInitialValue(this.selectEl);
             }
         },
