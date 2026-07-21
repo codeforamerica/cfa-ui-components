@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 class SubmitButtonComponent < ViewComponent::Base
-  def initialize(form:, label: I18n.t("cfaui.submit_button.label"), style: :primary, disabled: false, css_class: nil)
+  def initialize(form:, label: I18n.t("cfaui.submit_button.label"), variant: :primary, disabled: false, css_class: nil)
     @form = form
     @label = label
     @disabled = disabled
     @css_class = css_class
     @button_style =
-      case style
+      case variant
       when :primary
         "btn--primary"
       when :secondary
         "btn--secondary"
       else
-        raise ArgumentError.new("Invalid button style")
+        raise ArgumentError.new("Invalid button variant")
       end
   end
 end
