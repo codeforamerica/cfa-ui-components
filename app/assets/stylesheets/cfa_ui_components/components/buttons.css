@@ -1,5 +1,5 @@
 .btn {
-    @apply relative block text-center rounded-lg border-2 cursor-pointer;
+    @apply relative block w-full sm:w-auto text-center rounded-lg border-2 cursor-pointer;
 
     a {
         @apply text-inherit no-underline;
@@ -25,7 +25,11 @@
 .btn:focus-visible {
     outline: none;
 }
-
+.btn--primary,
+.btn--secondary,
+.btn--destructive {
+    @apply sm:min-w-[360px];
+}
 .btn--primary {
     @apply bg-primary border-border-default text-text-default;
     @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
@@ -75,7 +79,7 @@
 }
 
 .btn--small {
-    @apply px-3 py-2 w-fit rounded;
+    @apply min-w-0 px-3 py-2 w-fit rounded;
     font-size: 16px;
     font-weight: 700;
 }
@@ -107,7 +111,7 @@
 }
 
 .btn--large {
-    @apply p-cfa-med w-fit mx-auto;
+    @apply p-cfa-med sm:w-fit mx-auto;
     font-size: 22px;
     font-weight: 700;
 }
