@@ -32,7 +32,12 @@ export default function (Alpine: Alpine) {
     },
 
     openList() {
-      if (!this.disabled) this.open = true;
+      if (this.disabled) return;
+      this.open = true;
+      // Safari/Firefox on macOS do not focus a <button> on click, so keydown
+      // (and thus typeahead) would otherwise never reach this combobox. Focus it
+      // explicitly whenever the list opens.
+      this.$refs.button?.focus();
     },
     closeList() {
       this.open = false;
