@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ComboboxComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, item_disabled_method: nil, help_text: nil, optional: false, css_class: nil)
-    super(form:, method:, css_class:)
+  def initialize(form:, method:, label:, collection:, item_value_method:, item_label_method:, item_disabled_method: nil, help_text: nil, optional: false, css_class: nil, input_attrs: {})
+    super(form:, method:, css_class:, input_attrs:)
     @label = label
     @help_text = help_text
     @collection = collection
