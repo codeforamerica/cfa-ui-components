@@ -56,3 +56,5 @@ gem "view_component", "~> 4.0"
 gem "ostruct", "~> 0.6.3"
 
 gem "rack-session", ">= 2.1.2"
+
+gem "activestorage", ">= 8.0.4.1"
