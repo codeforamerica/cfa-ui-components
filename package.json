@@ -6,7 +6,7 @@
     "@alpinejs/mask": "^3.15.12",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.23",
-    "@tailwindcss/cli": "^4.3.2",
+    "@tailwindcss/cli": "^4.3.3",
     "alpinejs": "^3.15.12",
     "node": "^26.4.0",
     "tailwindcss": "^4.1.14"
