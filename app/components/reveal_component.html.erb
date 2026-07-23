@@ -1,5 +1,5 @@
-<details class="<%= class_names("group bg-white border-2 border-primary rounded-lg p-cfa-med", @css_class) %>">
-  <summary class="flex justify-between items-center list-none cursor-pointer">
+<details class="<%= class_names("group bg-white border-2 border-primary rounded-lg", @css_class) %>">
+  <summary class="flex justify-between items-center list-none marker:hidden cursor-pointer p-cfa-med">
     <span class="flex font-bold items-center gap-cfa-sm">
       <% if @icon.present? %>
         <%= inline_icon(@icon, size: 24) %>
@@ -9,7 +9,7 @@
     <span class="ml-[10px] inline-flex items-center transition-transform duration-200 group-open:rotate-180"><%= inline_icon(:expand_more, size: 25, aria_hidden: true) %></span>
   </summary>
 
-  <div class="cfa-stack-med mt-cfa-sm">
+  <div class="cfa-stack-med px-cfa-med pb-cfa-med">
     <%= content %>
   </div>
 </details>
