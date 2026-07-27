@@ -87,7 +87,7 @@
       }">
     <div x-show="!editing" x-cloak class="cfa-stack-sm">
       <p class="label block"><%= @label %></p>
-      <p class="[font-feature-settings:'calt'_0]" aria-hidden="true"><%= masked_value %></p>
+      <p class="masked-value" aria-hidden="true"><%= masked_value %></p>
       <span class="sr-only"><%= t("cfaui.tin.tin_ending_in", last_four: last_four) %></span>
       <button type="button" class="btn btn--secondary btn--small" x-on:click="edit()">
         <%= t("cfaui.tin.edit") %>
