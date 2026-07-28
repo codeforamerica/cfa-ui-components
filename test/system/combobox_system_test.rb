@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class ComboboxAriaTest < JavaScriptSystemTestCase
+class ComboboxSystemTest < JavaScriptSystemTestCase
   test "search input aria-labelledby references the visible label" do
     visit "/rails/view_components/combobox_component/default"
 
@@ -41,6 +41,16 @@ class ComboboxAriaTest < JavaScriptSystemTestCase
     assert_selector "li[role='option']:not([style*='display: none'])", text: "Apple"
     find("li[role='option']", text: "Apple").click
     assert_equal "Apple", input.value
+  end
+
+  test "prefilled first option is shown in the search input" do
+    # Rails omits the placeholder <option> once a value is selected, so the
+    # first real option lands at selectedIndex 0. Prefill must still populate.
+    visit "/rails/view_components/combobox_component/prefilled"
+
+    input = find("input[role='combobox']")
+    assert_equal "Apple", input.value,
+      "prefilled first option should be shown in the search input"
   end
 
   test "search input aria-describedby references the error message" do

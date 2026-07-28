@@ -14,7 +14,7 @@ class ComboboxComponentPreview < FormComponentPreview
   end
 
   def prefilled
-    custom_model = TestModel.new(favorite_fruits: "orange")
+    custom_model = TestModel.new(favorite_fruits: "apple")
     render(ComboboxComponent.new(form: form(model: custom_model), method: :favorite_fruits, label: I18n.t("preview.favorite_fruits"), help_text: I18n.t("preview.fruit_help_text"), collection: self.class.combobox_fruit_options, item_value_method: :value, item_label_method: :label))
   end
 

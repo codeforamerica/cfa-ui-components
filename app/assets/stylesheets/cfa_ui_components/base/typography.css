@@ -86,3 +86,9 @@ h1 {
 .help_text {
     @apply block text-text-body-secondary;
 }
+
+/* Masked identifiers such as ***-**-1234. Disables Inter's contextual
+   alternates, which otherwise misalign the mask glyphs. */
+.masked-value {
+    font-feature-settings: "calt" 0;
+}
