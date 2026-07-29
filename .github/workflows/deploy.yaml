@@ -75,7 +75,7 @@ jobs:
           owner: codeforamerica
           repositories: shared-services-infra
       - name: Trigger deployment from shared services
-        uses: codex-/return-dispatch@v3
+        uses: codex-/return-dispatch@v3.0.2
         id: dispatch
         with:
           token: ${{ steps.token.outputs.token }}
