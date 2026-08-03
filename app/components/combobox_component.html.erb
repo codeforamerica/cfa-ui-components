@@ -1,4 +1,4 @@
-<div x-data x-combobox class="<%= class_names("max-w-lg cfa-stack-sm", @css_class) %>"
+<div x-data x-combobox class="<%= class_names("max-w-sm cfa-stack-sm", @css_class) %>"
      x-init="Alpine.store('<%= @method.to_s %>', '<%= current_value %>')"
      @change="Alpine.store('<%= @method.to_s %>', $event.target.value)">
   <% invalid = @form.object.errors[@method].any? %>
@@ -12,7 +12,7 @@
         @method,
         @collection.map { |o| [o.send(@item_label_method), o.send(@item_value_method)] },
         {prompt: I18n.t("cfaui.combobox.placeholder").to_s, disabled: disabled_values},
-        {"x-combobox:values": "", aria: {invalid: invalid, required: @optional ? nil : "true", describedby: (error_dom_id if invalid)}.compact}
+        {"x-combobox:values": "", aria: {invalid: invalid, required: @optional ? nil : "true", describedby: (error_dom_id if invalid)}.compact}.merge(@input_attrs)
       ) %>
   <template x-if="$combobox.isLoaded">
     <div class="relative">
@@ -22,6 +22,7 @@
           aria-invalid="<%= invalid %>"
           class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent"
           placeholder="<%= I18n.t("cfaui.combobox.placeholder") %>"
+          <%= tag.attributes(@input_attrs) %>
         >
         <div class="absolute z-10 inset-y-px right-px flex">
           <button x-combobox:toggle class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
