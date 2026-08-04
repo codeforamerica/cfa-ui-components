@@ -1,24 +1,19 @@
 # frozen_string_literal: true
 
 class IconComponent < BaseComponent
-  # Standalone icons default to the themed icon color (--color-icon-default,
-  # i.e. Figma's icon/primary). Pass `css_class:` (e.g. "text-error") to color
-  # an icon differently. Icons rendered inside other components go through
-  # `inline_icon` directly and keep inheriting `currentColor`.
+  # Standalone icons default to the themed icon color (--color-icon-default).
+  # Pass `css_class:` (e.g. "text-error") to recolor. Icons inside other
+  # components use `inline_icon` and inherit `currentColor`.
   #
-  # Accessibility — name an icon by its MEANING, never its shape:
+  # Accessibility — name an icon by its MEANING, not its shape:
+  # * No `label:` (default): decorative — nearby text conveys the meaning, so
+  #   the icon is hidden from assistive tech to avoid double-announcing.
+  # * `label:` given: meaningful — the icon is the sole content; the label is
+  #   exposed as its name and the icon is no longer hidden.
   #
-  # * Decorative (default): text beside the icon already conveys the meaning
-  #   (a button label, a column value). The icon is hidden from assistive tech
-  #   so it isn't double-announced. This is the common case, so it's the
-  #   default when no `label:` is given.
-  # * Meaningful: the icon is the only content (e.g. a status glyph in an
-  #   icon-only cell). Pass `label:` with what it conveys ("Yes"/"No"); that
-  #   name is exposed and the icon is no longer hidden.
-  #
-  # `aria_hidden:` can be set explicitly to override the derived default (e.g.
-  # `aria_hidden: false` with no label falls back to a humanized icon name like
-  # "check circle icon" — a shape-based name that's rarely what you want).
+  # Set `aria_hidden:` explicitly to override the derived default. (Note:
+  # `aria_hidden: false` with no label exposes a shape-based name like
+  # "check circle icon" — rarely what you want.)
   def initialize(icon:, size: 20, css_class: "text-icon-default", label: nil, aria_hidden: label.nil?)
     @icon = icon
     @size = size
