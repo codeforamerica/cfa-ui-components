@@ -12,23 +12,22 @@
 
       if (this.open) {
         this.$nextTick(() => {
-  this.$refs.modalTitle.focus({ preventScroll: true });
-  });
-  }
-  },
-  init() {
-  const resetScrollingBehavior = () => {
-  document.documentElement.style.overflow = '';
-  document.documentElement.style.paddingRight = '';
-  };
-  document.addEventListener(
-  'turbo:before-visit',
-  resetScrollingBehavior
-  );
-  }
+          this.$refs.modalTitle.focus({ preventScroll: true });
+        });
+      }
+    },
+
+    init() {
+      const resetScrollingBehavior = () => {
+        document.documentElement.style.overflow = '';
+        document.documentElement.style.paddingRight = '';
+      };
+
+      document.addEventListener('turbo:before-visit', resetScrollingBehavior);
+    }
   }"
   @<%= @name %>-modal.window="toggle()"
-  >
+>
   <div
     class="h-dvh w-screen relative flex flex-row justify-center items-center bg-stone-400/50 overflow-y-hidden"
     x-trap.inert.noscroll="open"
