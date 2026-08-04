@@ -25,7 +25,7 @@
           <%= tag.attributes(@input_attrs) %>
         >
         <div class="absolute z-10 inset-y-px right-px flex">
-          <button x-combobox:toggle type="button" aria-label="<%= t('cfaui.combobox.toggle_aria') %>" class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
+          <button x-combobox:toggle type="button" aria-label="<%= t("cfaui.combobox.toggle_aria") %>" class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
             <template x-if="$combobox.isOpen">
               <%= render(IconComponent.new(icon: "expand_less")) %>
             </template>
