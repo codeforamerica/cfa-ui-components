@@ -37,7 +37,8 @@ class TooltipComponentTest < ViewComponent::TestCase
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info")) do
       "<ul><li>Item</li></ul>".html_safe
     end
-    assert_selector "dialog"
+
+    assert_selector "[role='dialog'][aria-modal='true']"
     assert_selector "ul li", text: "Item"
   end
 
