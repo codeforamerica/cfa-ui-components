@@ -5,8 +5,18 @@ require "test_helper"
 class IconComponentTest < ViewComponent::TestCase
   def test_renders_sprite_use_for_known_icon
     render_inline(IconComponent.new(icon: "info_outline"))
-    assert_selector "svg[role='img'][aria-label='info outline icon']"
     assert_selector "svg use[href$='#info_outline']", visible: :all
+  end
+
+  def test_hides_the_icon_from_assistive_tech_by_default
+    render_inline(IconComponent.new(icon: "info_outline"))
+    assert_selector "svg[aria-hidden='true'][focusable='false']", visible: :all
+    assert_no_selector "svg[role='img']", visible: :all
+  end
+
+  def test_unlabeled_icon_can_opt_back_into_a_humanized_name
+    render_inline(IconComponent.new(icon: "info_outline", aria_hidden: false))
+    assert_selector "svg[role='img'][aria-label='info outline icon']", visible: :all
   end
 
   def test_raises_for_unknown_icon
@@ -27,13 +37,30 @@ class IconComponentTest < ViewComponent::TestCase
     assert_no_selector "svg.text-icon-default", visible: :all
   end
 
+  def test_label_overrides_the_default_accessible_name
+    render_inline(IconComponent.new(icon: "check_circle", label: "Yes"))
+    assert_selector "svg[role='img'][aria-label='Yes']", visible: :all
+    assert_no_selector "svg[aria-label='check circle icon']", visible: :all
+  end
+
+  def test_label_overrides_the_default_accessible_name_on_masked_icons
+    render_inline(IconComponent.new(icon: "clock", label: "Pending"))
+    assert_selector "span.cfa-icon-mask[role='img'][aria-label='Pending']", visible: :all
+  end
+
+  def test_aria_hidden_removes_the_icon_from_the_accessibility_tree
+    render_inline(IconComponent.new(icon: "check_circle", aria_hidden: true))
+    assert_selector "svg[aria-hidden='true'][focusable='false']", visible: :all
+    assert_no_selector "svg[role='img']", visible: :all
+  end
+
   def test_loading_renders_masked_span
     render_inline(IconComponent.new(icon: "loading"))
-    assert_selector "span.cfa-icon-mask[role='img'][aria-label='loading icon']", visible: :all
+    assert_selector "span.cfa-icon-mask[aria-hidden='true']", visible: :all
   end
 
   def test_clock_renders_masked_span
     render_inline(IconComponent.new(icon: "clock"))
-    assert_selector "span.cfa-icon-mask[role='img'][aria-label='clock icon']", visible: :all
+    assert_selector "span.cfa-icon-mask[aria-hidden='true']", visible: :all
   end
 end

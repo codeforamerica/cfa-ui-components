@@ -310,9 +310,8 @@ const comboboxToggleButton = (el: ElementWithXAttributes<HTMLElement>, Alpine: A
         ':type'() {
             return 'button'
         },
-        ':aria-label'() {
-            return 'toggle options'
-        },
+        // aria-label is rendered server-side (localized) on the button; don't
+        // clobber it here with a hardcoded English string.
         ':tabindex'() {
             return '-1'
         },
