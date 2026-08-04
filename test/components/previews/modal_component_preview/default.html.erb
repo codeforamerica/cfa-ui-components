@@ -1,7 +1,6 @@
 <button
   type="button"
   x-data
-  aria-haspopup="dialog"
   @click="$dispatch('first-modal')"
 >
   Open Modal
@@ -19,5 +18,5 @@
     <li>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
     <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
   </ul>
-  <a href="#" @click.prevent="close()">Close me!</a>
+  <a href="#" @click.prevent="toggle()">Close me!</a>
 <% end %>

@@ -1,4 +1,4 @@
-x<div
+<div
   x-id="['<%= @name %>-title', '<%= @name %>-buttons']"
   x-transition.opacity
   class="fixed inset-0 z-1000"
@@ -6,21 +6,15 @@ x<div
   x-cloak
   x-data="{
     open: false,
-    previouslyFocused: null,
 
-    show() {
-      this.previouslyFocused = document.activeElement;
-      this.open = true;
+    toggle() {
+      this.open = !this.open;
 
-      this.$nextTick(() => {
+      if (this.open) {
+        this.$nextTick(() => {
   this.$refs.modalTitle.focus({ preventScroll: true });
   });
-  },
-  close() {
-  this.open = false;
-  this.$nextTick(() => {
-  this.previouslyFocused?.focus();
-  });
+  }
   },
   init() {
   const resetScrollingBehavior = () => {
@@ -33,18 +27,20 @@ x<div
   );
   }
   }"
-  @<%= @name %>-modal.window="show()"
+  @<%= @name %>-modal.window="toggle()"
   >
   <div
     class="h-dvh w-screen relative flex flex-row justify-center items-center bg-stone-400/50 overflow-y-hidden"
     x-trap.inert.noscroll="open"
-    @keyup.escape.window="open && close()"
-    @click.self="close()"
+    @keyup.escape.window="open && toggle()"
   >
     <div
       role="dialog"
       aria-modal="true"
       :aria-labelledby="$id('<%= @name %>-title')"
+      x-transition
+      x-show="open"
+      @click.away="toggle()"
       class="cfa-modal relative flex flex-col min-h-50 max-h-[90dvh] md:max-h-[80dvh] overflow-auto bg-white rounded-lg border-border-secondary border-2"
     >
       <div class="p-cfa-lg cfa-stack-med max-w-[360px]">
@@ -59,7 +55,7 @@ x<div
           </h1>
           <button
             type="button"
-            @click="close()"
+            @click="toggle()"
             class="flex shrink-0 cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             aria-label="<%= t("cfaui.modal.close_aria") %>"
           >
