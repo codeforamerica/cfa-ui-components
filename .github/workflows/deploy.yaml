@@ -16,6 +16,10 @@ on:
         required: false
         type: string
 
+concurrency:
+  group: deploy
+  queue: max
+
 permissions:
   contents: read
 
