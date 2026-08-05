@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "For when you want to have your UI be components"
   spec.homepage = "https://github.com/codeforamerica/cfa-ui-components/blob/main/README.md"
-  spec.required_ruby_version = ">= 3.1.0"
+  spec.required_ruby_version = ">= 4.0.6"
   spec.licenses = "Nonstandard"  # TODO: Change this when we go public
 
   spec.files = Dir[
