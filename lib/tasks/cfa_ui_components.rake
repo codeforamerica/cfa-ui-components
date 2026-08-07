@@ -7,10 +7,13 @@ namespace :cfa_ui_components do
       stylesheets_dest_dir = Rails.root.join("app/assets/stylesheets/vendor/cfa_ui_components")
       FileUtils.mkdir_p(stylesheets_dest_dir)
 
-      # Copy partial subdirectories (base/, components/, utilities/) that
-      # the entry CSS @imports. Without these, Tailwind can't resolve them.
+      # Copy the partial subdirectories (base/, components/, utilities/) AND the
+      # top-level entry files (tokens.css, base.css, components.css) that the
+      # umbrella @imports. Without these, Tailwind can't resolve the imports.
+      # The umbrella itself is copied here too, then overwritten below to prepend
+      # the @source directive.
       Dir.glob(File.join(stylesheets_source_dir, "*")).each do |entry|
-        FileUtils.cp_r(entry, stylesheets_dest_dir) if File.directory?(entry)
+        FileUtils.cp_r(entry, stylesheets_dest_dir)
       end
 
       # Prepend a @source directive that instructs Tailwind to scan the gem source while deciding which utility classes not to purge.
