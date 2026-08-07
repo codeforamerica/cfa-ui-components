@@ -1,0 +1,83 @@
+/* Design tokens (@theme) + fonts. Import this in a host that doesn't already
+   define the cfa tokens; a host with its own @theme (e.g. an admin re-skin that
+   mirrors these values) can skip it and just import components.css. Kept
+   separate from base/ and components/ so any subset can be used a la carte. */
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*
+ * Inter is self-hosted rather than loaded from Google Fonts. Google Fonts
+ * strips Inter's discretionary OpenType features (including `zero`), so
+ * `font-variant-numeric: slashed-zero` had no effect with the hosted version.
+ * The official InterVariable build below ships the `zero` feature intact.
+ * Shipped in the engine at app/assets/fonts/cfa_ui_components/, so the logical
+ * asset path is identical here and in consuming apps (Propshaft fingerprints it).
+ * The leading slash anchors the url() to the asset root so it resolves the same
+ * whether this file is served from the gem or copied into a consumer's
+ * app/assets/stylesheets/vendor/ (Propshaft resolves bare url()s relative to the
+ * containing file's directory, which otherwise mangles the path when vendored).
+ */
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/cfa_ui_components/InterVariable.woff2") format("woff2");
+}
+
+@theme {
+    --spacing-cfa-xsm: 4px;
+    --spacing-cfa-sm: 8px;
+    --spacing-cfa-med: 16px;
+    --spacing-cfa-lg: 24px;
+    --spacing-cfa-xl: 32px;
+    --spacing-cfa-2xl: 40px;
+
+    /* Background colors */
+    --color-background-app: #FFFFF5;
+    --color-background-navigation: #011E29;
+    --color-button-surface-secondary: #EEF1FF;
+    --color-background-secondary: #E5E5E5;
+    --color-background-container: #EBECDC;
+    --color-background-destructive-hover: #F8DEDE;
+    --color-background-destructive-active: #E8B5B5;
+    --color-background-disabled: #CCCCCC;
+    --color-background-indeterminate: #E2E7FF;
+
+    /* Text colors */
+    --color-text-default: #011E29;
+    --color-text-body-secondary: #1A353E;
+    --color-text-disabled: #999999;
+
+    /* Icon colors */
+    --color-icon-default: #011E29;
+    --color-icon-primary: #FFFFFF;
+
+    /* Border colors */
+    --color-border-default: #011E29;
+    --color-border-secondary: #CCD2D4;
+    --color-border-error: #B50909;
+    --color-border-warning: #B27A00;
+    --color-border-disabled: #B3BBBF;
+
+    /* Link colors */
+    --color-link-unvisited: #007C7C;
+    --color-link-visited: #4C2C92;
+
+    /* Brand / interactive colors */
+    --color-primary: #9EB0FF;
+    --color-primary-hover: #ECEFFF;
+    --color-primary-pressed: #E2E7FF;
+    --color-button-surface-secondary-hover: #CFD7FF;
+    --color-accent: #637FFF;
+    --color-focus: #339696;
+
+    /* State colors */
+    --color-success: #008817;
+    --color-error: #B50909;
+    --color-destructive: #7F0606;
+    --color-warning: #B27A00;
+
+    /* Neutrals */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+}
