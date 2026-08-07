@@ -1,0 +1,16 @@
+/* cfa components: class-scoped component styling only (no bare-element resets —
+   those live in base/). Safe to import into a host app WITHOUT clobbering its
+   chrome, which is why an Administrate/admin re-skin can pull this in directly.
+   Requires tokens (tokens.css or an equivalent @theme) present in the build.
+
+   layout.css is imported UNLAYERED on purpose: it declares top-level `@utility`
+   (forbidden inside `@layer`) and self-wraps its element rules in an internal
+   `@layer components`. Everything else goes in the `components` layer; state
+   helpers in `utilities` so they win the cascade. */
+@import "./components/layout.css";
+@import "./components/modal.css" layer(components);
+@import "./components/forms.css" layer(components);
+@import "./components/buttons.css" layer(components);
+@import "./components/icons.css" layer(components);
+
+@import "./utilities/state.css" layer(utilities);

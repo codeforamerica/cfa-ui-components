@@ -1,0 +1,35 @@
+/* Base appearance for native form ELEMENTS (bare `form`/`input`/`textarea`/
+   `select`), split out of components/forms.css so the components bundle can be
+   imported without restyling a host app's own form chrome (e.g. embedding cfa
+   components into an Administrate dashboard). Lives in the `cfa-base` layer with
+   the other element resets; class-scoped form component styling (and behavioral
+   `[aria-invalid]` error state) stays in components/forms.css. */
+form {
+    @apply cfa-stack;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+textarea,
+select {
+    @apply border border-border-default rounded px-cfa-sm py-cfa-sm bg-white text-text-default;
+
+    &:focus-visible {
+        @apply outline-2 outline-offset-2 outline-focus;
+    }
+
+    &:disabled {
+        @apply bg-background-disabled text-text-disabled border-border-disabled cursor-not-allowed;
+    }
+}
+
+input[type="text"] {
+  height: 40px;
+  padding: 8px;
+}
