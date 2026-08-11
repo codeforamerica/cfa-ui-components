@@ -4,6 +4,8 @@ en:
   cfaui:
     base:
       optional: optional
+    alert:
+      dismiss_aria: Dismiss alert
     back_button:
       label: Go back
     submit_button:
