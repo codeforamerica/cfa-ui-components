@@ -15,7 +15,10 @@ class TooltipComponentTest < ViewComponent::TestCase
 
   def test_renders_info_icon
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info"))
-    assert_selector "svg[role='img'][aria-label='info outline icon']"
+    # Decorative: the button's visible "Learn more" label carries the meaning,
+    # so the icon is hidden from assistive tech rather than shape-named.
+    assert_selector "svg use[href$='#info_outline']", visible: :all
+    assert_selector "svg[aria-hidden='true']", visible: :all
   end
 
   def test_has_alpine_data_attribute
