@@ -14,6 +14,8 @@
         this.$nextTick(() => {
           this.$refs.modalTitle.focus({ preventScroll: true });
         });
+      } else {
+        this.$dispatch('<%= @name %>-modal-dismissed');
       }
     },
 
