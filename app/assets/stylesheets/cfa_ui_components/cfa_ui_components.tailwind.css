@@ -1,4 +1,27 @@
+/* Layer order (low → high precedence). `cfa-base` (typography/links/lists)
+   sits above `base` so it beats Tailwind preflight, but below `components`
+   so component overrides like `footer a { color: white }` and `.btn a`
+   still win over base link colors. `utilities` stays highest so utilities
+   like `sr-only` win over components.
+
+   @import rules must precede any style declarations. @theme and @font-face
+   compile to declarations, so the layer statement and all imports stay above
+   them (only @charset and @layer may precede @import). */
+@layer theme, base, cfa-base, components, utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "./base/typography.css" layer(cfa-base);
+@import "./base/lists.css" layer(cfa-base);
+@import "./base/links.css" layer(cfa-base);
+
+@import "./components/layout.css";
+@import "./components/modal.css" layer(components);
+@import "./components/forms.css" layer(components);
+@import "./components/buttons.css" layer(components);
+@import "./components/icons.css" layer(components);
+
+@import "./utilities/state.css" layer(utilities);
 
 /*
  * Inter is self-hosted rather than loaded from Google Fonts. Google Fonts
@@ -77,17 +100,3 @@
     --color-white: #FFFFFF;
     --color-black: #000000;
 }
-
-@layer theme, base, components, utilities, cfa-base;
-
-@import "./base/typography.css" layer(cfa-base);
-@import "./base/lists.css" layer(cfa-base);
-@import "./base/links.css" layer(cfa-base);
-
-@import "./components/layout.css";
-@import "./components/modal.css";
-@import "./components/forms.css";
-@import "./components/buttons.css";
-@import "./components/icons.css";
-
-@import "./utilities/state.css";
