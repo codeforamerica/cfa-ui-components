@@ -25,7 +25,8 @@
           <%= tag.attributes(@input_attrs) %>
         >
         <div class="absolute z-10 inset-y-px right-px flex">
-          <button x-combobox:toggle class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
+          <%# aria-hidden: input already exposes open/close via aria-expanded, so this is a mouse-only affordance %>
+          <button x-combobox:toggle aria-hidden="true" class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
             <template x-if="$combobox.isOpen">
               <%= render(IconComponent.new(icon: "expand_less")) %>
             </template>

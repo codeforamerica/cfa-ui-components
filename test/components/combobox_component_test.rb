@@ -18,6 +18,25 @@ class ComboboxComponentTest < ViewComponent::TestCase
     assert_selector "option", text: "No"
   end
 
+  def test_chevron_toggle_is_hidden_from_assistive_tech
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    # The chevron toggle is a redundant, mouse/touch-only affordance: the search
+    # input already exposes open/close to assistive tech via aria-expanded, so the
+    # toggle is hidden from the a11y tree and needs no accessible name. The toggle
+    # lives inside an Alpine <template>, so assert on the raw markup (Capybara
+    # selectors don't descend into template content).
+    toggle = rendered_content[/<button x-combobox:toggle.*?<\/button>/m]
+    assert_includes toggle, "aria-hidden=\"true\""
+    refute_includes toggle, "aria-label"
+  end
+
   def test_renders_help_text
     render_inline(ComboboxComponent.new(
       form: build_form,
