@@ -22,4 +22,14 @@ class RevealComponentTest < ViewComponent::TestCase
     render_inline(RevealComponent.new(summary_text: "More details", css_class: "mt-cfa-lg"))
     assert_selector "details.mt-cfa-lg.group.border-primary"
   end
+
+  def test_collapsed_by_default
+    render_inline(RevealComponent.new(summary_text: "More details"))
+    assert_no_selector "details[open]"
+  end
+
+  def test_renders_open_when_open_is_true
+    render_inline(RevealComponent.new(summary_text: "More details", open: true))
+    assert_selector "details[open]"
+  end
 end
