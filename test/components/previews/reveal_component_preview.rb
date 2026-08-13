@@ -10,4 +10,10 @@ class RevealComponentPreview < ViewComponent::Preview
       content_tag(:p, "Sample form card")
     end
   end
+
+  def open
+    render(RevealComponent.new(summary_text: "I am summary", open: true)) do
+      content_tag(:p, "Sample Details")
+    end
+  end
 end
