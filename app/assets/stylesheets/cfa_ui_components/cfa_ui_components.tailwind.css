@@ -16,6 +16,7 @@
 @import "./base/links.css" layer(cfa-base);
 
 @import "./components/layout.css";
+@import "./components/reveal.css";
 @import "./components/modal.css" layer(components);
 @import "./components/forms.css" layer(components);
 @import "./components/buttons.css" layer(components);

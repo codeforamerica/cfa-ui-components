@@ -1,0 +1,23 @@
+/* The summary row lays the label and chevron out inline. In a narrow
+   container the label wraps and pushes the chevron past the card edge, so
+   stack them vertically once the component's own box gets too tight.
+
+   Keyed on container width, not viewport, so this responds to wherever a
+   consumer places the reveal (grid cell, sidebar, modal) rather than baking
+   in any one page's breakpoints. Unlayered so it beats the summary's inline
+   Tailwind utilities (matching layout.css). */
+.cfa-reveal {
+  container-type: inline-size;
+}
+
+@container (max-width: 20rem) {
+  .cfa-reveal > summary {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-cfa-sm);
+  }
+
+  .cfa-reveal > summary > span:last-child {
+    margin-left: 0;
+  }
+}
