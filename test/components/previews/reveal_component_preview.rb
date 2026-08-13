@@ -13,11 +13,10 @@ class RevealComponentPreview < ViewComponent::Preview
 
   # Constrains the reveal to a narrow container so the summary stacks the
   # label above the chevron instead of letting it overflow the edge.
+  #
+  # Template-backed (see in_narrow_container.html.erb): a preview's `render`
+  # returns a descriptor Hash, not HTML, so it can't be wrapped in a
+  # `content_tag`. The wrapping div lives in the ERB template instead.
   def in_narrow_container
-    content_tag(:div, style: "max-width: 18rem") do
-      render(RevealComponent.new(summary_text: "A longer summary that would overflow a narrow card", icon: "info")) do
-        content_tag(:p, "Sample details")
-      end
-    end
   end
 end
