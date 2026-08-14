@@ -92,15 +92,11 @@ jobs:
               "environment": "${{ env.ENVIRONMENT }}",
               "application": "${{ env.APPLICATION }}"
             }
-      - name: Wait on Workflow
-        uses: lucasssvaz/wait-on-workflow@v1
-        id: waiter
+      - name: Wait on the remote deployment workflow
+        uses: Codex-/await-remote-run@v3.0.0
         with:
-          repository: codeforamerica/shared-services-infra
-          workflow: ${{ steps.dispatch.outputs.run_id }}
-      - name: Fail unless the workflow succeeded
-        if: ${{ steps.waiter.outputs.conclusion != 'success' }}
-        uses: actions/github-script@v9
-        with:
-          script: |
-            core.setFailed('Deployment workflow completed with stats: ${{ steps.waiter.outputs.conclusion }}')
+          token: ${{ steps.token.outputs.token }}
+          owner: codeforamerica
+          repo: shared-services-infra
+          run_id: ${{ steps.dispatch.outputs.run_id }}
+          run_timeout_seconds: 300
