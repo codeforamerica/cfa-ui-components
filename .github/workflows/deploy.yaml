@@ -98,6 +98,7 @@ jobs:
         with:
           repository: codeforamerica/shared-services-infra
           workflow: ${{ steps.dispatch.outputs.run_id }}
+          github-token: ${{ steps.token.outputs.token }}
       - name: Fail unless the workflow succeeded
         if: ${{ steps.waiter.outputs.conclusion != 'success' }}
         uses: actions/github-script@v9
