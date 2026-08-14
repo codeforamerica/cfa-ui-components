@@ -1,0 +1,10 @@
+/* cfa base: element-level styling / reset (typography, links, lists, native
+   form elements) in the `cfa-base` layer. OPTIONAL — omit this entry when
+   embedding cfa components into a host that owns its own bare-element styles
+   (e.g. an Administrate dashboard), so the gem doesn't restyle the host's
+   `main`/`a`/`ul`/`form`/`select`/`input`. Requires tokens (tokens.css or an
+   equivalent @theme) present in the build. */
+@import "./base/typography.css" layer(cfa-base);
+@import "./base/lists.css" layer(cfa-base);
+@import "./base/links.css" layer(cfa-base);
+@import "./base/forms.css" layer(cfa-base);

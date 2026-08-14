@@ -1,38 +1,12 @@
-form {
-    @apply cfa-stack;
-}
+/* Bare `form`/`input`/`textarea`/`select` appearance moved to base/forms.css
+   (cfa-base layer) so this components bundle stays class-scoped and doesn't
+   restyle a host app's own form elements. */
 
 /* `mx-0`, not `m-0`: only the browser's default fieldset margin is horizontal
    (`0 2px`). Zeroing vertical margin too would clobber layout spacing like
    `.cfa-card > * + *`. */
 .fieldset-group {
     @apply border-none p-0 mx-0 min-w-0;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-input[type="search"],
-input[type="password"],
-input[type="url"],
-textarea,
-select {
-    @apply border border-border-default rounded px-cfa-sm py-cfa-sm bg-white text-text-default;
-
-    &:focus-visible {
-        @apply outline-2 outline-offset-2 outline-focus;
-    }
-
-    &:disabled {
-        @apply bg-background-disabled text-text-disabled border-border-disabled cursor-not-allowed;
-    }
-}
-
-input[type="text"] {
-  height: 40px;
-  padding: 8px;
 }
 
 .form_item {

@@ -11,6 +11,12 @@ class RevealComponentPreview < ViewComponent::Preview
     end
   end
 
+  def open
+    render(RevealComponent.new(summary_text: "I am summary", open: true)) do
+      content_tag(:p, "Sample Details")
+    end
+  end
+
   # Places reveals in a three-column card grid (like the gyraffe landing page)
   # so each card is narrow enough that the summary stacks the label above the
   # chevron instead of letting it overflow the edge.
