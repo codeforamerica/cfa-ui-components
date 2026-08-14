@@ -2,10 +2,9 @@ form {
     @apply cfa-stack;
 }
 
-/* `mx-0` (not `m-0`) neutralizes the browser's default fieldset margin, which
-   is horizontal-only (`margin: 0 2px`). Zeroing vertical margin too would clobber
-   spacing that layouts legitimately apply — e.g. `.cfa-card > * + *` spacing a
-   heading from the fieldset inside a card. */
+/* `mx-0`, not `m-0`: only the browser's default fieldset margin is horizontal
+   (`0 2px`). Zeroing vertical margin too would clobber layout spacing like
+   `.cfa-card > * + *`. */
 .fieldset-group {
     @apply border-none p-0 mx-0 min-w-0;
 }
