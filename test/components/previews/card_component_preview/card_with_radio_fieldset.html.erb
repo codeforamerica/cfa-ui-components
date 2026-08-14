@@ -1,0 +1,7 @@
+<%# form OUTSIDE the card so the fieldset is a direct child of .cfa-card — mirrors real app usage %>
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render CardComponent.new do %>
+    <h2>Do you like pineapple on pizza?</h2>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, legend: "Do you like pineapple on pizza?") %>
+  <% end %>
+<% end %>
