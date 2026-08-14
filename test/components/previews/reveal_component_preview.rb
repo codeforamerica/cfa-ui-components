@@ -11,8 +11,9 @@ class RevealComponentPreview < ViewComponent::Preview
     end
   end
 
-  # Constrains the reveal to a narrow container so the summary stacks the
-  # label above the chevron instead of letting it overflow the edge.
+  # Places reveals in a three-column card grid (like the gyraffe landing page)
+  # so each card is narrow enough that the summary stacks the label above the
+  # chevron instead of letting it overflow the edge.
   #
   # Template-backed (see in_narrow_container.html.erb): a preview's `render`
   # returns a descriptor Hash, not HTML, so it can't be wrapped in a

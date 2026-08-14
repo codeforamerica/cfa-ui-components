@@ -1,5 +1,17 @@
-<div style="max-width: 18rem">
-  <%= render RevealComponent.new(summary_text: "A longer summary that would overflow a narrow card", icon: "info") do %>
-    <p>Sample details</p>
+<%#
+  Mimics the gyraffe landing page's three-column product-card grid, the
+  layout that originally motivated this change. Each card is narrow enough
+  that the reveal's caret would overflow inline, so the summary stacks the
+  label above the chevron via the container query.
+%>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 48rem">
+  <% ["Food assistance", "Cash assistance", "Health coverage"].each do |title| %>
+    <div style="border: 1px solid #d4d4d4; border-radius: 0.5rem; padding: 1rem">
+      <h3 style="margin-top: 0"><%= title %></h3>
+      <p>A short description of the program and who it serves.</p>
+      <%= render RevealComponent.new(summary_text: "See if you qualify", icon: "info") do %>
+        <p>Eligibility details for <%= title.downcase %>.</p>
+      <% end %>
+    </div>
   <% end %>
 </div>
