@@ -17,6 +17,9 @@ class CardComponentPreview < FormComponentPreview
   def with_progress_and_radio
   end
 
+  def card_with_radio_fieldset
+  end
+
   def basic_info_form
   end
 

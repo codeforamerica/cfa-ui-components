@@ -2,8 +2,11 @@ form {
     @apply cfa-stack;
 }
 
+/* `mx-0`, not `m-0`: only the browser's default fieldset margin is horizontal
+   (`0 2px`). Zeroing vertical margin too would clobber layout spacing like
+   `.cfa-card > * + *`. */
 .fieldset-group {
-    @apply border-none p-0 m-0 min-w-0;
+    @apply border-none p-0 mx-0 min-w-0;
 }
 
 input[type="text"],
