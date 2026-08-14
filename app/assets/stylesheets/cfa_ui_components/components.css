@@ -3,11 +3,13 @@
    chrome, which is why an Administrate/admin re-skin can pull this in directly.
    Requires tokens (tokens.css or an equivalent @theme) present in the build.
 
-   layout.css is imported UNLAYERED on purpose: it declares top-level `@utility`
-   (forbidden inside `@layer`) and self-wraps its element rules in an internal
-   `@layer components`. Everything else goes in the `components` layer; state
-   helpers in `utilities` so they win the cascade. */
+   layout.css and reveal.css are imported UNLAYERED on purpose: layout.css
+   declares top-level `@utility` (forbidden inside `@layer`) and self-wraps its
+   element rules in an internal `@layer components`; reveal.css must beat the
+   summary's inline Tailwind utilities. Everything else goes in the `components`
+   layer; state helpers in `utilities` so they win the cascade. */
 @import "./components/layout.css";
+@import "./components/reveal.css";
 @import "./components/modal.css" layer(components);
 @import "./components/forms.css" layer(components);
 @import "./components/buttons.css" layer(components);
