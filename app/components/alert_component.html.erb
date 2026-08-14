@@ -1,0 +1,26 @@
+<div
+  x-data="{ open: true }"
+  x-show="open"
+  role="alert"
+  class="<%= class_names("cfa-alert flex items-start gap-cfa-sm rounded p-cfa-med", variant_classes, @css_class) %>"
+>
+  <span class="flex shrink-0 items-center">
+    <%= inline_icon(icon_name, size: 24, css_class: icon_class, aria_hidden: true) %>
+  </span>
+  <div class="flex-1 cfa-stack-xsm">
+    <% if title.present? %>
+      <p class="type-body-bold"><%= title %></p>
+    <% end %>
+    <p><%= content %></p>
+  </div>
+  <% if dismissible %>
+    <button
+      type="button"
+      @click="open = false"
+      class="flex shrink-0 cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      aria-label="<%= t("cfaui.alert.dismiss_aria") %>"
+    >
+      <%= inline_icon(:close, size: 24, aria_hidden: true) %>
+    </button>
+  <% end %>
+</div>
