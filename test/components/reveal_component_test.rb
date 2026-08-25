@@ -32,4 +32,14 @@ class RevealComponentTest < ViewComponent::TestCase
     render_inline(RevealComponent.new(summary_text: "More details", open: true))
     assert_selector "details[open]"
   end
+
+  def test_no_analytics_attributes_without_reveal_id
+    render_inline(RevealComponent.new(summary_text: "More details"))
+    assert_no_selector "details[data-analytics-event]"
+  end
+
+  def test_renders_analytics_attributes_when_reveal_id_given
+    render_inline(RevealComponent.new(summary_text: "More details", reveal_id: "what_is_permanent_home"))
+    assert_selector "details[data-analytics-event='reveal_clicked'][data-analytics-id='what_is_permanent_home']"
+  end
 end
