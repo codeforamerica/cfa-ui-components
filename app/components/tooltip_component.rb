@@ -8,13 +8,13 @@ class TooltipComponent < BaseComponent
     @css_class = css_class
     # `modal_name` is already unique per page, so it's a safe default id; callers
     # can pass an explicit `tooltip_id` for a cleaner/stable analytics label.
-    @tooltip_id = tooltip_id || modal_name
+    @tooltip_id = tooltip_id || modal_name.tr("-", "_")
   end
 
   # Emits a provider-agnostic `cfa:analytics` DOM event on click (see
   # analytics_emitter.ts); the host app routes it to Mixpanel or elsewhere.
   def analytics_attrs
     return {} if @tooltip_id.blank?
-    {"data-analytics-event" => "tooltip_clicked", "data-analytics-id" => @tooltip_id}
+    {"data-analytics-event" => "tooltip_clicked", "data-analytics-id" => qualified_analytics_id(@tooltip_id)}
   end
 end

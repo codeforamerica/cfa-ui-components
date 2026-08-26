@@ -38,8 +38,13 @@ class RevealComponentTest < ViewComponent::TestCase
     assert_no_selector "details[data-analytics-event]"
   end
 
-  def test_renders_analytics_attributes_when_reveal_id_given
+  def test_renders_analytics_attributes_namespaced_by_controller_path
     render_inline(RevealComponent.new(summary_text: "More details", reveal_id: "what_is_permanent_home"))
-    assert_selector "details[data-analytics-event='reveal_clicked'][data-analytics-id='what_is_permanent_home']"
+    assert_selector "details[data-analytics-event='reveal_clicked'][data-analytics-id='application/what_is_permanent_home']"
+  end
+
+  def test_reveal_id_with_slash_is_taken_as_fully_qualified
+    render_inline(RevealComponent.new(summary_text: "More details", reveal_id: "welcome/what_is_permanent_home"))
+    assert_selector "details[data-analytics-id='welcome/what_is_permanent_home']"
   end
 end

@@ -14,6 +14,6 @@ class RevealComponent < BaseComponent
   # analytics_emitter.ts); the host app routes it to Mixpanel or elsewhere.
   def analytics_attrs
     return {} if @reveal_id.blank?
-    {"data-analytics-event" => "reveal_clicked", "data-analytics-id" => @reveal_id}
+    {"data-analytics-event" => "reveal_clicked", "data-analytics-id" => qualified_analytics_id(@reveal_id)}
   end
 end
