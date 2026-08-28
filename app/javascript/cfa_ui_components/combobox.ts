@@ -62,6 +62,21 @@ const comboboxRoot = (el: ElementWithXAttributes<HTMLElement>, Alpine: Alpine) =
                 }
                 if (!value) this.activeEl = undefined
             })
+            // A native form.reset() resets the hidden <select> but leaves the
+            // visible combobox input showing the previously chosen label. Re-sync
+            // to the select's restored value. The reset event fires *before* the
+            // browser resets the controls, so defer the read to a microtask.
+            el.closest('form')?.addEventListener('reset', () => {
+                // The browser resets the <select> AFTER the reset event and its
+                // microtasks (when triggered by a reset button), and also clears
+                // this widget's unnamed search input. Wait for the next frame so
+                // the reset has landed, then re-sync from the restored <select>.
+                requestAnimationFrame(() => {
+                    // selectedIndex 0 is the placeholder; anything else is a value.
+                    if (this.selectEl.selectedIndex > 0) this.setInitialValue()
+                    else this.reset()
+                })
+            })
         },
         'x-data'() {
             return {
