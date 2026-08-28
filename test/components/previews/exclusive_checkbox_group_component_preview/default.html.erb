@@ -8,12 +8,12 @@
 
     <%= render CardComponent.new do %>
       <%= render SingleCheckboxComponent.new(form: f, method: :option_one, label: "Option one") %>
-      <p class="italic text-sm text-slate-700">Description of option one.</p>
+      <p class="type-progress-text italic">Description of option one.</p>
     <% end %>
 
     <%= render CardComponent.new do %>
       <%= render SingleCheckboxComponent.new(form: f, method: :option_two, label: "Option two") %>
-      <p class="italic text-sm text-slate-700">Description of option two.</p>
+      <p class="type-progress-text italic">Description of option two.</p>
     <% end %>
 
     <%= render CardComponent.new do %>
