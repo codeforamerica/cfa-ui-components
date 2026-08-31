@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@alpinejs/focus@^3.16.1":
-  version "3.16.1"
-  resolved "https://registry.yarnpkg.com/@alpinejs/focus/-/focus-3.16.1.tgz#ab1f1d834d7689a3844f79bfdee5cf8a88262882"
-  integrity sha512-gB/VbkEyKzJcJ7axGxyPhEucPwawVNTbWU94blXRAsYnjsIYlRB2rpITZwZLXzY4ctYpQv2tupLklIEDMiMoyw==
+"@alpinejs/focus@^3.16.3":
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/@alpinejs/focus/-/focus-3.16.3.tgz#45352108eec143468c7d33ea018cbae98d424504"
+  integrity sha512-MwEeux0W+/DP4B3FyNHPs+kzqMmgfWRf25WsJLBH1kahBqiVHNLewSJotbO+9345A8WsHz3yx8XkaeNnepDv3Q==
   dependencies:
     focus-trap "^8.0.0"
     tabbable "^6.4.0"
