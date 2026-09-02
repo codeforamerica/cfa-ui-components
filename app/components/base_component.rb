@@ -70,6 +70,15 @@ class BaseComponent < ViewComponent::Base
     @optional ? {} : {"aria-required" => "true"}
   end
 
+  # Namespace an analytics id by the rendering controller's path
+  # ("eligibility/eligible" + "full_list") so call sites only name the
+  # element. An id that already contains "/" is taken as fully qualified —
+  # the escape hatch for an id shared across pages.
+  def qualified_analytics_id(id)
+    return id if id.include?("/")
+    "#{helpers.controller_path}/#{id}"
+  end
+
   def checkbox_wrap(checkbox_html, small: false)
     size = small ? 16 : 24
     box = small ? "h-4 w-4" : "h-6 w-6"
