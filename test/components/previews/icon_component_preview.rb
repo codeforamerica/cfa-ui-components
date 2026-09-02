@@ -11,6 +11,6 @@ class IconComponentPreview < ViewComponent::Preview
   private
 
   def icon_names
-    (BaseComponent::USWDS_ICON_IDS.to_a + BaseComponent::NON_USWDS_ICON_IDS.keys).sort
+    (BaseComponent::USWDS_ICON_IDS.to_a + BaseComponent::NON_USWDS_ICONS.keys).sort
   end
 end

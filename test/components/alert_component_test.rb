@@ -20,7 +20,7 @@ class AlertComponentTest < ViewComponent::TestCase
 
   def test_renders_warning_icon
     render_inline(AlertComponent.new) { "Heads up" }
-    assert_selector "span.cfa-icon-mask.text-icon-default[aria-hidden='true']"
+    assert_selector "svg.cfa-icon.text-icon-default[aria-hidden='true']", visible: :all
   end
 
   def test_omits_dismiss_button_by_default
