@@ -31,28 +31,38 @@ class AnalyticsEmitterSystemTest < JavaScriptSystemTestCase
     JS
   end
 
-  test "reveal emits reveal_clicked once on open and not on close" do
+  test "reveal namespaces the analytics id by controller path" do
     visit "/rails/view_components/reveal_component/with_analytics"
     spy_on_analytics
 
-    summary = find("details[data-analytics-id='sample_reveal'] summary")
+    summary = find("details[data-analytics-id='preview/sample_reveal'] summary")
 
     summary.click # open
     assert_equal 1, analytics_calls.size
-    assert_equal({"event" => "reveal_clicked", "id" => "sample_reveal"}, analytics_calls.first)
+    assert_equal({"event" => "reveal_clicked", "id" => "preview/sample_reveal"}, analytics_calls.first)
 
     summary.click # close — must not emit again
     assert_equal 1, analytics_calls.size
   end
 
-  test "tooltip emits tooltip_clicked on click" do
+  test "reveal passes through a pre-qualified analytics id unchanged" do
+    visit "/rails/view_components/reveal_component/with_analytics_qualified"
+    spy_on_analytics
+
+    find("details[data-analytics-id='shared/sample_reveal'] summary").click
+
+    assert_equal 1, analytics_calls.size
+    assert_equal({"event" => "reveal_clicked", "id" => "shared/sample_reveal"}, analytics_calls.first)
+  end
+
+  test "tooltip namespaces the analytics id by controller path" do
     visit "/rails/view_components/tooltip_component/default"
     spy_on_analytics
 
-    find("button[data-analytics-id='tooltip']").click
+    find("button[data-analytics-id='preview/tooltip']").click
 
     assert_equal 1, analytics_calls.size
-    assert_equal({"event" => "tooltip_clicked", "id" => "tooltip"}, analytics_calls.first)
+    assert_equal({"event" => "tooltip_clicked", "id" => "preview/tooltip"}, analytics_calls.first)
   end
 
   test "falls back to the element's HTML id when no data-analytics-id is set" do

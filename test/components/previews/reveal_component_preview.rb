@@ -24,6 +24,13 @@ class RevealComponentPreview < ViewComponent::Preview
     end
   end
 
+  # Pre-qualified id (contains "/") bypasses controller-path namespacing.
+  def with_analytics_qualified
+    render(RevealComponent.new(summary_text: "I am summary", reveal_id: "shared/sample_reveal")) do
+      content_tag(:p, "Sample Details")
+    end
+  end
+
   # Places reveals in a three-column card grid (like the gyraffe landing page)
   # so each card is narrow enough that the summary stacks the label above the
   # chevron instead of letting it overflow the edge.

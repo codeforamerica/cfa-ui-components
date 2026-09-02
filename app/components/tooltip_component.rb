@@ -6,8 +6,6 @@ class TooltipComponent < BaseComponent
     @modal_name = modal_name
     @header = header || label
     @css_class = css_class
-    # `modal_name` is already unique per page, so it's a safe default id; callers
-    # can pass an explicit `tooltip_id` for a cleaner/stable analytics label.
     @tooltip_id = tooltip_id || modal_name.tr("-", "_")
   end
 
