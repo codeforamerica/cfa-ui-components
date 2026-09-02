@@ -10,18 +10,17 @@ class BaseComponent < ViewComponent::Base
     CfaUiComponents::Engine.root.join("app/assets/images", SPRITE_PATH)
   ).scan(/<symbol id="([^"]+)"/).flatten.to_set.freeze
 
-  # File-based icons not present in the USWDS sprite. Pre-read at load time;
-  # hardcoded fill/stroke colors are replaced with currentColor so the rendered
-  # SVG inherits its color from the CSS `color` property, same as USWDS icons.
+  # File-based icons not present in the USWDS sprite. Pre-read at load time
+  # so inline_icon can render them without an asset pipeline round-trip.
+  # SVG files must use fill="currentColor"/stroke="currentColor" so icons
+  # inherit the CSS `color` property the same way USWDS sprite icons do.
   NON_USWDS_ICONS = Dir.glob(
     CfaUiComponents::Engine.root.join("app/assets/images/icons/*.svg")
   ).each_with_object({}) do |file, icons|
     raw = File.read(file)
-    viewbox = raw[/\bviewBox="([^"]+)"/i, 1]
+    viewbox = raw[/\bviewBox="([^"]+)"/i, 1] or
+      raise "#{file} is missing a viewBox attribute"
     inner = raw.sub(/\A.*?<svg[^>]*>/m, "").sub(/<\/svg>\s*\z/m, "").strip
-    inner = inner
-      .gsub(/\bfill="[^"]*"/) { |m| (m == 'fill="none"') ? m : 'fill="currentColor"' }
-      .gsub(/\bstroke="[^"]*"/) { |m| (m == 'stroke="none"') ? m : 'stroke="currentColor"' }
     icons[File.basename(file, ".svg")] = {viewbox:, inner:}
   end.freeze
 
@@ -58,10 +57,8 @@ class BaseComponent < ViewComponent::Base
     {:role => "img", "aria-label" => label || "#{name.tr("_", " ")} icon"}
   end
 
-  # Inline SVG for file-based icons. Uses fill/stroke="currentColor" (substituted
-  # at load time) so the icon inherits the CSS `color` property without any
-  # CSS mask-image indirection, which browsers drop after Alpine-triggered style
-  # recalculation.
+  # Inline SVG for file-based icons. fill/stroke="currentColor" in the source
+  # SVGs means the icon inherits CSS `color` without any mask-image indirection.
   def inline_svg_icon(icon, name, size:, css_class:, aria_hidden:, label:)
     content_tag :svg, icon[:inner].html_safe,
       viewBox: icon[:viewbox],
