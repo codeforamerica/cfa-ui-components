@@ -73,6 +73,7 @@
               id: input_id(3),
               placeholder: @placeholder_day,
               class: "w-12",
+              inputmode: "numeric",
               aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact
             ) %>
     </div>
@@ -85,6 +86,7 @@
               id: input_id(1),
               placeholder: @placeholder_year,
               class: "w-18",
+              inputmode: "numeric",
               aria: {invalid: invalid, describedby: described_by_value(help: @helper_text.present?)}.compact
             ) %>
     </div>
