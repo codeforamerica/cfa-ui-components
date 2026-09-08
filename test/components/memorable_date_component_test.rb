@@ -234,6 +234,13 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_selector "input[name='date_picker_test_model[my_date(2i)]'][value='3']", visible: :all
   end
 
+  def test_day_and_year_fields_have_numeric_inputmode
+    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth"))
+
+    assert_selector "input#date_picker_test_model_my_date_3i[inputmode='numeric']"
+    assert_selector "input#date_picker_test_model_my_date_1i[inputmode='numeric']"
+  end
+
   def test_month_options_render_in_spanish_when_locale_is_es
     I18n.with_locale(:es) do
       render_inline(MemorableDateComponent.new(
