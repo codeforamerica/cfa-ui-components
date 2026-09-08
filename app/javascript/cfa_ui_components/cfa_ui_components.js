@@ -5,6 +5,7 @@ import combobox from "./combobox";
 import select from "./select";
 import alpineStoreResync from "./alpine_store_resync";
 import installSensitiveFieldReload from "./sensitive_field_reload";
+import installAnalyticsEmitter from "./analytics_emitter";
 
 Alpine.plugin(mask);
 Alpine.plugin(focus);
@@ -15,3 +16,4 @@ window.Alpine = Alpine;
 Alpine.start();
 
 installSensitiveFieldReload();
+installAnalyticsEmitter();

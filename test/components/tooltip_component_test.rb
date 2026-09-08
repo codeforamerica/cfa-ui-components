@@ -69,4 +69,19 @@ class TooltipComponentTest < ViewComponent::TestCase
     render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info"))
     assert_selector "button.group.text-link-unvisited"
   end
+
+  def test_analytics_id_defaults_to_underscored_modal_name_namespaced_by_controller_path
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "self-employment-income"))
+    assert_selector "button[data-analytics-event='tooltip_clicked'][data-analytics-id='application/self_employment_income']"
+  end
+
+  def test_analytics_id_can_be_overridden
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", tooltip_id: "permanent_home"))
+    assert_selector "button[data-analytics-event='tooltip_clicked'][data-analytics-id='application/permanent_home']"
+  end
+
+  def test_tooltip_id_with_slash_is_taken_as_fully_qualified
+    render_inline(TooltipComponent.new(label: "Learn more", modal_name: "info", tooltip_id: "welcome/what_do_i_need"))
+    assert_selector "button[data-analytics-id='welcome/what_do_i_need']"
+  end
 end
