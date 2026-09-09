@@ -313,10 +313,6 @@
     border-color: var(--color-focus);
   }
 }
-.select-field {
-  @apply space-y-cfa-sm;
-}
-
 .select-field__wrapper {
   @apply w-full max-w-sm;
 }
