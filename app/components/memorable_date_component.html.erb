@@ -66,7 +66,7 @@
     </div>
     <!-- DAY -->
     <div>
-      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
+      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-sm" %>
       <%= @form.text_field "#{@method}(3i)",
             **field_attrs(
               value: day_value,
@@ -79,7 +79,7 @@
     </div>
     <!-- YEAR -->
     <div>
-      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
+      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-sm" %>
       <%= @form.text_field "#{@method}(1i)",
             **field_attrs(
               value: year_value,
