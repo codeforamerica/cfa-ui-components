@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class LinkComponent < BaseComponent
-  def initialize(label:, url:, sr_label:, external_sr_label:, external: nil, new_tab: nil, html_attrs: nil)
+  def initialize(label:, url:, sr_label: nil, external_sr_label: nil, external: nil, new_tab: nil, html_attrs: nil)
     super(html_attrs:)
 
     @label = label
     @url = url
     @external = external
     @new_tab = new_tab
-    @sr_label = sr_label
-    @external_sr_label = external_sr_label
+    @sr_label = sr_label || I18n.t("cfaui.link.sr_label")
+    @external_sr_label = external_sr_label || I18n.t("cfaui.link.external_sr_label")
   end
 
   # Whether to show the "external link" affordance (launch icon + external
