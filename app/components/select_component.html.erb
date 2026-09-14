@@ -1,4 +1,4 @@
-<div class="<%= class_names("cfa-stack-sm", "select-field", @css_class) %>" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
+<div class="<%= class_names("cfa-stack-sm", @css_class) %>" x-data x-init="Alpine.store('<%= @method %>', '<%= current_value %>');">
   <% invalid = @form.object.errors[@method].any? %>
   <%= @form.label @method, label_with_optional_marker, id: "#{input_id}-label", class: "label block" %>
   <% if @help_text %>
