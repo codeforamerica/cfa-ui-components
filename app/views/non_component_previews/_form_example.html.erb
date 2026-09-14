@@ -6,24 +6,30 @@
     Explanation of what it means to be claimed.
   </p>
   <%= render(CardComponent.new) do %>
-    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, aria_labelledby: "claimed-question-heading") %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, scope: "claimed", collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label, aria_labelledby: "claimed-question-heading") %>
+    <%= render ConditionalComponent.new(method: :pineapple_pizza_preference, scope: "claimed", value: "yes", content_description: "Who claimed you") do %>
+      <%= render InputComponent.new(form: f, method: :middle_name, label: "Who claimed you?") %>
+    <% end %>
   <% end %>
   <%= render(CardComponent.new) do %>
-    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, legend: "Are you filing with your spouse (married filing jointly)?", collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference, scope: "spouse", legend: "Are you filing with your spouse (married filing jointly)?", collection: FormComponentPreview.yes_no_options, item_value_method: :value, item_label_method: :label) %>
   <% end %>
   <%= render(CardComponent.new) do %>
     <%= render InputComponent.new(form: f, method: :first_name, label: "First name") %>
   <% end %>
   <%= render(CardComponent.new) do %>
-    <%= render InputComponent.new(form: f, method: :middle_name, label: "Middle name", optional: true) %>
+    <%= render InputComponent.new(form: f, method: :last_name, label: "Last name", help_text: "Help text") %>
   <% end %>
   <%= render(CardComponent.new) do %>
-    <%= render InputComponent.new(form: f, method: :last_name, label: "Last name", help_text: "Help text") %>
+    <%= render MemorableDateComponent.new(form: f, method: :my_date, label: "Date of birth") %>
+  <% end %>
+  <%= render(CardComponent.new) do %>
+    <%= render ComboboxComponent.new(form: f, method: :favorite_fruit, label: I18n.t("preview.favorite_fruits"), collection: FormComponentPreview.combobox_fruit_options, item_value_method: :value, item_label_method: :label) %>
   <% end %>
   <%= render(CardComponent.new) do %>
     <%= render CheckboxesComponent.new(form: f, method: :favorite_fruits, collection: FormComponentPreview.fruit_options, item_value_method: :value, item_label_method: :label, legend: "What are your favorite fruits?") %>
   <% end %>
   <%= render ButtonComponent.new(label: "Review answers", url: "#", variant: :primary, size: :small) %>
-  <%= render ButtonComponent.new(label: "Start over", url: "#", variant: :secondary, size: :small) %>
+  <button type="reset" class="btn btn--secondary btn--small">Start over</button>
   <%= render SubmitButtonComponent.new(form: f) %>
 <% end %>
