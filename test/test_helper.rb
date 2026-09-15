@@ -6,6 +6,7 @@ require "active_model"
 class ComponentTestModel
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::Dirty
 
   attribute :text_field
   attribute :text_field_confirmation

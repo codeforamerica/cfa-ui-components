@@ -83,7 +83,11 @@ class TinComponentTest < ViewComponent::TestCase
   # --- Obfuscated view on revisit (saved value, no errors) ---
 
   def saved_model
-    ComponentTestModel.new(text_field: "123456789")
+    # Simulate a model loaded cleanly from the DB: the value exists but there are
+    # no pending in-memory changes (dirty tracking is at the clean baseline).
+    model = ComponentTestModel.new(text_field: "123456789")
+    model.clear_changes_information
+    model
   end
 
   def test_shows_obfuscated_value_with_last_four_when_value_saved
@@ -136,5 +140,34 @@ class TinComponentTest < ViewComponent::TestCase
     render_inline(TinComponent.new(form: build_form(model), method: :text_field, label: "Social Security Number"))
     assert_selector "div[x-data*='editing: true']"
     assert_selector "input[data-tin-input][value='123456789']"
+  end
+
+  # --- Unsaved in-memory change (assign_attributes called but save failed on another field) ---
+  #
+  # When a form submit fails validation on a *different* field, the controller calls
+  # assign_attributes with the submitted TIN and then renders :edit without saving.
+  # The next request loads a fresh model from the DB (TIN still nil) while the TIN
+  # input is disabled (masked view), so the value is silently dropped → "TIN required"
+  # loop. The fix: treat the value as *not* saved when the attribute has an uncommitted
+  # in-memory change so the input stays visible and pre-filled.
+
+  def unsaved_model
+    # Simulate a record that has a TIN assigned in memory via assign_attributes
+    # but the save was never committed (e.g. another field failed validation).
+    model = ComponentTestModel.new
+    model.text_field = "123456789"
+    model
+  end
+
+  def test_does_not_show_masked_view_when_value_is_unsaved_in_memory_change
+    render_inline(TinComponent.new(form: build_form(unsaved_model), method: :text_field, label: "Social Security Number"))
+    assert_no_text "•••"
+    assert_no_selector "button", text: "Edit"
+  end
+
+  def test_shows_edit_mode_with_prefilled_value_when_value_is_unsaved_in_memory_change
+    render_inline(TinComponent.new(form: build_form(unsaved_model), method: :text_field, label: "Social Security Number"))
+    assert_selector "input[data-tin-input][value='123456789']"
+    assert_no_selector "input[data-tin-input][disabled]"
   end
 end
