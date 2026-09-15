@@ -10,15 +10,21 @@ class BaseComponent < ViewComponent::Base
     CfaUiComponents::Engine.root.join("app/assets/images", SPRITE_PATH)
   ).scan(/<symbol id="([^"]+)"/).flatten.to_set.freeze
 
-  # File-based icons not present in the USWDS sprite, keyed by basename.
-  # Built from the SVGs shipped in `app/assets/images/icons`.
-  NON_USWDS_ICON_IDS = Dir.glob(
+  # File-based icons not present in the USWDS sprite. Pre-read at load time
+  # so inline_icon can render them without an asset pipeline round-trip.
+  # SVG files must use fill="currentColor"/stroke="currentColor" so icons
+  # inherit the CSS `color` property the same way USWDS sprite icons do.
+  NON_USWDS_ICONS = Dir.glob(
     CfaUiComponents::Engine.root.join("app/assets/images/icons/*.svg")
-  ).each_with_object({}) do |file, paths|
-    paths[File.basename(file, ".svg")] = "icons/#{File.basename(file)}"
+  ).each_with_object({}) do |file, icons|
+    raw = File.read(file)
+    viewbox = raw[/\bviewBox="([^"]+)"/i, 1] or
+      raise "#{file} is missing a viewBox attribute"
+    inner = raw.sub(/\A.*?<svg[^>]*>/m, "").sub(/<\/svg>\s*\z/m, "").strip
+    icons[File.basename(file, ".svg")] = {viewbox:, inner:}
   end.freeze
 
-  if (collisions = NON_USWDS_ICON_IDS.keys.to_set & USWDS_ICON_IDS).any?
+  if (collisions = NON_USWDS_ICONS.keys.to_set & USWDS_ICON_IDS).any?
     raise "File-based icons collide with USWDS sprite ids: #{collisions.to_a.sort.join(", ")}. " \
       "Remove the redundant SVG(s) from app/assets/images/icons or rename them."
   end
@@ -29,8 +35,8 @@ class BaseComponent < ViewComponent::Base
 
   def inline_icon(name, size: 20, css_class: nil, aria_hidden: false, label: nil)
     name = name.to_s
-    if (path = NON_USWDS_ICON_IDS[name])
-      return masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
+    if (icon = NON_USWDS_ICONS[name])
+      return inline_svg_icon(icon, name, size:, css_class:, aria_hidden:, label:)
     end
     unless USWDS_ICON_IDS.include?(name)
       raise ArgumentError, "Unknown icon #{name.inspect}. " \
@@ -51,11 +57,14 @@ class BaseComponent < ViewComponent::Base
     {:role => "img", "aria-label" => label || "#{name.tr("_", " ")} icon"}
   end
 
-  # CSS-masked span for a file-based icon, which inherits color via
-  # `background-color: currentColor`.
-  def masked_icon(path, name, size:, css_class:, aria_hidden:, label:)
-    style = "--icon-url: url('#{image_path(path)}'); width: #{size}px; height: #{size}px"
-    content_tag :span, "", class: ["cfa-icon-mask", css_class].compact, style:,
+  # Inline SVG for file-based icons. fill/stroke="currentColor" in the source
+  # SVGs means the icon inherits CSS `color` without any mask-image indirection.
+  def inline_svg_icon(icon, name, size:, css_class:, aria_hidden:, label:)
+    content_tag :svg, icon[:inner].html_safe,
+      viewBox: icon[:viewbox],
+      fill: "none",
+      width: size, height: size,
+      class: ["cfa-icon", css_class].compact,
       **icon_aria(name, aria_hidden:, label:)
   end
 
