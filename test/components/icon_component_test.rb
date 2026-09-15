@@ -43,9 +43,9 @@ class IconComponentTest < ViewComponent::TestCase
     assert_no_selector "svg[aria-label='check circle icon']", visible: :all
   end
 
-  def test_label_overrides_the_default_accessible_name_on_masked_icons
+  def test_label_overrides_the_default_accessible_name_on_file_based_icons
     render_inline(IconComponent.new(icon: "clock", label: "Pending"))
-    assert_selector "span.cfa-icon-mask[role='img'][aria-label='Pending']", visible: :all
+    assert_selector "svg.cfa-icon[role='img'][aria-label='Pending']", visible: :all
   end
 
   def test_aria_hidden_removes_the_icon_from_the_accessibility_tree
@@ -54,13 +54,19 @@ class IconComponentTest < ViewComponent::TestCase
     assert_no_selector "svg[role='img']", visible: :all
   end
 
-  def test_loading_renders_masked_span
+  def test_loading_renders_inline_svg
     render_inline(IconComponent.new(icon: "loading"))
-    assert_selector "span.cfa-icon-mask[aria-hidden='true']", visible: :all
+    assert_selector "svg.cfa-icon[aria-hidden='true']", visible: :all
   end
 
-  def test_clock_renders_masked_span
+  def test_clock_renders_inline_svg
     render_inline(IconComponent.new(icon: "clock"))
-    assert_selector "span.cfa-icon-mask[aria-hidden='true']", visible: :all
+    assert_selector "svg.cfa-icon[aria-hidden='true']", visible: :all
+  end
+
+  def test_file_based_icon_uses_currentColor_fill
+    render_inline(IconComponent.new(icon: "chevron"))
+    assert_no_selector "span.cfa-icon-mask", visible: :all
+    assert_selector "svg.cfa-icon path[fill='currentColor']", visible: :all
   end
 end
