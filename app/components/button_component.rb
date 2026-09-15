@@ -36,6 +36,6 @@ class ButtonComponent < BaseComponent
       else
         raise ArgumentError.new("Invalid button size")
       end
-    @icon_size = (size == :small) ? 16 : 20
+    @icon_size = (size == :small) ? 16 : 24
   end
 end
