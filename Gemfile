@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "https://rubygems.org", cooldown: 7
 
 ruby_version = File.read(File.join(File.dirname(__FILE__), ".ruby-version")).strip
 ruby ruby_version
