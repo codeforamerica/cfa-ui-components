@@ -1,7 +1,7 @@
 <fieldset class="<%= class_names("memorable-date", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %>>
   <% invalid = @form.object.errors[@method].any? %>
   <% if @label.present? %>
-    <legend class="flex flex-col gap-cfa-xsm mb-cfa-sm">
+    <legend class="flex flex-col gap-cfa-sm mb-cfa-sm">
       <span class="font-bold"><%= @label %></span>
       <% if @helper_text %>
         <span id="<%= help_dom_id %>" class="help_text"><%= @helper_text %></span>
@@ -11,7 +11,7 @@
   <div class="flex gap-cfa-sm items-end">
     <!-- MONTH -->
     <div class="w-[176px]">
-      <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-xsm" %>
+      <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-sm" %>
       <div
         x-data="cfaSelect(<%= month_alpine_opts %>)"
         class="cfa-custom-select w-full"
@@ -66,7 +66,7 @@
     </div>
     <!-- DAY -->
     <div>
-      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-xsm" %>
+      <%= label_tag input_id(3), @label_day, class: "label block mb-cfa-sm" %>
       <%= @form.text_field "#{@method}(3i)",
             **field_attrs(
               value: day_value,
@@ -79,7 +79,7 @@
     </div>
     <!-- YEAR -->
     <div>
-      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-xsm" %>
+      <%= label_tag input_id(1), @label_year, class: "label block mb-cfa-sm" %>
       <%= @form.text_field "#{@method}(1i)",
             **field_attrs(
               value: year_value,
