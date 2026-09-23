@@ -78,6 +78,16 @@
     @apply bg-background-destructive-active shadow-[inset_0_0_0_2px_var(--color-border-error)];
 }
 
+.btn--destructive:active::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid var(--color-border-error);
+    border-radius: 6px;
+    pointer-events: none;
+    box-shadow: none;
+}
+
 .btn--small {
     @apply min-w-0 px-3 py-2 w-fit rounded;
     font-size: 16px;
