@@ -121,7 +121,8 @@
 }
 
 .btn--large {
-    @apply p-cfa-med sm:w-fit mx-auto;
+    @apply h-[56px] px-3 py-0 sm:w-fit mx-auto;
+    @apply flex items-center justify-center;
     font-size: 22px;
     font-weight: 700;
 }
