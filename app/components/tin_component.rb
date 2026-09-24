@@ -47,9 +47,27 @@ class TinComponent < AttributeBoundFormElementComponent
     current_value.to_s.gsub(/\D/, "")
   end
 
-  # A value was previously saved, so the obfuscated view + Edit toggle apply.
+  # A value was previously saved AND committed to the database, so the
+  # obfuscated view + Edit toggle apply.
+  #
+  # We also check whether the attribute has uncommitted in-memory changes. If so,
+  # the value was assigned via form params but a validation error on another field
+  # prevented the save — the masked view must NOT appear in that case, because on
+  # the next request a fresh model will be loaded from the DB with no TIN, making
+  # the disabled input silently drop the value and triggering a "TIN required" loop.
   def saved_value?
+    return false if attribute_changed_in_memory?
     saved_digits.present?
+  end
+
+  # True when the bound attribute has an uncommitted in-memory change — i.e. the
+  # value was assigned via form params but the record was not saved (a validation
+  # error on another field prevented it). Uses the `_changed?` predicate provided
+  # by ActiveRecord dirty tracking and ActiveModel::Dirty; returns false when the
+  # model does not support dirty tracking.
+  def attribute_changed_in_memory?
+    predicate = :"#{@method}_changed?"
+    @form.object.respond_to?(predicate) && @form.object.public_send(predicate)
   end
 
   def last_four
