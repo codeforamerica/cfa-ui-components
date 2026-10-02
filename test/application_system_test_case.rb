@@ -8,7 +8,7 @@ require "capybara/cuprite"
 system("yarn build && yarn build:css", exception: true, chdir: Rails.root.to_s)
 
 Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(app, window_size: [1400, 1400], headless: true)
+  Capybara::Cuprite::Driver.new(app, window_size: [1400, 1400], headless: true, process_timeout: 30)
 end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
