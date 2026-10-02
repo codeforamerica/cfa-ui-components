@@ -19,6 +19,7 @@
       <div class="cfa-combobox__field flex w-full">
         <input
           x-combobox:input
+          type="text"
           aria-invalid="<%= invalid %>"
           class="!pr-10 w-full h-10 data-[invalid]:ring-2 data-[invalid]:ring-error data-[invalid]:border-transparent"
           placeholder="<%= I18n.t("cfaui.combobox.placeholder") %>"
@@ -26,7 +27,7 @@
         >
         <div class="absolute z-10 inset-y-px right-px flex">
           <%# aria-hidden: input already exposes open/close via aria-expanded, so this is a mouse-only affordance %>
-          <button x-combobox:toggle aria-hidden="true" class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
+          <button x-combobox:toggle type="button" tabindex="-1" aria-hidden="true" class="cfa-combobox__toggle h-full px-cfa-sm flex items-center bg-transparent">
             <template x-if="$combobox.isOpen">
               <%= render(IconComponent.new(icon: "expand_less")) %>
             </template>

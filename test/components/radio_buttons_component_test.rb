@@ -224,4 +224,16 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     ))
     assert_selector "fieldset.mt-cfa-lg"
   end
+
+  def test_renders_a_single_blank_hidden_input
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      legend: "Pick one"
+    ))
+    assert_selector "input[type='hidden'][name$='[radio_field]']", count: 1, visible: :all
+  end
 end

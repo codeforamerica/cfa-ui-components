@@ -37,6 +37,22 @@ class ComboboxComponentTest < ViewComponent::TestCase
     refute_includes toggle, "aria-label"
   end
 
+  def test_toggle_and_filter_input_render_types_and_toggle_is_unfocusable_before_alpine
+    render_inline(ComboboxComponent.new(
+      form: build_form,
+      method: :combobox_field,
+      label: "Choose fruit",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    toggle = rendered_content[/<button x-combobox:toggle[^>]*>/]
+    input = rendered_content[/<input\s+x-combobox:input[^>]*>/m]
+    assert_includes toggle, "type=\"button\""
+    assert_includes toggle, "tabindex=\"-1\""
+    assert_includes input, "type=\"text\""
+  end
+
   def test_renders_help_text
     render_inline(ComboboxComponent.new(
       form: build_form,
