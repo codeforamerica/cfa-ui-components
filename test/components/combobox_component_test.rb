@@ -29,12 +29,10 @@ class ComboboxComponentTest < ViewComponent::TestCase
     ))
     # The chevron toggle is a redundant, mouse/touch-only affordance: the search
     # input already exposes open/close to assistive tech via aria-expanded, so the
-    # toggle is hidden from the a11y tree and needs no accessible name. The toggle
-    # lives inside an Alpine <template>, so assert on the raw markup (Capybara
-    # selectors don't descend into template content).
-    toggle = rendered_content[/<button x-combobox:toggle.*?<\/button>/m]
-    assert_includes toggle, "aria-hidden=\"true\""
-    refute_includes toggle, "aria-label"
+    # toggle is hidden from the a11y tree and needs no accessible name.
+    toggle = alpine_element("button", "x-combobox:toggle")
+    assert_equal "true", toggle["aria-hidden"]
+    refute toggle.key?("aria-label")
   end
 
   def test_toggle_and_filter_input_render_types_and_toggle_is_unfocusable_before_alpine
@@ -46,11 +44,11 @@ class ComboboxComponentTest < ViewComponent::TestCase
       item_value_method: :value,
       item_label_method: :label
     ))
-    toggle = rendered_content[/<button x-combobox:toggle[^>]*>/]
-    input = rendered_content[/<input\s+x-combobox:input[^>]*>/m]
-    assert_includes toggle, "type=\"button\""
-    assert_includes toggle, "tabindex=\"-1\""
-    assert_includes input, "type=\"text\""
+    toggle = alpine_element("button", "x-combobox:toggle")
+    input = alpine_element("input", "x-combobox:input")
+    assert_equal "button", toggle["type"]
+    assert_equal "-1", toggle["tabindex"]
+    assert_equal "text", input["type"]
   end
 
   def test_renders_help_text
@@ -151,5 +149,16 @@ class ComboboxComponentTest < ViewComponent::TestCase
       item_label_method: :label
     ))
     assert_no_selector "select[autocomplete]", visible: :all
+  end
+
+  private
+
+  # The input and toggle live inside <template x-if>, which Capybara's HTML4 parser
+  # doesn't descend into, and Nokogiri can't match Alpine's colon attribute names
+  # via CSS — so walk an HTML5 parse of the raw markup directly.
+  def alpine_element(tag, alpine_attr)
+    element = Nokogiri::HTML5.fragment(rendered_content).xpath(".//#{tag}").find { |el| el.key?(alpine_attr) }
+    assert element, "expected a <#{tag} #{alpine_attr}> element"
+    element
   end
 end
