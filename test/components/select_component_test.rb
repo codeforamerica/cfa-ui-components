@@ -135,4 +135,17 @@ class SelectComponentTest < ViewComponent::TestCase
     ))
     assert_selector "[role='combobox']"
   end
+
+  def test_combobox_button_id_is_unique
+    render_inline(SelectComponent.new(
+      form: build_form,
+      method: :select_field,
+      label: "Pick one",
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label
+    ))
+    button_id = page.find("[role='combobox']")["id"]
+    assert_selector "##{button_id}", count: 1, visible: :all
+  end
 end

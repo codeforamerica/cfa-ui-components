@@ -58,7 +58,7 @@
         </li>
       <% end %>
     </ul>
-    <%= @form.hidden_field @method, "x-model": "value" %>
+    <%= @form.hidden_field @method, id: nil, "x-model": "value" %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
 </div>
