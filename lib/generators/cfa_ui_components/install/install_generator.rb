@@ -37,12 +37,12 @@ module CfaUiComponents
       package_json_file = "package.json"
 
       copy_js = "bundle exec rake cfa_ui_components:copy_gem_javascript && "
-      build_js = "esbuild app/javascript/*.*"
-      inject_into_file package_json_file, copy_js, before: build_js
+      build_js = /"build"\s*:\s*"/
+      inject_into_file package_json_file, copy_js, after: build_js
 
       copy_css = "bundle exec rake cfa_ui_components:copy_gem_styles && "
-      build_css = "npx @tailwindcss/cli"
-      inject_into_file package_json_file, copy_css, before: build_css
+      build_css = /"build:css"\s*:\s*"/
+      inject_into_file package_json_file, copy_css, after: build_css
     end
 
     def add_js_dependencies
