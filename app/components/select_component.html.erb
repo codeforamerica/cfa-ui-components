@@ -58,6 +58,7 @@
         </li>
       <% end %>
     </ul>
+    <%# id: nil suppresses Rails' default field_id, which the combobox button already uses %>
     <%= @form.hidden_field @method, id: nil, "x-model": "value" %>
   </div>
   <%= render(FormErrorsComponent.new(form: @form, method: @method)) %>
