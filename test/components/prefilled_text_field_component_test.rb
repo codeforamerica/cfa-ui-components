@@ -24,6 +24,11 @@ class PrefilledTextFieldComponentTest < ViewComponent::TestCase
     assert_selector "h3.label.block", text: "Full name"
   end
 
+  def test_heading_variant_does_not_put_aria_labelledby_on_generic_content
+    render_inline(PrefilledTextFieldComponent.new(text: "John Doe", label: "Full name", heading: :h3))
+    assert_no_selector "[aria-labelledby]"
+  end
+
   def test_currency_variant_formats_with_dollar_sign_and_delimiter
     render_inline(PrefilledTextFieldComponent.new(text: 1234, label: "Amount", variant: :currency))
     assert_selector "dd", text: "$1,234"

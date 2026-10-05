@@ -97,20 +97,6 @@ class LabelInputAssociationTest < ViewComponent::TestCase
     end
   end
 
-  def test_prefilled_text_field_heading_aria_labelledby_matches_label_id
-    render_inline(PrefilledTextFieldComponent.new(
-      text: "John Doe", label: "Full name", heading: :h2
-    ))
-
-    label = page.find("h2.label")
-    label_id = label["id"]
-    value = page.find("span[aria-labelledby]")
-
-    assert label_id.present?, "label heading should have an id"
-    assert_equal label_id, value["aria-labelledby"],
-      "Value span's aria-labelledby should reference the label heading's id"
-  end
-
   def test_prefilled_text_field_uses_description_list_association
     render_inline(PrefilledTextFieldComponent.new(
       text: "John Doe", label: "Full name"

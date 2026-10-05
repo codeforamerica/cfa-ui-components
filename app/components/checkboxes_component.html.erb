@@ -2,7 +2,6 @@
   <% if @legend %>
     <legend class="sr-only"><%= @legend %></legend>
   <% end %>
-  <%= @form.hidden_field @method, value: "" %>
   <div class="<%= class_names("cfa-stack-med", "has-error": has_error?) %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
