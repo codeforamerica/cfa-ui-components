@@ -17,7 +17,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     assert_selector "label", text: "No"
   end
 
-  def test_renders_hidden_field
+  def test_renders_a_single_blank_hidden_input
     render_inline(CheckboxesComponent.new(
       form: build_form,
       method: :checkboxes_field,
@@ -26,7 +26,8 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       item_label_method: :label,
       legend: "Pick some"
     ))
-    assert_selector "input[type='hidden'][value='']", visible: :all
+    assert_selector "input[type='hidden'][value='']", count: 1, visible: :all
+    assert_selector "input[type='hidden'][name$='[checkboxes_field][]']", visible: :all
   end
 
   def test_small_variant_uses_smaller_box

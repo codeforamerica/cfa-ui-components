@@ -2,10 +2,9 @@
   <% if @legend %>
     <legend class="sr-only"><%= @legend %></legend>
   <% end %>
-  <%= @form.hidden_field @method, value: "" %>
   <% content = content_tag(:div, class: @layout) do
        capture do
-         @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method, include_hidden: false) do |radio_button_item|
+         @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
            item_value = radio_button_item.value.to_s
            radio_attrs = {
              "x-model" => "$store.#{store_key}",
