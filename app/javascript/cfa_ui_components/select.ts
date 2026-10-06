@@ -27,6 +27,24 @@ export default function (Alpine: Alpine) {
     buttonId: opts.buttonId,
     listboxId: opts.listboxId,
 
+    init() {
+      // A native form.reset() only clears the bound hidden <input>; it does not
+      // touch this component's Alpine state, so the button label and the
+      // submitted value would desync. Restore the initial (server-rendered)
+      // selection when the surrounding form is reset.
+      const initial = {
+        value: opts.value ?? "",
+        label: opts.label ?? "",
+        activeIndex: opts.activeIndex ?? -1,
+      };
+      this.$root.closest("form")?.addEventListener("reset", () => {
+        this.value = initial.value;
+        this.label = initial.label;
+        this.activeIndex = initial.activeIndex;
+        this.closeList();
+      });
+    },
+
     optionId(i: number) {
       return `${this.buttonId}-option-${i}`;
     },

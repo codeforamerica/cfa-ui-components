@@ -1,4 +1,12 @@
-<fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
+<fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');
+             $el.closest('form')?.addEventListener('reset', () => requestAnimationFrame(() => {
+               // A native form.reset() unchecks the radios but does not update the
+               // Alpine store (x-model does not fire on reset), leaving any
+               // ConditionalComponent keyed on this store stale. Re-derive the
+               // store from the radio the form reset to.
+               const checked = $el.querySelector('input[type=radio]:checked');
+               Alpine.store('<%= store_key %>', checked ? checked.value : '');
+             }));">
   <% if @legend %>
     <legend class="sr-only"><%= @legend %></legend>
   <% end %>
