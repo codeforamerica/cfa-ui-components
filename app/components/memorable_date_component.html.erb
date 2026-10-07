@@ -7,6 +7,8 @@
         <span id="<%= help_dom_id %>" class="help_text"><%= @helper_text %></span>
       <% end %>
     </legend>
+  <% elsif @helper_text %>
+    <p id="<%= help_dom_id %>" class="help_text mb-cfa-sm"><%= @helper_text %></p>
   <% end %>
   <div class="flex gap-cfa-sm items-end">
     <!-- MONTH -->

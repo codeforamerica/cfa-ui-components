@@ -90,6 +90,20 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_no_selector "legend"
   end
 
+  def test_helper_text_renders_without_legend_when_label_blank
+    render_inline(MemorableDateComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "",
+      aria_labelledby: "external-heading",
+      helper_text: "For example: August 28 1986"
+    ))
+
+    assert_no_selector "legend"
+    assert_selector "fieldset > p#date_picker_test_model_my_date_help.help_text", text: "For example: August 28 1986"
+    assert_selector "input#date_picker_test_model_my_date_3i[aria-describedby='date_picker_test_model_my_date_help']"
+  end
+
   def test_raises_when_label_blank_and_no_aria_labelledby
     assert_raises(ArgumentError) do
       MemorableDateComponent.new(
