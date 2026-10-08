@@ -236,4 +236,18 @@ class CheckboxesComponentTest < ViewComponent::TestCase
     ))
     assert_selector "fieldset.mt-cfa-lg"
   end
+
+  def test_heading_renders_visible_heading_as_legend
+    render_inline(CheckboxesComponent.new(
+      form: build_form,
+      method: :checkboxes_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      heading: "Pick some",
+      heading_level: 3
+    ))
+
+    assert_selector "fieldset > legend.fieldset-heading.mb-cfa-med > h3", text: "Pick some"
+  end
 end

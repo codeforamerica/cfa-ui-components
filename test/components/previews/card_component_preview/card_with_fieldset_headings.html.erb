@@ -1,0 +1,14 @@
+<%# form OUTSIDE the card so the fieldsets are direct children of .cfa-card — mirrors real app usage %>
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render CardComponent.new do %>
+    <%= render InputComponent.new(form: f, method: :first_name, label: "First name") %>
+    <%= render MemorableDateComponent.new(form: f, method: :my_date,
+          heading: "Date of birth",
+          helper_text: "For example: August 28 1986") %>
+    <%= render RadioButtonsComponent.new(form: f, method: :pineapple_pizza_preference,
+          collection: FormComponentPreview.yes_no_options,
+          item_value_method: :value,
+          item_label_method: :label,
+          heading: "Do you like pineapple on pizza?") %>
+  <% end %>
+<% end %>

@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
 class MemorableDateComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day: nil, label_month: nil, label_month_select: nil, label_year: nil, placeholder_day: nil, placeholder_year: nil, helper_text: nil, aria_labelledby: nil, css_class: nil, input_attrs: {})
-    raise ArgumentError, "must provide a non-blank label: or aria_labelledby:" if label.blank? && aria_labelledby.nil?
+  def initialize(form:, method:, label: nil, heading: nil, heading_level: 2, label_day: nil, label_month: nil, label_month_select: nil, label_year: nil, placeholder_day: nil, placeholder_year: nil, helper_text: nil, aria_labelledby: nil, css_class: nil, input_attrs: {})
+    raise ArgumentError, "must provide a non-blank label:, heading:, or aria_labelledby:" if label.blank? && heading.nil? && aria_labelledby.nil?
+    raise ArgumentError, "pass label: or heading:, not both" if label.present? && heading
     if input_attrs.key?(:id)
       raise ArgumentError, "MemorableDateComponent forwards input_attrs to the " \
         "day/month/year fields, so a single :id would collide across them. Omit it."
     end
     super(form:, method:, css_class:, input_attrs:)
     @label = label
+    @heading = heading
+    @heading_level = heading_level
     # The day/month/year sub-labels are identical across consumers, so they
     # default to the library's own localized strings; callers may still override.
     @label_day = label_day || I18n.t("cfaui.memorable_date.day")
