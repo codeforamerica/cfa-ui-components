@@ -1,14 +1,19 @@
 <fieldset class="<%= class_names("memorable-date", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %>>
   <% invalid = @form.object.errors[@method].any? %>
-  <% if @label.present? %>
+  <% if @label.present? && !@hide_label %>
     <legend class="flex flex-col gap-cfa-sm mb-cfa-sm">
       <span class="font-bold"><%= @label %></span>
       <% if @helper_text %>
         <span id="<%= help_dom_id %>" class="help_text"><%= @helper_text %></span>
       <% end %>
     </legend>
-  <% elsif @helper_text %>
-    <p id="<%= help_dom_id %>" class="help_text mt-cfa-xsm"><%= @helper_text %></p>
+  <% else %>
+    <% if @label.present? %>
+      <legend class="sr-only"><%= @label %></legend>
+    <% end %>
+    <% if @helper_text %>
+      <p id="<%= help_dom_id %>" class="help_text mt-cfa-xsm"><%= @helper_text %></p>
+    <% end %>
   <% end %>
   <div class="flex gap-cfa-sm items-end">
     <!-- MONTH -->

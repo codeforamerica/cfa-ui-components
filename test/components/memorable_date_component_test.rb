@@ -104,6 +104,30 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_selector "input#date_picker_test_model_my_date_3i[aria-describedby='date_picker_test_model_my_date_help']"
   end
 
+  def test_hide_label_renders_sr_only_legend
+    render_inline(MemorableDateComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Issue date",
+      hide_label: true
+    ))
+
+    assert_selector "fieldset.memorable-date > legend.sr-only", text: "Issue date", visible: :all
+  end
+
+  def test_hide_label_keeps_helper_text_visible_outside_legend
+    render_inline(MemorableDateComponent.new(
+      form: build_form,
+      method: :my_date,
+      label: "Issue date",
+      hide_label: true,
+      helper_text: "For example: August 28 1986"
+    ))
+
+    assert_selector "fieldset > p#date_picker_test_model_my_date_help.help_text", text: "For example: August 28 1986"
+    assert_no_selector "legend #date_picker_test_model_my_date_help", visible: :all
+  end
+
   def test_raises_when_label_blank_and_no_aria_labelledby
     assert_raises(ArgumentError) do
       MemorableDateComponent.new(
