@@ -248,6 +248,7 @@ class CheckboxesComponentTest < ViewComponent::TestCase
       heading_level: 3
     ))
 
-    assert_selector "fieldset > legend.fieldset-heading.mb-cfa-med > h3", text: "Pick some"
+    assert_selector "fieldset > legend.fieldset-heading > h3", text: "Pick some"
+    assert_selector "fieldset > legend + div.cfa-stack-med.mt-cfa-med"
   end
 end

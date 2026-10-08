@@ -1,6 +1,6 @@
 <fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', <%= current_value&.to_s || [] %>);">
-  <%= render FieldsetLegendComponent.new(legend: @legend, heading: @heading, heading_level: @heading_level, css_class: "mb-cfa-med") %>
-  <div class="<%= class_names("cfa-stack-med", "has-error": has_error?) %>">
+  <%= render FieldsetLegendComponent.new(legend: @legend, heading: @heading, heading_level: @heading_level) %>
+  <div class="<%= class_names("cfa-stack-med", "has-error": has_error?, "mt-cfa-med": @heading) %>">
     <% content = capture {
          @form.collection_checkboxes(@method, @collection, @item_value_method, @item_label_method) do |checkbox_item|
            item_value = checkbox_item.value.to_s

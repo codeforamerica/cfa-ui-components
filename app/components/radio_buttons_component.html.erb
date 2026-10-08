@@ -1,6 +1,6 @@
 <fieldset class="<%= class_names("fieldset-group", @css_class) %>" <% if @aria_labelledby %>aria-labelledby="<%= @aria_labelledby %>"<% end %> <% if (described_by = described_by_value(warning: has_warning?)) %>aria-describedby="<%= described_by %>"<% end %> x-data x-init="Alpine.store('<%= store_key %>', '<%= current_value %>');">
-  <%= render FieldsetLegendComponent.new(legend: @legend, heading: @heading, heading_level: @heading_level, css_class: "mb-cfa-med") %>
-  <% content = content_tag(:div, class: @layout) do
+  <%= render FieldsetLegendComponent.new(legend: @legend, heading: @heading, heading_level: @heading_level) %>
+  <% content = content_tag(:div, class: class_names(@layout, "mt-cfa-med": @heading)) do
        capture do
          @form.collection_radio_buttons(@method, @collection, @item_value_method, @item_label_method) do |radio_button_item|
            item_value = radio_button_item.value.to_s

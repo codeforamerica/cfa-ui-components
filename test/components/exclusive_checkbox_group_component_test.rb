@@ -79,6 +79,7 @@ class ExclusiveCheckboxGroupComponentTest < ViewComponent::TestCase
       '<input type="checkbox" name="opt" />'.html_safe
     end
 
-    assert_selector "fieldset > legend.fieldset-heading.mb-cfa-xl > h1", text: "Which apply to you?"
+    assert_selector "fieldset > legend.fieldset-heading > h1", text: "Which apply to you?"
+    assert_selector "[data-exclusive-checkbox-group=options].mt-cfa-xl"
   end
 end

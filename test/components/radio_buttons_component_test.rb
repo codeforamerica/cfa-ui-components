@@ -247,6 +247,7 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
       heading: "Pick one"
     ))
 
-    assert_selector "fieldset > legend.fieldset-heading.mb-cfa-med > h2", text: "Pick one"
+    assert_selector "fieldset > legend.fieldset-heading > h2", text: "Pick one"
+    assert_selector "fieldset > legend + div.cfa-stack-med.mt-cfa-med"
   end
 end

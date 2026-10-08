@@ -26,8 +26,8 @@
     checkbox.click();
   }
 }" class="fieldset-group cfa-stack-xl">
-  <%= render FieldsetLegendComponent.new(legend: @legend, heading: @heading, heading_level: @heading_level, css_class: "mb-cfa-xl") %>
-  <div data-exclusive-checkbox-group="options" class="cfa-stack-xl [&>*]:cursor-pointer" @change="onOptionChange($event)" @click="handleItemClick($event)">
+  <%= render FieldsetLegendComponent.new(legend: @legend, heading: @heading, heading_level: @heading_level) %>
+  <div data-exclusive-checkbox-group="options" class="<%= class_names("cfa-stack-xl [&>*]:cursor-pointer", "mt-cfa-xl": @heading) %>" @change="onOptionChange($event)" @click="handleItemClick($event)">
     <%= content %>
   </div>
 

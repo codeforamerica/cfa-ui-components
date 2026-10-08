@@ -281,7 +281,6 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     ))
 
     assert_selector "fieldset > legend.fieldset-heading > h2", text: "Date of birth"
-    assert_no_selector "legend.mb-cfa-sm"
     assert_selector "legend + p#date_picker_test_model_my_date_help.help_text.mt-cfa-xsm", text: "For example: August 28 1986"
     assert_no_selector "fieldset[aria-labelledby]"
   end
@@ -289,7 +288,8 @@ class MemorableDateComponentTest < ViewComponent::TestCase
   def test_heading_without_helper_text_spaces_fields_below_legend
     render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, heading: "Issue date"))
 
-    assert_selector "fieldset > legend.fieldset-heading.mb-cfa-sm > h2", text: "Issue date"
+    assert_selector "fieldset > legend.fieldset-heading > h2", text: "Issue date"
+    assert_selector "legend + div.mt-cfa-sm"
     assert_no_selector "p.help_text"
   end
 

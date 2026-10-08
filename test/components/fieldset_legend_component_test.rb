@@ -10,9 +10,9 @@ class FieldsetLegendComponentTest < ViewComponent::TestCase
   end
 
   def test_heading_renders_visible_heading_inside_legend
-    render_inline(FieldsetLegendComponent.new(heading: "Date of birth", css_class: "mb-cfa-med"))
+    render_inline(FieldsetLegendComponent.new(heading: "Date of birth"))
 
-    assert_selector "legend.fieldset-heading.mb-cfa-med > h2", text: "Date of birth"
+    assert_selector "legend.fieldset-heading > h2", text: "Date of birth"
     assert_no_selector "legend.sr-only"
   end
 

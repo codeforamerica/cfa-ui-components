@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MemorableDateComponent < AttributeBoundFormElementComponent
+  # Name the date one of three ways: label: (bold legend, helper inside it),
+  # heading: (legend <hN>, helper below), or aria_labelledby: (external heading).
   def initialize(form:, method:, label: nil, heading: nil, heading_level: 2, label_day: nil, label_month: nil, label_month_select: nil, label_year: nil, placeholder_day: nil, placeholder_year: nil, helper_text: nil, aria_labelledby: nil, css_class: nil, input_attrs: {})
     raise ArgumentError, "must provide a non-blank label:, heading:, or aria_labelledby:" if label.blank? && heading.nil? && aria_labelledby.nil?
     raise ArgumentError, "pass label: or heading:, not both" if label.present? && heading
