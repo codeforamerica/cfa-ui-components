@@ -236,4 +236,18 @@ class RadioButtonsComponentTest < ViewComponent::TestCase
     ))
     assert_selector "input[type='hidden'][name$='[radio_field]']", count: 1, visible: :all
   end
+
+  def test_heading_renders_visible_heading_as_legend
+    render_inline(RadioButtonsComponent.new(
+      form: build_form,
+      method: :radio_field,
+      collection: simple_collection,
+      item_value_method: :value,
+      item_label_method: :label,
+      heading: "Pick one"
+    ))
+
+    assert_selector "fieldset > legend.fieldset-heading > h2", text: "Pick one"
+    assert_selector "fieldset > legend + div.cfa-stack-med.mt-cfa-med"
+  end
 end

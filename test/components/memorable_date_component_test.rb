@@ -271,4 +271,31 @@ class MemorableDateComponentTest < ViewComponent::TestCase
     assert_selector "span.option-label", text: "enero"
     assert_selector "span.option-label", text: "diciembre"
   end
+
+  def test_heading_renders_legend_heading_then_helper_text
+    render_inline(MemorableDateComponent.new(
+      form: build_form,
+      method: :my_date,
+      heading: "Date of birth",
+      helper_text: "For example: August 28 1986"
+    ))
+
+    assert_selector "fieldset > legend.fieldset-heading > h2", text: "Date of birth"
+    assert_selector "legend + p#date_picker_test_model_my_date_help.help_text.mt-cfa-xsm", text: "For example: August 28 1986"
+    assert_no_selector "fieldset[aria-labelledby]"
+  end
+
+  def test_heading_without_helper_text_spaces_fields_below_legend
+    render_inline(MemorableDateComponent.new(form: build_form, method: :my_date, heading: "Issue date"))
+
+    assert_selector "fieldset > legend.fieldset-heading > h2", text: "Issue date"
+    assert_selector "legend + div.mt-cfa-sm"
+    assert_no_selector "p.help_text"
+  end
+
+  def test_raises_when_label_and_heading_both_given
+    assert_raises(ArgumentError) do
+      MemorableDateComponent.new(form: build_form, method: :my_date, label: "Date of birth", heading: "Date of birth")
+    end
+  end
 end

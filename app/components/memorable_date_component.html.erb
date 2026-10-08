@@ -7,10 +7,13 @@
         <span id="<%= help_dom_id %>" class="help_text"><%= @helper_text %></span>
       <% end %>
     </legend>
-  <% elsif @helper_text %>
-    <p id="<%= help_dom_id %>" class="help_text mt-cfa-xsm"><%= @helper_text %></p>
+  <% else %>
+    <%= render FieldsetLegendComponent.new(heading: @heading, heading_level: @heading_level) %>
+    <% if @helper_text %>
+      <p id="<%= help_dom_id %>" class="help_text mt-cfa-xsm"><%= @helper_text %></p>
+    <% end %>
   <% end %>
-  <div class="flex gap-cfa-sm items-end">
+  <div class="<%= class_names("flex gap-cfa-sm items-end", "mt-cfa-sm": @heading && !@helper_text) %>">
     <!-- MONTH -->
     <div class="w-[176px]">
       <%= label_tag input_id(2), @label_month, id: "#{input_id(2)}-label", class: "label block mb-cfa-sm" %>

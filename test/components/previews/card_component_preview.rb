@@ -23,6 +23,9 @@ class CardComponentPreview < FormComponentPreview
   def card_with_memorable_date
   end
 
+  def card_with_fieldset_headings
+  end
+
   def basic_info_form
   end
 

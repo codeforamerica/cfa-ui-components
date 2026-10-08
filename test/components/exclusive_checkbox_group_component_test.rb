@@ -73,4 +73,13 @@ class ExclusiveCheckboxGroupComponentTest < ViewComponent::TestCase
     assert_selector "fieldset[aria-labelledby='external-heading']"
     assert_no_selector "legend"
   end
+
+  def test_heading_renders_visible_heading_as_legend
+    render_inline(ExclusiveCheckboxGroupComponent.new(heading: "Which apply to you?", heading_level: 1)) do
+      '<input type="checkbox" name="opt" />'.html_safe
+    end
+
+    assert_selector "fieldset > legend.fieldset-heading > h1", text: "Which apply to you?"
+    assert_selector "[data-exclusive-checkbox-group=options].mt-cfa-xl"
+  end
 end

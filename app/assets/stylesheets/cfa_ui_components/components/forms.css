@@ -9,6 +9,10 @@
     @apply border-none p-0 mx-0 min-w-0;
 }
 
+.fieldset-heading {
+    @apply p-0 w-full;
+}
+
 .form_item {
     @apply flex items-center;
     label { margin-left: var(--spacing-cfa-sm); }

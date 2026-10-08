@@ -35,4 +35,21 @@ class CardSpacingTest < JavaScriptSystemTestCase
       "The memorable date should keep `.cfa-card > * + *` spacing below the previous field; " \
       "a margin reset on `.memorable-date` likely collapsed it."
   end
+
+  test "a fieldset heading sits 4px above date helper text and 16px above radio options" do
+    visit "/rails/view_components/card_component/card_with_fieldset_headings"
+
+    gaps = evaluate_script(<<~JS)
+      (() => {
+        const gap = (a, b) => Math.round(document.querySelector(b).getBoundingClientRect().top - document.querySelector(a).getBoundingClientRect().bottom);
+        return {
+          aboveDate: gap(".cfa-card > div", ".cfa-card > fieldset.memorable-date"),
+          headingToHelper: gap("fieldset.memorable-date legend h2", "fieldset.memorable-date .help_text"),
+          helperToFields: gap("fieldset.memorable-date .help_text", "fieldset.memorable-date label"),
+          headingToOptions: gap("fieldset.fieldset-group legend h2", "fieldset.fieldset-group .form_item")
+        };
+      })()
+    JS
+    assert_equal({"aboveDate" => 16, "headingToHelper" => 4, "helperToFields" => 8, "headingToOptions" => 16}, gaps)
+  end
 end

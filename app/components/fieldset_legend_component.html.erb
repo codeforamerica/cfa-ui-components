@@ -1,0 +1,5 @@
+<% if @heading %>
+  <legend class="fieldset-heading"><%= content_tag("h#{@heading_level}", @heading) %></legend>
+<% else %>
+  <legend class="sr-only"><%= @legend %></legend>
+<% end %>
