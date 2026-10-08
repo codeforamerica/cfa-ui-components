@@ -7,14 +7,12 @@ require "capybara/cuprite"
 # and so edits to JS/CSS sources are reflected in system tests.
 system("yarn build && yarn build:css", exception: true, chdir: Rails.root.to_s)
 
-Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(app, window_size: [1400, 1400], headless: true, process_timeout: 30, timeout: 30)
-end
-
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :rack_test
 end
 
 class JavaScriptSystemTestCase < ApplicationSystemTestCase
-  driven_by :cuprite
+  # Rails registers its own :cuprite driver from these arguments, replacing
+  # any Capybara.register_driver(:cuprite), so options must be passed here.
+  driven_by :cuprite, screen_size: [1400, 1400], options: {headless: true, process_timeout: 30, timeout: 30}
 end
