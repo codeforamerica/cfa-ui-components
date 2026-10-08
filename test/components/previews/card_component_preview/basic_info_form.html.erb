@@ -13,15 +13,17 @@
           item_value_method: :value,
           item_label_method: :label,
           optional: true) %>
-    <h2 id="dob-heading">Date of birth</h2>
-    <%= render MemorableDateComponent.new(form: f, method: :my_date,
-          label: "",
-          aria_labelledby: "dob-heading",
-          label_day: "Day",
-          label_month: "Month",
-          label_month_select: "- Select -",
-          label_year: "Year",
-          helper_text: "For example: August 28 1986") %>
+    <div>
+      <h2 id="dob-heading">Date of birth</h2>
+      <%= render MemorableDateComponent.new(form: f, method: :my_date,
+            label: "",
+            aria_labelledby: "dob-heading",
+            label_day: "Day",
+            label_month: "Month",
+            label_month_select: "- Select -",
+            label_year: "Year",
+            helper_text: "For example: August 28 1986") %>
+    </div>
     <h2>Social security number</h2>
     <%= render TinComponent.new(form: f, method: :ssn,
           label: "Enter your SSN or ITIN",

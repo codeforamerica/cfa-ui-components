@@ -14,6 +14,13 @@ class MemorableDateComponentPreview < FormComponentPreview
       helper_text: I18n.t("preview.date_helper_text"))
   end
 
+  def with_hidden_label
+    render MemorableDateComponent.new(form:,
+      method: :my_date,
+      label: I18n.t("preview.date_of_birth"),
+      hide_label: true)
+  end
+
   def with_error
     custom_model = TestModel.new
     custom_model.valid?
