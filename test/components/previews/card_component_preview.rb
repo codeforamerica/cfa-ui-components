@@ -20,6 +20,9 @@ class CardComponentPreview < FormComponentPreview
   def card_with_radio_fieldset
   end
 
+  def card_with_memorable_date
+  end
+
   def basic_info_form
   end
 

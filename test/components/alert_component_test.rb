@@ -23,6 +23,12 @@ class AlertComponentTest < ViewComponent::TestCase
     assert_selector "svg.cfa-icon.text-icon-default[aria-hidden='true']", visible: :all
   end
 
+  def test_warning_icon_paths_stay_unfilled_under_cfa_icon_fill
+    render_inline(AlertComponent.new) { "Heads up" }
+    assert_selector "svg.cfa-icon path", visible: :all, count: 3
+    assert_no_selector "svg.cfa-icon path:not([fill='none'])", visible: :all
+  end
+
   def test_omits_dismiss_button_by_default
     render_inline(AlertComponent.new) { "Heads up" }
     assert_no_selector "button"

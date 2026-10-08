@@ -1,0 +1,8 @@
+<%# form OUTSIDE the card so the fieldset is a direct child of .cfa-card — mirrors real app usage %>
+<%= form_with url: "/", method: :post, model: FormComponentPreview::TestModel.new do |f| %>
+  <%= render CardComponent.new do %>
+    <h2>Add your ID information</h2>
+    <%= render InputComponent.new(form: f, method: :my_number, label: "ID number") %>
+    <%= render MemorableDateComponent.new(form: f, method: :my_date, label: "Issue date") %>
+  <% end %>
+<% end %>

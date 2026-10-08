@@ -24,4 +24,15 @@ class CardSpacingTest < JavaScriptSystemTestCase
       "The fieldset should keep `.cfa-card > * + *` spacing below the heading; " \
       "a margin reset on `.fieldset-group` likely collapsed it."
   end
+
+  test "a memorable date directly inside a card keeps its top margin below the previous field" do
+    visit "/rails/view_components/card_component/card_with_memorable_date"
+
+    margin_top = evaluate_script(
+      "getComputedStyle(document.querySelector('.cfa-card > fieldset.memorable-date')).marginTop"
+    )
+    assert_equal CARD_CHILD_GAP, margin_top,
+      "The memorable date should keep `.cfa-card > * + *` spacing below the previous field; " \
+      "a margin reset on `.memorable-date` likely collapsed it."
+  end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MemorableDateComponent < AttributeBoundFormElementComponent
-  def initialize(form:, method:, label:, label_day: nil, label_month: nil, label_month_select: nil, label_year: nil, placeholder_day: nil, placeholder_year: nil, helper_text: nil, aria_labelledby: nil, css_class: nil, input_attrs: {})
+  def initialize(form:, method:, label:, label_day: nil, label_month: nil, label_month_select: nil, label_year: nil, placeholder_day: nil, placeholder_year: nil, helper_text: nil, aria_labelledby: nil, hide_label: false, css_class: nil, input_attrs: {})
     raise ArgumentError, "must provide a non-blank label: or aria_labelledby:" if label.blank? && aria_labelledby.nil?
     if input_attrs.key?(:id)
       raise ArgumentError, "MemorableDateComponent forwards input_attrs to the " \
@@ -19,6 +19,7 @@ class MemorableDateComponent < AttributeBoundFormElementComponent
     @placeholder_year = placeholder_year || I18n.t("cfaui.memorable_date.placeholder_year")
     @helper_text = helper_text
     @aria_labelledby = aria_labelledby
+    @hide_label = hide_label
   end
 
   private

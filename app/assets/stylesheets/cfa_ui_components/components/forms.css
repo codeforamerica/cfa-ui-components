@@ -297,7 +297,7 @@
   @apply cfa-stack-sm;
   border: 0;
   padding: 0;
-  margin: 0;
+  margin-inline: 0;
   min-inline-size: 0;
 
   & .help_text {
