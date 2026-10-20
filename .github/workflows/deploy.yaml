@@ -10,7 +10,7 @@ on:
         default: development
         required: true
         type: environment
-      shared_services_ref:
+      shared-services-ref:
         description: The branch or tag of the shared services repository to use.
         default: main
         required: false
@@ -23,85 +23,58 @@ concurrency:
 permissions:
   contents: read
 
-env:
-  APPLICATION: cfa-ui-components
-  ENVIRONMENT: ${{ inputs.environment || 'development' }}
-  REMOTE_WORKFLOW: deploy-app.yaml
+run-name: Build and deploy to ${{ inputs.environment || 'development' }}
 
 jobs:
-  deploy:
-    name: Deploy to ${{ inputs.environment || 'development' }}
+  build:
+    name: Build and publish to ${{ inputs.environment || 'development' }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment || 'development' }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      APP_NAME: cfa-ui-components
+      ENVIRONMENT: ${{ inputs.environment || 'development' }}
+      IMAGE_TAG: ${{ github.sha }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@v7
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6.3.0
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+          role-session-name: github-actions-${{ github.job }}-${{ github.run_id }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
       - name: Log into Amazon ECR
+        uses: aws-actions/amazon-ecr-login@03f1aad4c6c7ffd436567f42f9384779290529bd # v2.1.7
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2.1.7
-      - name: Check if the image exists
-        id: image_exists
-        uses: k4kratik/container-image-check-custom-action@v4
-        with:
-          type: ecr
-          container_repo_name: "${{ env.APPLICATION }}-${{ env.ENVIRONMENT }}-web"
-          image_tag: ${{ github.sha }}
       - name: Build and push Docker image
-        if: ${{ steps.image_exists.outputs.image_exists == 'false' }}
         env:
-          IMAGE_TAG: ${{ github.sha }}
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: "${{ env.APPLICATION }}-${{ env.ENVIRONMENT }}-web"
+          REPOSITORY: ${{ env.APP_NAME }}-${{ env.ENVIRONMENT }}-web
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG --platform linux/amd64 .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-      - name: Update SSM Version Parameter
-        env:
-          IMAGE_TAG: ${{ github.sha }}
+          if aws ecr describe-images --repository-name "$REPOSITORY" \
+              --image-ids imageTag="$IMAGE_TAG" >/dev/null 2>&1; then
+            echo "Image $IMAGE_TAG already exists, skipping build."
+            exit 0
+          fi
+
+          docker build --platform linux/amd64 -t "$REGISTRY/$REPOSITORY:$IMAGE_TAG" .
+          docker push "$REGISTRY/$REPOSITORY:$IMAGE_TAG"
+      - name: Update SSM version parameter
         run: |
-          echo "tag:$IMAGE_TAG"
           aws ssm put-parameter \
-            --name  /$APPLICATION/$ENVIRONMENT/web/version \
+            --name "/$APP_NAME/$ENVIRONMENT/web/version" \
             --value "$IMAGE_TAG" \
             --overwrite
-      - name: Get a deployment token
-        uses: actions/create-github-app-token@v3
-        id: token
-        with:
-          app-id: ${{ secrets.DEPLOYMENT_APP_ID }}
-          private-key: ${{ secrets.DEPLOYMENT_APP_KEY }}
-          owner: codeforamerica
-          repositories: shared-services-infra
-      - name: Trigger deployment from shared services
-        uses: codex-/return-dispatch@v4.0.1
-        id: dispatch
-        with:
-          token: ${{ steps.token.outputs.token }}
-          ref: ${{ inputs.shared_services_ref || 'main' }}
-          repo: shared-services-infra
-          owner: codeforamerica
-          workflow: ${{ env.REMOTE_WORKFLOW }}
-          workflow_inputs: |
-            {
-              "environment": "${{ env.ENVIRONMENT }}",
-              "application": "${{ env.APPLICATION }}"
-            }
-      - name: Wait on Workflow
-        uses: lucasssvaz/wait-on-workflow@v1
-        id: waiter
-        with:
-          repository: codeforamerica/shared-services-infra
-          workflow: ${{ steps.dispatch.outputs.run_id }}
-          github-token: ${{ steps.token.outputs.token }}
-      - name: Fail unless the workflow succeeded
-        if: ${{ steps.waiter.outputs.conclusion != 'success' }}
-        uses: actions/github-script@v9
-        with:
-          script: |
-            core.setFailed('Deployment workflow completed with stats: ${{ steps.waiter.outputs.conclusion }}')
+
+  deploy:
+    name: Deploy to ${{ inputs.environment || 'development' }}
+    needs: build
+    uses: codeforamerica/github-actions/.github/workflows/shared-services-container-hosting-deploy.yaml@main
+    with:
+      application: cfa-ui-components
+      environment: ${{ inputs.environment || 'development' }}
+      shared-services-ref: ${{ inputs.shared-services-ref }}
+    secrets: inherit
