@@ -29,7 +29,7 @@ jobs:
   build:
     name: Build and publish to ${{ inputs.environment || 'development' }}
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.environment || 'development' }}
     permissions:
       contents: read
       id-token: write
