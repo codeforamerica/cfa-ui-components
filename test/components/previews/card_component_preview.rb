@@ -53,17 +53,6 @@ class CardComponentPreview < FormComponentPreview
 
   def action
     render(CardComponent.new) do |card|
-      card.with_image { content_tag(:div, "", class: "h-[194px] bg-zinc-200") }
-      card.with_button { content_tag(:button, "Button", class: "btn btn--primary btn--large") }
-      safe_join([
-        content_tag(:h2, "This is the card title"),
-        content_tag(:p, "This is the card content")
-      ])
-    end
-  end
-
-  def action_sm
-    render(CardComponent.new) do |card|
       card.with_button { content_tag(:button, "Button", class: "btn btn--primary btn--large") }
       safe_join([
         content_tag(:h2, "This is the card title"),
