@@ -10,10 +10,10 @@
     focus-trap "^8.0.0"
     tabbable "^6.4.0"
 
-"@alpinejs/mask@^3.17.4":
-  version "3.17.4"
-  resolved "https://registry.yarnpkg.com/@alpinejs/mask/-/mask-3.17.4.tgz#46e1010db85935d4cf5e58a2cf13bee4f560369e"
-  integrity sha512-eEcggxA8+TlpMYoioF43vhLuoInL8rlkPpAZmIWh4SRLJwZRaxCYrb8W+A3kyiRos7z8Bfj2FHwJmq+jejfKaw==
+"@alpinejs/mask@^3.17.5":
+  version "3.17.5"
+  resolved "https://registry.yarnpkg.com/@alpinejs/mask/-/mask-3.17.5.tgz#d340605b244a0bfeb46b7e3b6d4577eba84b20bc"
+  integrity sha512-Luqp6ZcATVCgUTBSyet40LNezOH+X0QEJpwCa9stFmZT6ozDi3HeLFlNQM8LJJ3Y2fM7psLKBtYrJc7n7WY89w==
 
 "@emnapi/core@^1.11.1":
   version "1.11.2"
