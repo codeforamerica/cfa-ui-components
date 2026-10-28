@@ -20,7 +20,7 @@ class AlertComponentTest < ViewComponent::TestCase
 
   def test_renders_info_icon_by_default
     render_inline(AlertComponent.new) { "Heads up" }
-    assert_selector "svg.cfa-icon.text-icon-default[aria-hidden='true']", visible: :all
+    assert_selector "svg.cfa-icon.text-text-primary[aria-hidden='true']", visible: :all
     assert_selector "svg.cfa-icon path[d='M12 16V12']", visible: :all
   end
 
@@ -80,7 +80,7 @@ class AlertComponentTest < ViewComponent::TestCase
 
   def test_css_class_is_appended_without_dropping_base_classes
     render_inline(AlertComponent.new(css_class: "mt-cfa-sm")) { "Heads up" }
-    assert_selector "div.cfa-alert.mt-cfa-sm.bg-background-tertiary.border-border-secondary"
+    assert_selector "div.cfa-alert.mt-cfa-sm.bg-background-tertiary.border-border-primary"
   end
 
   def test_raises_for_invalid_variant
