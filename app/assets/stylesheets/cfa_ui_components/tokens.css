@@ -47,6 +47,8 @@
     /* Text colors */
     --color-text-default: #011E29;
     --color-text-body-secondary: #1A353E;
+    --color-text-primary: #121212;
+    --color-button-secondary-text: #20201E;
     --color-text-disabled: #999999;
 
     /* Icon colors */
@@ -56,6 +58,7 @@
     /* Border colors */
     --color-border-default: #011E29;
     --color-border-secondary: #CCD2D4;
+    --color-border-primary: #D0D0D0;
     --color-border-error: #B50909;
     --color-border-warning: #B27A00;
     --color-border-disabled: #B3BBBF;

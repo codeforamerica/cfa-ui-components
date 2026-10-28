@@ -2,10 +2,11 @@
   x-data="{ open: true }"
   x-show="open"
   role="alert"
-  class="<%= class_names("cfa-alert flex items-start gap-2.5 rounded border border-border-secondary bg-background-tertiary p-cfa-med text-text-default", @css_class) %>"
+  class="<%= class_names("cfa-alert flex items-start gap-2.5 rounded border border-border-primary bg-background-tertiary p-cfa-med text-text-primary", @css_class) %>"
 >
   <span class="flex shrink-0 items-center">
-    <%= inline_icon(icon_name, size: 24, css_class: "text-icon-default", aria_hidden: true) %>
+    <%# Figma's icon/default (#121212) matches text/primary; the global icon-default token is #011E29. %>
+    <%= inline_icon(icon_name, size: 24, css_class: "text-text-primary", aria_hidden: true) %>
   </span>
   <%# Mobile: actions stack under the text. md+: actions sit inline, bottom-aligned with the text. %>
   <div class="flex flex-1 min-w-0 flex-col gap-2.5 md:flex-row md:items-end md:justify-between md:gap-cfa-med">
