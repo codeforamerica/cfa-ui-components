@@ -8,8 +8,9 @@
     <%# Figma's icon/default (#121212) matches text/primary; the global icon-default token is #011E29. %>
     <%= inline_icon(icon_name, size: 24, css_class: "text-text-primary", aria_hidden: true) %>
   </span>
-  <%# Mobile: actions stack under the text. md+: actions sit inline, bottom-aligned with the text. %>
-  <div class="flex flex-1 min-w-0 flex-col gap-2.5 md:flex-row md:items-end md:justify-between md:gap-cfa-med">
+  <%# Mobile: actions stack under the text. md+: actions sit inline with the text —
+      bottom-aligned, or vertically centered (alongside the dismiss button) when dismissible. %>
+  <div class="<%= class_names("flex flex-1 min-w-0 flex-col gap-2.5 md:flex-row md:justify-between md:gap-cfa-med", dismissible ? "md:items-center" : "md:items-end") %>">
     <div class="flex-1 min-w-0 cfa-stack-xsm">
       <% if title.present? %>
         <p class="type-body-bold"><%= title %></p>
@@ -25,10 +26,12 @@
     <% end %>
   </div>
   <% if dismissible %>
+    <%# Figma lays out a 24px icon; -m-1 keeps the 32px hit area without shifting layout.
+        md+ with actions: centered so it sits beside the action buttons. %>
     <button
       type="button"
       @click="open = false"
-      class="flex size-8 shrink-0 items-center justify-center cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      class="<%= class_names("-m-1 flex size-8 shrink-0 items-center justify-center cursor-pointer bg-transparent border-0 p-0 text-inherit focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus", "md:self-center" => actions?) %>"
       aria-label="<%= t("cfaui.alert.dismiss_aria") %>"
     >
       <%= inline_icon(:close, size: 24, aria_hidden: true) %>

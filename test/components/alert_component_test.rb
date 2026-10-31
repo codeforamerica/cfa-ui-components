@@ -78,6 +78,28 @@ class AlertComponentTest < ViewComponent::TestCase
     assert_selector "button[aria-label='Dismiss alert']"
   end
 
+  def test_centers_actions_and_dismiss_when_dismissible_with_actions
+    render_inline(AlertComponent.new(dismissible: true)) do |alert|
+      alert.with_action(label: "One")
+      "Heads up"
+    end
+    assert_selector "div.md\\:items-center:has(> .cfa-alert__actions)"
+    assert_selector "button.md\\:self-center[aria-label='Dismiss alert']"
+  end
+
+  def test_bottom_aligns_actions_when_not_dismissible
+    render_inline(AlertComponent.new) do |alert|
+      alert.with_action(label: "One")
+      "Heads up"
+    end
+    assert_selector "div.md\\:items-end:has(> .cfa-alert__actions)"
+  end
+
+  def test_top_aligns_dismiss_without_actions
+    render_inline(AlertComponent.new(dismissible: true)) { "Heads up" }
+    assert_no_selector "button.md\\:self-center"
+  end
+
   def test_css_class_is_appended_without_dropping_base_classes
     render_inline(AlertComponent.new(css_class: "mt-cfa-sm")) { "Heads up" }
     assert_selector "div.cfa-alert.mt-cfa-sm.bg-background-tertiary.border-border-primary"
