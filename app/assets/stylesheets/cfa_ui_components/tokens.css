@@ -32,6 +32,14 @@
     --spacing-cfa-xl: 32px;
     --spacing-cfa-2xl: 40px;
 
+    /* Color token names mirror Figma variable names, so read the utility
+       carefully: `text-text-primary` / `border-border-primary` are the neutral
+       Figma "primary" text (#121212) and border (#D0D0D0), while bare
+       `text-primary` / `border-primary` come from the brand `--color-primary`
+       (#9EB0FF). --color-text-default, --color-text-primary, and
+       --color-button-secondary-text are distinct near-blacks in Figma; don't
+       swap one for another. */
+
     /* Background colors */
     --color-background-app: #FFFFF5;
     --color-background-navigation: #011E29;
