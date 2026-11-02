@@ -20,7 +20,7 @@ class RevealComponentTest < ViewComponent::TestCase
 
   def test_css_class_is_appended_without_dropping_base_classes
     render_inline(RevealComponent.new(summary_text: "More details", css_class: "mt-cfa-lg"))
-    assert_selector "details.mt-cfa-lg.group.border-primary"
+    assert_selector "details.mt-cfa-lg.group.border-brand-primary"
   end
 
   def test_collapsed_by_default

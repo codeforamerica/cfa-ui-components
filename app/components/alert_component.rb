@@ -5,8 +5,8 @@ class AlertComponent < BaseComponent
   # has no equivalent size/variant yet. Renders a link when `url:` is given,
   # otherwise a plain `type="button"` the caller can wire up via html attrs.
   ACTION_CLASSES = "cfa-alert__action inline-flex h-8 items-center justify-center whitespace-nowrap rounded " \
-    "border border-border-default bg-transparent px-cfa-med text-sm font-medium leading-none text-button-secondary-text " \
-    "no-underline cursor-pointer hover:bg-primary-hover active:bg-primary-pressed " \
+    "border border-border-default bg-transparent px-cfa-med text-sm font-medium leading-none text-text-default " \
+    "no-underline cursor-pointer hover:bg-brand-primary-hover active:bg-brand-primary-pressed " \
     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
 
   renders_many :actions, ->(label:, url: nil, **html_attrs) do

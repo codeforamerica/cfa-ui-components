@@ -31,12 +31,12 @@
     @apply sm:min-w-[min(100%,360px)];
 }
 .btn--primary {
-    @apply bg-primary border-border-default text-text-default;
-    @apply hover:bg-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
+    @apply bg-brand-primary border-border-default text-text-default;
+    @apply hover:bg-brand-primary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
 .btn--primary:active {
-    @apply bg-primary-pressed border-border-default;
+    @apply bg-brand-primary-pressed border-border-default;
 }
 
 .btn--primary:active::before {
@@ -49,19 +49,19 @@
 }
 
 .btn--secondary {
-    @apply bg-button-surface-secondary border-primary text-text-default;
+    @apply bg-button-surface-secondary border-brand-primary text-text-default;
     @apply hover:bg-button-surface-secondary-hover hover:shadow-[0_4px_0_0_rgba(0,0,0,0.1)];
 }
 
 .btn--secondary:active {
-    @apply bg-primary-pressed;
+    @apply bg-brand-primary-pressed;
 }
 
 .btn--secondary:active::before {
     content: '';
     position: absolute;
     inset: 2px;
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-brand-primary);
     border-radius: 6px;
     pointer-events: none;
 }
@@ -112,12 +112,12 @@
 
 .btn--back:hover,
 .btn--back.is-hover {
-    @apply bg-primary-hover border-transparent;
+    @apply bg-brand-primary-hover border-transparent;
 }
 
 .btn--back:active,
 .btn--back.is-active {
-    @apply bg-primary-pressed border-border-default;
+    @apply bg-brand-primary-pressed border-border-default;
 }
 
 .btn--large {
