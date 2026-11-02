@@ -21,7 +21,7 @@ class AlertComponentTest < ViewComponent::TestCase
   def test_renders_info_icon_by_default
     render_inline(AlertComponent.new) { "Heads up" }
     assert_selector "svg.cfa-icon.text-text-primary[aria-hidden='true']", visible: :all
-    assert_selector "svg.cfa-icon path[d='M12 16V12']", visible: :all
+    assert_selector "svg.cfa-icon use[href$='#info_outline']", visible: :all
   end
 
   def test_renders_warning_icon_for_warning_variant
@@ -30,11 +30,9 @@ class AlertComponentTest < ViewComponent::TestCase
   end
 
   def test_icon_paths_stay_unfilled_under_cfa_icon_fill
-    %i[info warning].each do |variant|
-      render_inline(AlertComponent.new(variant:)) { "Heads up" }
-      assert_selector "svg.cfa-icon path", visible: :all, count: 3
-      assert_no_selector "svg.cfa-icon path:not([fill='none'])", visible: :all
-    end
+    render_inline(AlertComponent.new(variant: :warning)) { "Heads up" }
+    assert_selector "svg.cfa-icon path", visible: :all, count: 3
+    assert_no_selector "svg.cfa-icon path:not([fill='none'])", visible: :all
   end
 
   def test_omits_dismiss_button_by_default

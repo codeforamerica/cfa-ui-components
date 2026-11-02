@@ -25,7 +25,7 @@ class AlertComponent < BaseComponent
 
     @icon_name =
       case variant
-      when :info then :info_circle
+      when :info then :info_outline
       when :warning then :warning_outline
       else raise ArgumentError.new("Invalid alert variant")
       end
