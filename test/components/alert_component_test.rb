@@ -20,7 +20,7 @@ class AlertComponentTest < ViewComponent::TestCase
 
   def test_renders_info_icon_by_default
     render_inline(AlertComponent.new) { "Heads up" }
-    assert_selector "svg.cfa-icon.text-text-primary[aria-hidden='true']", visible: :all
+    assert_selector "svg.cfa-icon.text-text-default[aria-hidden='true']", visible: :all
     assert_selector "svg.cfa-icon use[href$='#info_outline']", visible: :all
   end
 
