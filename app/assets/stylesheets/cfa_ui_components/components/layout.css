@@ -10,12 +10,16 @@
     gap: --value(--spacing-cfa-*);
 }
 
+@utility cfa-container {
+    @apply mx-auto w-full md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px];
+}
+
 /* `@utility` above must stay top-level (Tailwind forbids nesting it in
    `@layer`). The plain element rules below go in the components layer so
    Tailwind utilities can win the cascade against them. */
 @layer components {
     main {
-        @apply cfa-stack mx-auto w-full md:max-w-[688px] xl:max-w-[944px] 2xl:max-w-[1072px] px-cfa-med md:px-0 py-cfa-xl;
+        @apply cfa-stack cfa-container px-cfa-med md:px-0 py-cfa-xl;
     }
 
     .cfa-card > * + * {
