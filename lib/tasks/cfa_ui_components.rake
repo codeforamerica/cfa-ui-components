@@ -19,12 +19,8 @@ namespace :cfa_ui_components do
       # Prepend a @source directive that instructs Tailwind to scan the gem source while deciding which utility classes not to purge.
       css_source = File.join(stylesheets_source_dir, "cfa_ui_components.tailwind.css")
       css_dest = stylesheets_dest_dir.join("cfa_ui_components.tailwind.css")
-      Tempfile.open do |temp_file|
-        source_line = "@source \"#{gem_spec.full_gem_path}\";\n\n"
-        temp_file.write(source_line)
-        temp_file.write(File.read(css_source))
-        FileUtils.mv(temp_file.path, css_dest)
-      end
+      source_line = "@source \"#{gem_spec.full_gem_path}\";\n\n"
+      File.write(css_dest, source_line + File.read(css_source))
     end
   end
 
