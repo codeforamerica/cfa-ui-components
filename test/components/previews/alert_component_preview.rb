@@ -24,6 +24,13 @@ class AlertComponentPreview < ViewComponent::Preview
     end
   end
 
+  def with_action_without_title
+    render(AlertComponent.new(variant: :warning)) do |alert|
+      alert.with_action(label: "Button", url: "#")
+      "This is the content. Go for it!"
+    end
+  end
+
   def with_action_dismissible
     render(AlertComponent.new(title: "This is the title", dismissible: true)) do |alert|
       alert.with_action(label: "Button")
