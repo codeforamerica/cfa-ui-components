@@ -27,7 +27,8 @@ class AlertComponentPreview < ViewComponent::Preview
   def with_action_without_title
     render(AlertComponent.new(variant: :warning)) do |alert|
       alert.with_action(label: "Button", url: "#")
-      "This is the content. Go for it!"
+      "This content is very very very very very very very very very very very very very very very very " \
+        "very very very very very very very long to show how the icon lines up with the first line."
     end
   end
 
