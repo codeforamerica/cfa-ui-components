@@ -32,4 +32,9 @@ class AlertComponent < BaseComponent
   end
 
   attr_reader :title, :dismissible, :icon_name
+
+  # Without a title, a single line of text lines up with the actions.
+  def center_content?
+    title.blank? && actions?
+  end
 end

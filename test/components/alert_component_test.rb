@@ -86,11 +86,24 @@ class AlertComponentTest < ViewComponent::TestCase
   end
 
   def test_bottom_aligns_actions_when_not_dismissible
-    render_inline(AlertComponent.new) do |alert|
+    render_inline(AlertComponent.new(title: "Title")) do |alert|
       alert.with_action(label: "One")
       "Heads up"
     end
     assert_selector "div.md\\:items-end:has(> .cfa-alert__actions)"
+    assert_no_selector ".md\\:h-8"
+    assert_no_selector ".md\\:py-1\\.5"
+  end
+
+  def test_aligns_icon_with_first_line_and_centers_actions_without_title
+    render_inline(AlertComponent.new) do |alert|
+      alert.with_action(label: "One")
+      "Heads up"
+    end
+    assert_selector ".cfa-alert.items-start"
+    assert_selector ".cfa-alert > span.md\\:h-8"
+    assert_selector "div.md\\:py-1\\.5 > p", text: "Heads up"
+    assert_selector "div.md\\:items-center:has(> .cfa-alert__actions)"
   end
 
   def test_top_aligns_dismiss_without_actions
