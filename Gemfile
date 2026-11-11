@@ -45,14 +45,14 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "cuprite", "~> 0.18"
+  gem "cuprite", "~> 0.20"
 end
 
 gem "lookbook"
 
 gem "jsbundling-rails", "~> 1.3"
 gem "cssbundling-rails", "~> 1.0"
-gem "view_component", "~> 4.15"
+gem "view_component", "~> 4.22"
 gem "ostruct", "~> 0.6.3"
 
 gem "rack-session", ">= 2.1.2"
