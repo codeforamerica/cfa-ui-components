@@ -139,8 +139,15 @@ class AlertComponentTest < ViewComponent::TestCase
     assert_selector ".cfa-alert[role='region'][aria-labelledby='#{title_id}']"
   end
 
+  def test_title_is_not_labelled_without_region_role
+    render_inline(AlertComponent.new(title: "Closing soon")) { "Heads up" }
+    assert_no_selector "p.type-body-bold[id]"
+    assert_no_selector ".cfa-alert[aria-labelledby]"
+  end
+
   def test_region_role_requires_title
     assert_raises(ArgumentError) { AlertComponent.new(role: :region) }
+    assert_raises(ArgumentError) { AlertComponent.new(role: :region, title: "") }
   end
 
   def test_raises_for_invalid_role

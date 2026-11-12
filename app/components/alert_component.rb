@@ -23,7 +23,7 @@ class AlertComponent < BaseComponent
   ROLES = [nil, :alert, :status, :region].freeze
 
   def initialize(variant: :info, title: nil, dismissible: false, css_class: nil, role: nil)
-    raise ArgumentError.new("Invalid alert role") unless ROLES.include?(role)
+    raise ArgumentError.new("Invalid alert role: #{role.inspect}") unless ROLES.include?(role)
     raise ArgumentError.new("role: :region requires a title") if role == :region && title.blank?
 
     @title = title
