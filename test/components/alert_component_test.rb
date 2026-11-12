@@ -119,4 +119,31 @@ class AlertComponentTest < ViewComponent::TestCase
   def test_raises_for_invalid_variant
     assert_raises(ArgumentError) { AlertComponent.new(variant: :bogus) }
   end
+
+  def test_omits_role_by_default
+    render_inline(AlertComponent.new) { "Heads up" }
+    assert_no_selector ".cfa-alert[role]"
+  end
+
+  def test_renders_live_region_roles
+    render_inline(AlertComponent.new(role: :alert)) { "Heads up" }
+    assert_selector ".cfa-alert[role='alert']"
+
+    render_inline(AlertComponent.new(role: :status)) { "Heads up" }
+    assert_selector ".cfa-alert[role='status']"
+  end
+
+  def test_region_role_is_labelled_by_title
+    render_inline(AlertComponent.new(title: "Closing soon", role: :region)) { "Heads up" }
+    title_id = page.find("p.type-body-bold", text: "Closing soon")[:id]
+    assert_selector ".cfa-alert[role='region'][aria-labelledby='#{title_id}']"
+  end
+
+  def test_region_role_requires_title
+    assert_raises(ArgumentError) { AlertComponent.new(role: :region) }
+  end
+
+  def test_raises_for_invalid_role
+    assert_raises(ArgumentError) { AlertComponent.new(role: :bogus) }
+  end
 end
