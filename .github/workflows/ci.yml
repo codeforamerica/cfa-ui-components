@@ -50,7 +50,7 @@ jobs:
         run: echo "version=$(cat .node-version)" >> "$GITHUB_OUTPUT"
 
       - name: Check Node version for known vulnerabilities
-        uses: nodejs/is-my-node-vulnerable@v1.6.1
+        uses: nodejs/is-my-node-vulnerable@c37a56bad56e34fe5223ddd3cb223cc4158136ae # v1.6.1
         with:
           node-version: ${{ steps.node_version.outputs.version }}
 
