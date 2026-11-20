@@ -1,6 +1,10 @@
 <div
   x-data="{ open: true }"
   x-show="open"
+  <% if persists_dismissal? %>
+    <%# Back can restore this page from the bfcache after the alert was closed on a later page. %>
+    x-on:pageshow.window="if ($event.persisted && document.cookie.split('; ').some((cookie) => cookie.startsWith(<%= "#{dismissal_cookie_name}=".to_json %>))) open = false"
+  <% end %>
   role="alert"
   class="<%= class_names("cfa-alert flex items-start gap-cfa-sm rounded border border-border-primary bg-background-tertiary p-cfa-med text-text-primary", @css_class) %>"
 >
@@ -27,7 +31,7 @@
     <%# -m-1: 32px hit area in a 24px layout slot. Focus ring is a border because Safari doesn't paint a negative outline-offset. %>
     <button
       type="button"
-      @click="open = false"
+      x-on:click="open = false<% if persists_dismissal? %>; document.cookie = <%= dismissal_cookie.to_json %><% end %>"
       class="<%= class_names("-m-1 flex size-8 shrink-0 items-center justify-center cursor-pointer rounded-sm bg-transparent border-2 border-transparent p-0 text-inherit hover:bg-primary active:bg-button-primary-fill-active focus-visible:outline-none focus-visible:border-focus", "md:self-center" => actions?) %>"
       aria-label="<%= t("cfaui.alert.dismiss_aria") %>"
     >
