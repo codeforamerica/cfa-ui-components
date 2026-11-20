@@ -30,6 +30,9 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 
+  # Checks Ruby and RubyGems versions for known vulnerabilities [https://github.com/civisanalytics/ruby_audit]
+  gem "ruby_audit", require: false
+
   gem "standard", require: false
 
   gem "erb_lint", require: false
