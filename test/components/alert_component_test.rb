@@ -119,4 +119,72 @@ class AlertComponentTest < ViewComponent::TestCase
   def test_raises_for_invalid_variant
     assert_raises(ArgumentError) { AlertComponent.new(variant: :bogus) }
   end
+
+  def test_dismissal_without_copy_scope_sets_no_cookie
+    render_inline(AlertComponent.new(dismissible: true)) { "Heads up" }
+    refute_includes dismiss_button["x-on:click"], "document.cookie"
+  end
+
+  def test_dismissal_with_copy_scope_sets_a_one_year_cookie
+    render_inline(AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert")) { "Heads up" }
+    assert_match(/document\.cookie = "alert_dismissed_alert_\h{12}=1; path=\/; SameSite=Lax; max-age=#{1.year.to_i}"/, dismiss_button["x-on:click"])
+  end
+
+  def test_session_dismissal_sets_a_session_cookie
+    render_inline(AlertComponent.new(dismissible: :session, copy_scope: "cfaui.alert")) { "Heads up" }
+    assert_match(/document\.cookie = "alert_dismissed_alert_\h{12}=1; path=\/; SameSite=Lax"/, dismiss_button["x-on:click"])
+  end
+
+  def test_dismissal_cookie_is_secure_over_https
+    with_request_url("/", host: "example.com", protocol: "https") do
+      render_inline(AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert")) { "Heads up" }
+    end
+    assert_includes dismiss_button["x-on:click"], "; Secure"
+  end
+
+  def test_dismissal_cookie_name_is_the_same_in_every_locale
+    english = AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert").dismissal_cookie_name
+    spanish = I18n.with_locale(:es) { AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert").dismissal_cookie_name }
+    assert_equal english, spanish
+  end
+
+  def test_dismissal_cookie_name_changes_with_the_english_copy
+    I18n.backend.store_translations(:en, alert_component_test: {body: "Maintenance this weekend"})
+    before_change = AlertComponent.new(dismissible: true, copy_scope: "alert_component_test").dismissal_cookie_name
+    I18n.backend.store_translations(:en, alert_component_test: {body: "Maintenance starts in 1 hour"})
+    after_change = AlertComponent.new(dismissible: true, copy_scope: "alert_component_test").dismissal_cookie_name
+
+    refute_equal before_change, after_change
+  ensure
+    I18n.backend.reload!
+  end
+
+  def test_skips_rendering_once_dismissed
+    cookie_name = AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert").dismissal_cookie_name
+    vc_test_request.cookies[cookie_name] = "1"
+
+    render_inline(AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert")) { "Heads up" }
+    assert_no_selector ".cfa-alert"
+  end
+
+  def test_renders_when_an_older_copy_was_dismissed
+    vc_test_request.cookies["alert_dismissed_alert_000000000000"] = "1"
+
+    render_inline(AlertComponent.new(dismissible: true, copy_scope: "cfaui.alert")) { "Heads up" }
+    assert_selector ".cfa-alert"
+  end
+
+  def test_raises_for_invalid_dismissible
+    assert_raises(ArgumentError) { AlertComponent.new(dismissible: :forever) }
+  end
+
+  def test_raises_for_session_dismissal_without_copy_scope
+    assert_raises(ArgumentError) { AlertComponent.new(dismissible: :session) }
+  end
+
+  private
+
+  def dismiss_button
+    page.find("button[aria-label='Dismiss alert']")
+  end
 end

@@ -17,6 +17,12 @@ class AlertComponentPreview < ViewComponent::Preview
     end
   end
 
+  def dismissible_across_pages
+    render(AlertComponent.new(title: "This is not legal advice", dismissible: true, copy_scope: "cfaui.alert")) do
+      "Close this, then reload: it stays closed until the copy under the cfaui.alert scope changes."
+    end
+  end
+
   def with_action
     render(AlertComponent.new(title: "This is the title")) do |alert|
       alert.with_action(label: "Button", url: "#")

@@ -18,9 +18,18 @@ class AlertComponent < BaseComponent
     end
   end
 
-  def initialize(variant: :info, title: nil, dismissible: false, css_class: nil)
+  DISMISSIBLE_VALUES = [false, true, :session].freeze
+
+  # copy_scope: an i18n scope holding the alert's copy. With it, a dismissal is
+  # remembered in a cookie named after a digest of that copy in English, so new
+  # copy shows the alert again but switching language doesn't.
+  def initialize(variant: :info, title: nil, dismissible: false, copy_scope: nil, css_class: nil)
+    raise ArgumentError, "dismissible must be one of #{DISMISSIBLE_VALUES}" unless DISMISSIBLE_VALUES.include?(dismissible)
+    raise ArgumentError, "dismissible: :session needs a copy_scope" if dismissible == :session && copy_scope.nil?
+
     @title = title
     @dismissible = dismissible
+    @copy_scope = copy_scope
     @css_class = css_class
 
     @icon_name =
@@ -31,10 +40,38 @@ class AlertComponent < BaseComponent
       end
   end
 
-  attr_reader :title, :dismissible, :icon_name
+  attr_reader :title, :dismissible, :copy_scope, :icon_name
+
+  def render?
+    !persists_dismissal? || request.cookies[dismissal_cookie_name].blank?
+  end
 
   # Without a title, a single line of text lines up with the actions.
   def center_content?
     title.blank? && actions?
+  end
+
+  def persists_dismissal?
+    dismissible.present? && copy_scope.present?
+  end
+
+  def dismissal_cookie_name
+    @dismissal_cookie_name ||= begin
+      english_copy = I18n.t(copy_scope, locale: :en, raise: true)
+      digest = Digest::SHA256.hexdigest(english_copy.to_json).first(12)
+      "alert_dismissed_#{copy_scope.split(".").last}_#{digest}"
+    end
+  end
+
+  def dismissal_cookie_set_js
+    "document.cookie.split('; ').some((cookie) => cookie.startsWith(#{"#{dismissal_cookie_name}=".to_json}))"
+  end
+
+  # Without max-age, the browser drops the cookie when the session ends.
+  def dismissal_cookie
+    attributes = ["#{dismissal_cookie_name}=1", "path=/", "SameSite=Lax"]
+    attributes << "max-age=#{1.year.to_i}" if dismissible == true
+    attributes << "Secure" if request.ssl?
+    attributes.join("; ")
   end
 end
