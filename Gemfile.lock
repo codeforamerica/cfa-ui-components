@@ -246,7 +246,7 @@ GEM
       activesupport (>= 7.0.0)
       rack
     public_suffix (7.0.5)
-    puma (8.0.2)
+    puma (8.0.3)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.8)
@@ -361,7 +361,7 @@ GEM
     unicode-emoji (4.3.0)
     uri (1.1.2)
     useragent (0.16.11)
-    view_component (4.23.0)
+    view_component (4.24.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       prism (>= 1.0)
@@ -414,7 +414,7 @@ DEPENDENCIES
   thruster
   turbo-rails
   tzinfo-data
-  view_component (~> 4.23)
+  view_component (~> 4.24)
   web-console
 
 RUBY VERSION
