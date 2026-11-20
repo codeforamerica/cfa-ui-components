@@ -63,6 +63,10 @@ class AlertComponent < BaseComponent
     end
   end
 
+  def dismissal_cookie_set_js
+    "document.cookie.split('; ').some((cookie) => cookie.startsWith(#{"#{dismissal_cookie_name}=".to_json}))"
+  end
+
   # Without max-age, the browser drops the cookie when the session ends.
   def dismissal_cookie
     attributes = ["#{dismissal_cookie_name}=1", "path=/", "SameSite=Lax"]
