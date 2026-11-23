@@ -1,7 +1,8 @@
 <div
   x-data="{ open: true }"
   x-show="open"
-  role="alert"
+  <% if role %>role="<%= role %>"<% end %>
+  <% if title_id %>aria-labelledby="<%= title_id %>"<% end %>
   class="<%= class_names("cfa-alert flex items-start gap-cfa-sm rounded border border-border-primary bg-background-tertiary p-cfa-med text-text-primary", @css_class) %>"
 >
   <%# Without a title: the icon and the text's first 20px line are both centered 16px down, so they line up with each other at any text length, and a single line centers on the 32px action button. %>
@@ -11,7 +12,7 @@
   <div class="<%= class_names("flex flex-1 min-w-0 flex-col gap-cfa-sm md:flex-row md:justify-between md:gap-cfa-med", (dismissible || center_content?) ? "md:items-center" : "md:items-end") %>">
     <div class="<%= class_names("flex-1 min-w-0 cfa-stack-xsm", "md:py-1.5" => center_content?) %>">
       <% if title.present? %>
-        <p class="type-body-bold"><%= title %></p>
+        <p class="type-body-bold" <% if title_id %>id="<%= title_id %>"<% end %>><%= title %></p>
       <% end %>
       <p><%= content %></p>
     </div>

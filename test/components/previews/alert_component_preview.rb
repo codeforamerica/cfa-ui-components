@@ -17,6 +17,12 @@ class AlertComponentPreview < ViewComponent::Preview
     end
   end
 
+  def page_banner
+    render(AlertComponent.new(title: "SimpleFile is closing soon", dismissible: true, role: :region)) do
+      "There's still time to file."
+    end
+  end
+
   def with_action
     render(AlertComponent.new(title: "This is the title")) do |alert|
       alert.with_action(label: "Button", url: "#")

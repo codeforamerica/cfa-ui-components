@@ -18,10 +18,19 @@ class AlertComponent < BaseComponent
     end
   end
 
-  def initialize(variant: :info, title: nil, dismissible: false, css_class: nil)
+  # Default (nil) is no role: right for content present at page load. :alert and
+  # :status are live regions for content injected later; :region is a landmark.
+  ROLES = [nil, :alert, :status, :region].freeze
+
+  def initialize(variant: :info, title: nil, dismissible: false, css_class: nil, role: nil)
+    raise ArgumentError.new("Invalid alert role: #{role.inspect}") unless ROLES.include?(role)
+    raise ArgumentError.new("role: :region requires a title") if role == :region && title.blank?
+
     @title = title
     @dismissible = dismissible
     @css_class = css_class
+    @role = role
+    @title_id = "cfa-alert-title-#{SecureRandom.hex(4)}" if role == :region
 
     @icon_name =
       case variant
@@ -31,7 +40,7 @@ class AlertComponent < BaseComponent
       end
   end
 
-  attr_reader :title, :dismissible, :icon_name
+  attr_reader :title, :dismissible, :icon_name, :role, :title_id
 
   # Without a title, a single line of text lines up with the actions.
   def center_content?
