@@ -11,7 +11,7 @@ jobs:
       contents: write
     steps:
       - name: Standard Ruby
-        uses: standardrb/standard-ruby-action@v1
+        uses: standardrb/standard-ruby-action@df5152f6106147e13feb6ee0fa820b0d435cb8cd # v1.6.0
       - name: ERB Lint
         run: bundle exec erb_lint --autocorrect app/views app/components
       # The following are modified from https://github.com/standardrb/standard-ruby-action/blob/main/action.yml
